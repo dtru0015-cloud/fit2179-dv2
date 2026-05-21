@@ -41,7 +41,7 @@
       "data": {"url": "australia_states_enriched.geojson"},
       "transform": [
         {"calculate": "geoCentroid(null, datum)", "as": "centroid"},
-        {"calculate": "datum.properties.fire_risk_score + ''", "as": "score_label"}
+        {"calculate": "datum.properties['fire_risk_score'] + ''", "as": "score_label"}
       ],
       "mark": {"type": "text", "fontSize": 10, "fill": "#ffffff",
                "stroke": "#333", "strokeWidth": 0.3, "dy": 7},
