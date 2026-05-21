@@ -1,39 +1,58 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 280,
-  "data": {"url": "state_ranking_by_decade.csv"},
-  "mark": {"type": "bar", "cornerRadiusEnd": 4},
-  "encoding": {
-    "y": {
-      "field": "state",
-      "type": "nominal",
-      "title": null,
-      "sort": {"field": "fire_risk_score", "order": "descending"},
-      "axis": {"labelFontSize": 10}
+  "height": 380,
+  "projection": {"type": "mercator", "center": [134, -28], "scale": 680},
+  "layer": [
+    {
+      "data": {"url": "australia_states.geojson", "format": {"type": "geojson"}},
+      "transform": [{
+        "lookup": "properties.STATE_NAME",
+        "from": {"data": {"url": "state_ranking_by_decade.csv"}, "key": "state",
+                 "fields": ["fire_risk_score","pct_land_fire_prone","state_code"]}
+      }],
+      "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 1.5},
+      "encoding": {
+        "color": {"field": "fire_risk_score", "type": "quantitative",
+          "scale": {"type": "threshold", "domain": [40,55,65,75],
+                    "range": ["#FDDBC7","#F4A582","#D6604D","#B2182B","#67001F"]},
+          "legend": {"title": "Fire Risk Score", "orient": "bottom-left"}},
+        "tooltip": [
+          {"field": "properties.STATE_NAME", "type": "nominal", "title": "State"},
+          {"field": "fire_risk_score", "type": "quantitative", "title": "Risk Score"},
+          {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Fire-Prone", "format": ".0f"}
+        ]
+      }
     },
-    "x": {
-      "field": "fire_risk_score",
-      "type": "quantitative",
-      "title": "Fire Risk Score",
-      "axis": {"titleFontSize": 11, "labelFontSize": 10, "grid": true, "gridDash": [3,3]}
+    {
+      "data": {"url": "australia_states.geojson", "format": {"type": "geojson"}},
+      "transform": [
+        {"lookup": "properties.STATE_NAME", "from": {"data": {"url": "state_ranking_by_decade.csv"},
+         "key": "state", "fields": ["fire_risk_score","state_code"]}},
+        {"calculate": "geoCentroid(null, datum)", "as": "centroid"}
+      ],
+      "mark": {"type": "text", "fontSize": 11, "fontWeight": "bold", "fill": "#fff", "dy": -6},
+      "encoding": {
+        "longitude": {"field": "centroid[0]", "type": "quantitative"},
+        "latitude": {"field": "centroid[1]", "type": "quantitative"},
+        "text": {"field": "state_code", "type": "nominal"}
+      }
     },
-    "color": {
-      "field": "fire_risk_score",
-      "type": "quantitative",
-      "scale": {
-        "type": "threshold",
-        "domain": [40, 55, 65, 75],
-        "range": ["#FDDBC7","#F4A582","#D6604D","#B2182B","#67001F"]
-      },
-      "legend": {"title": "Fire Risk Score", "titleFontSize": 11, "labelFontSize": 10}
-    },
-    "tooltip": [
-      {"field": "state", "type": "nominal", "title": "State"},
-      {"field": "state_code", "type": "nominal", "title": "Code"},
-      {"field": "fire_risk_score", "type": "quantitative", "title": "Fire Risk Score"},
-      {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Land Fire-Prone"}
-    ]
-  },
+    {
+      "data": {"url": "australia_states.geojson", "format": {"type": "geojson"}},
+      "transform": [
+        {"lookup": "properties.STATE_NAME", "from": {"data": {"url": "state_ranking_by_decade.csv"},
+         "key": "state", "fields": ["fire_risk_score","state_code"]}},
+        {"calculate": "geoCentroid(null, datum)", "as": "centroid"},
+        {"calculate": "datum.fire_risk_score + ''", "as": "score_label"}
+      ],
+      "mark": {"type": "text", "fontSize": 10, "fill": "#fff", "dy": 7},
+      "encoding": {
+        "longitude": {"field": "centroid[0]", "type": "quantitative"},
+        "latitude": {"field": "centroid[1]", "type": "quantitative"},
+        "text": {"field": "score_label", "type": "nominal"}
+      }
+    }
+  ],
   "config": {"background": "transparent", "view": {"stroke": "transparent"}}
 }
