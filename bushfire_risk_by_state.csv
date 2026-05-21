@@ -1,26 +1,9 @@
-season_start_year,total_area_ha_national,severity,notable_events
-2000,15200000,Moderate,
-2001,18500000,High,Black Christmas fires (NSW) – 753000 ha
-2002,12800000,Moderate,
-2003,22000000,High,Alpine fires Victoria – 1.1 million ha
-2004,9500000,Low,
-2005,11200000,Moderate,
-2006,13800000,Moderate,
-2007,16400000,High,
-2008,10100000,Low,
-2009,17600000,High,Black Saturday (VIC) – 450000 ha; 173 deaths
-2010,8200000,Low,La Niña season
-2011,14076000,Moderate,
-2012,9800000,Low,
-2013,11500000,Moderate,
-2014,13200000,Moderate,
-2015,16800000,High,
-2016,9400000,Low,
-2017,14500000,Moderate,
-2018,16200000,High,
-2019,186000000,Extreme,Black Summer – worst season on record; 24 million ha
-2020,96000000,Extreme,
-2021,10500000,Low,La Niña cooling
-2022,8900000,Low,La Niña second year
-2023,96081928,Extreme,NT dominated; over 61 million ha by November
-2024,14200000,Moderate,
+state,state_code,fire_risk_score,pct_land_fire_prone
+New South Wales,NSW,92,78
+Victoria,VIC,88,69
+Queensland,QLD,75,61
+Western Australia,WA,70,58
+South Australia,SA,67,52
+Tasmania,TAS,55,41
+Northern Territory,NT,48,35
+Australian Capital Territory,ACT,80,60
