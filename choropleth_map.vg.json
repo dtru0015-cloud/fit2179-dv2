@@ -1,33 +1,88 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container",
-  "height": 380,
-  "projection": {"type": "mercator", "center": [134, -28], "scale": 680},
-  "data": {"url": "australia_states_enriched.geojson"},
-  "transform": [
-    {"calculate": "datum.properties.fire_risk_score", "as": "risk"},
-    {"calculate": "datum.properties.STATE_NAME", "as": "name"},
-    {"calculate": "datum.properties.pct_land_fire_prone", "as": "pct"}
-  ],
-  "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 1.5},
-  "encoding": {
-    "color": {
-      "field": "risk",
-      "type": "quantitative",
-      "title": "Fire Risk Score",
-      "scale": {
-        "type": "threshold",
-        "domain": [40, 55, 65, 75],
-        "range": ["#FDDBC7","#F4A582","#D6604D","#B2182B","#67001F"]
-      },
-      "legend": {"title": "Fire Risk Score", "orient": "bottom-left",
-                 "titleFontSize": 11, "labelFontSize": 10}
-    },
-    "tooltip": [
-      {"field": "name", "type": "nominal", "title": "State"},
-      {"field": "risk", "type": "quantitative", "title": "Risk Score"},
-      {"field": "pct", "type": "quantitative", "title": "% Fire-Prone"}
-    ]
+  "width": 520,
+  "height": 360,
+  "data": {
+    "url": "australia_states.geojson",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
   },
-  "config": {"background": "transparent", "view": {"stroke": "transparent"}}
+  "transform": [
+    {
+      "lookup": "properties.STATE_NAME",
+      "from": {
+        "data": {
+          "url": "bushfire_risk_by_state.csv"
+        },
+        "key": "state",
+        "fields": ["fire_risk_score", "pct_land_fire_prone"]
+      }
+    }
+  ],
+  "projection": {
+    "type": "mercator",
+    "center": [134, -27],
+    "scale": 520,
+    "translate": [260, 180]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#111111",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "color": {
+          "field": "fire_risk_score",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "yelloworangered"
+          },
+          "title": "Fire Risk Score"
+        },
+        "tooltip": [
+          {
+            "field": "properties.STATE_NAME",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "fire_risk_score",
+            "type": "quantitative",
+            "title": "Fire Risk Score"
+          },
+          {
+            "field": "pct_land_fire_prone",
+            "type": "quantitative",
+            "title": "% Land Fire-Prone"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "fill": "#111111"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "label_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "label_lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "state_code",
+          "type": "nominal"
+        }
+      }
+    }
+  ]
 }
