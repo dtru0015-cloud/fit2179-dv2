@@ -5,7 +5,7 @@
   "projection": {"type": "mercator", "center": [134, -28], "scale": 680},
   "layer": [
     {
-      "data": {"url": "australia_states.geojson", "format": {"type": "geojson"}},
+      "data": {"url": "australia_states.geojson"},
       "transform": [{
         "lookup": "properties.STATE_NAME",
         "from": {"data": {"url": "state_ranking_by_decade.csv"}, "key": "state",
@@ -25,7 +25,7 @@
       }
     },
     {
-      "data": {"url": "australia_states.geojson", "format": {"type": "geojson"}},
+      "data": {"url": "australia_states.geojson"},
       "transform": [
         {"lookup": "properties.STATE_NAME", "from": {"data": {"url": "state_ranking_by_decade.csv"},
          "key": "state", "fields": ["fire_risk_score","state_code"]}},
@@ -39,7 +39,7 @@
       }
     },
     {
-      "data": {"url": "australia_states.geojson", "format": {"type": "geojson"}},
+      "data": {"url": "australia_states.geojson"},
       "transform": [
         {"lookup": "properties.STATE_NAME", "from": {"data": {"url": "state_ranking_by_decade.csv"},
          "key": "state", "fields": ["fire_risk_score","state_code"]}},
