@@ -2,48 +2,36 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 280,
-  "data": {"url": "bushfire_risk_by_state.csv"},
+  "data": {"url": "bushfire_human_impact.csv"},
   "layer": [
     {
-      "mark": {
-        "type": "bar",
-        "opacity": 0.7,
-        "color": "#E67E22"
-      },
+      "mark": {"type": "bar", "opacity": 0.8, "color": "#E67E22", "cornerRadiusEnd": 3},
       "encoding": {
         "x": {
-          "field": "season_start_year",
+          "field": "year",
           "type": "ordinal",
-          "title": "Season",
+          "title": "Year",
           "axis": {"labelAngle": -45, "labelFontSize": 9, "titleFontSize": 11, "grid": false}
         },
         "y": {
-          "field": "total_area_ha_national",
+          "field": "area_ha",
           "type": "quantitative",
-          "title": "Total Area Burned (ha)",
+          "title": "Area Burned (ha)",
           "axis": {"format": "~s", "titleFontSize": 11, "labelFontSize": 10}
         },
         "tooltip": [
-          {"field": "season_start_year", "type": "ordinal", "title": "Season"},
-          {"field": "total_area_ha_national", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
-          {"field": "severity", "type": "nominal", "title": "Severity"},
-          {"field": "notable_events", "type": "nominal", "title": "Notable Events"}
+          {"field": "event_name", "type": "nominal", "title": "Event"},
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
+          {"field": "deaths", "type": "quantitative", "title": "Deaths"},
+          {"field": "homes", "type": "quantitative", "title": "Homes Destroyed"}
         ]
       }
     },
     {
+      "data": {"values": [{"year": "2019", "label": "Black Summer"}]},
       "mark": {"type": "rule", "color": "#C0392B", "strokeDash": [4,3], "strokeWidth": 1.5},
-      "data": {"values": [{"season_start_year": "2019"}]},
-      "encoding": {"x": {"field": "season_start_year", "type": "ordinal"}}
-    },
-    {
-      "mark": {"type": "text", "align": "left", "dx": 4, "dy": -8, "color": "#C0392B", "fontSize": 10, "fontWeight": "bold"},
-      "data": {"values": [{"season_start_year": "2019", "total_area_ha_national": 180000000, "label": "Black Summer"}]},
-      "encoding": {
-        "x": {"field": "season_start_year", "type": "ordinal"},
-        "y": {"field": "total_area_ha_national", "type": "quantitative"},
-        "text": {"field": "label"}
-      }
+      "encoding": {"x": {"field": "year", "type": "ordinal"}}
     }
   ],
   "config": {"background": "transparent", "view": {"stroke": "transparent"}}
