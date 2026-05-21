@@ -1,44 +1,52 @@
-// Australia's Bushfire Crisis — DV2 FIT2179
-// Dinh Duy Truong | 33538921 | May 2026
-
-const embedOpts = {
-  actions: false,
-  renderer: "svg",
-  theme: "default"
-};
-
-// ① Choropleth Map
-vegaEmbed("#choropleth_map", "js/choropleth_map.vg.json", embedOpts)
-  .catch(console.error);
-
-// ④ Area by State
-vegaEmbed("#area_by_state", "js/area_by_state.vg.json", embedOpts)
-  .catch(console.error);
-
-// ⑤ Bump Chart
-vegaEmbed("#bump_chart", "js/bump_chart.vg.json", embedOpts)
-  .catch(console.error);
-
-// ⑥ Dual Axis — Area Burned + Temp Anomaly
-vegaEmbed("#dual_axis", "js/dual_axis.vg.json", embedOpts)
-  .catch(console.error);
-
-// ⑦ Fire Season Heatmap
-vegaEmbed("#heatmap", "js/heatmap.vg.json", embedOpts)
-  .catch(console.error);
-
-// ⑧ Connected Dot Plot
-vegaEmbed("#dot_plot", "js/dot_plot.vg.json", embedOpts)
-  .catch(console.error);
-
-// ⑨ Bubble Scatter — Economic Losses
-vegaEmbed("#bubble_scatter", "js/bubble_scatter.vg.json", embedOpts)
-  .catch(console.error);
-
-// ⑩ Population Exposure
-vegaEmbed("#pop_exposure", "js/pop_exposure.vg.json", embedOpts)
-  .catch(console.error);
-
-// ⑪ Slope Chart
-vegaEmbed("#slope_chart", "js/slope_chart.vg.json", embedOpts)
-  .catch(console.error);
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 280,
+  "data": {"url": "population_fire_risk_exposure.csv"},
+  "transform": [
+    {"filter": "datum.state !== 'Northern Territory' && datum.state !== 'Australian Capital Territory'"}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "line", "strokeWidth": 1, "opacity": 0.3},
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Census Year",
+          "axis": {"labelFontSize": 9}
+        },
+        "y": {
+          "field": "pop_in_high_risk_zones",
+          "type": "quantitative",
+          "title": "Population in High Risk Zones",
+          "axis": {"format": ".2s", "labelFontSize": 9}
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State",
+          "scale": {
+            "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
+            "range": ["#C0392B","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]
+          }
+        }
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 60},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "pop_in_high_risk_zones", "type": "quantitative"},
+        "color": {"field": "state", "type": "nominal"},
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "pop_in_high_risk_zones", "type": "quantitative", "title": "Population at Risk", "format": ","},
+          {"field": "pct_pop_high_risk", "type": "quantitative", "title": "% of State Pop", "format": ".1f"}
+        ]
+      }
+    }
+  ],
+  "config": {"font": "Inter, sans-serif", "view": {"stroke": "transparent"}}
+}

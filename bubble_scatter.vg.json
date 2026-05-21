@@ -1,39 +1,88 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 260,
-  "data": {"url": "data/bushfire_area_by_state.csv"},
-  "transform": [
-    {"filter": "datum.state !== 'Northern Territory'"}
-  ],
-  "mark": {"type": "bar", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2},
-  "encoding": {
-    "x": {
-      "field": "season",
-      "type": "ordinal",
-      "title": "Season",
-      "axis": {"labelAngle": -30, "labelFontSize": 9}
+  "height": 280,
+  "data": {"url": "economic_losses.csv"},
+  "layer": [
+    {
+      "mark": {"type": "circle", "opacity": 0.75},
+      "encoding": {
+        "x": {
+          "field": "homes_destroyed",
+          "type": "quantitative",
+          "title": "Homes Destroyed",
+          "axis": {"format": ",", "labelFontSize": 9}
+        },
+        "y": {
+          "field": "economic_total",
+          "type": "quantitative",
+          "title": "Total Economic Loss (AUD M)",
+          "axis": {"format": ".2s", "labelFontSize": 9}
+        },
+        "size": {
+          "field": "deaths",
+          "type": "quantitative",
+          "title": "Direct Deaths",
+          "scale": {
+            "type": "threshold",
+            "domain": [5, 30, 75, 173],
+            "range": [40, 120, 250, 450, 700]
+          },
+          "legend": {"title": "Deaths", "titleFontSize": 10}
+        },
+        "color": {
+          "value": "#C0392B"
+        },
+        "tooltip": [
+          {"field": "event_name", "type": "nominal", "title": "Event"},
+          {"field": "year", "type": "quantitative", "title": "Year"},
+          {"field": "economic_total", "type": "quantitative", "title": "Economic Loss (AUD M)", "format": ","},
+          {"field": "deaths", "type": "quantitative", "title": "Deaths"},
+          {"field": "homes_destroyed", "type": "quantitative", "title": "Homes Destroyed", "format": ","}
+        ]
+      },
+      "transform": [
+        {
+          "lookup": "event_name",
+          "from": {
+            "data": {"url": "bushfire_human_impact.csv"},
+            "key": "event_name",
+            "fields": ["deaths_direct", "homes_destroyed"]
+          }
+        },
+        {"calculate": "datum.insured + datum.agriculture + datum.tourism + datum.infrastructure", "as": "economic_total"},
+        {"calculate": "datum.deaths_direct", "as": "deaths"},
+        {"calculate": "datum.homes_destroyed", "as": "homes_destroyed"}
+      ]
     },
-    "y": {
-      "field": "area_burned_ha",
-      "type": "quantitative",
-      "title": "Area Burned (ha)",
-      "axis": {"format": ".2s"}
-    },
-    "color": {
-      "field": "state",
-      "type": "nominal",
-      "title": "State",
-      "scale": {
-        "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania","Australian Capital Territory"],
-        "range": ["#C0392B","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD","#E74C3C"]
+    {
+      "transform": [
+        {
+          "lookup": "event_name",
+          "from": {
+            "data": {"url": "bushfire_human_impact.csv"},
+            "key": "event_name",
+            "fields": ["deaths_direct", "homes_destroyed"]
+          }
+        },
+        {"calculate": "datum.insured + datum.agriculture + datum.tourism + datum.infrastructure", "as": "economic_total"},
+        {"calculate": "datum.deaths_direct", "as": "deaths"},
+        {"calculate": "datum.homes_destroyed", "as": "homes_destroyed"},
+        {"filter": "datum.economic_total > 500"}
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 9,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "x": {"field": "homes_destroyed", "type": "quantitative"},
+        "y": {"field": "economic_total", "type": "quantitative"},
+        "text": {"field": "event_name", "type": "nominal"}
       }
-    },
-    "tooltip": [
-      {"field": "state", "type": "nominal", "title": "State"},
-      {"field": "season", "type": "ordinal", "title": "Season"},
-      {"field": "area_burned_ha", "type": "quantitative", "title": "Area (ha)", "format": ","}
-    ]
-  },
+    }
+  ],
   "config": {"font": "Inter, sans-serif", "view": {"stroke": "transparent"}}
 }

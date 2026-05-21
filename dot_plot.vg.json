@@ -2,85 +2,48 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 280,
-  "data": {"url": "data/economic_losses.csv"},
+  "data": {"url": "bushfire_human_impact.csv"},
   "layer": [
     {
-      "mark": {"type": "circle", "opacity": 0.75},
+      "mark": {"type": "rule", "strokeWidth": 2, "color": "#ccc"},
       "encoding": {
+        "y": {"field": "event_name", "type": "nominal", "sort": {"field": "year"}, "title": null},
+        "x": {"field": "deaths_direct", "type": "quantitative"},
+        "x2": {"field": "homes_destroyed"}
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 80},
+      "encoding": {
+        "y": {"field": "event_name", "type": "nominal", "sort": {"field": "year"}, "title": null, "axis": {"labelFontSize": 9}},
         "x": {
-          "field": "homes_destroyed",
+          "field": "deaths_direct",
           "type": "quantitative",
-          "title": "Homes Destroyed",
-          "axis": {"format": ",", "labelFontSize": 9}
+          "title": "Deaths (red) vs Homes Destroyed (orange)",
+          "axis": {"labelFontSize": 9}
         },
-        "y": {
-          "field": "economic_total",
-          "type": "quantitative",
-          "title": "Total Economic Loss (AUD M)",
-          "axis": {"format": ".2s", "labelFontSize": 9}
-        },
-        "size": {
-          "field": "deaths",
-          "type": "quantitative",
-          "title": "Direct Deaths",
-          "scale": {
-            "type": "threshold",
-            "domain": [5, 30, 75, 173],
-            "range": [40, 120, 250, 450, 700]
-          },
-          "legend": {"title": "Deaths", "titleFontSize": 10}
-        },
-        "color": {
-          "value": "#C0392B"
-        },
+        "color": {"value": "#C0392B"},
         "tooltip": [
           {"field": "event_name", "type": "nominal", "title": "Event"},
           {"field": "year", "type": "quantitative", "title": "Year"},
-          {"field": "economic_total", "type": "quantitative", "title": "Economic Loss (AUD M)", "format": ","},
-          {"field": "deaths", "type": "quantitative", "title": "Deaths"},
-          {"field": "homes_destroyed", "type": "quantitative", "title": "Homes Destroyed", "format": ","}
+          {"field": "deaths_direct", "type": "quantitative", "title": "Direct Deaths"}
         ]
-      },
-      "transform": [
-        {
-          "lookup": "event_name",
-          "from": {
-            "data": {"url": "data/bushfire_human_impact.csv"},
-            "key": "event_name",
-            "fields": ["deaths_direct", "homes_destroyed"]
-          }
-        },
-        {"calculate": "datum.insured + datum.agriculture + datum.tourism + datum.infrastructure", "as": "economic_total"},
-        {"calculate": "datum.deaths_direct", "as": "deaths"},
-        {"calculate": "datum.homes_destroyed", "as": "homes_destroyed"}
-      ]
+      }
     },
     {
-      "transform": [
-        {
-          "lookup": "event_name",
-          "from": {
-            "data": {"url": "data/bushfire_human_impact.csv"},
-            "key": "event_name",
-            "fields": ["deaths_direct", "homes_destroyed"]
-          }
-        },
-        {"calculate": "datum.insured + datum.agriculture + datum.tourism + datum.infrastructure", "as": "economic_total"},
-        {"calculate": "datum.deaths_direct", "as": "deaths"},
-        {"calculate": "datum.homes_destroyed", "as": "homes_destroyed"},
-        {"filter": "datum.economic_total > 500"}
-      ],
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "dx": 8,
-        "fontSize": 9,
-        "fontStyle": "italic"
-      },
+      "mark": {"type": "point", "filled": true, "size": 80},
       "encoding": {
-        "x": {"field": "homes_destroyed", "type": "quantitative"},
-        "y": {"field": "economic_total", "type": "quantitative"},
-        "text": {"field": "event_name", "type": "nominal"}
+        "y": {"field": "event_name", "type": "nominal", "sort": {"field": "year"}},
+        "x": {
+          "field": "homes_destroyed",
+          "type": "quantitative"
+        },
+        "color": {"value": "#E67E22"},
+        "tooltip": [
+          {"field": "event_name", "type": "nominal", "title": "Event"},
+          {"field": "year", "type": "quantitative", "title": "Year"},
+          {"field": "homes_destroyed", "type": "quantitative", "title": "Homes Destroyed", "format": ","}
+        ]
       }
     }
   ],

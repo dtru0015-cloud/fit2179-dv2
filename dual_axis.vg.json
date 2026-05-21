@@ -1,0 +1,77 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 260,
+  "data": {"url": "bushfire_annual_trend_clean.csv"},
+  "layer": [
+    {
+      "mark": {"type": "bar", "color": "#E67E22", "opacity": 0.7},
+      "encoding": {
+        "x": {
+          "field": "season_start_year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {"labelAngle": -45, "labelFontSize": 9, "tickCount": 6}
+        },
+        "y": {
+          "field": "total_area_ha_national",
+          "type": "quantitative",
+          "title": "Area Burned (million ha)",
+          "axis": {"format": ".2s", "titleColor": "#E67E22"},
+          "scale": {"domain": [0, 200000000]}
+        },
+        "tooltip": [
+          {"field": "season_start_year", "type": "ordinal", "title": "Year"},
+          {"field": "total_area_ha_national", "type": "quantitative", "title": "Area (ha)", "format": ","},
+          {"field": "notable_events", "type": "nominal", "title": "Event"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "line", "color": "#C0392B", "strokeWidth": 2, "point": {"filled": true, "size": 30, "color": "#C0392B"}},
+      "encoding": {
+        "x": {"field": "season_start_year", "type": "ordinal"},
+        "y": {
+          "field": "temp_anomaly_c",
+          "type": "quantitative",
+          "title": "Temp Anomaly (°C)",
+          "axis": {"titleColor": "#C0392B"},
+          "scale": {"domain": [0, 2]}
+        },
+        "tooltip": [
+          {"field": "season_start_year", "type": "ordinal", "title": "Year"},
+          {"field": "temp_anomaly_c", "type": "quantitative", "title": "Temp Anomaly (°C)", "format": ".2f"}
+        ]
+      },
+      "transform": [
+        {
+          "lookup": "season_start_year",
+          "from": {
+            "data": {"url": "bom_temperature_anomaly.csv"},
+            "key": "year",
+            "fields": ["temp_anomaly_c"]
+          }
+        }
+      ]
+    },
+    {
+      "transform": [{"filter": "datum.season_start_year === 2019"}],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -4,
+        "dy": -10,
+        "fontSize": 9,
+        "fontStyle": "italic",
+        "color": "#333"
+      },
+      "encoding": {
+        "x": {"field": "season_start_year", "type": "ordinal"},
+        "y": {"field": "total_area_ha_national", "type": "quantitative", "scale": {"domain": [0, 200000000]}},
+        "text": {"value": "2019–20 Black Summer (24M ha)"}
+      }
+    }
+  ],
+  "resolve": {"scale": {"y": "independent"}},
+  "config": {"font": "Inter, sans-serif", "view": {"stroke": "transparent"}}
+}
