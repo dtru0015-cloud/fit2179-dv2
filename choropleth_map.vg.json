@@ -4,10 +4,15 @@
   "height": 380,
   "projection": {"type": "mercator", "center": [134, -28], "scale": 680},
   "data": {"url": "australia_states_enriched.geojson"},
+  "transform": [
+    {"calculate": "datum.properties.fire_risk_score", "as": "risk"},
+    {"calculate": "datum.properties.STATE_NAME", "as": "name"},
+    {"calculate": "datum.properties.pct_land_fire_prone", "as": "pct"}
+  ],
   "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 1.5},
   "encoding": {
     "color": {
-      "field": "fire_risk_score",
+      "field": "risk",
       "type": "quantitative",
       "title": "Fire Risk Score",
       "scale": {
@@ -15,17 +20,13 @@
         "domain": [40, 55, 65, 75],
         "range": ["#FDDBC7","#F4A582","#D6604D","#B2182B","#67001F"]
       },
-      "legend": {
-        "title": "Fire Risk Score",
-        "orient": "bottom-left",
-        "titleFontSize": 11,
-        "labelFontSize": 10
-      }
+      "legend": {"title": "Fire Risk Score", "orient": "bottom-left",
+                 "titleFontSize": 11, "labelFontSize": 10}
     },
     "tooltip": [
-      {"field": "state_name", "type": "nominal", "title": "State"},
-      {"field": "fire_risk_score", "type": "quantitative", "title": "Risk Score"},
-      {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Fire-Prone"}
+      {"field": "name", "type": "nominal", "title": "State"},
+      {"field": "risk", "type": "quantitative", "title": "Risk Score"},
+      {"field": "pct", "type": "quantitative", "title": "% Fire-Prone"}
     ]
   },
   "config": {"background": "transparent", "view": {"stroke": "transparent"}}
