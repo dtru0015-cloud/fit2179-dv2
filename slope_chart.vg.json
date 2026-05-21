@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 260,
+  "data": {"url": "data/state_ranking_by_decade.csv"},
+  "layer": [
+    {
+      "mark": {"type": "line", "strokeWidth": 2.5, "point": false},
+      "encoding": {
+        "x": {
+          "field": "decade",
+          "type": "ordinal",
+          "title": "Decade",
+          "axis": {"labelFontSize": 10}
+        },
+        "y": {
+          "field": "rank_deaths",
+          "type": "quantitative",
+          "sort": "descending",
+          "title": "Rank (1 = most deaths)",
+          "scale": {"domain": [1, 6]},
+          "axis": {"values": [1,2,3,4,5,6], "labelFontSize": 10}
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State",
+          "scale": {
+            "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
+            "range": ["#C0392B","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]
+          }
+        },
+        "tooltip": [
+          {"field": "state", "type": "nominal"},
+          {"field": "decade", "type": "ordinal"},
+          {"field": "rank_deaths", "type": "quantitative", "title": "Rank (deaths)"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 80},
+      "encoding": {
+        "x": {"field": "decade", "type": "ordinal"},
+        "y": {"field": "rank_deaths", "type": "quantitative", "sort": "descending"},
+        "color": {"field": "state", "type": "nominal"},
+        "tooltip": [
+          {"field": "state", "type": "nominal"},
+          {"field": "decade", "type": "ordinal"},
+          {"field": "rank_deaths", "type": "quantitative", "title": "Rank (deaths)"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.decade === '2020s'"}],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 10
+      },
+      "encoding": {
+        "x": {"field": "decade", "type": "ordinal"},
+        "y": {"field": "rank_deaths", "type": "quantitative", "sort": "descending"},
+        "text": {"field": "state", "type": "nominal"},
+        "color": {"field": "state", "type": "nominal"}
+      }
+    }
+  ],
+  "config": {"font": "Inter, sans-serif", "view": {"stroke": "transparent"}}
+}

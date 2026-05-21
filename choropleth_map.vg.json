@@ -1,0 +1,50 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 260,
+  "data": {"url": "data/fire_season_heatmap.csv"},
+  "mark": "rect",
+  "encoding": {
+    "x": {
+      "field": "month",
+      "type": "ordinal",
+      "title": null,
+      "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+      "axis": {"labelFontSize": 9}
+    },
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": ["New South Wales","Victoria","Queensland","South Australia","Western Australia","Tasmania","Northern Territory","Australian Capital Territory"],
+      "axis": {"labelFontSize": 9, "labelLimit": 160}
+    },
+    "color": {
+      "field": "avg_fire_danger_index",
+      "type": "quantitative",
+      "title": "Avg FFDI",
+      "scale": {
+        "type": "threshold",
+        "domain": [10, 20, 30, 40],
+        "range": ["#FFF9C4", "#FFCC80", "#FF8A65", "#E64A19", "#B71C1C"]
+      },
+      "legend": {
+        "title": "Fire Danger",
+        "titleFontSize": 10,
+        "labelFontSize": 9,
+        "orient": "bottom",
+        "direction": "horizontal"
+      }
+    },
+    "tooltip": [
+      {"field": "state", "type": "nominal", "title": "State"},
+      {"field": "month", "type": "ordinal", "title": "Month"},
+      {"field": "avg_fire_danger_index", "type": "quantitative", "title": "Avg FFDI", "format": ".0f"}
+    ]
+  },
+  "config": {
+    "font": "Inter, sans-serif",
+    "view": {"stroke": "transparent"},
+    "axis": {"grid": false}
+  }
+}

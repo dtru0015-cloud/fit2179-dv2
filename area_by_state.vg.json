@@ -1,0 +1,90 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 320,
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28],
+    "scale": 550
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/australia_states.geojson",
+        "format": {"type": "geojson"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.state_code",
+          "from": {
+            "data": {"url": "data/bushfire_risk_by_state.csv"},
+            "key": "state_code",
+            "fields": ["fire_risk_score", "pct_land_fire_prone", "state"]
+          }
+        },
+        {
+          "calculate": "datum.fire_risk_score / 100",
+          "as": "risk_normalised"
+        }
+      ],
+      "mark": {"type": "geoshape", "stroke": "#fff", "strokeWidth": 1},
+      "encoding": {
+        "color": {
+          "field": "risk_normalised",
+          "type": "quantitative",
+          "title": "Fire Risk Score",
+          "scale": {
+            "type": "threshold",
+            "domain": [0.5, 0.6, 0.7, 0.8],
+            "range": ["#FDDBC7", "#F4A582", "#D6604D", "#B2182B", "#67001F"]
+          },
+          "legend": {
+            "title": "Fire Risk",
+            "titleFontSize": 11,
+            "labelFontSize": 10,
+            "format": ".0%"
+          }
+        },
+        "tooltip": [
+          {"field": "properties.state", "type": "nominal", "title": "State"},
+          {"field": "fire_risk_score", "type": "quantitative", "title": "Risk Score"},
+          {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Land Fire-Prone", "format": ".0f"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/australia_states.geojson",
+        "format": {"type": "geojson"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.state_code",
+          "from": {
+            "data": {"url": "data/bushfire_risk_by_state.csv"},
+            "key": "state_code",
+            "fields": ["fire_risk_score", "state_code"]
+          }
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "fill": "#333"
+      },
+      "encoding": {
+        "longitude": {"field": "properties.longitude", "type": "quantitative"},
+        "latitude": {"field": "properties.latitude", "type": "quantitative"},
+        "text": {
+          "field": "state_code",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": "transparent"},
+    "font": "Inter, sans-serif"
+  }
+}

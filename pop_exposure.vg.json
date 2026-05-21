@@ -1,0 +1,44 @@
+// Australia's Bushfire Crisis — DV2 FIT2179
+// Dinh Duy Truong | 33538921 | May 2026
+
+const embedOpts = {
+  actions: false,
+  renderer: "svg",
+  theme: "default"
+};
+
+// ① Choropleth Map
+vegaEmbed("#choropleth_map", "js/choropleth_map.vg.json", embedOpts)
+  .catch(console.error);
+
+// ④ Area by State
+vegaEmbed("#area_by_state", "js/area_by_state.vg.json", embedOpts)
+  .catch(console.error);
+
+// ⑤ Bump Chart
+vegaEmbed("#bump_chart", "js/bump_chart.vg.json", embedOpts)
+  .catch(console.error);
+
+// ⑥ Dual Axis — Area Burned + Temp Anomaly
+vegaEmbed("#dual_axis", "js/dual_axis.vg.json", embedOpts)
+  .catch(console.error);
+
+// ⑦ Fire Season Heatmap
+vegaEmbed("#heatmap", "js/heatmap.vg.json", embedOpts)
+  .catch(console.error);
+
+// ⑧ Connected Dot Plot
+vegaEmbed("#dot_plot", "js/dot_plot.vg.json", embedOpts)
+  .catch(console.error);
+
+// ⑨ Bubble Scatter — Economic Losses
+vegaEmbed("#bubble_scatter", "js/bubble_scatter.vg.json", embedOpts)
+  .catch(console.error);
+
+// ⑩ Population Exposure
+vegaEmbed("#pop_exposure", "js/pop_exposure.vg.json", embedOpts)
+  .catch(console.error);
+
+// ⑪ Slope Chart
+vegaEmbed("#slope_chart", "js/slope_chart.vg.json", embedOpts)
+  .catch(console.error);

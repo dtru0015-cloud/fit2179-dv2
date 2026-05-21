@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 260,
+  "data": {"url": "data/bushfire_area_by_state.csv"},
+  "transform": [
+    {"filter": "datum.state !== 'Northern Territory'"}
+  ],
+  "mark": {"type": "bar", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2},
+  "encoding": {
+    "x": {
+      "field": "season",
+      "type": "ordinal",
+      "title": "Season",
+      "axis": {"labelAngle": -30, "labelFontSize": 9}
+    },
+    "y": {
+      "field": "area_burned_ha",
+      "type": "quantitative",
+      "title": "Area Burned (ha)",
+      "axis": {"format": ".2s"}
+    },
+    "color": {
+      "field": "state",
+      "type": "nominal",
+      "title": "State",
+      "scale": {
+        "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania","Australian Capital Territory"],
+        "range": ["#C0392B","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD","#E74C3C"]
+      }
+    },
+    "tooltip": [
+      {"field": "state", "type": "nominal", "title": "State"},
+      {"field": "season", "type": "ordinal", "title": "Season"},
+      {"field": "area_burned_ha", "type": "quantitative", "title": "Area (ha)", "format": ","}
+    ]
+  },
+  "config": {"font": "Inter, sans-serif", "view": {"stroke": "transparent"}}
+}
