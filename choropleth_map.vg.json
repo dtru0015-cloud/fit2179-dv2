@@ -2,6 +2,13 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 520,
   "height": 360,
+  "title": {
+    "text": "Bushfire Risk Across Australia",
+    "fontSize": 22,
+    "anchor": "middle",
+    "color": "#111111"
+  },
+
   "data": {
     "url": "australia_states.geojson",
     "format": {
@@ -9,6 +16,7 @@
       "property": "features"
     }
   },
+
   "transform": [
     {
       "lookup": "properties.STATE_NAME",
@@ -17,23 +25,32 @@
           "url": "bushfire_risk_by_state.csv"
         },
         "key": "state",
-        "fields": ["fire_risk_score", "pct_land_fire_prone"]
+        "fields": [
+          "fire_risk_score",
+          "pct_land_fire_prone",
+          "state_code",
+          "label_lon",
+          "label_lat"
+        ]
       }
     }
   ],
+
   "projection": {
     "type": "mercator",
     "center": [134, -27],
     "scale": 520,
     "translate": [260, 180]
   },
+
   "layer": [
     {
       "mark": {
         "type": "geoshape",
-        "stroke": "#111111",
-        "strokeWidth": 0.8
+        "stroke": "#ffffff",
+        "strokeWidth": 1
       },
+
       "encoding": {
         "color": {
           "field": "fire_risk_score",
@@ -43,6 +60,7 @@
           },
           "title": "Fire Risk Score"
         },
+
         "tooltip": [
           {
             "field": "properties.STATE_NAME",
@@ -52,16 +70,17 @@
           {
             "field": "fire_risk_score",
             "type": "quantitative",
-            "title": "Fire Risk Score"
+            "title": "Risk Score"
           },
           {
             "field": "pct_land_fire_prone",
             "type": "quantitative",
-            "title": "% Land Fire-Prone"
+            "title": "% Fire-prone Land"
           }
         ]
       }
     },
+
     {
       "mark": {
         "type": "text",
@@ -69,6 +88,7 @@
         "fontWeight": "bold",
         "fill": "#111111"
       },
+
       "encoding": {
         "longitude": {
           "field": "label_lon",
