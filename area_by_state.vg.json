@@ -1,39 +1,50 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 260,
-  "data": {"url": "bushfire_area_by_state.csv"},
-  "transform": [
-    {"filter": "datum.state !== 'Northern Territory'"}
-  ],
-  "mark": {"type": "bar", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2},
-  "encoding": {
-    "x": {
-      "field": "season",
-      "type": "ordinal",
-      "title": "Season",
-      "axis": {"labelAngle": -30, "labelFontSize": 9}
-    },
-    "y": {
-      "field": "area_burned_ha",
-      "type": "quantitative",
-      "title": "Area Burned (ha)",
-      "axis": {"format": ".2s"}
-    },
-    "color": {
-      "field": "state",
-      "type": "nominal",
-      "title": "State",
-      "scale": {
-        "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania","Australian Capital Territory"],
-        "range": ["#C0392B","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD","#E74C3C"]
+  "height": 280,
+  "data": {"url": "bushfire_risk_by_state.csv"},
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "opacity": 0.7,
+        "color": "#E67E22"
+      },
+      "encoding": {
+        "x": {
+          "field": "season_start_year",
+          "type": "ordinal",
+          "title": "Season",
+          "axis": {"labelAngle": -45, "labelFontSize": 9, "titleFontSize": 11, "grid": false}
+        },
+        "y": {
+          "field": "total_area_ha_national",
+          "type": "quantitative",
+          "title": "Total Area Burned (ha)",
+          "axis": {"format": "~s", "titleFontSize": 11, "labelFontSize": 10}
+        },
+        "tooltip": [
+          {"field": "season_start_year", "type": "ordinal", "title": "Season"},
+          {"field": "total_area_ha_national", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
+          {"field": "severity", "type": "nominal", "title": "Severity"},
+          {"field": "notable_events", "type": "nominal", "title": "Notable Events"}
+        ]
       }
     },
-    "tooltip": [
-      {"field": "state", "type": "nominal", "title": "State"},
-      {"field": "season", "type": "ordinal", "title": "Season"},
-      {"field": "area_burned_ha", "type": "quantitative", "title": "Area (ha)", "format": ","}
-    ]
-  },
-  "config": {"font": "Inter, sans-serif", "view": {"stroke": "transparent"}}
+    {
+      "mark": {"type": "rule", "color": "#C0392B", "strokeDash": [4,3], "strokeWidth": 1.5},
+      "data": {"values": [{"season_start_year": "2019"}]},
+      "encoding": {"x": {"field": "season_start_year", "type": "ordinal"}}
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 4, "dy": -8, "color": "#C0392B", "fontSize": 10, "fontWeight": "bold"},
+      "data": {"values": [{"season_start_year": "2019", "total_area_ha_national": 180000000, "label": "Black Summer"}]},
+      "encoding": {
+        "x": {"field": "season_start_year", "type": "ordinal"},
+        "y": {"field": "total_area_ha_national", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ],
+  "config": {"background": "transparent", "view": {"stroke": "transparent"}}
 }

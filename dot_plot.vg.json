@@ -1,51 +1,54 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 280,
+  "height": 320,
   "data": {"url": "bushfire_human_impact.csv"},
   "layer": [
     {
-      "mark": {"type": "rule", "strokeWidth": 2, "color": "#ccc"},
+      "mark": {"type": "bar", "opacity": 0.8, "cornerRadiusEnd": 3},
       "encoding": {
-        "y": {"field": "event_name", "type": "nominal", "sort": {"field": "year"}, "title": null},
-        "x": {"field": "deaths_direct", "type": "quantitative"},
-        "x2": {"field": "homes_destroyed"}
-      }
-    },
-    {
-      "mark": {"type": "point", "filled": true, "size": 80},
-      "encoding": {
-        "y": {"field": "event_name", "type": "nominal", "sort": {"field": "year"}, "title": null, "axis": {"labelFontSize": 9}},
-        "x": {
-          "field": "deaths_direct",
-          "type": "quantitative",
-          "title": "Deaths (red) vs Homes Destroyed (orange)",
-          "axis": {"labelFontSize": 9}
+        "y": {
+          "field": "event_name",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "homes", "order": "descending"},
+          "axis": {"labelFontSize": 10, "labelLimit": 160}
         },
-        "color": {"value": "#C0392B"},
-        "tooltip": [
-          {"field": "event_name", "type": "nominal", "title": "Event"},
-          {"field": "year", "type": "quantitative", "title": "Year"},
-          {"field": "deaths_direct", "type": "quantitative", "title": "Direct Deaths"}
-        ]
-      }
-    },
-    {
-      "mark": {"type": "point", "filled": true, "size": 80},
-      "encoding": {
-        "y": {"field": "event_name", "type": "nominal", "sort": {"field": "year"}},
         "x": {
-          "field": "homes_destroyed",
-          "type": "quantitative"
+          "field": "homes",
+          "type": "quantitative",
+          "title": "Deaths (red dot) vs Homes Destroyed (orange bar)",
+          "axis": {"format": ",.0f", "titleFontSize": 11, "labelFontSize": 10, "grid": true, "gridDash": [3,3]}
         },
         "color": {"value": "#E67E22"},
         "tooltip": [
           {"field": "event_name", "type": "nominal", "title": "Event"},
-          {"field": "year", "type": "quantitative", "title": "Year"},
-          {"field": "homes_destroyed", "type": "quantitative", "title": "Homes Destroyed", "format": ","}
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "homes", "type": "quantitative", "title": "Homes Destroyed", "format": ",.0f"},
+          {"field": "deaths", "type": "quantitative", "title": "Deaths"},
+          {"field": "area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 80, "opacity": 0.9},
+      "encoding": {
+        "y": {
+          "field": "event_name",
+          "type": "nominal",
+          "sort": {"field": "homes", "order": "descending"}
+        },
+        "x": {"field": "deaths", "type": "quantitative"},
+        "color": {"value": "#C0392B"},
+        "tooltip": [
+          {"field": "event_name", "type": "nominal", "title": "Event"},
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "deaths", "type": "quantitative", "title": "Deaths"},
+          {"field": "homes", "type": "quantitative", "title": "Homes Destroyed", "format": ",.0f"}
         ]
       }
     }
   ],
-  "config": {"font": "Inter, sans-serif", "view": {"stroke": "transparent"}}
+  "resolve": {"scale": {"x": "shared"}},
+  "config": {"background": "transparent", "view": {"stroke": "transparent"}}
 }

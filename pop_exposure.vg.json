@@ -2,51 +2,36 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 280,
-  "data": {"url": "population_fire_risk_exposure.csv"},
-  "transform": [
-    {"filter": "datum.state !== 'Northern Territory' && datum.state !== 'Australian Capital Territory'"}
-  ],
-  "layer": [
-    {
-      "mark": {"type": "line", "strokeWidth": 1, "opacity": 0.3},
-      "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal",
-          "title": "Census Year",
-          "axis": {"labelFontSize": 9}
-        },
-        "y": {
-          "field": "pop_in_high_risk_zones",
-          "type": "quantitative",
-          "title": "Population in High Risk Zones",
-          "axis": {"format": ".2s", "labelFontSize": 9}
-        },
-        "color": {
-          "field": "state",
-          "type": "nominal",
-          "title": "State",
-          "scale": {
-            "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
-            "range": ["#C0392B","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]
-          }
-        }
+  "data": {"url": "bushfire_major_events.csv"},
+  "mark": {"type": "line", "point": {"filled": true, "size": 50}, "strokeWidth": 2},
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Census Year",
+      "axis": {"labelFontSize": 11, "titleFontSize": 11, "grid": false}
+    },
+    "y": {
+      "field": "pop_in_high_risk_zones",
+      "type": "quantitative",
+      "title": "Population in High Risk Zones",
+      "axis": {"format": "~s", "titleFontSize": 11, "labelFontSize": 10, "grid": true, "gridDash": [3,3]}
+    },
+    "color": {
+      "field": "state",
+      "type": "nominal",
+      "title": "State",
+      "scale": {
+        "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
+        "range": ["#C0392B","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]
       }
     },
-    {
-      "mark": {"type": "point", "filled": true, "size": 60},
-      "encoding": {
-        "x": {"field": "year", "type": "ordinal"},
-        "y": {"field": "pop_in_high_risk_zones", "type": "quantitative"},
-        "color": {"field": "state", "type": "nominal"},
-        "tooltip": [
-          {"field": "state", "type": "nominal", "title": "State"},
-          {"field": "year", "type": "ordinal", "title": "Year"},
-          {"field": "pop_in_high_risk_zones", "type": "quantitative", "title": "Population at Risk", "format": ","},
-          {"field": "pct_pop_high_risk", "type": "quantitative", "title": "% of State Pop", "format": ".1f"}
-        ]
-      }
-    }
-  ],
-  "config": {"font": "Inter, sans-serif", "view": {"stroke": "transparent"}}
+    "tooltip": [
+      {"field": "year", "type": "ordinal", "title": "Year"},
+      {"field": "state", "type": "nominal", "title": "State"},
+      {"field": "pop_in_high_risk_zones", "type": "quantitative", "title": "Population at Risk", "format": ",.0f"},
+      {"field": "pct_pop_high_risk", "type": "quantitative", "title": "% of State Pop.", "format": ".1f"}
+    ]
+  },
+  "config": {"background": "transparent", "view": {"stroke": "transparent"}}
 }
