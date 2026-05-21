@@ -1,45 +1,38 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 320,
+  "height": 280,
   "data": {"url": "state_ranking_by_decade.csv"},
-  "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 6
-  },
+  "mark": {"type": "bar", "cornerRadiusEnd": 4},
   "encoding": {
-    "x": {
-      "field": "fire_risk_score",
-      "type": "quantitative",
-      "title": "Fire Risk Score (0–1)",
-      "scale": {"domain": [0, 1]},
-      "axis": {"titleFontSize": 11, "labelFontSize": 10, "grid": true, "gridDash": [3,3]}
-    },
     "y": {
       "field": "state",
       "type": "nominal",
       "title": null,
       "sort": {"field": "fire_risk_score", "order": "descending"},
-      "axis": {"labelFontSize": 11}
+      "axis": {"labelFontSize": 10}
+    },
+    "x": {
+      "field": "fire_risk_score",
+      "type": "quantitative",
+      "title": "Fire Risk Score",
+      "axis": {"titleFontSize": 11, "labelFontSize": 10, "grid": true, "gridDash": [3,3]}
     },
     "color": {
       "field": "fire_risk_score",
       "type": "quantitative",
       "scale": {
         "type": "threshold",
-        "domain": [0.35, 0.50, 0.65, 0.75],
+        "domain": [40, 55, 65, 75],
         "range": ["#FDDBC7","#F4A582","#D6604D","#B2182B","#67001F"]
       },
-      "legend": {
-        "title": "Fire Risk Score",
-        "titleFontSize": 11,
-        "labelFontSize": 10
-      }
+      "legend": {"title": "Fire Risk Score", "titleFontSize": 11, "labelFontSize": 10}
     },
     "tooltip": [
       {"field": "state", "type": "nominal", "title": "State"},
-      {"field": "fire_risk_score", "type": "quantitative", "title": "Risk Score", "format": ".2f"},
-      {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Land Fire-Prone", "format": ".0f"}
+      {"field": "state_code", "type": "nominal", "title": "Code"},
+      {"field": "fire_risk_score", "type": "quantitative", "title": "Fire Risk Score"},
+      {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Land Fire-Prone"}
     ]
   },
   "config": {"background": "transparent", "view": {"stroke": "transparent"}}
