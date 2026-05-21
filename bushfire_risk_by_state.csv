@@ -1,9 +1,9 @@
-state,state_code,fire_risk_score,pct_land_fire_prone
-New South Wales,NSW,92,78
-Victoria,VIC,88,69
-Queensland,QLD,75,61
-Western Australia,WA,70,58
-South Australia,SA,67,52
-Tasmania,TAS,55,41
-Northern Territory,NT,48,35
-Australian Capital Territory,ACT,80,60
+state,state_code,fire_risk_score,pct_land_fire_prone,label_lon,label_lat
+New South Wales,NSW,92,78,147,-32
+Victoria,VIC,88,69,145,-37
+Queensland,QLD,75,61,145,-21
+Western Australia,WA,70,58,121,-25
+South Australia,SA,67,52,135,-30
+Tasmania,TAS,55,41,147,-42
+Northern Territory,NT,48,35,133,-19
+Australian Capital Territory,ACT,80,60,149,-35.5
