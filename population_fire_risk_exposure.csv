@@ -1,0 +1,279 @@
+{
+  "type": "FeatureCollection",
+  "name": "australia_states_simplified_for_fit2179_dv2",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Western Australia",
+        "state_code": "WA"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              113.0,
+              -35.2
+            ],
+            [
+              129.0,
+              -35.2
+            ],
+            [
+              129.0,
+              -13.5
+            ],
+            [
+              113.0,
+              -13.5
+            ],
+            [
+              113.0,
+              -35.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Northern Territory",
+        "state_code": "NT"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              129.0,
+              -26.0
+            ],
+            [
+              138.0,
+              -26.0
+            ],
+            [
+              138.0,
+              -10.5
+            ],
+            [
+              129.0,
+              -10.5
+            ],
+            [
+              129.0,
+              -26.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Australia",
+        "state_code": "SA"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              129.0,
+              -38.1
+            ],
+            [
+              141.0,
+              -38.1
+            ],
+            [
+              141.0,
+              -26.0
+            ],
+            [
+              129.0,
+              -26.0
+            ],
+            [
+              129.0,
+              -38.1
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Queensland",
+        "state_code": "QLD"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              138.0,
+              -29.2
+            ],
+            [
+              153.7,
+              -29.2
+            ],
+            [
+              153.7,
+              -10.0
+            ],
+            [
+              138.0,
+              -10.0
+            ],
+            [
+              138.0,
+              -29.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New South Wales",
+        "state_code": "NSW"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              141.0,
+              -37.5
+            ],
+            [
+              153.7,
+              -37.5
+            ],
+            [
+              153.7,
+              -28.0
+            ],
+            [
+              141.0,
+              -28.0
+            ],
+            [
+              141.0,
+              -37.5
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Victoria",
+        "state_code": "VIC"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              141.0,
+              -39.2
+            ],
+            [
+              150.1,
+              -39.2
+            ],
+            [
+              150.1,
+              -34.0
+            ],
+            [
+              141.0,
+              -34.0
+            ],
+            [
+              141.0,
+              -39.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Tasmania",
+        "state_code": "TAS"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              144.5,
+              -43.8
+            ],
+            [
+              148.5,
+              -43.8
+            ],
+            [
+              148.5,
+              -39.5
+            ],
+            [
+              144.5,
+              -39.5
+            ],
+            [
+              144.5,
+              -43.8
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Australian Capital Territory",
+        "state_code": "ACT"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              148.8,
+              -35.9
+            ],
+            [
+              149.4,
+              -35.9
+            ],
+            [
+              149.4,
+              -35.1
+            ],
+            [
+              148.8,
+              -35.1
+            ],
+            [
+              148.8,
+              -35.9
+            ]
+          ]
+        ]
+      }
+    }
+  ],
+  "note": "Simplified approximate polygons for Vega-Lite prototyping. Replace with official ABS ASGS boundaries for final high-precision map if needed."
+}

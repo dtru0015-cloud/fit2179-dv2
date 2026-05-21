@@ -1,0 +1,97 @@
+state,month,avg_fire_danger_index
+New South Wales,Jan,38
+New South Wales,Feb,35
+New South Wales,Mar,22
+New South Wales,Apr,10
+New South Wales,May,5
+New South Wales,Jun,3
+New South Wales,Jul,4
+New South Wales,Aug,8
+New South Wales,Sep,16
+New South Wales,Oct,25
+New South Wales,Nov,34
+New South Wales,Dec,42
+Victoria,Jan,41
+Victoria,Feb,44
+Victoria,Mar,28
+Victoria,Apr,12
+Victoria,May,5
+Victoria,Jun,3
+Victoria,Jul,3
+Victoria,Aug,7
+Victoria,Sep,14
+Victoria,Oct,22
+Victoria,Nov,33
+Victoria,Dec,40
+Queensland,Jan,22
+Queensland,Feb,19
+Queensland,Mar,15
+Queensland,Apr,10
+Queensland,May,8
+Queensland,Jun,6
+Queensland,Jul,7
+Queensland,Aug,11
+Queensland,Sep,18
+Queensland,Oct,24
+Queensland,Nov,25
+Queensland,Dec,23
+Western Australia,Jan,28
+Western Australia,Feb,26
+Western Australia,Mar,18
+Western Australia,Apr,10
+Western Australia,May,8
+Western Australia,Jun,7
+Western Australia,Jul,8
+Western Australia,Aug,12
+Western Australia,Sep,18
+Western Australia,Oct,22
+Western Australia,Nov,26
+Western Australia,Dec,30
+South Australia,Jan,36
+South Australia,Feb,34
+South Australia,Mar,22
+South Australia,Apr,11
+South Australia,May,6
+South Australia,Jun,4
+South Australia,Jul,4
+South Australia,Aug,8
+South Australia,Sep,15
+South Australia,Oct,22
+South Australia,Nov,30
+South Australia,Dec,38
+Tasmania,Jan,24
+Tasmania,Feb,28
+Tasmania,Mar,16
+Tasmania,Apr,8
+Tasmania,May,4
+Tasmania,Jun,2
+Tasmania,Jul,2
+Tasmania,Aug,5
+Tasmania,Sep,9
+Tasmania,Oct,14
+Tasmania,Nov,18
+Tasmania,Dec,22
+Northern Territory,Jan,10
+Northern Territory,Feb,8
+Northern Territory,Mar,12
+Northern Territory,Apr,18
+Northern Territory,May,24
+Northern Territory,Jun,28
+Northern Territory,Jul,32
+Northern Territory,Aug,36
+Northern Territory,Sep,34
+Northern Territory,Oct,28
+Northern Territory,Nov,18
+Northern Territory,Dec,12
+Australian Capital Territory,Jan,36
+Australian Capital Territory,Feb,34
+Australian Capital Territory,Mar,20
+Australian Capital Territory,Apr,9
+Australian Capital Territory,May,4
+Australian Capital Territory,Jun,2
+Australian Capital Territory,Jul,3
+Australian Capital Territory,Aug,7
+Australian Capital Territory,Sep,13
+Australian Capital Territory,Oct,20
+Australian Capital Territory,Nov,28
+Australian Capital Territory,Dec,35
