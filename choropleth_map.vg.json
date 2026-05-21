@@ -6,51 +6,49 @@
   "layer": [
     {
       "data": {"url": "australia_states.geojson"},
-      "transform": [{
-        "lookup": "properties.STATE_NAME",
-        "from": {"data": {"url": "state_ranking_by_decade.csv"}, "key": "state",
-                 "fields": ["fire_risk_score","pct_land_fire_prone","state_code"]}
-      }],
       "mark": {"type": "geoshape", "stroke": "#ffffff", "strokeWidth": 1.5},
       "encoding": {
-        "color": {"field": "fire_risk_score", "type": "quantitative",
+        "color": {
+          "field": "properties.fire_risk_score",
+          "type": "quantitative",
+          "title": "Fire Risk Score",
           "scale": {"type": "threshold", "domain": [40,55,65,75],
                     "range": ["#FDDBC7","#F4A582","#D6604D","#B2182B","#67001F"]},
-          "legend": {"title": "Fire Risk Score", "orient": "bottom-left"}},
+          "legend": {"title": "Fire Risk Score", "orient": "bottom-left",
+                     "titleFontSize": 11, "labelFontSize": 10}
+        },
         "tooltip": [
           {"field": "properties.STATE_NAME", "type": "nominal", "title": "State"},
-          {"field": "fire_risk_score", "type": "quantitative", "title": "Risk Score"},
-          {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Fire-Prone", "format": ".0f"}
+          {"field": "properties.fire_risk_score", "type": "quantitative", "title": "Risk Score"},
+          {"field": "properties.pct_land_fire_prone", "type": "quantitative", "title": "% Fire-Prone"}
         ]
       }
     },
     {
       "data": {"url": "australia_states.geojson"},
       "transform": [
-        {"lookup": "properties.STATE_NAME", "from": {"data": {"url": "state_ranking_by_decade.csv"},
-         "key": "state", "fields": ["fire_risk_score","state_code"]}},
         {"calculate": "geoCentroid(null, datum)", "as": "centroid"}
       ],
-      "mark": {"type": "text", "fontSize": 11, "fontWeight": "bold", "fill": "#fff", "dy": -6},
+      "mark": {"type": "text", "fontSize": 11, "fontWeight": "bold",
+               "fill": "#ffffff", "stroke": "#333", "strokeWidth": 0.3, "dy": -6},
       "encoding": {
         "longitude": {"field": "centroid[0]", "type": "quantitative"},
-        "latitude": {"field": "centroid[1]", "type": "quantitative"},
-        "text": {"field": "state_code", "type": "nominal"}
+        "latitude":  {"field": "centroid[1]", "type": "quantitative"},
+        "text":      {"field": "properties.state_code", "type": "nominal"}
       }
     },
     {
       "data": {"url": "australia_states.geojson"},
       "transform": [
-        {"lookup": "properties.STATE_NAME", "from": {"data": {"url": "state_ranking_by_decade.csv"},
-         "key": "state", "fields": ["fire_risk_score","state_code"]}},
         {"calculate": "geoCentroid(null, datum)", "as": "centroid"},
-        {"calculate": "datum.fire_risk_score + ''", "as": "score_label"}
+        {"calculate": "datum.properties.fire_risk_score + ''", "as": "score_label"}
       ],
-      "mark": {"type": "text", "fontSize": 10, "fill": "#fff", "dy": 7},
+      "mark": {"type": "text", "fontSize": 10, "fill": "#ffffff",
+               "stroke": "#333", "strokeWidth": 0.3, "dy": 7},
       "encoding": {
         "longitude": {"field": "centroid[0]", "type": "quantitative"},
-        "latitude": {"field": "centroid[1]", "type": "quantitative"},
-        "text": {"field": "score_label", "type": "nominal"}
+        "latitude":  {"field": "centroid[1]", "type": "quantitative"},
+        "text":      {"field": "score_label", "type": "nominal"}
       }
     }
   ],
