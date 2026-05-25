@@ -33,24 +33,25 @@
   "projection": {"type": "mercator", "center": [134, -27], "scale": 520, "translate": [400, 210]},
   "layer": [
     {
-      "data": {
-        "url": "australia_states.geojson",
-        "format": {"type": "json", "property": "features"}
-      },
+      "data": {"url": "bushfire_risk_by_state_multiyear.csv"},
       "transform": [
+        {"filter": "datum.year == year_select"},
         {
-          "lookup": "properties.STATE_NAME",
+          "lookup": "state",
           "from": {
-            "data": {"url": "bushfire_risk_by_state_multiyear.csv"},
-            "key": "state",
-            "fields": ["fire_risk_score", "pct_land_fire_prone", "state_code", "year"],
-            "filter": "datum.year == year_select"
+            "data": {
+              "url": "australia_states.geojson",
+              "format": {"type": "json", "property": "features"}
+            },
+            "key": "properties.STATE_NAME",
+            "fields": ["type", "geometry"]
           }
         },
-        {"calculate": "state_select == null || datum.properties.STATE_NAME == state_select ? 1 : 0.3", "as": "op"}
+        {"calculate": "state_select == null || datum.state == state_select ? 1 : 0.3", "as": "op"}
       ],
       "mark": {"type": "geoshape", "stroke": "#0a1628", "strokeWidth": 1.5},
       "encoding": {
+        "shape": {"field": "geometry", "type": "geojson"},
         "color": {
           "field": "fire_risk_score",
           "type": "quantitative",
@@ -70,7 +71,8 @@
         },
         "opacity": {"field": "op", "type": "quantitative", "legend": null},
         "tooltip": [
-          {"field": "properties.STATE_NAME", "type": "nominal", "title": "State"},
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "year", "type": "ordinal", "title": "Year"},
           {"field": "fire_risk_score", "type": "quantitative", "title": "Fire Risk Score"},
           {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Fire-Prone Land"}
         ]
@@ -126,7 +128,6 @@
   ],
   "config": {
     "background": "#0a1628",
-    "view": {"stroke": "transparent"},
-    "axis": {"labelColor": "#ffffff", "titleColor": "#ffffff"}
+    "view": {"stroke": "transparent"}
   }
 }
