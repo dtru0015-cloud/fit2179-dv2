@@ -6,10 +6,10 @@
   "layer": [
     {
       "mark": {
-        "type": "line",
+        "type": "area",
         "color": "#E67E22",
-        "strokeWidth": 2,
-        "point": {"filled": true, "color": "#E67E22", "size": 60}
+        "opacity": 0.4,
+        "line": {"color": "#E67E22", "strokeWidth": 2}
       },
       "encoding": {
         "x": {
@@ -21,11 +21,24 @@
         "y": {
           "field": "area_ha",
           "type": "quantitative",
-          "title": "Area Burned (ha) — log scale",
-          "scale": {"type": "log", "base": 10},
+          "title": "Area Burned (ha)",
           "axis": {"format": "~s", "titleFontSize": 11, "labelFontSize": 10,
                    "grid": true, "gridDash": [3,3]}
         },
+        "tooltip": [
+          {"field": "event_name", "type": "nominal", "title": "Event"},
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
+          {"field": "deaths", "type": "quantitative", "title": "Deaths"},
+          {"field": "homes", "type": "quantitative", "title": "Homes Destroyed"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "color": "#E67E22", "size": 60},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "area_ha", "type": "quantitative"},
         "tooltip": [
           {"field": "event_name", "type": "nominal", "title": "Event"},
           {"field": "year", "type": "ordinal", "title": "Year"},
@@ -41,12 +54,12 @@
       "encoding": {"x": {"field": "year", "type": "ordinal"}}
     },
     {
-      "data": {"values": [{"year": "2019", "area_ha": 20000000, "label": "◀ Black Summer"}]},
+      "data": {"values": [{"year": "2019", "area_ha": 21000000, "label": "◀ Black Summer"}]},
       "mark": {"type": "text", "align": "left", "dx": 4, "dy": -8,
                "color": "#C0392B", "fontSize": 10, "fontWeight": "bold"},
       "encoding": {
         "x": {"field": "year", "type": "ordinal"},
-        "y": {"field": "area_ha", "type": "quantitative", "scale": {"type": "log"}},
+        "y": {"field": "area_ha", "type": "quantitative"},
         "text": {"field": "label"}
       }
     }
