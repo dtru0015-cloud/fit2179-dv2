@@ -1,108 +1,111 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 520,
-  "height": 360,
+  "width": "container",
+  "height": 420,
   "title": {
     "text": "Bushfire Risk Across Australia",
-    "fontSize": 22,
-    "anchor": "middle",
-    "color": "#111111"
+    "fontSize": 18,
+    "color": "#ffffff",
+    "anchor": "middle"
   },
-
-  "data": {
-    "url": "australia_states.geojson",
-    "format": {
-      "type": "json",
-      "property": "features"
-    }
-  },
-
-  "transform": [
+  "params": [
     {
-      "lookup": "properties.STATE_NAME",
-      "from": {
-        "data": {
-          "url": "bushfire_risk_by_state.csv"
-        },
-        "key": "state",
-        "fields": [
-          "fire_risk_score",
-          "pct_land_fire_prone",
-          "state_code",
-          "label_lon",
-          "label_lat"
-        ]
+      "name": "state_select",
+      "bind": {
+        "input": "select",
+        "options": [null, "New South Wales", "Victoria", "Queensland", "Western Australia", "South Australia", "Tasmania", "Northern Territory", "Australian Capital Territory"],
+        "labels": ["All States", "New South Wales", "Victoria", "Queensland", "Western Australia", "South Australia", "Tasmania", "Northern Territory", "Australian Capital Territory"],
+        "name": "Highlight State: "
       }
     }
   ],
-
-  "projection": {
-    "type": "mercator",
-    "center": [134, -27],
-    "scale": 520,
-    "translate": [260, 180]
-  },
-
+  "projection": {"type": "mercator", "center": [134, -27], "scale": 520, "translate": [400, 210]},
   "layer": [
     {
-      "mark": {
-        "type": "geoshape",
-        "stroke": "#ffffff",
-        "strokeWidth": 1
+      "data": {
+        "url": "australia_states.geojson",
+        "format": {"type": "json", "property": "features"}
       },
-
+      "transform": [
+        {"calculate": "datum.properties ? datum.properties.fire_risk_score : 0", "as": "risk"},
+        {"calculate": "datum.properties ? datum.properties.STATE_NAME : ''", "as": "name"},
+        {"calculate": "datum.properties ? datum.properties.pct_land_fire_prone : 0", "as": "pct"},
+        {"calculate": "state_select == null || datum.name == state_select ? 1 : 0.25", "as": "op"}
+      ],
+      "mark": {"type": "geoshape", "stroke": "#0a1628", "strokeWidth": 1.5},
       "encoding": {
+        "color": {
+          "field": "risk",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [50, 60, 70, 80],
+            "range": ["#4ECDC4","#F7DC6F","#F39C12","#E74C3C","#8E1A0E"]
+          },
+          "legend": {
+            "title": "Fire Risk Score",
+            "orient": "top-right",
+            "titleColor": "#ffffff",
+            "labelColor": "#ffffff",
+            "titleFontSize": 11,
+            "labelFontSize": 10
+          }
+        },
+        "opacity": {"field": "op", "type": "quantitative", "legend": null},
+        "tooltip": [
+          {"field": "name", "type": "nominal", "title": "State"},
+          {"field": "risk", "type": "quantitative", "title": "Fire Risk Score"},
+          {"field": "pct", "type": "quantitative", "title": "% Fire-Prone Land"}
+        ]
+      }
+    },
+    {
+      "data": {"url": "bushfire_risk_by_state.csv"},
+      "transform": [
+        {"calculate": "state_select == null || datum.state == state_select ? 1 : 0.2", "as": "op"}
+      ],
+      "mark": {"type": "circle", "stroke": "#ffffff", "strokeWidth": 1},
+      "encoding": {
+        "longitude": {"field": "label_lon", "type": "quantitative"},
+        "latitude": {"field": "label_lat", "type": "quantitative"},
+        "size": {
+          "field": "fire_risk_score",
+          "type": "quantitative",
+          "scale": {"range": [100, 1500]},
+          "legend": {"title": "Risk Score", "labelColor": "#ffffff", "titleColor": "#ffffff"}
+        },
         "color": {
           "field": "fire_risk_score",
           "type": "quantitative",
           "scale": {
-            "scheme": "yelloworangered"
+            "type": "threshold",
+            "domain": [50, 60, 70, 80],
+            "range": ["#4ECDC4","#F7DC6F","#F39C12","#E74C3C","#8E1A0E"]
           },
-          "title": "Fire Risk Score"
+          "legend": null
         },
-
+        "opacity": {"field": "op", "type": "quantitative", "legend": null},
         "tooltip": [
-          {
-            "field": "properties.STATE_NAME",
-            "type": "nominal",
-            "title": "State"
-          },
-          {
-            "field": "fire_risk_score",
-            "type": "quantitative",
-            "title": "Risk Score"
-          },
-          {
-            "field": "pct_land_fire_prone",
-            "type": "quantitative",
-            "title": "% Fire-prone Land"
-          }
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "state_code", "type": "nominal", "title": "Code"},
+          {"field": "fire_risk_score", "type": "quantitative", "title": "Fire Risk Score"},
+          {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Fire-Prone Land"}
         ]
       }
     },
-
     {
-      "mark": {
-        "type": "text",
-        "fontSize": 11,
-        "fontWeight": "bold",
-        "fill": "#111111"
-      },
-
+      "data": {"url": "bushfire_risk_by_state.csv"},
+      "mark": {"type": "text", "fontSize": 11, "fontWeight": "bold", "fill": "#ffffff", "dy": -2},
       "encoding": {
-        "longitude": {
-          "field": "label_lon",
-          "type": "quantitative"
-        },
-        "latitude": {
-          "field": "label_lat",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "state_code",
-          "type": "nominal"
-        }
+        "longitude": {"field": "label_lon", "type": "quantitative"},
+        "latitude": {"field": "label_lat", "type": "quantitative"},
+        "text": {"field": "state_code", "type": "nominal"}
       }
     }
-  ]
+  ],
+  "config": {
+    "background": "#0a1628",
+    "view": {"stroke": "transparent"},
+    "axis": {"labelColor": "#ffffff", "titleColor": "#ffffff"}
+  }
 }
