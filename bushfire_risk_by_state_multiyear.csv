@@ -1,0 +1,41 @@
+state,state_code,year,fire_risk_score,pct_land_fire_prone,label_lon,label_lat
+New South Wales,NSW,2001,69,62,147,-32
+Victoria,VIC,2001,65,58,145,-37
+Queensland,QLD,2001,58,52,145,-21
+Western Australia,WA,2001,55,48,121,-25
+South Australia,SA,2001,50,40,135,-30
+Tasmania,TAS,2001,42,33,147,-42
+Northern Territory,NT,2001,38,28,133,-19
+Australian Capital Territory,ACT,2001,60,48,149,-35.5
+New South Wales,NSW,2006,72,64,147,-32
+Victoria,VIC,2006,71,62,145,-37
+Queensland,QLD,2006,61,54,145,-21
+Western Australia,WA,2006,58,50,121,-25
+South Australia,SA,2006,53,42,135,-30
+Tasmania,TAS,2006,44,35,147,-42
+Northern Territory,NT,2006,40,30,133,-19
+Australian Capital Territory,ACT,2006,63,50,149,-35.5
+New South Wales,NSW,2011,76,67,147,-32
+Victoria,VIC,2011,75,64,145,-37
+Queensland,QLD,2011,64,56,145,-21
+Western Australia,WA,2011,62,52,121,-25
+South Australia,SA,2011,56,44,135,-30
+Tasmania,TAS,2011,47,37,147,-42
+Northern Territory,NT,2011,43,32,133,-19
+Australian Capital Territory,ACT,2011,68,54,149,-35.5
+New South Wales,NSW,2016,83,72,147,-32
+Victoria,VIC,2016,80,67,145,-37
+Queensland,QLD,2016,69,58,145,-21
+Western Australia,WA,2016,66,55,121,-25
+South Australia,SA,2016,61,47,135,-30
+Tasmania,TAS,2016,51,39,147,-42
+Northern Territory,NT,2016,46,34,133,-19
+Australian Capital Territory,ACT,2016,74,57,149,-35.5
+New South Wales,NSW,2021,92,78,147,-32
+Victoria,VIC,2021,88,69,145,-37
+Queensland,QLD,2021,75,61,145,-21
+Western Australia,WA,2021,70,58,121,-25
+South Australia,SA,2021,67,52,135,-30
+Tasmania,TAS,2021,55,41,147,-42
+Northern Territory,NT,2021,48,35,133,-19
+Australian Capital Territory,ACT,2021,80,60,149,-35.5
