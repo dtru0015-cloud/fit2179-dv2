@@ -145,7 +145,7 @@
     }
 
     /* ── KPI CARDS ── */
-    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
     .kpi-card {
       background: var(--smoke-dark);
       border-radius: 8px;
@@ -292,38 +292,43 @@
   <h2 class="section-title">Where does fire danger concentrate?</h2>
   <p class="section-intro">Australia's bushfire risk is not evenly distributed. New South Wales, Victoria, and the ACT consistently face the highest combined risk — driven by their dense vegetation, population pressure, and exposure to extreme fire weather.</p>
 
-  <div class="grid-1-2" style="margin-bottom:28px;">
-    <div>
-      <!-- KPI Cards -->
-      <div style="margin-bottom:16px;">
-        <p style="font-family:'Merriweather',serif;font-size:0.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dark);">② The Scale of Impact (1939–2023)</p>
-        <p style="font-size:0.78rem;color:var(--text-mid);margin-bottom:14px;">Key totals from major bushfire events</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-          <div class="kpi-card"><div class="kpi-icon">🔥</div><div class="kpi-value">~159M ha</div><div class="kpi-label">Total area burned</div></div>
-          <div class="kpi-card"><div class="kpi-icon">👤</div><div class="kpi-value">1,186</div><div class="kpi-label">Direct deaths</div></div>
-          <div class="kpi-card"><div class="kpi-icon">🏠</div><div class="kpi-value">18,616</div><div class="kpi-label">Homes destroyed</div></div>
-          <div class="kpi-card"><div class="kpi-icon">💰</div><div class="kpi-value">$109B+</div><div class="kpi-label">Economic loss (AUD)</div></div>
-        </div>
-      </div>
-      <!-- Black Summer Spotlight -->
-      <div class="spotlight">
-        <p class="spotlight-title">③ Black Summer Spotlight (2019–20)</p>
-        <p class="spotlight-sub">Australia's most devastating fire season on record</p>
-        <div class="spotlight-stats">
-          <div class="spotlight-stat"><div class="val">24M ha</div><div class="lbl">Area burned</div></div>
-          <div class="spotlight-stat"><div class="val">33</div><div class="lbl">Direct deaths</div></div>
-          <div class="spotlight-stat"><div class="val">3,094</div><div class="lbl">Homes destroyed</div></div>
-          <div class="spotlight-stat"><div class="val">$103B</div><div class="lbl">Economic loss</div></div>
-        </div>
-      </div>
+  <!-- KPI Cards — full width -->
+  <div style="margin-bottom:20px;">
+    <p style="font-family:'Merriweather',serif;font-size:0.9rem;font-weight:700;margin-bottom:8px;color:var(--text-dark);">② The Scale of Impact (1939–2023)</p>
+    <p style="font-size:0.78rem;color:var(--text-mid);margin-bottom:14px;">Key totals from major bushfire events</p>
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-icon">🔥</div><div class="kpi-value">~159M ha</div><div class="kpi-label">Total area burned</div></div>
+      <div class="kpi-card"><div class="kpi-icon">👤</div><div class="kpi-value">1,186</div><div class="kpi-label">Direct deaths</div></div>
+      <div class="kpi-card"><div class="kpi-icon">🏠</div><div class="kpi-value">18,616</div><div class="kpi-label">Homes destroyed</div></div>
+      <div class="kpi-card"><div class="kpi-icon">💰</div><div class="kpi-value">$109B+</div><div class="kpi-label">Economic loss (AUD)</div></div>
     </div>
+  </div>
 
-    <!-- Chart 1: Choropleth Map -->
+  <!-- Black Summer Spotlight — full width -->
+  <div class="spotlight" style="margin-bottom:28px;">
+    <p class="spotlight-title">③ Black Summer Spotlight (2019–20)</p>
+    <p class="spotlight-sub">Australia's most devastating fire season on record</p>
+    <div class="spotlight-stats">
+      <div class="spotlight-stat"><div class="val">24M ha</div><div class="lbl">Area burned</div></div>
+      <div class="spotlight-stat"><div class="val">33</div><div class="lbl">Direct deaths</div></div>
+      <div class="spotlight-stat"><div class="val">3,094</div><div class="lbl">Homes destroyed</div></div>
+      <div class="spotlight-stat"><div class="val">$103B</div><div class="lbl">Economic loss</div></div>
+    </div>
+  </div>
+
+  <!-- Chart 1 + Chart 4 side by side -->
+  <div class="grid-2">
     <div class="chart-card">
       <p class="chart-title">① Fire Risk Score by State</p>
       <p class="chart-subtitle">Source: Geoscience Australia</p>
       <div id="choropleth_map" class="vis-container"></div>
-      <p class="chart-annotation">🔴 NSW scores highest (0.81), followed by VIC (0.74) and ACT (0.76) — states with both dense bush and growing urban fringe populations.</p>
+      <p class="chart-annotation">🔴 NSW scores highest (92), followed by VIC (88) and ACT (80) — states with both dense bush and growing urban fringe populations.</p>
+    </div>
+    <div class="chart-card">
+      <p class="chart-title">④ Area Burned — Major Seasons</p>
+      <p class="chart-subtitle">Source: ABARES — Forest fire data</p>
+      <div id="area_by_state" class="vis-container"></div>
+      <p class="chart-annotation">The Black Summer (2019) dwarfs all previous seasons on record, burning 24M ha across multiple states.</p>
     </div>
   </div>
 </div>
@@ -335,19 +340,19 @@
   <p class="section-intro">Looking across decades, certain states repeatedly bear the heaviest burden. The rankings shift, but the vulnerability persists — and worsens with each extreme season.</p>
 
   <div class="grid-2">
-    <!-- Chart 4: Area by State -->
-    <div class="chart-card">
-      <p class="chart-title">④ Area Burned by State — Major Seasons</p>
-      <p class="chart-subtitle">Source: ABARES — Forest fire data</p>
-      <div id="area_by_state" class="vis-container"></div>
-      <p class="chart-annotation">The Northern Territory consistently records the largest burned areas due to savanna fires, while NSW and VIC suffer the most damaging bushfires in populated regions.</p>
-    </div>
     <!-- Chart 5: Bump Chart -->
     <div class="chart-card">
       <p class="chart-title">⑤ State Ranking by Decade — Direct Deaths</p>
       <p class="chart-subtitle">Source: AFAC / Various historical records</p>
       <div id="bump_chart" class="vis-container"></div>
       <p class="chart-annotation">NSW has risen to rank 1 in the 2010s and 2020s, overtaking Victoria which dominated in the 2000s — driven by Black Saturday (2009) and the Black Summer (2019–20).</p>
+    </div>
+    <!-- Chart 6: Dual axis trend -->
+    <div class="chart-card">
+      <p class="chart-title">⑥ Area Burned vs. Temperature Anomaly (2000–2024)</p>
+      <p class="chart-subtitle">Sources: Geoscience Australia / ABARES · Bureau of Meteorology (ACORN-SAT)</p>
+      <div id="dual_axis" class="vis-container"></div>
+      <p class="chart-annotation">The 2019–20 Black Summer coincides with Australia's hottest year on record (+1.52°C above baseline). Warmer conditions align with — though do not solely cause — larger burned areas.</p>
     </div>
   </div>
 </div>
@@ -359,19 +364,19 @@
   <p class="section-intro">Australia's warming trend is clear — and it aligns with increasingly severe fire seasons. As temperatures rise, conditions become more dangerous, and the fire season extends further into spring and autumn.</p>
 
   <div class="grid-2" style="margin-bottom:28px;">
-    <!-- Chart 6: Dual axis trend -->
-    <div class="chart-card">
-      <p class="chart-title">⑥ Area Burned vs. Temperature Anomaly (2000–2024)</p>
-      <p class="chart-subtitle">Sources: Geoscience Australia / ABARES · Bureau of Meteorology (ACORN-SAT)</p>
-      <div id="dual_axis" class="vis-container"></div>
-      <p class="chart-annotation">The 2019–20 Black Summer coincides with Australia's hottest year on record (+1.52°C above baseline). Warmer conditions align with — though do not solely cause — larger burned areas.</p>
-    </div>
     <!-- Chart 7: Heatmap -->
     <div class="chart-card">
       <p class="chart-title">⑦ Fire Danger Throughout the Year</p>
       <p class="chart-subtitle">Average Fire Danger Index (FFDI) · Source: Bureau of Meteorology</p>
       <div id="heatmap" class="vis-container"></div>
       <p class="chart-annotation">Victoria and NSW peak in January–February. The Northern Territory's fire season runs May–September — almost opposite to the south — meaning Australia faces fire risk year-round.</p>
+    </div>
+    <!-- Chart 8: Connected dot plot -->
+    <div class="chart-card">
+      <p class="chart-title">⑧ Deaths and Homes Destroyed — Major Events</p>
+      <p class="chart-subtitle">Sources: CFA, NSW RFS, QFES, etc.</p>
+      <div id="dot_plot" class="vis-container"></div>
+      <p class="chart-annotation">Black Saturday (2009) remains the deadliest single event with 173 lives lost. The Black Summer (2019–20) caused the most property destruction — 3,000+ homes across multiple states.</p>
     </div>
   </div>
 </div>
@@ -383,19 +388,19 @@
   <p class="section-intro">Behind the hectares and indices are real losses — lives ended, homes destroyed, and communities uprooted. The scale of individual events reveals just how devastating Australian bushfires can be.</p>
 
   <div class="grid-2" style="margin-bottom:28px;">
-    <!-- Chart 8: Connected dot plot -->
-    <div class="chart-card">
-      <p class="chart-title">⑧ Deaths and Homes Destroyed — Major Events</p>
-      <p class="chart-subtitle">Sources: CFA, NSW RFS, QFES, etc.</p>
-      <div id="dot_plot" class="vis-container"></div>
-      <p class="chart-annotation">Black Saturday (2009) remains the deadliest single event with 173 lives lost. The Black Summer (2019–20) caused the most property destruction — 3,000+ homes across multiple states.</p>
-    </div>
     <!-- Chart 9: Bubble scatter -->
     <div class="chart-card">
       <p class="chart-title">⑨ Economic Losses Are Escalating</p>
       <p class="chart-subtitle">Major bushfires (1939–2023) · Source: Insurance Council of Australia</p>
       <div id="bubble_scatter" class="vis-container"></div>
       <p class="chart-annotation">The Black Summer's estimated $103B economic loss dwarfs all previous events combined. Bubble size represents direct deaths — showing that the largest economic impacts also carry high human costs.</p>
+    </div>
+    <!-- Chart 10: Population exposure -->
+    <div class="chart-card">
+      <p class="chart-title">⑩ Population Living in High Bushfire Risk Areas</p>
+      <p class="chart-subtitle">Sources: ABS (2001, 2006, 2011, 2016, 2021) &amp; Geoscience Australia</p>
+      <div id="pop_exposure" class="vis-container"></div>
+      <p class="chart-annotation">Since 2001, the number of Australians living in high fire risk zones has grown by over 600,000. NSW alone has seen a jump from 18.8% to nearly 23% of its population at risk.</p>
     </div>
   </div>
 </div>
@@ -407,19 +412,17 @@
   <p class="section-intro">As Australia's population grows and spreads into fire-prone areas, the number of people directly exposed to high fire risk is increasing — even as fire seasons grow more intense.</p>
 
   <div class="grid-2">
-    <!-- Chart 10: Population exposure -->
-    <div class="chart-card">
-      <p class="chart-title">⑩ Population Living in High Bushfire Risk Areas</p>
-      <p class="chart-subtitle">Sources: ABS (2001, 2006, 2011, 2016, 2021) &amp; Geoscience Australia</p>
-      <div id="pop_exposure" class="vis-container"></div>
-      <p class="chart-annotation">Since 2001, the number of Australians living in high fire risk zones has grown by over 600,000. NSW alone has seen a jump from 18.8% to nearly 23% of its population at risk.</p>
-    </div>
     <!-- Chart 11: Slope chart -->
     <div class="chart-card">
       <p class="chart-title">⑪ Risk is Spreading: Change in Fire Risk Score (2001–2021)</p>
       <p class="chart-subtitle">Source: Geoscience Australia</p>
       <div id="slope_chart" class="vis-container"></div>
       <p class="chart-annotation">Every state has seen its fire risk score increase over 20 years. NSW shows the largest rise (+0.23), while even historically lower-risk states like WA and SA are trending upward.</p>
+    </div>
+    <!-- Placeholder for additional chart or text -->
+    <div class="chart-card" style="display:flex;flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(135deg,#1a0500,#4a1200);border-color:#6b2200;">
+      <p style="font-family:'Merriweather',serif;font-size:1.4rem;font-weight:900;color:var(--fire-orange);text-align:center;margin-bottom:16px;line-height:1.4;">The data is clear:<br>we are becoming<br>more vulnerable.</p>
+      <p style="font-size:0.88rem;color:#c9a090;text-align:center;line-height:1.8;max-width:320px;">Bushfires are not new to Australia. But the combination of extreme fire weather, repeated severe seasons, and growing human exposure suggests our vulnerability is increasing.</p>
     </div>
   </div>
 </div>
