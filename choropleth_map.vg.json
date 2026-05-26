@@ -30,7 +30,12 @@
       }
     }
   ],
-  "projection": {"type": "mercator", "center": [134, -27], "scale": 520, "translate": [400, 210]},
+  "projection": {
+    "type": "mercator",
+    "center": [132, -28],
+    "scale": 480,
+    "translate": [360, 200]
+  },
   "layer": [
     {
       "data": {"url": "bushfire_risk_by_state_multiyear.csv"},
@@ -62,11 +67,12 @@
           },
           "legend": {
             "title": "Fire Risk Score",
-            "orient": "top-right",
+            "orient": "right",
             "titleColor": "#ffffff",
             "labelColor": "#ffffff",
             "titleFontSize": 11,
-            "labelFontSize": 10
+            "labelFontSize": 10,
+            "offset": 10
           }
         },
         "opacity": {"field": "op", "type": "quantitative", "legend": null},
@@ -91,7 +97,7 @@
         "size": {
           "field": "fire_risk_score",
           "type": "quantitative",
-          "scale": {"range": [200, 2000]},
+          "scale": {"range": [200, 1800]},
           "legend": null
         },
         "color": {
@@ -115,9 +121,7 @@
     },
     {
       "data": {"url": "bushfire_risk_by_state_multiyear.csv"},
-      "transform": [
-        {"filter": "datum.year == year_select"}
-      ],
+      "transform": [{"filter": "datum.year == year_select"}],
       "mark": {"type": "text", "fontSize": 10, "fontWeight": "bold", "fill": "#ffffff", "dy": -2},
       "encoding": {
         "longitude": {"field": "label_lon", "type": "quantitative"},
