@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 300,
-  "data": {"url": "bushfire_human_impact.csv"},
+  "data": {"url": "annual_area_burned.csv"},
   "layer": [
     {
       "mark": {
@@ -19,55 +19,42 @@
           "axis": {"labelAngle": -45, "labelFontSize": 9, "titleFontSize": 11, "grid": false}
         },
         "y": {
-          "field": "area_ha",
+          "field": "total_area_ha",
           "type": "quantitative",
-          "title": "Area Burned (ha)",
-          "axis": {"format": "~s", "titleFontSize": 11, "labelFontSize": 10, "grid": true, "gridDash": [3,3]}
+          "title": "Total Area Burned (ha)",
+          "axis": {"format": "~s", "titleFontSize": 11, "labelFontSize": 10,
+                   "grid": true, "gridDash": [3,3]}
         }
       }
     },
     {
-      "mark": {"type": "point", "filled": true, "size": 70, "color": "#E67E22"},
+      "mark": {"type": "point", "filled": true, "size": 50, "color": "#E67E22"},
       "encoding": {
         "x": {"field": "year", "type": "ordinal"},
-        "y": {"field": "area_ha", "type": "quantitative"},
+        "y": {"field": "total_area_ha", "type": "quantitative"},
         "tooltip": [
-          {"field": "event_name", "type": "nominal", "title": "Event"},
           {"field": "year", "type": "ordinal", "title": "Year"},
-          {"field": "area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
-          {"field": "deaths", "type": "quantitative", "title": "Deaths"},
-          {"field": "homes", "type": "quantitative", "title": "Homes Destroyed"}
+          {"field": "total_area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
+          {"field": "notable_event", "type": "nominal", "title": "Notable Event"}
         ]
       }
     },
     {
+      "transform": [{"filter": "datum.notable_event != ''"}],
       "mark": {
         "type": "text",
         "fontSize": 9,
         "fontWeight": "bold",
         "color": "#4a3f35",
-        "angle": -40,
+        "angle": -35,
         "align": "left",
         "dx": 4,
         "dy": -10
       },
-      "transform": [
-        {"filter": "datum.area_ha > 400000"}
-      ],
       "encoding": {
         "x": {"field": "year", "type": "ordinal"},
-        "y": {"field": "area_ha", "type": "quantitative"},
-        "text": {"field": "event_name", "type": "nominal"}
-      }
-    },
-    {
-      "data": {"values": [{"year": "2019", "area_ha": 22000000, "label": "◀ Black Summer"}]},
-      "mark": {"type": "text", "align": "left", "dx": 4, "dy": -8,
-               "color": "#C0392B", "fontSize": 10, "fontWeight": "bold"},
-      "encoding": {
-        "x": {"field": "year", "type": "ordinal"},
-        "y": {"field": "area_ha", "type": "quantitative"},
-        "text": {"field": "label"}
+        "y": {"field": "total_area_ha", "type": "quantitative"},
+        "text": {"field": "notable_event", "type": "nominal"}
       }
     },
     {
