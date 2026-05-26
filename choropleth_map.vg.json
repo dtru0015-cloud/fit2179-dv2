@@ -84,14 +84,14 @@
         {"filter": "datum.year == year_select"},
         {"calculate": "state_select == null || datum.state == state_select ? 1 : 0.2", "as": "op"}
       ],
-      "mark": {"type": "circle", "stroke": "#ffffff", "strokeWidth": 1},
+      "mark": {"type": "circle", "stroke": "#ffffff", "strokeWidth": 1.5},
       "encoding": {
         "longitude": {"field": "label_lon", "type": "quantitative"},
         "latitude": {"field": "label_lat", "type": "quantitative"},
         "size": {
           "field": "fire_risk_score",
           "type": "quantitative",
-          "scale": {"range": [100, 1500]},
+          "scale": {"range": [200, 2000]},
           "legend": null
         },
         "color": {
