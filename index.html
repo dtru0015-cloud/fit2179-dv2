@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Australia's Bushfire Crisis</title>
 
-  <!-- Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -19,14 +16,14 @@
       --fire-orange: #E67E22;
       --fire-amber:  #F39C12;
       --fire-yellow: #F1C40F;
-      --smoke-dark:  #1a1a1a;
-      --smoke-mid:   #2c2c2c;
-      --smoke-light: #3d3d3d;
-      --cream:       #FAF6F1;
-      --text-dark:   #1a1005;
-      --text-mid:    #4a3f35;
-      --section-bg:  #ffffff;
-      --border:      #e8e0d8;
+      --smoke-dark:  #0d1f35;
+      --smoke-mid:   #162b45;
+      --smoke-light: #1e3a55;
+      --cream:       #0a1628;
+      --text-dark:   #ffffff;
+      --text-mid:    #aaaaaa;
+      --section-bg:  #0d1f35;
+      --border:      #1e3a55;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -62,7 +59,7 @@
     .hero-right strong { color: var(--fire-orange); font-size: 1.1rem; }
 
     .section { padding: 50px 40px; border-bottom: 1px solid var(--border); }
-    .section:nth-child(even) { background: #fff; }
+    .section:nth-child(even) { background: #0d1f35; }
 
     .section-label {
       font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
@@ -83,17 +80,17 @@
     .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 28px; }
 
     .chart-card {
-      background: #fff; border: 1px solid var(--border);
-      border-radius: 8px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      background: #0d1f35;
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
-    .chart-card.dark { background: var(--smoke-dark); border-color: #333; }
+    .chart-card.dark { background: #060f1a; border-color: #1e3a55; }
     .chart-title {
       font-family: 'Merriweather', serif; font-size: 0.95rem;
-      font-weight: 700; color: var(--text-dark); margin-bottom: 4px;
+      font-weight: 700; color: #ffffff; margin-bottom: 4px;
     }
-    .chart-card.dark .chart-title { color: #fff; }
     .chart-subtitle { font-size: 0.78rem; color: var(--text-mid); margin-bottom: 14px; }
-    .chart-card.dark .chart-subtitle { color: #aaa; }
     .chart-annotation {
       font-size: 0.78rem; color: var(--text-mid); margin-top: 10px;
       border-top: 1px solid var(--border); padding-top: 8px; line-height: 1.6;
@@ -101,8 +98,8 @@
 
     .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
     .kpi-card {
-      background: var(--smoke-dark); border-radius: 8px;
-      padding: 20px 18px; color: white; text-align: center;
+      background: #060f1a; border: 1px solid #1e3a55;
+      border-radius: 8px; padding: 20px 18px; color: white; text-align: center;
     }
     .kpi-icon { font-size: 1.8rem; margin-bottom: 6px; }
     .kpi-value {
@@ -156,7 +153,7 @@
     }
 
     .footer {
-      background: var(--smoke-dark); color: #888; padding: 24px 40px;
+      background: #060f1a; color: #888; padding: 24px 40px;
       display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem;
     }
     .footer a { color: #aaa; }
@@ -191,16 +188,15 @@
   </div>
 </div>
 
-<!-- SECTION 1: HOOK -->
+<!-- SECTION 1 -->
 <div class="section">
   <p class="section-label">① Bushfire Risk Across Australia</p>
   <h2 class="section-title">Where does fire danger concentrate?</h2>
   <p class="section-intro">Australia's bushfire risk is not evenly distributed. New South Wales, Victoria, and the ACT consistently face the highest combined risk — driven by their dense vegetation, population pressure, and exposure to extreme fire weather.</p>
 
-  <!-- KPI Cards — full width -->
   <div style="margin-bottom:20px;">
-    <p style="font-family:'Merriweather',serif;font-size:0.9rem;font-weight:700;margin-bottom:8px;color:var(--text-dark);">② The Scale of Impact (1939–2023)</p>
-    <p style="font-size:0.78rem;color:var(--text-mid);margin-bottom:14px;">Key totals from major bushfire events</p>
+    <p style="font-family:'Merriweather',serif;font-size:0.9rem;font-weight:700;margin-bottom:8px;color:#ffffff;">② The Scale of Impact (1939–2023)</p>
+    <p style="font-size:0.78rem;color:#aaaaaa;margin-bottom:14px;">Key totals from major bushfire events</p>
     <div class="kpi-grid">
       <div class="kpi-card"><div class="kpi-icon">🔥</div><div class="kpi-value">~159M ha</div><div class="kpi-label">Total area burned</div></div>
       <div class="kpi-card"><div class="kpi-icon">👤</div><div class="kpi-value">1,186</div><div class="kpi-label">Direct deaths</div></div>
@@ -209,7 +205,6 @@
     </div>
   </div>
 
-  <!-- Black Summer Spotlight — full width -->
   <div class="spotlight" style="margin-bottom:28px;">
     <p class="spotlight-title">③ Black Summer Spotlight (2019–20)</p>
     <p class="spotlight-sub">Australia's most devastating fire season on record</p>
@@ -221,7 +216,6 @@
     </div>
   </div>
 
-  <!-- Chart 1 + Chart 4 side by side -->
   <div class="grid-2">
     <div class="chart-card">
       <p class="chart-title">① Fire Risk Score by State</p>
@@ -239,7 +233,7 @@
   </div>
 </div>
 
-<!-- SECTION 2: PATTERN -->
+<!-- SECTION 2 -->
 <div class="section">
   <p class="section-label">② The Pattern</p>
   <h2 class="section-title">This is not random.</h2>
@@ -261,7 +255,7 @@
   </div>
 </div>
 
-<!-- SECTION 3: EXPLANATION -->
+<!-- SECTION 3 -->
 <div class="section">
   <p class="section-label">③ The Explanation</p>
   <h2 class="section-title">More fire. Hotter times.</h2>
@@ -283,7 +277,7 @@
   </div>
 </div>
 
-<!-- SECTION 4: HUMAN COST -->
+<!-- SECTION 4 -->
 <div class="section">
   <p class="section-label">④ The Human Cost</p>
   <h2 class="section-title">The damage is personal.</h2>
@@ -305,7 +299,7 @@
   </div>
 </div>
 
-<!-- SECTION 5: FUTURE -->
+<!-- SECTION 5 -->
 <div class="section">
   <p class="section-label">⑤ The Future</p>
   <h2 class="section-title">More Australians may be in harm's way.</h2>
