@@ -22,36 +22,35 @@ fetch('area_by_state.vg.json')
     // Red highlight dot for selected year
     spec.layer.push({
       "transform": [{ "filter": "datum.year == selected_year" }],
-      "mark": { "type": "point", "filled": true, "size": 250,
-                "color": "#C0392B", "stroke": "#fff", "strokeWidth": 2 },
+      "mark": {
+        "type": "point", "filled": true, "size": 300,
+        "color": "#C0392B", "stroke": "#fff", "strokeWidth": 2
+      },
       "encoding": {
         "x": { "field": "year", "type": "ordinal" },
-        "y": { "field": "area_ha", "type": "quantitative" },
+        "y": { "field": "total_area_ha", "type": "quantitative" },
         "tooltip": [
-          { "field": "event_name", "type": "nominal", "title": "📍 Event" },
           { "field": "year", "type": "ordinal", "title": "Year" },
-          { "field": "area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f" },
-          { "field": "deaths", "type": "quantitative", "title": "Deaths" },
-          { "field": "homes", "type": "quantitative", "title": "Homes Destroyed" }
+          { "field": "total_area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f" },
+          { "field": "notable_event", "type": "nominal", "title": "Notable Event" }
         ]
       }
     });
 
-    // Event name label for selected year
+    // Event label above red dot
     spec.layer.push({
-      "transform": [{ "filter": "datum.year == selected_year" }],
+      "transform": [
+        { "filter": "datum.year == selected_year" },
+        { "filter": "datum.notable_event != ''" }
+      ],
       "mark": {
-        "type": "text",
-        "fontSize": 11,
-        "fontWeight": "bold",
-        "color": "#C0392B",
-        "align": "center",
-        "dy": -18
+        "type": "text", "fontSize": 11, "fontWeight": "bold",
+        "color": "#C0392B", "align": "center", "dy": -18
       },
       "encoding": {
         "x": { "field": "year", "type": "ordinal" },
-        "y": { "field": "area_ha", "type": "quantitative" },
-        "text": { "field": "event_name", "type": "nominal" }
+        "y": { "field": "total_area_ha", "type": "quantitative" },
+        "text": { "field": "notable_event", "type": "nominal" }
       }
     });
 
