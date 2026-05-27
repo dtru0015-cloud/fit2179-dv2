@@ -78,7 +78,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 28px;
-      align-items: start;
+      align-items: stretch;
     }
 
     .chart-card {
@@ -87,6 +87,8 @@
       border-radius: 8px;
       padding: 20px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
     }
     .chart-title {
       font-family: 'Merriweather', serif; font-size: 0.95rem;
@@ -96,6 +98,34 @@
     .chart-annotation {
       font-size: 0.78rem; color: #aaaaaa; margin-top: 10px;
       border-top: 1px solid var(--border); padding-top: 8px; line-height: 1.6;
+    }
+
+    /* Stat row inside choropleth card to fill height */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .stat-box {
+      background: #060f1a;
+      border: 1px solid #1e3a55;
+      border-radius: 6px;
+      padding: 12px;
+      text-align: center;
+    }
+    .stat-box .sv {
+      font-family: 'Merriweather', serif;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--fire-orange);
+    }
+    .stat-box .sl {
+      font-size: 0.68rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-top: 2px;
     }
 
     .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
@@ -219,20 +249,27 @@
     </div>
   </div>
 
-  <!-- Idiom 3: Choropleth + Idiom 4: Line Chart -->
+  <!-- Idiom 3 + 4: side by side, equal height -->
   <div class="grid-2">
     <div class="chart-card">
       <p class="chart-title">① Fire Risk Score by State</p>
       <p class="chart-subtitle">Idiom: Choropleth Map · Source: Geoscience Australia · Use year slider &amp; state dropdown to explore</p>
       <div id="choropleth_map" class="vis-container"></div>
       <p class="chart-annotation">🔴 NSW scores highest (92), followed by VIC (88) and ACT (80) — states with both dense bush and growing urban fringe populations.</p>
+      <!-- Extra stats to balance card height -->
+      <div class="stat-row">
+        <div class="stat-box"><div class="sv">8 States</div><div class="sl">Assessed for risk</div></div>
+        <div class="stat-box"><div class="sv">92 / 100</div><div class="sl">NSW highest score</div></div>
+        <div class="stat-box"><div class="sv">48 / 100</div><div class="sl">NT lowest score</div></div>
+        <div class="stat-box"><div class="sv">+23pts</div><div class="sl">NSW rise 2001–2021</div></div>
+      </div>
     </div>
     <div class="chart-card">
       <p class="chart-title">④ Area Burned — Major Seasons (2000–2024)</p>
       <p class="chart-subtitle">Idiom: Interactive Line Chart · Source: ABARES · Use year slider on map to highlight a season</p>
       <div id="area_by_state" class="vis-container"></div>
-      <p class="chart-annotation">🔴 The Black Summer (2019) burned 186M ha nationally — more than all other seasons in this dataset combined. Drag the year slider on the map to explore each season.</p>
       <div id="event-popup"></div>
+      <p class="chart-annotation">🔴 The Black Summer (2019) burned 186M ha nationally — more than all other seasons in this dataset combined. Drag the year slider on the map to explore each season.</p>
     </div>
   </div>
 </div>
@@ -244,14 +281,12 @@
   <p class="section-intro">Australia's warming trend is clear — and it aligns with increasingly severe fire seasons. As temperatures rise, conditions become more dangerous, and the fire season extends further into spring and autumn.</p>
 
   <div class="grid-2" style="margin-bottom:28px;">
-    <!-- Idiom 5: Heatmap -->
     <div class="chart-card">
       <p class="chart-title">⑤ Fire Danger Throughout the Year</p>
       <p class="chart-subtitle">Idiom: Matrix Heatmap · Average Fire Danger Index (FFDI) · Source: Bureau of Meteorology</p>
       <div id="heatmap" class="vis-container"></div>
       <p class="chart-annotation">Victoria and NSW peak in January–February. The NT's fire season runs May–September — almost opposite to the south — meaning Australia faces fire risk year-round.</p>
     </div>
-    <!-- Idiom 6: Dual-axis -->
     <div class="chart-card">
       <p class="chart-title">⑥ Area Burned vs. Temperature Anomaly (2000–2024)</p>
       <p class="chart-subtitle">Idiom: Dual-Axis Line Chart · Sources: ABARES · Bureau of Meteorology (ACORN-SAT)</p>
@@ -260,7 +295,6 @@
     </div>
   </div>
 
-  <!-- Idiom 7: Small Multiples — full width -->
   <div class="chart-card">
     <p class="chart-title">⑦ Monthly Fire Danger by State — Small Multiples</p>
     <p class="chart-subtitle">Idiom: Faceted Small Multiples · Average Fire Danger Index by month · Source: Bureau of Meteorology</p>
@@ -276,14 +310,12 @@
   <p class="section-intro">Behind the hectares and indices are real losses — lives ended, homes destroyed, and communities uprooted. The scale of individual events reveals just how devastating Australian bushfires can be.</p>
 
   <div class="grid-2">
-    <!-- Idiom 8: Connected Dot Plot -->
     <div class="chart-card">
       <p class="chart-title">⑧ Deaths and Homes Destroyed — Major Events</p>
       <p class="chart-subtitle">Idiom: Connected Dot Plot · Sources: CFA, NSW RFS, QFES, etc.</p>
       <div id="dot_plot" class="vis-container"></div>
       <p class="chart-annotation">Black Saturday (2009) remains the deadliest single event with 173 lives lost. The Black Summer (2019–20) caused the most property destruction — 3,000+ homes across multiple states.</p>
     </div>
-    <!-- Idiom 9: Bubble Scatter -->
     <div class="chart-card">
       <p class="chart-title">⑨ Economic Losses Are Escalating</p>
       <p class="chart-subtitle">Idiom: Bubble Scatter Plot · Major bushfires (1939–2023) · Source: Insurance Council of Australia</p>
@@ -300,14 +332,12 @@
   <p class="section-intro">As Australia's population grows and spreads into fire-prone areas, the number of people directly exposed to high fire risk is increasing — even as fire seasons grow more intense.</p>
 
   <div class="grid-2">
-    <!-- Idiom 10: Dot Matrix -->
     <div class="chart-card">
       <p class="chart-title">⑩ Population Exposed to High Bushfire Risk</p>
       <p class="chart-subtitle">Idiom: Dot Matrix / Bubble Plot · Sources: ABS (2001–2021) &amp; Geoscience Australia</p>
       <div id="dot_matrix" class="vis-container"></div>
       <p class="chart-annotation">NSW consistently has the largest exposed population, growing from 1.24M in 2001 to 1.85M in 2021 — a 49% increase. Every state shows upward growth across all census years.</p>
     </div>
-    <!-- Idiom 11: Slope Chart -->
     <div class="chart-card">
       <p class="chart-title">⑪ Risk is Spreading: Change in Fire Risk Score (2001–2021)</p>
       <p class="chart-subtitle">Idiom: Slope Chart · Source: Geoscience Australia</p>
