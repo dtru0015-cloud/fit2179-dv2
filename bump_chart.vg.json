@@ -10,14 +10,15 @@
       "type": "nominal",
       "title": null,
       "sort": {"field": "fire_risk_score", "order": "descending"},
-      "axis": {"labelFontSize": 10}
+      "axis": {"labelFontSize": 10, "labelColor": "#ffffff"}
     },
     "x": {
       "field": "fire_risk_score",
       "type": "quantitative",
       "title": "Fire Risk Score",
-
-      "axis": {"titleFontSize": 11, "labelFontSize": 10, "grid": true, "gridDash": [3,3]}
+      "axis": {"titleFontSize": 11, "labelFontSize": 10, "titleColor": "#ffffff",
+               "labelColor": "#aaaaaa", "grid": true, "gridColor": "#1a2a3a",
+               "gridDash": [3,3], "domainColor": "#1e3a55"}
     },
     "color": {
       "field": "fire_risk_score",
@@ -25,16 +26,17 @@
       "scale": {
         "type": "threshold",
         "domain": [40, 55, 65, 75],
-"range": ["#FDDBC7","#F4A582","#D6604D","#B2182B","#67001F"]
+        "range": ["#FDDBC7","#F4A582","#D6604D","#B2182B","#67001F"]
       },
-      "legend": null
+      "legend": {"title": "Fire Risk Score", "titleColor": "#ffffff",
+                 "labelColor": "#ffffff", "titleFontSize": 10, "labelFontSize": 10}
     },
     "tooltip": [
       {"field": "state", "type": "nominal", "title": "State"},
       {"field": "state_code", "type": "nominal", "title": "Code"},
-      {"field": "fire_risk_score", "type": "quantitative", "title": "Fire Risk Score", "format": ".2f"},
-      {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Land Fire-Prone", "format": ".0f"}
+      {"field": "fire_risk_score", "type": "quantitative", "title": "Fire Risk Score"},
+      {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Land Fire-Prone"}
     ]
   },
-  "config": {"background": "transparent", "view": {"stroke": "transparent"}}
+  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
 }
