@@ -51,51 +51,16 @@
     .chart-subtitle { font-size: 0.78rem; color: #888; margin-bottom: 14px; }
     .chart-annotation { font-size: 0.78rem; color: #aaa; margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px; line-height: 1.6; }
 
-    /* Shared controls bar */
     .controls-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-      background: #060f1a;
-      border: 1px solid #1e3a55;
-      border-radius: 8px;
-      padding: 16px 28px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; background: #060f1a; border: 1px solid #1e3a55;
+      border-radius: 8px; padding: 16px 28px; margin-bottom: 20px; flex-wrap: wrap;
     }
-    .control-group {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .control-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: #E67E22;
-      white-space: nowrap;
-    }
-    .control-group input[type="range"] {
-      width: 200px;
-      accent-color: #E67E22;
-      cursor: pointer;
-    }
-    .year-display {
-      font-family: 'Merriweather', serif;
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: #fff;
-      min-width: 40px;
-    }
-    .control-group select {
-      background: #0d1f35;
-      color: #fff;
-      border: 1px solid #1e3a55;
-      border-radius: 4px;
-      padding: 6px 10px;
-      font-size: 13px;
-      cursor: pointer;
-    }
+    .control-group { display: flex; align-items: center; gap: 12px; }
+    .control-label { font-size: 13px; font-weight: 600; color: #E67E22; white-space: nowrap; }
+    .control-group input[type="range"] { width: 200px; accent-color: #E67E22; cursor: pointer; }
+    .year-display { font-family: 'Merriweather', serif; font-size: 1.1rem; font-weight: 900; color: #fff; min-width: 40px; }
+    .control-group select { background: #0d1f35; color: #fff; border: 1px solid #1e3a55; border-radius: 4px; padding: 6px 10px; font-size: 13px; cursor: pointer; }
 
     .stat-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 14px; }
     .stat-box { background: #060f1a; border: 1px solid #1e3a55; border-radius: 6px; padding: 12px; text-align: center; }
@@ -182,7 +147,7 @@
     </div>
   </div>
 
-  <!-- Shared controls bar — centered above both charts -->
+  <!-- Shared controls bar -->
   <div class="controls-bar">
     <div class="control-group">
       <span class="control-label">📅 Year:</span>
@@ -211,13 +176,14 @@
       <p class="chart-title">① Fire Risk Score by State</p>
       <p class="chart-subtitle">Idiom: Choropleth Map · Source: Geoscience Australia</p>
       <div id="choropleth_map" class="vis-container"></div>
-      <p class="chart-annotation">🔴 NSW scores highest (92), followed by VIC (88) and ACT (80) — states with both dense bush and growing urban fringe populations.</p>
+      <!-- Stat boxes between map and annotation -->
       <div class="stat-row">
         <div class="stat-box"><div class="sv">8 States</div><div class="sl">Assessed for risk</div></div>
         <div class="stat-box"><div class="sv">92 / 100</div><div class="sl">NSW highest score</div></div>
         <div class="stat-box"><div class="sv">48 / 100</div><div class="sl">NT lowest score</div></div>
         <div class="stat-box"><div class="sv">+23 pts</div><div class="sl">NSW rise 2001–2021</div></div>
       </div>
+      <p class="chart-annotation">🔴 NSW scores highest (92), followed by VIC (88) and ACT (80) — states with both dense bush and growing urban fringe populations.</p>
     </div>
     <div class="chart-card">
       <p class="chart-title">④ Area Burned — Major Seasons (2000–2024)</p>
@@ -275,7 +241,7 @@
       <p class="chart-title">⑨ Economic Losses Are Escalating</p>
       <p class="chart-subtitle">Idiom: Bubble Scatter Plot · Source: Insurance Council of Australia</p>
       <div id="bubble_scatter" class="vis-container"></div>
-      <p class="chart-annotation">The Black Summer's $103B economic loss dwarfs all previous events combined. Bubble size = direct deaths.</p>
+      <p class="chart-annotation">The Black Summer's $103B economic loss dwarfs all previous events combined. Bubble size represents direct deaths.</p>
     </div>
   </div>
 </div>
