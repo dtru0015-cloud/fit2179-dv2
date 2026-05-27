@@ -5,25 +5,20 @@
   "data": {"url": "annual_area_burned.csv"},
   "layer": [
     {
-      "mark": {
-        "type": "area",
-        "color": "#E67E22",
-        "opacity": 0.3,
-        "line": {"color": "#E67E22", "strokeWidth": 2}
-      },
+      "mark": {"type": "area", "color": "#E67E22", "opacity": 0.3,
+               "line": {"color": "#E67E22", "strokeWidth": 2}},
       "encoding": {
         "x": {
-          "field": "year",
-          "type": "ordinal",
-          "title": "Year",
-          "axis": {"labelAngle": -45, "labelFontSize": 9, "titleFontSize": 11, "grid": false}
+          "field": "year", "type": "ordinal", "title": "Year",
+          "axis": {"labelAngle": -45, "labelFontSize": 9, "titleFontSize": 11,
+                   "labelColor": "#aaaaaa", "titleColor": "#ffffff",
+                   "grid": false, "domainColor": "#1e3a55"}
         },
         "y": {
-          "field": "total_area_ha",
-          "type": "quantitative",
-          "title": "Total Area Burned (ha)",
+          "field": "total_area_ha", "type": "quantitative", "title": "Total Area Burned (ha)",
           "axis": {"format": "~s", "titleFontSize": 11, "labelFontSize": 10,
-                   "grid": true, "gridDash": [3,3]}
+                   "titleColor": "#ffffff", "labelColor": "#aaaaaa",
+                   "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a"}
         }
       }
     },
@@ -41,16 +36,8 @@
     },
     {
       "transform": [{"filter": "datum.notable_event != ''"}],
-      "mark": {
-        "type": "text",
-        "fontSize": 9,
-        "fontWeight": "bold",
-        "color": "#4a3f35",
-        "angle": -35,
-        "align": "left",
-        "dx": 4,
-        "dy": -10
-      },
+      "mark": {"type": "text", "fontSize": 9, "fontWeight": "bold", "color": "#E67E22",
+               "angle": -35, "align": "left", "dx": 4, "dy": -10},
       "encoding": {
         "x": {"field": "year", "type": "ordinal"},
         "y": {"field": "total_area_ha", "type": "quantitative"},
@@ -63,5 +50,5 @@
       "encoding": {"x": {"field": "year", "type": "ordinal"}}
     }
   ],
-  "config": {"background": "transparent", "view": {"stroke": "transparent"}}
+  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
 }
