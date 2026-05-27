@@ -5,20 +5,23 @@
   "data": {"url": "bushfire_human_impact.csv"},
   "layer": [
     {
-      "mark": {"type": "bar", "opacity": 0.8, "cornerRadiusEnd": 3},
+      "mark": {"type": "bar", "opacity": 0.85, "cornerRadiusEnd": 3},
       "encoding": {
         "y": {
           "field": "event_name",
           "type": "nominal",
           "title": null,
           "sort": {"field": "homes", "order": "descending"},
-          "axis": {"labelFontSize": 10, "labelLimit": 160}
+          "axis": {"labelFontSize": 10, "labelLimit": 160, "labelColor": "#ffffff"}
         },
         "x": {
           "field": "homes",
           "type": "quantitative",
           "title": "Deaths (red dot) vs Homes Destroyed (orange bar)",
-          "axis": {"format": ",.0f", "titleFontSize": 11, "labelFontSize": 10, "grid": true, "gridDash": [3,3]}
+          "axis": {"format": ",.0f", "titleFontSize": 10, "labelFontSize": 10,
+                   "titleColor": "#ffffff", "labelColor": "#aaaaaa",
+                   "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
+                   "domainColor": "#1e3a55"}
         },
         "color": {"value": "#E67E22"},
         "tooltip": [
@@ -33,11 +36,8 @@
     {
       "mark": {"type": "point", "filled": true, "size": 80, "opacity": 0.9},
       "encoding": {
-        "y": {
-          "field": "event_name",
-          "type": "nominal",
-          "sort": {"field": "homes", "order": "descending"}
-        },
+        "y": {"field": "event_name", "type": "nominal",
+              "sort": {"field": "homes", "order": "descending"}},
         "x": {"field": "deaths", "type": "quantitative"},
         "color": {"value": "#C0392B"},
         "tooltip": [
@@ -50,5 +50,5 @@
     }
   ],
   "resolve": {"scale": {"x": "shared"}},
-  "config": {"background": "transparent", "view": {"stroke": "transparent"}}
+  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
 }
