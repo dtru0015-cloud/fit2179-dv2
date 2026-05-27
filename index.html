@@ -16,178 +16,113 @@
       --fire-orange: #E67E22;
       --fire-amber:  #F39C12;
       --fire-yellow: #F1C40F;
-      --smoke-dark:  #0d1f35;
-      --smoke-mid:   #162b45;
-      --smoke-light: #1e3a55;
       --cream:       #0a1628;
-      --text-dark:   #ffffff;
-      --text-mid:    #aaaaaa;
-      --section-bg:  #0d1f35;
       --border:      #1e3a55;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--cream);
-      color: var(--text-dark);
-      font-size: 15px;
-      line-height: 1.7;
-    }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; font-size: 15px; line-height: 1.7; }
 
     .hero {
       background: linear-gradient(160deg, #0d0602 0%, #3b1003 40%, #7a2b08 100%);
-      color: white;
-      padding: 60px 40px 50px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
+      color: white; padding: 60px 40px 50px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
     }
-    .hero-left h1 {
-      font-family: 'Merriweather', serif;
-      font-size: 2.8rem;
-      font-weight: 900;
-      line-height: 1.15;
-      margin-bottom: 16px;
-      color: #fff;
-    }
+    .hero-left h1 { font-family: 'Merriweather', serif; font-size: 2.8rem; font-weight: 900; line-height: 1.15; margin-bottom: 16px; }
     .hero-left h1 span { color: var(--fire-orange); }
     .hero-left p { font-size: 1.05rem; color: #c9b8aa; max-width: 480px; line-height: 1.8; }
     .hero-right { text-align: right; font-size: 1rem; color: #c9b8aa; line-height: 1.9; }
-    .hero-right strong { color: var(--fire-orange); font-size: 1.1rem; }
+    .hero-right strong { color: var(--fire-orange); }
 
     .section { padding: 50px 40px; border-bottom: 1px solid var(--border); }
     .section:nth-child(even) { background: #0d1f35; }
 
-    .section-label {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--fire-red); margin-bottom: 6px;
-    }
-    .section-title {
-      font-family: 'Merriweather', serif; font-size: 1.7rem; font-weight: 700;
-      color: #ffffff; margin-bottom: 10px; line-height: 1.3;
-    }
-    .section-intro {
-      font-size: 0.95rem; color: #aaaaaa; max-width: 720px;
-      margin-bottom: 30px; line-height: 1.8;
-    }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fire-red); margin-bottom: 6px; }
+    .section-title { font-family: 'Merriweather', serif; font-size: 1.7rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.3; }
+    .section-intro { font-size: 0.95rem; color: #aaa; max-width: 720px; margin-bottom: 30px; line-height: 1.8; }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      align-items: stretch;
-    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
 
     .chart-card {
-      background: #0d1f35;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-      display: flex;
-      flex-direction: column;
+      background: #0d1f35; border: 1px solid var(--border);
+      border-radius: 8px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      display: flex; flex-direction: column;
     }
-    .chart-title {
-      font-family: 'Merriweather', serif; font-size: 0.95rem;
-      font-weight: 700; color: #ffffff; margin-bottom: 4px;
-    }
-    .chart-subtitle { font-size: 0.78rem; color: #888888; margin-bottom: 14px; }
-    .chart-annotation {
-      font-size: 0.78rem; color: #aaaaaa; margin-top: 10px;
-      border-top: 1px solid var(--border); padding-top: 8px; line-height: 1.6;
-    }
+    .chart-title { font-family: 'Merriweather', serif; font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .chart-subtitle { font-size: 0.78rem; color: #888; margin-bottom: 14px; }
+    .chart-annotation { font-size: 0.78rem; color: #aaa; margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px; line-height: 1.6; }
 
-    /* Stat row inside choropleth card to fill height */
-    .stat-row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .stat-box {
+    /* Shared controls bar */
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
       background: #060f1a;
       border: 1px solid #1e3a55;
-      border-radius: 6px;
-      padding: 12px;
-      text-align: center;
+      border-radius: 8px;
+      padding: 16px 28px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
-    .stat-box .sv {
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .control-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #E67E22;
+      white-space: nowrap;
+    }
+    .control-group input[type="range"] {
+      width: 200px;
+      accent-color: #E67E22;
+      cursor: pointer;
+    }
+    .year-display {
       font-family: 'Merriweather', serif;
       font-size: 1.1rem;
       font-weight: 900;
-      color: var(--fire-orange);
+      color: #fff;
+      min-width: 40px;
     }
-    .stat-box .sl {
-      font-size: 0.68rem;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-top: 2px;
+    .control-group select {
+      background: #0d1f35;
+      color: #fff;
+      border: 1px solid #1e3a55;
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 13px;
+      cursor: pointer;
     }
+
+    .stat-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 14px; }
+    .stat-box { background: #060f1a; border: 1px solid #1e3a55; border-radius: 6px; padding: 12px; text-align: center; }
+    .stat-box .sv { font-family: 'Merriweather', serif; font-size: 1.1rem; font-weight: 900; color: var(--fire-orange); }
+    .stat-box .sl { font-size: 0.68rem; color: #888; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }
 
     .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
-    .kpi-card {
-      background: #060f1a; border: 1px solid #1e3a55;
-      border-radius: 8px; padding: 20px 18px; color: white; text-align: center;
-    }
+    .kpi-card { background: #060f1a; border: 1px solid #1e3a55; border-radius: 8px; padding: 20px 18px; color: white; text-align: center; }
     .kpi-icon { font-size: 1.8rem; margin-bottom: 6px; }
-    .kpi-value {
-      font-family: 'Merriweather', serif; font-size: 1.6rem;
-      font-weight: 900; color: var(--fire-orange); line-height: 1.1;
-    }
-    .kpi-label {
-      font-size: 0.72rem; color: #888; text-transform: uppercase;
-      letter-spacing: 0.08em; margin-top: 4px;
-    }
+    .kpi-value { font-family: 'Merriweather', serif; font-size: 1.6rem; font-weight: 900; color: var(--fire-orange); line-height: 1.1; }
+    .kpi-label { font-size: 0.72rem; color: #888; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
 
-    .spotlight {
-      background: linear-gradient(135deg, #1a0500 0%, #4a1200 100%);
-      border-radius: 8px; padding: 24px; color: white; border: 1px solid #6b2200;
-    }
-    .spotlight-title {
-      font-family: 'Merriweather', serif; font-size: 1rem;
-      font-weight: 700; color: var(--fire-orange); margin-bottom: 4px;
-    }
+    .spotlight { background: linear-gradient(135deg, #1a0500 0%, #4a1200 100%); border-radius: 8px; padding: 24px; color: white; border: 1px solid #6b2200; }
+    .spotlight-title { font-family: 'Merriweather', serif; font-size: 1rem; font-weight: 700; color: var(--fire-orange); margin-bottom: 4px; }
     .spotlight-sub { font-size: 0.78rem; color: #c9a090; margin-bottom: 16px; }
     .spotlight-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     .spotlight-stat { text-align: center; }
-    .spotlight-stat .val {
-      font-family: 'Merriweather', serif; font-size: 1.3rem;
-      font-weight: 900; color: var(--fire-yellow);
-    }
-    .spotlight-stat .lbl {
-      font-size: 0.68rem; color: #c9a090;
-      text-transform: uppercase; letter-spacing: 0.07em;
-    }
+    .spotlight-stat .val { font-family: 'Merriweather', serif; font-size: 1.3rem; font-weight: 900; color: var(--fire-yellow); }
+    .spotlight-stat .lbl { font-size: 0.68rem; color: #c9a090; text-transform: uppercase; letter-spacing: 0.07em; }
 
-    .bottom-line {
-      background: linear-gradient(160deg, #0d0602 0%, #3b1003 60%, #7a2b08 100%);
-      color: white; padding: 60px 40px; text-align: center;
-    }
-    .bottom-line h2 {
-      font-family: 'Merriweather', serif; font-size: 1.5rem;
-      font-weight: 700; margin-bottom: 20px; color: #e8d5c8;
-    }
-    .bottom-line .points {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 20px; max-width: 800px; margin: 0 auto 32px;
-    }
-    .bottom-line .point {
-      background: rgba(255,255,255,0.06); border-radius: 8px;
-      padding: 16px; font-size: 0.9rem; color: #c9b8aa; line-height: 1.7;
-    }
-    .bottom-line .conclusion {
-      font-family: 'Merriweather', serif; font-size: 1.6rem; font-weight: 900;
-      color: var(--fire-orange); max-width: 700px; margin: 0 auto 12px; line-height: 1.3;
-    }
+    .bottom-line { background: linear-gradient(160deg, #0d0602 0%, #3b1003 60%, #7a2b08 100%); color: white; padding: 60px 40px; text-align: center; }
+    .bottom-line h2 { font-family: 'Merriweather', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; color: #e8d5c8; }
+    .bottom-line .points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 800px; margin: 0 auto 32px; }
+    .bottom-line .point { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 16px; font-size: 0.9rem; color: #c9b8aa; line-height: 1.7; }
+    .bottom-line .conclusion { font-family: 'Merriweather', serif; font-size: 1.6rem; font-weight: 900; color: var(--fire-orange); max-width: 700px; margin: 0 auto 12px; line-height: 1.3; }
 
-    .footer {
-      background: #060f1a; color: #666; padding: 24px 40px;
-      display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem;
-    }
+    .footer { background: #060f1a; color: #666; padding: 24px 40px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; }
 
     .vis-container { width: 100%; }
     .vis-container > div { width: 100% !important; }
@@ -197,6 +132,7 @@
       .hero { grid-template-columns: 1fr; }
       .hero-right { text-align: left; }
       .spotlight-stats { grid-template-columns: repeat(2, 1fr); }
+      .controls-bar { flex-direction: column; gap: 16px; }
     }
   </style>
 </head>
@@ -210,12 +146,9 @@
     <p>Exploring the trends, impacts, and growing risks of bushfires across Australia — from state-by-state exposure to the human cost of our most devastating seasons.</p>
   </div>
   <div class="hero-right">
-    <p>Bushfires are part of Australia's history.<br>
-    But the scale and intensity of recent seasons —<br>
-    and the number of people in harm's way —<br>
-    are changing.</p>
+    <p>Bushfires are part of Australia's history.<br>But the scale and intensity of recent seasons —<br>and the number of people in harm's way —<br>are changing.</p>
     <br>
-    <p>The data suggests <strong>we are becoming<br>more vulnerable.</strong></p>
+    <p>The data suggests <strong>we are becoming more vulnerable.</strong></p>
   </div>
 </div>
 
@@ -225,9 +158,9 @@
   <h2 class="section-title">Where does fire danger concentrate?</h2>
   <p class="section-intro">Australia's bushfire risk is not evenly distributed. New South Wales, Victoria, and the ACT consistently face the highest combined risk — driven by their dense vegetation, population pressure, and exposure to extreme fire weather.</p>
 
-  <!-- Idiom 1: KPI Cards -->
+  <!-- KPI Cards -->
   <div style="margin-bottom:20px;">
-    <p style="font-family:'Merriweather',serif;font-size:0.9rem;font-weight:700;margin-bottom:8px;color:#ffffff;">② The Scale of Impact (1939–2023)</p>
+    <p style="font-family:'Merriweather',serif;font-size:0.9rem;font-weight:700;margin-bottom:8px;color:#fff;">② The Scale of Impact (1939–2023)</p>
     <p style="font-size:0.78rem;color:#888;margin-bottom:14px;">Key totals from major bushfire events</p>
     <div class="kpi-grid">
       <div class="kpi-card"><div class="kpi-icon">🔥</div><div class="kpi-value">~159M ha</div><div class="kpi-label">Total area burned</div></div>
@@ -237,7 +170,7 @@
     </div>
   </div>
 
-  <!-- Idiom 2: Infographic Spotlight Card -->
+  <!-- Black Summer Spotlight -->
   <div class="spotlight" style="margin-bottom:28px;">
     <p class="spotlight-title">③ Black Summer Spotlight (2019–20)</p>
     <p class="spotlight-sub">Australia's most devastating fire season on record</p>
@@ -249,27 +182,49 @@
     </div>
   </div>
 
-  <!-- Idiom 3 + 4: side by side, equal height -->
+  <!-- Shared controls bar — centered above both charts -->
+  <div class="controls-bar">
+    <div class="control-group">
+      <span class="control-label">📅 Year:</span>
+      <input type="range" id="year-slider" min="2000" max="2024" step="1" value="2019">
+      <span class="year-display" id="year-label">2019</span>
+    </div>
+    <div class="control-group">
+      <span class="control-label">📍 Highlight State:</span>
+      <select id="state-dropdown">
+        <option value="null">All States</option>
+        <option value="New South Wales">New South Wales</option>
+        <option value="Victoria">Victoria</option>
+        <option value="Queensland">Queensland</option>
+        <option value="Western Australia">Western Australia</option>
+        <option value="South Australia">South Australia</option>
+        <option value="Tasmania">Tasmania</option>
+        <option value="Northern Territory">Northern Territory</option>
+        <option value="Australian Capital Territory">Australian Capital Territory</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Charts side by side -->
   <div class="grid-2">
     <div class="chart-card">
       <p class="chart-title">① Fire Risk Score by State</p>
-      <p class="chart-subtitle">Idiom: Choropleth Map · Source: Geoscience Australia · Use year slider &amp; state dropdown to explore</p>
+      <p class="chart-subtitle">Idiom: Choropleth Map · Source: Geoscience Australia</p>
       <div id="choropleth_map" class="vis-container"></div>
       <p class="chart-annotation">🔴 NSW scores highest (92), followed by VIC (88) and ACT (80) — states with both dense bush and growing urban fringe populations.</p>
-      <!-- Extra stats to balance card height -->
       <div class="stat-row">
         <div class="stat-box"><div class="sv">8 States</div><div class="sl">Assessed for risk</div></div>
         <div class="stat-box"><div class="sv">92 / 100</div><div class="sl">NSW highest score</div></div>
         <div class="stat-box"><div class="sv">48 / 100</div><div class="sl">NT lowest score</div></div>
-        <div class="stat-box"><div class="sv">+23pts</div><div class="sl">NSW rise 2001–2021</div></div>
+        <div class="stat-box"><div class="sv">+23 pts</div><div class="sl">NSW rise 2001–2021</div></div>
       </div>
     </div>
     <div class="chart-card">
       <p class="chart-title">④ Area Burned — Major Seasons (2000–2024)</p>
-      <p class="chart-subtitle">Idiom: Interactive Line Chart · Source: ABARES · Use year slider on map to highlight a season</p>
+      <p class="chart-subtitle">Idiom: Interactive Line Chart · Source: ABARES</p>
       <div id="area_by_state" class="vis-container"></div>
       <div id="event-popup"></div>
-      <p class="chart-annotation">🔴 The Black Summer (2019) burned 186M ha nationally — more than all other seasons in this dataset combined. Drag the year slider on the map to explore each season.</p>
+      <p class="chart-annotation">🔴 The Black Summer (2019) burned 186M ha nationally — more than all other seasons in this dataset combined.</p>
     </div>
   </div>
 </div>
@@ -283,15 +238,15 @@
   <div class="grid-2" style="margin-bottom:28px;">
     <div class="chart-card">
       <p class="chart-title">⑤ Fire Danger Throughout the Year</p>
-      <p class="chart-subtitle">Idiom: Matrix Heatmap · Average Fire Danger Index (FFDI) · Source: Bureau of Meteorology</p>
+      <p class="chart-subtitle">Idiom: Matrix Heatmap · Average FFDI · Source: Bureau of Meteorology</p>
       <div id="heatmap" class="vis-container"></div>
-      <p class="chart-annotation">Victoria and NSW peak in January–February. The NT's fire season runs May–September — almost opposite to the south — meaning Australia faces fire risk year-round.</p>
+      <p class="chart-annotation">Victoria and NSW peak in January–February. The NT's fire season runs May–September — meaning Australia faces fire risk year-round.</p>
     </div>
     <div class="chart-card">
       <p class="chart-title">⑥ Area Burned vs. Temperature Anomaly (2000–2024)</p>
       <p class="chart-subtitle">Idiom: Dual-Axis Line Chart · Sources: ABARES · Bureau of Meteorology (ACORN-SAT)</p>
       <div id="dual_axis" class="vis-container"></div>
-      <p class="chart-annotation">The 2019–20 Black Summer coincides with Australia's hottest year on record (+1.52°C above baseline). Warmer conditions align with — though do not solely cause — larger burned areas.</p>
+      <p class="chart-annotation">The 2019–20 Black Summer coincides with Australia's hottest year on record (+1.52°C above baseline). Warmer conditions align with larger burned areas.</p>
     </div>
   </div>
 
@@ -299,7 +254,7 @@
     <p class="chart-title">⑦ Monthly Fire Danger by State — Small Multiples</p>
     <p class="chart-subtitle">Idiom: Faceted Small Multiples · Average Fire Danger Index by month · Source: Bureau of Meteorology</p>
     <div id="small_multiples" class="vis-container"></div>
-    <p class="chart-annotation">Each state has a distinct fire season peak — comparing across all states reveals how Australia's fire risk is staggered throughout the year, with no single month free of high danger somewhere.</p>
+    <p class="chart-annotation">Each state has a distinct fire season peak — no single month is free of high danger somewhere across Australia.</p>
   </div>
 </div>
 
@@ -307,20 +262,20 @@
 <div class="section">
   <p class="section-label">③ The Human Cost</p>
   <h2 class="section-title">The damage is personal.</h2>
-  <p class="section-intro">Behind the hectares and indices are real losses — lives ended, homes destroyed, and communities uprooted. The scale of individual events reveals just how devastating Australian bushfires can be.</p>
+  <p class="section-intro">Behind the hectares and indices are real losses — lives ended, homes destroyed, and communities uprooted.</p>
 
   <div class="grid-2">
     <div class="chart-card">
       <p class="chart-title">⑧ Deaths and Homes Destroyed — Major Events</p>
       <p class="chart-subtitle">Idiom: Connected Dot Plot · Sources: CFA, NSW RFS, QFES, etc.</p>
       <div id="dot_plot" class="vis-container"></div>
-      <p class="chart-annotation">Black Saturday (2009) remains the deadliest single event with 173 lives lost. The Black Summer (2019–20) caused the most property destruction — 3,000+ homes across multiple states.</p>
+      <p class="chart-annotation">Black Saturday (2009) remains the deadliest single event with 173 lives lost. The Black Summer caused the most property destruction — 3,000+ homes.</p>
     </div>
     <div class="chart-card">
       <p class="chart-title">⑨ Economic Losses Are Escalating</p>
-      <p class="chart-subtitle">Idiom: Bubble Scatter Plot · Major bushfires (1939–2023) · Source: Insurance Council of Australia</p>
+      <p class="chart-subtitle">Idiom: Bubble Scatter Plot · Source: Insurance Council of Australia</p>
       <div id="bubble_scatter" class="vis-container"></div>
-      <p class="chart-annotation">The Black Summer's estimated $103B economic loss dwarfs all previous events combined. Bubble size represents direct deaths — showing that the largest economic impacts also carry high human costs.</p>
+      <p class="chart-annotation">The Black Summer's $103B economic loss dwarfs all previous events combined. Bubble size = direct deaths.</p>
     </div>
   </div>
 </div>
@@ -329,20 +284,20 @@
 <div class="section">
   <p class="section-label">④ The Future</p>
   <h2 class="section-title">More Australians may be in harm's way.</h2>
-  <p class="section-intro">As Australia's population grows and spreads into fire-prone areas, the number of people directly exposed to high fire risk is increasing — even as fire seasons grow more intense.</p>
+  <p class="section-intro">As Australia's population grows and spreads into fire-prone areas, the number of people exposed to high fire risk is increasing — even as fire seasons grow more intense.</p>
 
   <div class="grid-2">
     <div class="chart-card">
       <p class="chart-title">⑩ Population Exposed to High Bushfire Risk</p>
       <p class="chart-subtitle">Idiom: Dot Matrix / Bubble Plot · Sources: ABS (2001–2021) &amp; Geoscience Australia</p>
       <div id="dot_matrix" class="vis-container"></div>
-      <p class="chart-annotation">NSW consistently has the largest exposed population, growing from 1.24M in 2001 to 1.85M in 2021 — a 49% increase. Every state shows upward growth across all census years.</p>
+      <p class="chart-annotation">NSW's exposed population grew from 1.24M in 2001 to 1.85M in 2021 — a 49% increase. Every state shows upward growth.</p>
     </div>
     <div class="chart-card">
       <p class="chart-title">⑪ Risk is Spreading: Change in Fire Risk Score (2001–2021)</p>
       <p class="chart-subtitle">Idiom: Slope Chart · Source: Geoscience Australia</p>
       <div id="slope_chart" class="vis-container"></div>
-      <p class="chart-annotation">Every state has seen its fire risk score increase over 20 years. NSW shows the largest rise (+0.23), while even historically lower-risk states like WA and SA are trending upward.</p>
+      <p class="chart-annotation">Every state has seen its fire risk score increase over 20 years. NSW shows the largest rise (+0.23), while even lower-risk states like WA and SA trend upward.</p>
     </div>
   </div>
 </div>
@@ -351,8 +306,8 @@
 <div class="bottom-line">
   <h2>The Bottom Line</h2>
   <div class="points">
-    <div class="point">🔥 Extreme fire seasons are becoming <strong>more frequent</strong> — with three of the four worst seasons occurring after 2019.</div>
-    <div class="point">🌡️ Conditions are getting <strong>hotter</strong> — 2019 was Australia's warmest year on record, with 8 of the 9 hottest years occurring since 2013.</div>
+    <div class="point">🔥 Extreme fire seasons are becoming <strong>more frequent</strong> — three of the four worst seasons occurred after 2019.</div>
+    <div class="point">🌡️ Conditions are getting <strong>hotter</strong> — 2019 was Australia's warmest year on record, with 8 of the 9 hottest years since 2013.</div>
     <div class="point">👥 More Australians are living in <strong>harm's way</strong> — exposure to high fire risk zones has grown in every state since 2001.</div>
   </div>
   <p class="conclusion">The data is clear: we are becoming more vulnerable.</p>
