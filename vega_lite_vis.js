@@ -42,12 +42,14 @@ function renderPopup(event, year) {
 
 function updateEventPopup(year) {
   const event = eventData[year];
-  if (event) {
-    lastEvent = { event, year };
-    renderPopup(event, year);
-  } else if (lastEvent) {
-    renderPopup(lastEvent.event, lastEvent.year);
-  }
+  if (event) { lastEvent = { event, year }; renderPopup(event, year); }
+  else if (lastEvent) { renderPopup(lastEvent.event, lastEvent.year); }
+}
+
+// Update year label display
+function updateYearLabel(year) {
+  const label = document.getElementById('year-label');
+  if (label) label.textContent = year;
 }
 
 let choroplethView, areaView;
@@ -56,10 +58,27 @@ vegaEmbed("#choropleth_map", "choropleth_map.vg.json", embedOpts)
   .then(result => {
     choroplethView = result.view;
     updateEventPopup(2019);
-    choroplethView.addSignalListener('year_select', (name, value) => {
-      if (areaView) areaView.signal('selected_year', value).run();
-      updateEventPopup(value);
-    });
+
+    // Wire HTML slider to choropleth signal
+    const slider = document.getElementById('year-slider');
+    if (slider) {
+      slider.addEventListener('input', function() {
+        const val = +this.value;
+        updateYearLabel(val);
+        choroplethView.signal('year_select', val).run();
+        if (areaView) areaView.signal('selected_year', val).run();
+        updateEventPopup(val);
+      });
+    }
+
+    // Wire HTML dropdown to choropleth signal
+    const dropdown = document.getElementById('state-dropdown');
+    if (dropdown) {
+      dropdown.addEventListener('change', function() {
+        const val = this.value === 'null' ? null : this.value;
+        choroplethView.signal('state_select', val).run();
+      });
+    }
   }).catch(console.error);
 
 fetch('area_by_state.vg.json')
@@ -68,7 +87,6 @@ fetch('area_by_state.vg.json')
     spec.params = spec.params || [];
     spec.params.push({ name: "selected_year", value: 2019 });
 
-    // Red dot only — no text label
     spec.layer.push({
       "transform": [{ "filter": "datum.year == selected_year" }],
       "mark": { "type": "point", "filled": true, "size": 300,
