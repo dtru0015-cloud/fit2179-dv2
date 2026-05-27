@@ -3,45 +3,42 @@
   "width": "container",
   "height": 300,
   "data": {"url": "bushfire_area_by_state.csv"},
-  "layer": [
-    {
-      "mark": {"type": "point", "filled": true, "opacity": 0.75, "stroke": "#fff", "strokeWidth": 0.5},
-      "encoding": {
-        "x": {
-          "field": "homes_destroyed",
-          "type": "quantitative",
-          "title": "Homes Destroyed",
-          "axis": {"format": ",.0f", "titleFontSize": 11, "labelFontSize": 10, "grid": true, "gridDash": [3,3]}
-        },
-        "y": {
-          "field": "economic_loss_aud_million",
-          "type": "quantitative",
-          "title": "Economic Loss (AUD Million)",
-          "axis": {"format": ",.0f", "titleFontSize": 11, "labelFontSize": 10, "grid": true, "gridDash": [3,3]}
-        },
-        "size": {
-          "field": "deaths_direct",
-          "type": "quantitative",
-          "title": "Deaths",
-          "scale": {"range": [40, 1200]},
-          "legend": {
-            "title": "Deaths",
-            "values": [5, 30, 75, 173],
-            "symbolFillColor": "#C0392B",
-            "labelFontSize": 10,
-            "titleFontSize": 10
-          }
-        },
-        "color": {"value": "#C0392B"},
-        "tooltip": [
-          {"field": "event_name", "type": "nominal", "title": "Event"},
-          {"field": "year", "type": "ordinal", "title": "Year"},
-          {"field": "economic_loss_aud_million", "type": "quantitative", "title": "Economic Loss (AUD M)", "format": ",.0f"},
-          {"field": "homes_destroyed", "type": "quantitative", "title": "Homes Destroyed", "format": ",.0f"},
-          {"field": "deaths_direct", "type": "quantitative", "title": "Deaths"}
-        ]
-      }
-    }
-  ],
-  "config": {"background": "transparent", "view": {"stroke": "transparent"}}
+  "mark": {"type": "point", "filled": true, "opacity": 0.75, "stroke": "#0a1628", "strokeWidth": 0.5},
+  "encoding": {
+    "x": {
+      "field": "homes_destroyed",
+      "type": "quantitative",
+      "title": "Homes Destroyed",
+      "axis": {"format": ",.0f", "titleFontSize": 11, "labelFontSize": 10,
+               "titleColor": "#ffffff", "labelColor": "#aaaaaa",
+               "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
+               "domainColor": "#1e3a55"}
+    },
+    "y": {
+      "field": "economic_loss_aud_million",
+      "type": "quantitative",
+      "title": "Economic Loss (AUD Million)",
+      "axis": {"format": ",.0f", "titleFontSize": 11, "labelFontSize": 10,
+               "titleColor": "#ffffff", "labelColor": "#aaaaaa",
+               "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
+               "domainColor": "#1e3a55"}
+    },
+    "size": {
+      "field": "deaths_direct",
+      "type": "quantitative",
+      "title": "Deaths",
+      "scale": {"range": [40, 1200]},
+      "legend": {"title": "Deaths", "titleColor": "#ffffff", "labelColor": "#ffffff",
+                 "symbolFillColor": "#C0392B", "labelFontSize": 10, "titleFontSize": 10}
+    },
+    "color": {"value": "#C0392B"},
+    "tooltip": [
+      {"field": "event_name", "type": "nominal", "title": "Event"},
+      {"field": "year", "type": "ordinal", "title": "Year"},
+      {"field": "economic_loss_aud_million", "type": "quantitative", "title": "Economic Loss (AUD M)", "format": ",.0f"},
+      {"field": "homes_destroyed", "type": "quantitative", "title": "Homes Destroyed", "format": ",.0f"},
+      {"field": "deaths_direct", "type": "quantitative", "title": "Deaths"}
+    ]
+  },
+  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
 }
