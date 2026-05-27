@@ -10,31 +10,29 @@
       "type": "ordinal",
       "title": "Month",
       "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-      "axis": {"labelFontSize": 10, "titleFontSize": 11}
+      "axis": {"labelFontSize": 10, "titleFontSize": 11,
+               "labelColor": "#ffffff", "titleColor": "#ffffff"}
     },
     "y": {
       "field": "state",
       "type": "nominal",
       "title": null,
-      "axis": {"labelFontSize": 10}
+      "axis": {"labelFontSize": 10, "labelColor": "#ffffff"}
     },
     "color": {
       "field": "avg_fire_danger_index",
       "type": "quantitative",
       "title": "Fire Danger",
       "scale": {"type": "sequential", "scheme": "orangered"},
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "titleFontSize": 10,
-        "labelFontSize": 9
-      }
+      "legend": {"orient": "bottom", "direction": "horizontal",
+                 "titleColor": "#ffffff", "labelColor": "#ffffff",
+                 "titleFontSize": 10, "labelFontSize": 9}
     },
     "tooltip": [
       {"field": "state", "type": "nominal", "title": "State"},
       {"field": "month", "type": "ordinal", "title": "Month"},
-      {"field": "avg_fire_danger_index", "type": "quantitative", "title": "Avg Fire Danger Index", "format": ".1f"}
+      {"field": "avg_fire_danger_index", "type": "quantitative", "title": "Fire Danger Index", "format": ".1f"}
     ]
   },
-  "config": {"background": "transparent", "view": {"stroke": "transparent"}}
+  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
 }
