@@ -68,6 +68,7 @@ fetch('area_by_state.vg.json')
     spec.params = spec.params || [];
     spec.params.push({ name: "selected_year", value: 2019 });
 
+    // Red dot only — no text label
     spec.layer.push({
       "transform": [{ "filter": "datum.year == selected_year" }],
       "mark": { "type": "point", "filled": true, "size": 300,
@@ -83,29 +84,15 @@ fetch('area_by_state.vg.json')
       }
     });
 
-    spec.layer.push({
-      "transform": [
-        { "filter": "datum.year == selected_year" },
-        { "filter": "datum.notable_event != ''" }
-      ],
-      "mark": { "type": "text", "fontSize": 11, "fontWeight": "bold",
-                "color": "#C0392B", "align": "center", "dy": -18 },
-      "encoding": {
-        "x": { "field": "year", "type": "ordinal" },
-        "y": { "field": "total_area_ha", "type": "quantitative" },
-        "text": { "field": "notable_event", "type": "nominal" }
-      }
-    });
-
     return vegaEmbed("#area_by_state", spec, embedOpts);
   })
   .then(result => { areaView = result.view; })
   .catch(console.error);
 
-vegaEmbed("#heatmap",        "heatmap.vg.json",        embedOpts).catch(console.error);
-vegaEmbed("#dual_axis",      "dual_axis.vg.json",      embedOpts).catch(console.error);
-vegaEmbed("#small_multiples","small_multiples.vg.json",embedOpts).catch(console.error);
-vegaEmbed("#dot_plot",       "dot_plot.vg.json",       embedOpts).catch(console.error);
-vegaEmbed("#bubble_scatter", "bubble_scatter.vg.json", embedOpts).catch(console.error);
-vegaEmbed("#dot_matrix",     "dot_matrix.vg.json",     embedOpts).catch(console.error);
-vegaEmbed("#slope_chart",    "slope_chart.vg.json",    embedOpts).catch(console.error);
+vegaEmbed("#heatmap",         "heatmap.vg.json",         embedOpts).catch(console.error);
+vegaEmbed("#dual_axis",       "dual_axis.vg.json",        embedOpts).catch(console.error);
+vegaEmbed("#small_multiples", "small_multiples.vg.json",  embedOpts).catch(console.error);
+vegaEmbed("#dot_plot",        "dot_plot.vg.json",         embedOpts).catch(console.error);
+vegaEmbed("#bubble_scatter",  "bubble_scatter.vg.json",   embedOpts).catch(console.error);
+vegaEmbed("#dot_matrix",      "dot_matrix.vg.json",       embedOpts).catch(console.error);
+vegaEmbed("#slope_chart",     "slope_chart.vg.json",      embedOpts).catch(console.error);
