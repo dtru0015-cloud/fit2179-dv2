@@ -24,9 +24,7 @@ function renderPopup(event, year) {
   popup.innerHTML = `
     <div style="background:linear-gradient(135deg,#1a0500,#4a1200);border:1px solid #E67E22;
                 border-radius:8px;padding:14px 18px;color:white;margin-top:10px;">
-      <div style="font-size:13px;font-weight:700;color:#E67E22;margin-bottom:8px;">
-        📍 ${year}: ${event.name}
-      </div>
+      <div style="font-size:13px;font-weight:700;color:#E67E22;margin-bottom:8px;">📍 ${year}: ${event.name}</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;">
         <div><div style="font-size:15px;font-weight:900;color:#F1C40F;">${event.area}</div>
              <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Area Burned</div></div>
@@ -46,7 +44,6 @@ function updateEventPopup(year) {
   else if (lastEvent) { renderPopup(lastEvent.event, lastEvent.year); }
 }
 
-// Update year label display
 function updateYearLabel(year) {
   const label = document.getElementById('year-label');
   if (label) label.textContent = year;
@@ -58,8 +55,6 @@ vegaEmbed("#choropleth_map", "choropleth_map.vg.json", embedOpts)
   .then(result => {
     choroplethView = result.view;
     updateEventPopup(2019);
-
-    // Wire HTML slider to choropleth signal
     const slider = document.getElementById('year-slider');
     if (slider) {
       slider.addEventListener('input', function() {
@@ -70,8 +65,6 @@ vegaEmbed("#choropleth_map", "choropleth_map.vg.json", embedOpts)
         updateEventPopup(val);
       });
     }
-
-    // Wire HTML dropdown to choropleth signal
     const dropdown = document.getElementById('state-dropdown');
     if (dropdown) {
       dropdown.addEventListener('change', function() {
@@ -86,11 +79,9 @@ fetch('area_by_state.vg.json')
   .then(spec => {
     spec.params = spec.params || [];
     spec.params.push({ name: "selected_year", value: 2019 });
-
     spec.layer.push({
       "transform": [{ "filter": "datum.year == selected_year" }],
-      "mark": { "type": "point", "filled": true, "size": 300,
-                "color": "#C0392B", "stroke": "#fff", "strokeWidth": 2 },
+      "mark": { "type": "point", "filled": true, "size": 300, "color": "#C0392B", "stroke": "#fff", "strokeWidth": 2 },
       "encoding": {
         "x": { "field": "year", "type": "ordinal" },
         "y": { "field": "total_area_ha", "type": "quantitative" },
@@ -101,16 +92,15 @@ fetch('area_by_state.vg.json')
         ]
       }
     });
-
     return vegaEmbed("#area_by_state", spec, embedOpts);
   })
   .then(result => { areaView = result.view; })
   .catch(console.error);
 
-vegaEmbed("#heatmap",         "heatmap.vg.json",         embedOpts).catch(console.error);
-vegaEmbed("#dual_axis",       "dual_axis.vg.json",        embedOpts).catch(console.error);
-vegaEmbed("#small_multiples", "small_multiples.vg.json",  embedOpts).catch(console.error);
-vegaEmbed("#dot_plot",        "dot_plot.vg.json",         embedOpts).catch(console.error);
-vegaEmbed("#bubble_scatter",  "bubble_scatter.vg.json",   embedOpts).catch(console.error);
-vegaEmbed("#dot_matrix",      "dot_matrix.vg.json",       embedOpts).catch(console.error);
-vegaEmbed("#slope_chart",     "slope_chart.vg.json",      embedOpts).catch(console.error);
+vegaEmbed("#heatmap",        "heatmap.vg.json",        embedOpts).catch(console.error);
+vegaEmbed("#dual_axis",      "dual_axis.vg.json",       embedOpts).catch(console.error);
+vegaEmbed("#slope_chart",    "slope_chart.vg.json",     embedOpts).catch(console.error);
+vegaEmbed("#dot_plot",       "dot_plot.vg.json",        embedOpts).catch(console.error);
+vegaEmbed("#wildlife_chart", "wildlife_chart.vg.json",  embedOpts).catch(console.error);
+vegaEmbed("#bubble_scatter", "bubble_scatter.vg.json",  embedOpts).catch(console.error);
+vegaEmbed("#dot_matrix",     "dot_matrix.vg.json",      embedOpts).catch(console.error);
