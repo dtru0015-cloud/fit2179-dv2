@@ -1,0 +1,81 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 280,
+  "data": {"url": "wildlife_impact.csv"},
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusEnd": 4},
+      "encoding": {
+        "y": {
+          "field": "species_group",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "animals_affected_millions", "order": "descending"},
+          "axis": {"labelFontSize": 12, "labelColor": "#ffffff", "labelFontWeight": "bold"}
+        },
+        "x": {
+          "field": "animals_affected_millions",
+          "type": "quantitative",
+          "title": "Animals Affected (millions)",
+          "axis": {
+            "titleFontSize": 11, "labelFontSize": 10,
+            "titleColor": "#ffffff", "labelColor": "#aaaaaa",
+            "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
+            "domainColor": "#1e3a55", "format": ",.0f"
+          }
+        },
+        "color": {
+          "field": "species_group",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Reptiles", "Birds", "Mammals", "Frogs"],
+            "range": ["#E74C3C", "#E67E22", "#F39C12", "#27AE60"]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "species_group", "type": "nominal", "title": "Species Group"},
+          {"field": "animals_affected_millions", "type": "quantitative", "title": "Animals Affected (M)", "format": ",.0f"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 11, "fontWeight": "bold"},
+      "encoding": {
+        "y": {
+          "field": "species_group",
+          "type": "nominal",
+          "sort": {"field": "animals_affected_millions", "order": "descending"}
+        },
+        "x": {"field": "animals_affected_millions", "type": "quantitative"},
+        "text": {
+          "field": "animals_affected_millions",
+          "type": "quantitative",
+          "format": ",.0f"
+        },
+        "color": {
+          "field": "species_group",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Reptiles", "Birds", "Mammals", "Frogs"],
+            "range": ["#E74C3C", "#E67E22", "#F39C12", "#27AE60"]
+          }
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 6, "dy": 0, "fontSize": 20},
+      "encoding": {
+        "y": {
+          "field": "species_group",
+          "type": "nominal",
+          "sort": {"field": "animals_affected_millions", "order": "descending"}
+        },
+        "x": {"value": 0},
+        "text": {"field": "emoji", "type": "nominal"}
+      }
+    }
+  ],
+  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
+}
