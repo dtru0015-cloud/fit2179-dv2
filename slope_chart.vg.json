@@ -1,35 +1,27 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 280,
+  "height": 300,
   "data": {"url": "slope_chart.csv"},
   "layer": [
     {
-      "mark": {"type": "line", "strokeWidth": 2},
+      "mark": {"type": "line", "strokeWidth": 2.5},
       "encoding": {
         "x": {
-          "field": "year",
-          "type": "ordinal",
-          "title": null,
-          "axis": {"labelFontSize": 12, "labelColor": "#ffffff",
-                   "labelFontWeight": "bold", "grid": false, "domainColor": "#1e3a55"}
+          "field": "year", "type": "ordinal", "title": null,
+          "axis": {"labelFontSize": 12, "labelColor": "#ffffff", "labelFontWeight": "bold",
+                   "grid": false, "domainColor": "#1e3a55"}
         },
         "y": {
-          "field": "fire_risk_score",
-          "type": "quantitative",
-          "title": "Fire Risk Score",
+          "field": "fire_risk_score", "type": "quantitative", "title": "Fire Risk Score",
           "scale": {"domain": [0.2, 0.9]},
-          "axis": {"labelFontSize": 10, "titleFontSize": 11,
-                   "labelColor": "#aaaaaa", "titleColor": "#ffffff",
-                   "gridColor": "#1a2a3a", "domainColor": "#1e3a55"}
+          "axis": {"labelFontSize": 10, "titleFontSize": 11, "labelColor": "#aaaaaa",
+                   "titleColor": "#ffffff", "gridColor": "#1a2a3a", "domainColor": "#1e3a55"}
         },
         "color": {
-          "field": "state",
-          "type": "nominal",
-          "scale": {
-            "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
-            "range": ["#E74C3C","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]
-          },
+          "field": "state", "type": "nominal",
+          "scale": {"domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
+                    "range": ["#E74C3C","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]},
           "legend": {"labelColor": "#ffffff", "titleColor": "#ffffff",
                      "labelFontSize": 10, "titleFontSize": 10}
         }
@@ -40,21 +32,25 @@
       "encoding": {
         "x": {"field": "year", "type": "ordinal"},
         "y": {"field": "fire_risk_score", "type": "quantitative", "scale": {"domain": [0.2, 0.9]}},
-        "color": {"field": "state", "type": "nominal"}
+        "color": {
+          "field": "state", "type": "nominal",
+          "scale": {"domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
+                    "range": ["#E74C3C","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]}
+        }
       }
     },
     {
-      "transform": [{"filter": "datum.year == 2021"}],
-      "mark": {"type": "text", "align": "left", "dx": 5, "fontSize": 10, "fontWeight": "bold"},
+      "transform": [{"filter": "datum.score_label != ''"}],
+      "mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 10, "fontWeight": "bold"},
       "encoding": {
         "x": {"field": "year", "type": "ordinal"},
         "y": {"field": "fire_risk_score", "type": "quantitative", "scale": {"domain": [0.2, 0.9]}},
         "text": {"field": "score_label", "type": "nominal"},
-        "color": {"field": "state", "type": "nominal",
-                  "scale": {
-                    "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
-                    "range": ["#E74C3C","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]
-                  }}
+        "color": {
+          "field": "state", "type": "nominal",
+          "scale": {"domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
+                    "range": ["#E74C3C","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]}
+        }
       }
     }
   ],
