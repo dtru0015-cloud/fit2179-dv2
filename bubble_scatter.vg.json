@@ -3,6 +3,9 @@
   "width": "container",
   "height": 300,
   "data": {"url": "bushfire_area_by_state.csv"},
+  "transform": [
+    {"filter": "datum.event_name != 'Black Summer'"}
+  ],
   "layer": [
     {
       "mark": {"type": "rule", "color": "#1e3a55", "strokeWidth": 2},
@@ -14,13 +17,11 @@
           "axis": {"labelFontSize": 10, "labelColor": "#ffffff", "labelLimit": 180}
         },
         "x": {"value": 0},
-        "x2": {
-          "field": "economic_loss_aud_million", "type": "quantitative"
-        }
+        "x2": {"field": "economic_loss_aud_million", "type": "quantitative"}
       }
     },
     {
-      "mark": {"type": "point", "filled": true, "size": 120},
+      "mark": {"type": "point", "filled": true, "size": 150},
       "encoding": {
         "y": {
           "field": "event_name", "type": "nominal",
@@ -36,23 +37,27 @@
         },
         "color": {
           "field": "economic_loss_aud_million", "type": "quantitative",
-          "scale": {"type": "threshold", "domain": [500, 2000, 10000, 50000],
+          "scale": {"type": "threshold", "domain": [500, 1000, 2000, 5000],
                     "range": ["#FDDBC7","#F4A582","#D6604D","#B2182B","#67001F"]},
           "legend": null
-        },
-        "size": {
-          "field": "deaths_direct", "type": "quantitative",
-          "scale": {"range": [60, 600]},
-          "legend": {"title": "Deaths", "labelColor": "#ffffff", "titleColor": "#ffffff",
-                     "labelFontSize": 10, "titleFontSize": 10}
         },
         "tooltip": [
           {"field": "event_name", "type": "nominal", "title": "Event"},
           {"field": "year", "type": "ordinal", "title": "Year"},
           {"field": "economic_loss_aud_million", "type": "quantitative", "title": "Economic Loss (AUD M)", "format": ",.0f"},
-          {"field": "homes_destroyed", "type": "quantitative", "title": "Homes Destroyed", "format": ",.0f"},
-          {"field": "deaths_direct", "type": "quantitative", "title": "Deaths"}
+          {"field": "homes_destroyed", "type": "quantitative", "title": "Homes Destroyed", "format": ",.0f"}
         ]
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 9, "color": "#aaaaaa"},
+      "encoding": {
+        "y": {
+          "field": "event_name", "type": "nominal",
+          "sort": {"field": "economic_loss_aud_million", "order": "descending"}
+        },
+        "x": {"field": "economic_loss_aud_million", "type": "quantitative"},
+        "text": {"field": "economic_loss_aud_million", "type": "quantitative", "format": "$,.0fM"}
       }
     }
   ],
