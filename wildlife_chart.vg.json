@@ -1,41 +1,82 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container",
-  "height": 240,
-  "data": {
-    "values": [
-      {"species": "Reptiles 🦎", "billions": 2.46, "pct": 81.3, "label": "2.46B\nReptiles"},
-      {"species": "Birds 🦅", "billions": 0.18, "pct": 6.0, "label": "180M\nBirds"},
-      {"species": "Mammals 🦘", "billions": 0.143, "pct": 4.7, "label": "143M\nMammals"},
-      {"species": "Frogs 🐸", "billions": 0.051, "pct": 1.7, "label": "51M\nFrogs"}
-    ]
-  },
-  "mark": {"type": "bar", "cornerRadiusEnd": 4},
-  "encoding": {
-    "x": {
-      "field": "pct", "type": "quantitative",
-      "title": "Share of ~3 Billion Animals Affected (%)",
-      "axis": {"titleFontSize": 11, "labelFontSize": 10,
-               "titleColor": "#ffffff", "labelColor": "#aaaaaa",
-               "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
-               "domainColor": "#1e3a55"}
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 480,
+  "height": 260,
+  "padding": 2,
+  "background": "#0a1628",
+
+  "data": [
+    {
+      "name": "tree",
+      "values": [
+        {"id": 0, "parent": null, "name": "root",   "value": 0},
+        {"id": 1, "parent": 0,    "name": "Reptiles", "value": 2460, "label": "Reptiles 🦎\n2,460M"},
+        {"id": 2, "parent": 0,    "name": "Birds",    "value": 180,  "label": "Birds 🦅\n180M"},
+        {"id": 3, "parent": 0,    "name": "Mammals",  "value": 143,  "label": "Mammals 🦘\n143M"},
+        {"id": 4, "parent": 0,    "name": "Frogs",    "value": 51,   "label": "Frogs 🐸\n51M"}
+      ],
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "value",
+          "sort": {"field": "value", "order": "descending"},
+          "round": true,
+          "method": "squarify",
+          "ratio": 1.618,
+          "size": [{"signal": "width"}, {"signal": "height"}]
+        }
+      ]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "tree"},
+      "encode": {
+        "enter": {
+          "x":  {"field": "x0"},
+          "y":  {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"},
+          "stroke":      {"value": "#0a1628"},
+          "strokeWidth": {"value": 3},
+          "cornerRadius":{"value": 4}
+        },
+        "update": {
+          "fill": {
+            "signal": "datum.name === 'root' ? '#0a1628' : datum.name === 'Reptiles' ? '#E74C3C' : datum.name === 'Birds' ? '#E67E22' : datum.name === 'Mammals' ? '#F39C12' : '#27AE60'"
+          },
+          "opacity": {"value": 0.9},
+          "tooltip": {
+            "signal": "{'Species': datum.label, 'Animals Affected': datum.value + 'M'}"
+          }
+        }
+      }
     },
-    "y": {
-      "field": "species", "type": "nominal", "title": null,
-      "sort": {"field": "pct", "order": "descending"},
-      "axis": {"labelFontSize": 12, "labelColor": "#ffffff", "labelFontWeight": "bold"}
-    },
-    "color": {
-      "field": "species", "type": "nominal",
-      "scale": {"domain": ["Reptiles 🦎","Birds 🦅","Mammals 🦘","Frogs 🐸"],
-                "range": ["#E74C3C","#E67E22","#F39C12","#27AE60"]},
-      "legend": null
-    },
-    "tooltip": [
-      {"field": "species", "type": "nominal", "title": "Species"},
-      {"field": "billions", "type": "quantitative", "title": "Animals (billions)", "format": ".3f"},
-      {"field": "pct", "type": "quantitative", "title": "Share (%)", "format": ".1f"}
-    ]
-  },
-  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
+    {
+      "type": "text",
+      "from": {"data": "tree"},
+      "encode": {
+        "enter": {
+          "x":        {"signal": "(datum.x0 + datum.x1) / 2"},
+          "y":        {"signal": "(datum.y0 + datum.y1) / 2"},
+          "align":    {"value": "center"},
+          "baseline": {"value": "middle"},
+          "fill":     {"value": "#ffffff"},
+          "fontWeight": {"value": "bold"},
+          "fontSize": {
+            "signal": "datum.name === 'root' ? 0 : (datum.x1 - datum.x0) > 80 ? 13 : (datum.x1 - datum.x0) > 40 ? 10 : 0"
+          },
+          "text": {"field": "label"},
+          "limit": {"signal": "datum.x1 - datum.x0 - 8"}
+        }
+      }
+    }
+  ]
 }
