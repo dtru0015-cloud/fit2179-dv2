@@ -3,42 +3,58 @@
   "width": "container",
   "height": 300,
   "data": {"url": "bushfire_area_by_state.csv"},
-  "mark": {"type": "point", "filled": true, "opacity": 0.75, "stroke": "#0a1628", "strokeWidth": 0.5},
-  "encoding": {
-    "x": {
-      "field": "homes_destroyed",
-      "type": "quantitative",
-      "title": "Homes Destroyed",
-      "axis": {"format": ",.0f", "titleFontSize": 11, "labelFontSize": 10,
-               "titleColor": "#ffffff", "labelColor": "#aaaaaa",
-               "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
-               "domainColor": "#1e3a55"}
+  "layer": [
+    {
+      "mark": {"type": "rule", "color": "#1e3a55", "strokeWidth": 2},
+      "encoding": {
+        "y": {
+          "field": "event_name", "type": "nominal",
+          "sort": {"field": "economic_loss_aud_million", "order": "descending"},
+          "title": null,
+          "axis": {"labelFontSize": 10, "labelColor": "#ffffff", "labelLimit": 180}
+        },
+        "x": {"value": 0},
+        "x2": {
+          "field": "economic_loss_aud_million", "type": "quantitative"
+        }
+      }
     },
-    "y": {
-      "field": "economic_loss_aud_million",
-      "type": "quantitative",
-      "title": "Economic Loss (AUD Million)",
-      "axis": {"format": ",.0f", "titleFontSize": 11, "labelFontSize": 10,
-               "titleColor": "#ffffff", "labelColor": "#aaaaaa",
-               "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
-               "domainColor": "#1e3a55"}
-    },
-    "size": {
-      "field": "deaths_direct",
-      "type": "quantitative",
-      "title": "Deaths",
-      "scale": {"range": [40, 1200]},
-      "legend": {"title": "Deaths", "titleColor": "#ffffff", "labelColor": "#ffffff",
-                 "symbolFillColor": "#C0392B", "labelFontSize": 10, "titleFontSize": 10}
-    },
-    "color": {"value": "#C0392B"},
-    "tooltip": [
-      {"field": "event_name", "type": "nominal", "title": "Event"},
-      {"field": "year", "type": "ordinal", "title": "Year"},
-      {"field": "economic_loss_aud_million", "type": "quantitative", "title": "Economic Loss (AUD M)", "format": ",.0f"},
-      {"field": "homes_destroyed", "type": "quantitative", "title": "Homes Destroyed", "format": ",.0f"},
-      {"field": "deaths_direct", "type": "quantitative", "title": "Deaths"}
-    ]
-  },
+    {
+      "mark": {"type": "point", "filled": true, "size": 120},
+      "encoding": {
+        "y": {
+          "field": "event_name", "type": "nominal",
+          "sort": {"field": "economic_loss_aud_million", "order": "descending"}
+        },
+        "x": {
+          "field": "economic_loss_aud_million", "type": "quantitative",
+          "title": "Economic Loss (AUD Million)",
+          "axis": {"format": ",.0f", "titleFontSize": 11, "labelFontSize": 10,
+                   "titleColor": "#ffffff", "labelColor": "#aaaaaa",
+                   "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
+                   "domainColor": "#1e3a55"}
+        },
+        "color": {
+          "field": "economic_loss_aud_million", "type": "quantitative",
+          "scale": {"type": "threshold", "domain": [500, 2000, 10000, 50000],
+                    "range": ["#FDDBC7","#F4A582","#D6604D","#B2182B","#67001F"]},
+          "legend": null
+        },
+        "size": {
+          "field": "deaths_direct", "type": "quantitative",
+          "scale": {"range": [60, 600]},
+          "legend": {"title": "Deaths", "labelColor": "#ffffff", "titleColor": "#ffffff",
+                     "labelFontSize": 10, "titleFontSize": 10}
+        },
+        "tooltip": [
+          {"field": "event_name", "type": "nominal", "title": "Event"},
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "economic_loss_aud_million", "type": "quantitative", "title": "Economic Loss (AUD M)", "format": ",.0f"},
+          {"field": "homes_destroyed", "type": "quantitative", "title": "Homes Destroyed", "format": ",.0f"},
+          {"field": "deaths_direct", "type": "quantitative", "title": "Deaths"}
+        ]
+      }
+    }
+  ],
   "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
 }
