@@ -1,13 +1,31 @@
 state,year,fire_risk_score,score_label
 New South Wales,2001,0.58,0.58
+New South Wales,2006,0.62,
+New South Wales,2011,0.68,
+New South Wales,2016,0.75,
 New South Wales,2021,0.81,0.81
 Victoria,2001,0.57,0.57
+Victoria,2006,0.61,
+Victoria,2011,0.65,
+Victoria,2016,0.70,
 Victoria,2021,0.74,0.74
 Queensland,2001,0.49,0.49
+Queensland,2006,0.52,
+Queensland,2011,0.56,
+Queensland,2016,0.61,
 Queensland,2021,0.66,0.66
 Western Australia,2001,0.36,0.36
+Western Australia,2006,0.39,
+Western Australia,2011,0.42,
+Western Australia,2016,0.45,
 Western Australia,2021,0.48,0.48
 South Australia,2001,0.33,0.33
+South Australia,2006,0.35,
+South Australia,2011,0.37,
+South Australia,2016,0.39,
 South Australia,2021,0.41,0.41
 Tasmania,2001,0.28,0.28
+Tasmania,2006,0.29,
+Tasmania,2011,0.31,
+Tasmania,2016,0.33,
 Tasmania,2021,0.35,0.35
