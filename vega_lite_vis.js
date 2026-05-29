@@ -103,5 +103,5 @@ vegaEmbed("#slope_chart",   "slope_chart.vg.json",    embedOpts).catch(console.e
 vegaEmbed("#deaths_chart",  "deaths_chart.vg.json",   embedOpts).catch(console.error);
 vegaEmbed("#homes_chart",   "homes_chart.vg.json",    embedOpts).catch(console.error);
 vegaEmbed("#wildlife_chart","wildlife_chart.vg.json", vegaOpts).catch(console.error);
-vegaEmbed("#waterfall_chart", "waterfall_chart.vg.json", embedOpts).catch(console.error);
+vegaEmbed("#waterfall_chart", "waterfall_chart.vg.json", vegaOpts).catch(console.error);
 vegaEmbed("#dot_matrix",    "dot_matrix.vg.json",     embedOpts).catch(console.error);
