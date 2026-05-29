@@ -9,16 +9,16 @@
     {
       "name": "source",
       "values": [
-        {"event": "Black Friday",    "year": "1939", "loss": 150,    "prev": 0,      "cumulative": 150,    "change": "+$150M",  "type": "small"},
-        {"event": "Ash Wednesday",   "year": "1983", "loss": 950,    "prev": 150,    "cumulative": 1100,   "change": "+$950M",  "type": "medium"},
-        {"event": "Canberra Fires",  "year": "2003", "loss": 300,    "prev": 1100,   "cumulative": 1400,   "change": "+$300M",  "type": "small"},
-        {"event": "Black Saturday",  "year": "2009", "loss": 4400,   "prev": 1400,   "cumulative": 5800,   "change": "+$4.4B",  "type": "large"},
-        {"event": "Hazelwood",       "year": "2014", "loss": 650,    "prev": 5800,   "cumulative": 6450,   "change": "+$650M",  "type": "small"},
-        {"event": "Sampson Flat",    "year": "2015", "loss": 15,     "prev": 6450,   "cumulative": 6465,   "change": "+$15M",   "type": "tiny"},
-        {"event": "Yarloop",         "year": "2016", "loss": 200,    "prev": 6465,   "cumulative": 6665,   "change": "+$200M",  "type": "small"},
-        {"event": "Tathra",          "year": "2018", "loss": 25,     "prev": 6665,   "cumulative": 6690,   "change": "+$25M",   "type": "tiny"},
-        {"event": "Black Summer",    "year": "2019", "loss": 103000, "prev": 6690,   "cumulative": 109690, "change": "+$103B",  "type": "extreme"},
-        {"event": "Wooroloo",        "year": "2021", "loss": 50,     "prev": 109690, "cumulative": 109740, "change": "+$50M",   "type": "tiny"}
+        {"event": "Black Friday",   "year": "1939", "loss": 150,    "prev": 0,      "cumulative": 150,    "change": "+$150M",  "type": "small"},
+        {"event": "Ash Wednesday",  "year": "1983", "loss": 950,    "prev": 150,    "cumulative": 1100,   "change": "+$950M",  "type": "medium"},
+        {"event": "Canberra Fires", "year": "2003", "loss": 300,    "prev": 1100,   "cumulative": 1400,   "change": "+$300M",  "type": "small"},
+        {"event": "Black Saturday", "year": "2009", "loss": 4400,   "prev": 1400,   "cumulative": 5800,   "change": "+$4.4B",  "type": "large"},
+        {"event": "Hazelwood",      "year": "2014", "loss": 650,    "prev": 5800,   "cumulative": 6450,   "change": "+$650M",  "type": "small"},
+        {"event": "Sampson Flat",   "year": "2015", "loss": 15,     "prev": 6450,   "cumulative": 6465,   "change": "+$15M",   "type": "tiny"},
+        {"event": "Yarloop",        "year": "2016", "loss": 200,    "prev": 6465,   "cumulative": 6665,   "change": "+$200M",  "type": "small"},
+        {"event": "Tathra",         "year": "2018", "loss": 25,     "prev": 6665,   "cumulative": 6690,   "change": "+$25M",   "type": "tiny"},
+        {"event": "Black Summer",   "year": "2019", "loss": 103000, "prev": 6690,   "cumulative": 109690, "change": "+$103B",  "type": "extreme"},
+        {"event": "Wooroloo",       "year": "2021", "loss": 50,     "prev": 109690, "cumulative": 109740, "change": "+$50M",   "type": "tiny"}
       ]
     }
   ],
@@ -33,10 +33,10 @@
     },
     {
       "name": "y",
-      "type": "linear",
-      "domain": [0, 115000],
-      "range": "height",
-      "reverse": true,
+      "type": "pow",
+      "exponent": 0.4,
+      "domain": [0, 112000],
+      "range": [{"signal": "height"}, 0],
       "nice": true
     },
     {
@@ -78,6 +78,7 @@
       "titleColor": "#ffffff",
       "titleFontSize": 11,
       "titlePadding": 10,
+      "values": [0, 500, 1000, 2000, 5000, 10000, 20000, 50000, 110000],
       "format": "$,.0f"
     }
   ],
@@ -90,17 +91,13 @@
         "enter": {
           "x": {"scale": "x", "field": "event", "offset": 1},
           "width": {"scale": "x", "band": 1, "offset": -2},
+          "y": {"scale": "y", "field": "cumulative"},
+          "y2": {"signal": "max(scale('y', datum.prev), scale('y', datum.cumulative) + 8)"},
           "fill": {"scale": "color", "field": "type"},
           "opacity": {"value": 0.9},
           "cornerRadius": {"value": 3},
           "tooltip": {
             "signal": "{'Event': datum.event + ' (' + datum.year + ')', 'Added Loss': datum.change, 'Running Total': '$' + format(datum.cumulative, ',.0f') + 'M'}"
-          }
-        },
-        "update": {
-          "y": {"scale": "y", "field": "cumulative"},
-          "y2": {
-            "signal": "max(scale('y', datum.prev), scale('y', datum.cumulative) + 6)"
           }
         },
         "hover": {"opacity": {"value": 1}}
@@ -112,14 +109,12 @@
       "encode": {
         "enter": {
           "x": {"signal": "scale('x', datum.event) + bandwidth('x') / 2"},
+          "y": {"scale": "y", "field": "cumulative", "offset": -10},
           "align": {"value": "center"},
           "fill": {"scale": "color", "field": "type"},
           "fontSize": {"signal": "datum.type === 'extreme' ? 13 : 10"},
           "fontWeight": {"value": "bold"},
           "text": {"field": "change"}
-        },
-        "update": {
-          "y": {"scale": "y", "field": "cumulative", "offset": -10}
         }
       }
     },
@@ -129,13 +124,12 @@
       "encode": {
         "enter": {
           "x": {"signal": "scale('x', datum.event) + bandwidth('x') / 2"},
+          "y": {"signal": "height + 72"},
           "align": {"value": "center"},
           "fill": {"value": "#666666"},
           "fontSize": {"value": 9},
+          "fontStyle": {"value": "italic"},
           "text": {"field": "year"}
-        },
-        "update": {
-          "y": {"signal": "height + 72"}
         }
       }
     }
