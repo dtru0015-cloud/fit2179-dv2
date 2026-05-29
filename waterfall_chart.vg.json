@@ -1,26 +1,31 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "width": 620,
-  "height": 360,
-  "padding": {"left": 70, "right": 20, "top": 40, "bottom": 90},
+  "height": 380,
+  "padding": {"left": 70, "right": 20, "top": 50, "bottom": 90},
   "background": "#0a1628",
 
   "data": [
     {
       "name": "source",
       "values": [
-        {"event": "Black Friday",   "year": "1939", "loss": 150,    "type": "small"},
-        {"event": "Ash Wednesday",  "year": "1983", "loss": 950,    "type": "medium"},
-        {"event": "Canberra Fires", "year": "2003", "loss": 300,    "type": "small"},
-        {"event": "Black Saturday", "year": "2009", "loss": 4400,   "type": "large"},
-        {"event": "Hazelwood",      "year": "2014", "loss": 650,    "type": "small"},
-        {"event": "Sampson Flat",   "year": "2015", "loss": 15,     "type": "tiny"},
-        {"event": "Yarloop",        "year": "2016", "loss": 200,    "type": "small"},
-        {"event": "Tathra",         "year": "2018", "loss": 25,     "type": "tiny"},
-        {"event": "Black Summer",   "year": "2019", "loss": 103000, "type": "extreme"},
-        {"event": "Wooroloo",       "year": "2021", "loss": 50,     "type": "tiny"}
+        {"event": "Black Friday",   "year": "1939", "loss": 150,    "prev": 0,      "end": 150,    "type": "add"},
+        {"event": "Ash Wednesday",  "year": "1983", "loss": 950,    "prev": 150,    "end": 1100,   "type": "add"},
+        {"event": "Canberra Fires", "year": "2003", "loss": 300,    "prev": 1100,   "end": 1400,   "type": "add"},
+        {"event": "Black Saturday", "year": "2009", "loss": 4400,   "prev": 1400,   "end": 5800,   "type": "add"},
+        {"event": "Hazelwood",      "year": "2014", "loss": 650,    "prev": 5800,   "end": 6450,   "type": "add"},
+        {"event": "Sampson Flat",   "year": "2015", "loss": 15,     "prev": 6450,   "end": 6465,   "type": "add"},
+        {"event": "Yarloop",        "year": "2016", "loss": 200,    "prev": 6465,   "end": 6665,   "type": "add"},
+        {"event": "Tathra",         "year": "2018", "loss": 25,     "prev": 6665,   "end": 6690,   "type": "add"},
+        {"event": "Black Summer",   "year": "2019", "loss": 103000, "prev": 6690,   "end": 109690, "type": "extreme"},
+        {"event": "Wooroloo",       "year": "2021", "loss": 50,     "prev": 109690, "end": 109740, "type": "add"},
+        {"event": "TOTAL",          "year": "",     "loss": 109740, "prev": 0,      "end": 109740, "type": "total"}
       ]
     }
+  ],
+
+  "signals": [
+    {"name": "barWidth", "update": "bandwidth('x') * 0.75"}
   ],
 
   "scales": [
@@ -29,21 +34,20 @@
       "type": "band",
       "domain": {"data": "source", "field": "event"},
       "range": "width",
-      "padding": 0.25
+      "padding": 0.3
     },
     {
       "name": "y",
       "type": "pow",
-      "exponent": 0.35,
-      "domain": [0, 110000],
-      "range": [{"signal": "height"}, 0],
-      "nice": false
+      "exponent": 0.38,
+      "domain": [0, 115000],
+      "range": [{"signal": "height"}, 0]
     },
     {
       "name": "color",
       "type": "ordinal",
-      "domain": ["tiny", "small", "medium", "large", "extreme"],
-      "range": ["#27AE60", "#2980B9", "#3498DB", "#E67E22", "#C0392B"]
+      "domain": ["add", "extreme", "total"],
+      "range": ["#3498DB", "#C0392B", "#F1C40F"]
     }
   ],
 
@@ -72,18 +76,18 @@
       "labelColor": "#aaaaaa",
       "labelFontSize": 9,
       "domainColor": "#1e3a55",
-      "gridColor": "#1a2a3a",
+      "gridColor": "#1e2d45",
       "gridDash": [3, 3],
-      "title": "Economic Loss (AUD Million)",
+      "title": "Cumulative Economic Loss (AUD)",
       "titleColor": "#ffffff",
       "titleFontSize": 11,
-      "titlePadding": 10,
-      "values": [0, 50, 200, 500, 1000, 2000, 5000, 10000, 50000, 103000],
+      "titlePadding": 12,
+      "values": [0, 100, 500, 1000, 2000, 5000, 10000, 50000, 110000],
       "encode": {
         "labels": {
           "update": {
             "text": {
-              "signal": "datum.value >= 1000 ? '$' + datum.value/1000 + 'B' : '$' + datum.value + 'M'"
+              "signal": "datum.value === 0 ? '$0' : datum.value >= 1000 ? '$' + (datum.value/1000) + 'B' : '$' + datum.value + 'M'"
             }
           }
         }
@@ -93,22 +97,39 @@
 
   "marks": [
     {
+      "type": "rule",
+      "from": {"data": "source"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "x", "field": "event", "offset": -4},
+          "x2": {"signal": "scale('x', datum.event) + bandwidth('x') + 4"},
+          "y": {"scale": "y", "field": "end"},
+          "stroke": {"scale": "color", "field": "type"},
+          "strokeWidth": {"value": 1},
+          "opacity": {"value": 0.4},
+          "strokeDash": {"value": [3, 3]}
+        }
+      }
+    },
+    {
       "type": "rect",
       "from": {"data": "source"},
       "encode": {
         "enter": {
-          "x": {"scale": "x", "field": "event", "offset": 1},
-          "width": {"scale": "x", "band": 1, "offset": -2},
-          "y": {"scale": "y", "field": "loss"},
-          "y2": {"scale": "y", "value": 0},
+          "x": {"signal": "scale('x', datum.event) + (bandwidth('x') - barWidth) / 2"},
+          "width": {"signal": "barWidth"},
           "fill": {"scale": "color", "field": "type"},
-          "opacity": {"value": 0.9},
-          "cornerRadius": {"value": 3},
+          "opacity": {"value": 0.88},
+          "cornerRadius": {"value": 4},
           "tooltip": {
-            "signal": "{'Event': datum.event + ' (' + datum.year + ')', 'Economic Loss': datum.loss >= 1000 ? '$' + format(datum.loss/1000, '.1f') + 'B' : '$' + datum.loss + 'M'}"
+            "signal": "{'Event': datum.event + (datum.year ? ' (' + datum.year + ')' : ''), 'Added Loss': datum.loss >= 1000 ? '$' + format(datum.loss/1000, '.1f') + 'B' : '$' + datum.loss + 'M', 'Running Total': datum.end >= 1000 ? '$' + format(datum.end/1000, '.1f') + 'B' : '$' + datum.end + 'M'}"
           }
         },
-        "hover": {"opacity": {"value": 1}}
+        "update": {
+          "y": {"scale": "y", "field": "end"},
+          "y2": {"signal": "max(scale('y', datum.prev), scale('y', datum.end) + 6)"}
+        },
+        "hover": {"opacity": {"value": 1}, "cursor": {"value": "pointer"}}
       }
     },
     {
@@ -117,14 +138,16 @@
       "encode": {
         "enter": {
           "x": {"signal": "scale('x', datum.event) + bandwidth('x') / 2"},
-          "y": {"scale": "y", "field": "loss", "offset": -8},
           "align": {"value": "center"},
           "fill": {"scale": "color", "field": "type"},
-          "fontSize": {"signal": "datum.type === 'extreme' ? 13 : datum.type === 'large' ? 11 : 9"},
+          "fontSize": {"signal": "datum.type === 'extreme' ? 13 : datum.type === 'total' ? 12 : 9"},
           "fontWeight": {"value": "bold"},
           "text": {
-            "signal": "datum.loss >= 1000 ? '$' + format(datum.loss/1000, '.1f') + 'B' : '$' + datum.loss + 'M'"
+            "signal": "datum.loss >= 1000 ? '+$' + format(datum.loss/1000, '.1f') + 'B' : '+$' + datum.loss + 'M'"
           }
+        },
+        "update": {
+          "y": {"scale": "y", "field": "end", "offset": -11}
         }
       }
     },
@@ -136,7 +159,7 @@
           "x": {"signal": "scale('x', datum.event) + bandwidth('x') / 2"},
           "y": {"signal": "height + 70"},
           "align": {"value": "center"},
-          "fill": {"value": "#666666"},
+          "fill": {"value": "#555555"},
           "fontSize": {"value": 9},
           "fontStyle": {"value": "italic"},
           "text": {"field": "year"}
@@ -148,19 +171,19 @@
   "legends": [
     {
       "fill": "color",
-      "orient": "bottom",
+      "orient": "top-left",
       "direction": "horizontal",
-      "labelColor": "#ffffff",
+      "labelColor": "#cccccc",
       "titleColor": "#ffffff",
       "labelFontSize": 10,
-      "title": "Loss Scale",
       "titleFontSize": 10,
+      "title": "Event Type",
       "padding": 8,
       "encode": {
         "labels": {
           "update": {
             "text": {
-              "signal": "datum.value === 'tiny' ? 'Minor (<$100M)' : datum.value === 'small' ? 'Moderate ($100M–$1B)' : datum.value === 'medium' ? 'Significant ($1–5B)' : datum.value === 'large' ? 'Major ($5–10B)' : 'Catastrophic (>$100B)'"
+              "signal": "datum.value === 'add' ? 'Other Events' : datum.value === 'extreme' ? '🔥 Black Summer' : 'Cumulative Total'"
             }
           }
         }
