@@ -4,56 +4,62 @@
   "height": 320,
   "data": {
     "values": [
-      {"event": "Black Friday (1939)",     "loss": 150,    "cumulative": 150,    "prev": 0,     "type": "loss"},
-      {"event": "Ash Wednesday (1983)",    "loss": 950,    "cumulative": 1100,   "prev": 150,   "type": "loss"},
-      {"event": "Black Christmas (2001)",  "loss": 70,     "cumulative": 1170,   "prev": 1100,  "type": "loss"},
-      {"event": "Alpine Fires (2003)",     "loss": 120,    "cumulative": 1290,   "prev": 1170,  "type": "loss"},
-      {"event": "Black Saturday (2009)",   "loss": 4400,   "cumulative": 5690,   "prev": 1290,  "type": "loss"},
-      {"event": "Hazelwood (2014)",        "loss": 650,    "cumulative": 6340,   "prev": 5690,  "type": "loss"},
-      {"event": "Yarloop (2016)",          "loss": 200,    "cumulative": 6540,   "prev": 6340,  "type": "loss"},
-      {"event": "Tathra (2018)",           "loss": 25,     "cumulative": 6565,   "prev": 6540,  "type": "loss"},
-      {"event": "Black Summer (2019)",     "loss": 103000, "cumulative": 109565, "prev": 6565,  "type": "black_summer"},
-      {"event": "Wooroloo (2021)",         "loss": 50,     "cumulative": 109615, "prev": 109565,"type": "loss"},
-      {"event": "Total",                   "loss": 109615, "cumulative": 109615, "prev": 0,     "type": "total"}
+      {"event": "Black Friday\n1939",     "loss": 150,    "cumulative": 150,    "prev": 0,     "type": "loss"},
+      {"event": "Ash Wednesday\n1983",    "loss": 950,    "cumulative": 1100,   "prev": 150,   "type": "loss"},
+      {"event": "Black Christmas\n2001",  "loss": 70,     "cumulative": 1170,   "prev": 1100,  "type": "loss"},
+      {"event": "Alpine Fires\n2003",     "loss": 120,    "cumulative": 1290,   "prev": 1170,  "type": "loss"},
+      {"event": "Black Saturday\n2009",   "loss": 4400,   "cumulative": 5690,   "prev": 1290,  "type": "loss"},
+      {"event": "Hazelwood\n2014",        "loss": 650,    "cumulative": 6340,   "prev": 5690,  "type": "loss"},
+      {"event": "Yarloop\n2016",          "loss": 200,    "cumulative": 6540,   "prev": 6340,  "type": "loss"},
+      {"event": "Tathra\n2018",           "loss": 25,     "cumulative": 6565,   "prev": 6540,  "type": "loss"},
+      {"event": "Black Summer\n2019",     "loss": 103000, "cumulative": 109565, "prev": 6565,  "type": "black_summer"},
+      {"event": "Wooroloo\n2021",         "loss": 50,     "cumulative": 109615, "prev": 109565,"type": "loss"},
+      {"event": "TOTAL",                  "loss": 109615, "cumulative": 109615, "prev": 0,     "type": "total"}
     ]
   },
   "layer": [
     {
-      "mark": {"type": "bar", "width": {"band": 0.6}},
+      "mark": {"type": "bar"},
       "encoding": {
         "x": {
-          "field": "event", "type": "ordinal",
-          "sort": null, "title": null,
-          "axis": {"labelAngle": -35, "labelFontSize": 9, "labelColor": "#aaaaaa",
+          "field": "event", "type": "ordinal", "sort": null, "title": null,
+          "axis": {"labelAngle": -30, "labelFontSize": 9, "labelColor": "#aaaaaa",
                    "grid": false, "domainColor": "#1e3a55"}
         },
         "y": {
           "field": "prev", "type": "quantitative",
           "title": "Cumulative Loss (AUD Million)",
-          "axis": {"format": "$,.0f", "titleFontSize": 11, "labelFontSize": 9,
+          "axis": {"format": "$,.0f", "titleFontSize": 10, "labelFontSize": 9,
                    "titleColor": "#ffffff", "labelColor": "#aaaaaa",
                    "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
                    "domainColor": "#1e3a55"}
         },
-        "y2": {"field": "cumulative", "type": "quantitative"},
+        "y2": {"field": "cumulative"},
         "color": {
           "field": "type", "type": "nominal",
           "scale": {
             "domain": ["loss", "black_summer", "total"],
-            "range": ["#E67E22", "#C0392B", "#F1C40F"]
+            "range": ["#2980B9", "#C0392B", "#F1C40F"]
           },
-          "legend": null
+          "legend": {
+            "title": "Event Type",
+            "labelColor": "#ffffff",
+            "titleColor": "#ffffff",
+            "values": ["loss", "black_summer", "total"],
+            "labelExpr": "datum.value === 'loss' ? 'Other Events' : datum.value === 'black_summer' ? 'Black Summer' : 'Total'",
+            "orient": "top-right"
+          }
         },
         "tooltip": [
           {"field": "event", "type": "nominal", "title": "Event"},
           {"field": "loss", "type": "quantitative", "title": "Loss (AUD M)", "format": "$,.0f"},
-          {"field": "cumulative", "type": "quantitative", "title": "Running Total", "format": "$,.0fM"}
+          {"field": "cumulative", "type": "quantitative", "title": "Running Total (AUD M)", "format": "$,.0f"}
         ]
       }
     },
     {
       "transform": [{"filter": "datum.type === 'black_summer' || datum.type === 'total'"}],
-      "mark": {"type": "text", "align": "center", "dy": -8, "fontSize": 9, "fontWeight": "bold"},
+      "mark": {"type": "text", "align": "center", "dy": -10, "fontSize": 10, "fontWeight": "bold"},
       "encoding": {
         "x": {"field": "event", "type": "ordinal", "sort": null},
         "y": {"field": "cumulative", "type": "quantitative"},
