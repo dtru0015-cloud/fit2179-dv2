@@ -2,6 +2,7 @@
 // Dinh Duy Truong | 33538921 | May 2026
 
 const embedOpts = { actions: false, renderer: "svg", theme: "default" };
+const vegaOpts = { actions: false, renderer: "svg" };
 
 const eventData = {
   2001: { name: "Black Christmas", area: "753,314 ha", deaths: 0, homes: 109, loss: "$70M" },
@@ -68,8 +69,7 @@ vegaEmbed("#choropleth_map", "choropleth_map.vg.json", embedOpts)
     const dropdown = document.getElementById('state-dropdown');
     if (dropdown) {
       dropdown.addEventListener('change', function() {
-        const val = this.value === 'null' ? null : this.value;
-        choroplethView.signal('state_select', val).run();
+        choroplethView.signal('state_select', this.value === 'null' ? null : this.value).run();
       });
     }
   }).catch(console.error);
@@ -97,10 +97,11 @@ fetch('area_by_state.vg.json')
   .then(result => { areaView = result.view; })
   .catch(console.error);
 
-vegaEmbed("#heatmap",        "heatmap.vg.json",        embedOpts).catch(console.error);
-vegaEmbed("#dual_axis",      "dual_axis.vg.json",       embedOpts).catch(console.error);
-vegaEmbed("#slope_chart",    "slope_chart.vg.json",     embedOpts).catch(console.error);
-vegaEmbed("#dot_plot",       "dot_plot.vg.json",        embedOpts).catch(console.error);
-vegaEmbed("#wildlife_chart", "wildlife_chart.vg.json",  embedOpts).catch(console.error);
-vegaEmbed("#bubble_scatter", "bubble_scatter.vg.json",  embedOpts).catch(console.error);
-vegaEmbed("#dot_matrix",     "dot_matrix.vg.json",      embedOpts).catch(console.error);
+vegaEmbed("#heatmap",       "heatmap.vg.json",       embedOpts).catch(console.error);
+vegaEmbed("#dual_axis",     "dual_axis.vg.json",      embedOpts).catch(console.error);
+vegaEmbed("#slope_chart",   "slope_chart.vg.json",    embedOpts).catch(console.error);
+vegaEmbed("#deaths_chart",  "deaths_chart.vg.json",   embedOpts).catch(console.error);
+vegaEmbed("#homes_chart",   "homes_chart.vg.json",    embedOpts).catch(console.error);
+vegaEmbed("#wildlife_chart","wildlife_chart.vg.json", vegaOpts).catch(console.error);
+vegaEmbed("#waterfall_chart", "waterfall_chart.vg.json", embedOpts).catch(console.error);
+vegaEmbed("#dot_matrix",    "dot_matrix.vg.json",     embedOpts).catch(console.error);
