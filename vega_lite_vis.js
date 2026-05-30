@@ -4,7 +4,7 @@
 const embedOpts = { actions: false, renderer: "svg", theme: "default" };
 const vegaOpts  = { actions: false, renderer: "svg" };
 
-// ─── Event popup data (year slider) ─────────────────────────────────────────
+// ─── Year slider → event popup ───────────────────────────────────────────────
 const eventData = {
   2001: { name: "Black Christmas",     area: "753,314 ha",    deaths: 0,   homes: 109,  loss: "$70M"  },
   2003: { name: "Alpine Fires VIC",    area: "1,100,000 ha",  deaths: 0,   homes: 41,   loss: "$120M" },
@@ -18,147 +18,117 @@ const eventData = {
   2021: { name: "Wooroloo",            area: "10,000 ha",     deaths: 0,   homes: 86,   loss: "$50M"  }
 };
 
-// ─── State-specific data for click info box ──────────────────────────────────
+// ─── State full-name → code mapping (matches datum.state in CSV) ─────────────
+const stateNameToCode = {
+  "New South Wales":              "NSW",
+  "Victoria":                     "VIC",
+  "Queensland":                   "QLD",
+  "South Australia":              "SA",
+  "Western Australia":            "WA",
+  "Tasmania":                     "TAS",
+  "Northern Territory":           "NT",
+  "Australian Capital Territory": "ACT"
+};
+
+// ─── Per-state info box data ──────────────────────────────────────────────────
 const stateData = {
   NSW: {
-    name: "New South Wales",
-    riskScore: 92,
-    pctFireProne: 67,
-    worstEvent: "Black Summer 2019",
-    worstAreaBurned: "5.5M ha",
-    worstDeaths: 25,
-    worstHomes: 2476,
-    riskRise: "+23 pts since 2001",
+    name: "New South Wales",      riskScore: 92,  pctFireProne: 67,
+    worstEvent: "Black Summer 2019", worstArea: "5.5M ha", worstDeaths: 25, worstHomes: "2,476",
+    riskChange: "+23 pts (2001–2021)",
     fact: "Highest-risk state. Blue Mountains & coastal ranges are extreme-risk zones. Sydney's urban fringe expands directly into fire-prone bush."
   },
   VIC: {
-    name: "Victoria",
-    riskScore: 88,
-    pctFireProne: 58,
-    worstEvent: "Black Saturday 2009",
-    worstAreaBurned: "450,000 ha",
-    worstDeaths: 173,
-    worstHomes: 2029,
-    riskRise: "+18 pts since 2001",
+    name: "Victoria",             riskScore: 88,  pctFireProne: 58,
+    worstEvent: "Black Saturday 2009", worstArea: "450,000 ha", worstDeaths: 173, worstHomes: "2,029",
+    riskChange: "+18 pts (2001–2021)",
     fact: "Australia's deadliest fire state. Dense mountain ash forests and an expanding urban fringe create extreme fire corridors north of Melbourne."
   },
   QLD: {
-    name: "Queensland",
-    riskScore: 72,
-    pctFireProne: 71,
-    worstEvent: "2019 Queensland Fires",
-    worstAreaBurned: "~10M ha",
-    worstDeaths: 0,
-    worstHomes: 71,
-    riskRise: "+12 pts since 2001",
-    fact: "Large fire area but lower population exposure. Tropical savanna burns seasonally — risk peaks in dry season from June–September."
+    name: "Queensland",           riskScore: 72,  pctFireProne: 71,
+    worstEvent: "2019 Queensland Fires", worstArea: "~10M ha", worstDeaths: 0, worstHomes: "71",
+    riskChange: "+12 pts (2001–2021)",
+    fact: "Large fire area but lower population exposure. Tropical savanna burns seasonally — risk peaks in the dry season from June–September."
   },
   SA: {
-    name: "South Australia",
-    riskScore: 75,
-    pctFireProne: 54,
-    worstEvent: "Ash Wednesday 1983",
-    worstAreaBurned: "208,000 ha",
-    worstDeaths: 28,
-    worstHomes: 383,
-    riskRise: "+10 pts since 2001",
-    fact: "High summer temperatures push fire danger scores frequently into 'Catastrophic' range. The Adelaide Hills are a chronic risk zone."
+    name: "South Australia",      riskScore: 75,  pctFireProne: 54,
+    worstEvent: "Ash Wednesday 1983", worstArea: "208,000 ha", worstDeaths: 28, worstHomes: "383",
+    riskChange: "+10 pts (2001–2021)",
+    fact: "High summer temperatures push fire danger into 'Catastrophic' range frequently. The Adelaide Hills are a chronic, recurring risk zone."
   },
   WA: {
-    name: "Western Australia",
-    riskScore: 68,
-    pctFireProne: 49,
-    worstEvent: "Wooroloo 2021",
-    worstAreaBurned: "10,000 ha",
-    worstDeaths: 0,
-    worstHomes: 86,
-    riskRise: "+9 pts since 2001",
+    name: "Western Australia",    riskScore: 68,  pctFireProne: 49,
+    worstEvent: "Wooroloo 2021",  worstArea: "10,000 ha", worstDeaths: 0, worstHomes: "86",
+    riskChange: "+9 pts (2001–2021)",
     fact: "South-west WA has seen dramatic rainfall decline since the 1970s, increasing fire frequency. The Darling Scarp is the primary risk corridor."
   },
   TAS: {
-    name: "Tasmania",
-    riskScore: 62,
-    pctFireProne: 43,
-    worstEvent: "2019 Wilderness Fires",
-    worstAreaBurned: "~200,000 ha",
-    worstDeaths: 0,
-    worstHomes: 3,
-    riskRise: "+14 pts since 2001",
-    fact: "Rapid risk increase driven by warming and drying. Ancient rainforest and peatlands — not traditionally fire-adapted — now burning regularly."
+    name: "Tasmania",             riskScore: 62,  pctFireProne: 43,
+    worstEvent: "2019 Wilderness Fires", worstArea: "~200,000 ha", worstDeaths: 0, worstHomes: "3",
+    riskChange: "+14 pts (2001–2021)",
+    fact: "Rapid risk increase — ancient rainforest and peatlands not traditionally fire-adapted are now burning regularly due to warming and drying."
   },
   NT: {
-    name: "Northern Territory",
-    riskScore: 48,
-    pctFireProne: 82,
-    worstEvent: "Annual savanna fires",
-    worstAreaBurned: "~40M ha/yr",
-    worstDeaths: 0,
-    worstHomes: 0,
-    riskRise: "+5 pts since 2001",
-    fact: "Lowest risk score despite burning the most land. Sparse population and managed Indigenous burns keep human exposure low. Over 50% burns every year."
+    name: "Northern Territory",   riskScore: 48,  pctFireProne: 82,
+    worstEvent: "Annual savanna fires", worstArea: "~40M ha/yr", worstDeaths: 0, worstHomes: "0",
+    riskChange: "+5 pts (2001–2021)",
+    fact: "Lowest risk score despite burning the most land. Sparse population and managed Indigenous burns keep human exposure low. 50%+ burns every year."
   },
   ACT: {
-    name: "Aust. Capital Territory",
-    riskScore: 80,
-    pctFireProne: 61,
-    worstEvent: "2003 Canberra Fires",
-    worstAreaBurned: "160,000 ha",
-    worstDeaths: 4,
-    worstHomes: 487,
-    riskRise: "+16 pts since 2001",
-    fact: "High risk relative to size. The 2003 fires entered Canberra suburbs — a rare urban fire incursion. 70% of the ACT is national park and bush reserve."
+    name: "ACT",                  riskScore: 80,  pctFireProne: 61,
+    worstEvent: "2003 Canberra Fires", worstArea: "160,000 ha", worstDeaths: 4, worstHomes: "487",
+    riskChange: "+16 pts (2001–2021)",
+    fact: "High risk relative to its small size. The 2003 fires entered Canberra suburbs. 70% of the ACT is national park and bush reserve."
   }
 };
 
-// ─── Default (all-states) info box content ──────────────────────────────────
-const defaultBoxContent = [
-  { value: "8 States",  label: "ASSESSED FOR RISK"  },
-  { value: "92 / 100",  label: "NSW HIGHEST SCORE"  },
-  { value: "48 / 100",  label: "NT LOWEST SCORE"    },
-  { value: "+23 pts",   label: "NSW RISE 2001–2021" }
+// ─── Info box renderer ────────────────────────────────────────────────────────
+const defaultCards = [
+  { value: "8 States", label: "ASSESSED FOR RISK"  },
+  { value: "92 / 100", label: "NSW HIGHEST SCORE"  },
+  { value: "48 / 100", label: "NT LOWEST SCORE"    },
+  { value: "+23 pts",  label: "NSW RISE 2001–2021" }
 ];
 
-function renderInfoBox(cards, factText) {
+function renderInfoBox(cards, factHTML) {
   const box = document.getElementById('state-info-box');
   if (!box) return;
-
-  const cardsHTML = cards.map(c => `
-    <div style="background:#0d1f3a;border:1px solid #1e3a5f;border-radius:8px;
-                padding:14px 18px;text-align:center;">
-      <div style="font-size:18px;font-weight:700;color:#E67E22;">${c.value}</div>
-      <div style="font-size:10px;color:#8aabcc;text-transform:uppercase;
-                  letter-spacing:0.07em;margin-top:4px;">${c.label}</div>
-    </div>`).join('');
-
-  const factHTML = factText ? `
-    <div style="margin-top:10px;font-size:12px;color:#c8d8f0;line-height:1.55;
-                padding:0 2px;">
-      <span style="color:#E67E22;margin-right:6px;">●</span>${factText}
-    </div>` : '';
-
   box.innerHTML = `
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-      ${cardsHTML}
-    </div>${factHTML}`;
+      ${cards.map(c => `
+        <div style="background:#0d1f3a;border:1px solid #1e3a5f;border-radius:8px;
+                    padding:14px 18px;text-align:center;">
+          <div style="font-size:18px;font-weight:700;color:#E67E22;">${c.value}</div>
+          <div style="font-size:10px;color:#8aabcc;text-transform:uppercase;
+                      letter-spacing:0.07em;margin-top:4px;">${c.label}</div>
+        </div>`).join('')}
+    </div>
+    ${factHTML ? `<div style="margin-top:10px;font-size:12px;color:#c8d8f0;
+                              line-height:1.55;padding:0 2px;">${factHTML}</div>` : ''}`;
 }
 
-function updateStateBox(stateCode) {
-  const s = stateData[stateCode];
+function updateStateBox(code) {
+  const s = stateData[code];
   if (!s) { resetStateBox(); return; }
-
-  renderInfoBox([
-    { value: s.name,            label: "SELECTED STATE"     },
-    { value: `${s.riskScore} / 100`, label: "FIRE RISK SCORE"  },
-    { value: `${s.pctFireProne}%`, label: "% LAND FIRE-PRONE" },
-    { value: s.riskRise,        label: "RISK CHANGE 2001–2021" }
-  ], `<strong style="color:#E67E22">${s.worstEvent}</strong>: ${s.worstAreaBurned} burned · ${s.worstDeaths} deaths · ${typeof s.worstHomes === 'number' ? s.worstHomes.toLocaleString() : s.worstHomes} homes lost. ${s.fact}`);
+  renderInfoBox(
+    [
+      { value: s.name,             label: "SELECTED STATE"        },
+      { value: `${s.riskScore} / 100`, label: "FIRE RISK SCORE"  },
+      { value: `${s.pctFireProne}%`,   label: "% LAND FIRE-PRONE"},
+      { value: s.riskChange,       label: "RISK CHANGE"           }
+    ],
+    `<span style="color:#E67E22">●</span>&nbsp;
+     <strong style="color:#E67E22">${s.worstEvent}:</strong>
+     ${s.worstArea} burned · ${s.worstDeaths} deaths · ${s.worstHomes} homes.
+     ${s.fact}`
+  );
 }
 
 function resetStateBox() {
-  renderInfoBox(defaultBoxContent, null);
+  renderInfoBox(defaultCards, null);
 }
 
-// ─── Year slider popup ───────────────────────────────────────────────────────
+// ─── Year slider popup ────────────────────────────────────────────────────────
 let lastEvent = null;
 
 function renderPopup(event, year) {
@@ -167,16 +137,26 @@ function renderPopup(event, year) {
   popup.innerHTML = `
     <div style="background:linear-gradient(135deg,#1a0500,#4a1200);border:1px solid #E67E22;
                 border-radius:8px;padding:14px 18px;color:white;margin-top:10px;">
-      <div style="font-size:13px;font-weight:700;color:#E67E22;margin-bottom:8px;">📍 ${year}: ${event.name}</div>
+      <div style="font-size:13px;font-weight:700;color:#E67E22;margin-bottom:8px;">
+        📍 ${year}: ${event.name}</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;">
-        <div><div style="font-size:15px;font-weight:900;color:#F1C40F;">${event.area}</div>
-             <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Area Burned</div></div>
-        <div><div style="font-size:15px;font-weight:900;color:#F1C40F;">${event.deaths}</div>
-             <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Deaths</div></div>
-        <div><div style="font-size:15px;font-weight:900;color:#F1C40F;">${typeof event.homes === 'number' ? event.homes.toLocaleString() : event.homes}</div>
-             <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Homes Destroyed</div></div>
-        <div><div style="font-size:15px;font-weight:900;color:#F1C40F;">${event.loss}</div>
-             <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Economic Loss</div></div>
+        <div>
+          <div style="font-size:15px;font-weight:900;color:#F1C40F;">${event.area}</div>
+          <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Area Burned</div>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:900;color:#F1C40F;">${event.deaths}</div>
+          <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Deaths</div>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:900;color:#F1C40F;">
+            ${typeof event.homes === 'number' ? event.homes.toLocaleString() : event.homes}</div>
+          <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Homes Destroyed</div>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:900;color:#F1C40F;">${event.loss}</div>
+          <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Economic Loss</div>
+        </div>
       </div>
     </div>`;
 }
@@ -192,9 +172,9 @@ function updateYearLabel(year) {
   if (label) label.textContent = year;
 }
 
-// ─── Chart embeds ────────────────────────────────────────────────────────────
+// ─── Chart embeds ─────────────────────────────────────────────────────────────
 let choroplethView, areaView;
-let activeStateCode = null;
+let activeStateName = null;   // tracks datum.state (full name) for the signal
 
 vegaEmbed("#area_by_state", "area_by_state.vg.json", embedOpts)
   .then(result => { areaView = result.view; })
@@ -206,7 +186,7 @@ vegaEmbed("#choropleth_map", "choropleth_map.vg.json", embedOpts)
     resetStateBox();
     updateEventPopup(2019);
 
-    // ── Year slider ──────────────────────────────────────────────────────────
+    // Year slider ──────────────────────────────────────────────────────────────
     const slider = document.getElementById('year-slider');
     if (slider) {
       slider.addEventListener('input', function () {
@@ -218,45 +198,52 @@ vegaEmbed("#choropleth_map", "choropleth_map.vg.json", embedOpts)
       });
     }
 
-    // ── State dropdown ───────────────────────────────────────────────────────
+    // State dropdown ───────────────────────────────────────────────────────────
     const dropdown = document.getElementById('state-dropdown');
     if (dropdown) {
       dropdown.addEventListener('change', function () {
-        const val = this.value === 'null' ? null : this.value;
+        // dropdown value should be full state name or empty string
+        const val = this.value === '' ? null : this.value;
         choroplethView.signal('state_select', val).run();
-        if (val) { activeStateCode = val; updateStateBox(val); }
-        else      { activeStateCode = null; resetStateBox(); }
+        activeStateName = val;
+        if (val) {
+          const code = stateNameToCode[val];
+          updateStateBox(code);
+        } else {
+          resetStateBox();
+        }
       });
     }
 
-    // ── Map click → state info box ───────────────────────────────────────────
+    // Circle click → state info box ────────────────────────────────────────────
     choroplethView.addEventListener('click', function (event, item) {
-      if (!item || !item.datum) {
-        // Clicked blank area — deselect
-        activeStateCode = null;
+      if (!item || !item.datum || !item.datum.state) {
+        // Clicked background — deselect
+        activeStateName = null;
         choroplethView.signal('state_select', null).run();
         const dd = document.getElementById('state-dropdown');
-        if (dd) dd.value = 'null';
+        if (dd) dd.value = '';
         resetStateBox();
         return;
       }
 
-      const code = item.datum.state_code;
-      if (!code) return;
+      const fullName = item.datum.state;        // e.g. "New South Wales"
+      const code = stateNameToCode[fullName]    // e.g. "NSW"
+               || item.datum.state_code;        // fallback if field exists
 
-      if (activeStateCode === code) {
+      if (activeStateName === fullName) {
         // Click same state again → deselect
-        activeStateCode = null;
+        activeStateName = null;
         choroplethView.signal('state_select', null).run();
         const dd = document.getElementById('state-dropdown');
-        if (dd) dd.value = 'null';
+        if (dd) dd.value = '';
         resetStateBox();
       } else {
-        activeStateCode = code;
-        choroplethView.signal('state_select', code).run();
+        activeStateName = fullName;
+        choroplethView.signal('state_select', fullName).run();
         const dd = document.getElementById('state-dropdown');
-        if (dd) dd.value = code;
-        updateStateBox(code);
+        if (dd) dd.value = fullName;
+        if (code) updateStateBox(code);
       }
     });
 
