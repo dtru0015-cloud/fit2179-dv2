@@ -14,32 +14,32 @@
     "scale": 550
   },
 
-  "layer": [
+  "data": { "url": "bushfire_risk_by_state_multiyear.csv" },
 
+  "transform": [
+    { "filter": "datum.year == year_select" },
     {
-      "data": { "url": "bushfire_risk_by_state_multiyear.csv" },
-      "transform": [
-        { "filter": "datum.year == year_select" },
-        {
-          "lookup": "state_code",
-          "from": {
-            "data": {
-              "url": "australia_states.geojson",
-              "format": { "type": "geojson" }
-            },
-            "key": "properties.state_code",
-            "fields": ["geometry"]
-          }
+      "lookup": "state_code",
+      "from": {
+        "data": {
+          "url": "australia_states.geojson",
+          "format": { "type": "json", "property": "features" }
         },
-        { "calculate": "datum.fire_risk_score / 100", "as": "risk_normalised" }
-      ],
-      "mark": { "type": "geoshape" },
+        "key": "properties.state_code",
+        "fields": ["geometry"]
+      }
+    },
+    { "calculate": "datum.fire_risk_score / 100", "as": "risk_normalised" }
+  ],
+
+  "layer": [
+    {
+      "mark": "geoshape",
       "encoding": {
         "shape": { "field": "geometry", "type": "geojson" },
         "color": {
           "field": "risk_normalised",
           "type": "quantitative",
-          "title": "Fire Risk Score",
           "scale": {
             "type": "threshold",
             "domain": [0.5, 0.6, 0.7, 0.8],
@@ -53,13 +53,6 @@
             "titleColor": "#c8d8f0",
             "labelColor": "#8aabcc"
           }
-        },
-        "opacity": {
-          "condition": {
-            "test": "state_select === null || datum.state_code === state_select",
-            "value": 1
-          },
-          "value": 0.2
         },
         "stroke": {
           "condition": {
@@ -75,15 +68,20 @@
           },
           "value": 0.5
         },
+        "opacity": {
+          "condition": {
+            "test": "state_select === null || datum.state_code === state_select",
+            "value": 1
+          },
+          "value": 0.2
+        },
         "tooltip": [
           { "field": "state",              "type": "nominal",      "title": "State"              },
           { "field": "fire_risk_score",    "type": "quantitative", "title": "Risk Score"         },
-          { "field": "pct_land_fire_prone","type": "quantitative", "title": "% Land Fire-Prone",
-            "format": ".0f" }
+          { "field": "pct_land_fire_prone","type": "quantitative", "title": "% Fire-Prone Land", "format": ".0f" }
         ]
       }
     },
-
     {
       "data": {
         "values": [
@@ -97,11 +95,7 @@
           { "state_code": "ACT", "lon": 149.1, "lat": -35.5 }
         ]
       },
-      "mark": {
-        "type": "text",
-        "fontSize": 10,
-        "fontWeight": "bold"
-      },
+      "mark": { "type": "text", "fontSize": 10, "fontWeight": "bold" },
       "encoding": {
         "longitude": { "field": "lon", "type": "quantitative" },
         "latitude":  { "field": "lat", "type": "quantitative" },
@@ -122,7 +116,6 @@
         }
       }
     }
-
   ],
 
   "config": {
