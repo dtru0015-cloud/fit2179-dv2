@@ -13,23 +13,21 @@
       "title": "1980–89",
       "width": 140, "height": 115,
       "projection": { "type": "mercator", "center": [134, -28], "scale": 200 },
-      "data": { "url": "australia_states.geojson", "format": { "type": "geojson" } },
+      "data": { "url": "fire_return_interval.csv" },
       "transform": [{
-        "lookup": "properties.state_code",
+        "lookup": "state_name",
         "from": {
-          "data": { "url": "fire_return_interval.csv" },
-          "key": "state_code",
-          "fields": ["d1980", "state_name"]
+          "data": { "url": "australia_states.geojson", "format": { "type": "json", "property": "features" } },
+          "key": "properties.STATE_NAME",
+          "fields": ["type", "geometry"]
         }
       }],
       "mark": { "type": "geoshape", "stroke": "#0a1628", "strokeWidth": 0.8 },
       "encoding": {
+        "shape": { "field": "geometry", "type": "geojson" },
         "color": {
           "field": "d1980", "type": "quantitative",
-          "scale": {
-            "domain": [5, 75],
-            "range": ["#b2182b","#ef8a62","#fddbc7","#d1e5f0","#67a9cf","#2166ac"]
-          },
+          "scale": { "domain": [5, 75], "range": ["#b2182b","#ef8a62","#fddbc7","#d1e5f0","#67a9cf","#2166ac"] },
           "legend": null
         },
         "tooltip": [
@@ -42,23 +40,21 @@
       "title": "1990–99",
       "width": 140, "height": 115,
       "projection": { "type": "mercator", "center": [134, -28], "scale": 200 },
-      "data": { "url": "australia_states.geojson", "format": { "type": "geojson" } },
+      "data": { "url": "fire_return_interval.csv" },
       "transform": [{
-        "lookup": "properties.state_code",
+        "lookup": "state_name",
         "from": {
-          "data": { "url": "fire_return_interval.csv" },
-          "key": "state_code",
-          "fields": ["d1990", "state_name"]
+          "data": { "url": "australia_states.geojson", "format": { "type": "json", "property": "features" } },
+          "key": "properties.STATE_NAME",
+          "fields": ["type", "geometry"]
         }
       }],
       "mark": { "type": "geoshape", "stroke": "#0a1628", "strokeWidth": 0.8 },
       "encoding": {
+        "shape": { "field": "geometry", "type": "geojson" },
         "color": {
           "field": "d1990", "type": "quantitative",
-          "scale": {
-            "domain": [5, 75],
-            "range": ["#b2182b","#ef8a62","#fddbc7","#d1e5f0","#67a9cf","#2166ac"]
-          },
+          "scale": { "domain": [5, 75], "range": ["#b2182b","#ef8a62","#fddbc7","#d1e5f0","#67a9cf","#2166ac"] },
           "legend": null
         },
         "tooltip": [
@@ -71,23 +67,21 @@
       "title": "2000–09",
       "width": 140, "height": 115,
       "projection": { "type": "mercator", "center": [134, -28], "scale": 200 },
-      "data": { "url": "australia_states.geojson", "format": { "type": "geojson" } },
+      "data": { "url": "fire_return_interval.csv" },
       "transform": [{
-        "lookup": "properties.state_code",
+        "lookup": "state_name",
         "from": {
-          "data": { "url": "fire_return_interval.csv" },
-          "key": "state_code",
-          "fields": ["d2000", "state_name"]
+          "data": { "url": "australia_states.geojson", "format": { "type": "json", "property": "features" } },
+          "key": "properties.STATE_NAME",
+          "fields": ["type", "geometry"]
         }
       }],
       "mark": { "type": "geoshape", "stroke": "#0a1628", "strokeWidth": 0.8 },
       "encoding": {
+        "shape": { "field": "geometry", "type": "geojson" },
         "color": {
           "field": "d2000", "type": "quantitative",
-          "scale": {
-            "domain": [5, 75],
-            "range": ["#b2182b","#ef8a62","#fddbc7","#d1e5f0","#67a9cf","#2166ac"]
-          },
+          "scale": { "domain": [5, 75], "range": ["#b2182b","#ef8a62","#fddbc7","#d1e5f0","#67a9cf","#2166ac"] },
           "legend": null
         },
         "tooltip": [
@@ -100,23 +94,21 @@
       "title": "2010–19",
       "width": 140, "height": 115,
       "projection": { "type": "mercator", "center": [134, -28], "scale": 200 },
-      "data": { "url": "australia_states.geojson", "format": { "type": "geojson" } },
+      "data": { "url": "fire_return_interval.csv" },
       "transform": [{
-        "lookup": "properties.state_code",
+        "lookup": "state_name",
         "from": {
-          "data": { "url": "fire_return_interval.csv" },
-          "key": "state_code",
-          "fields": ["d2010", "state_name"]
+          "data": { "url": "australia_states.geojson", "format": { "type": "json", "property": "features" } },
+          "key": "properties.STATE_NAME",
+          "fields": ["type", "geometry"]
         }
       }],
       "mark": { "type": "geoshape", "stroke": "#0a1628", "strokeWidth": 0.8 },
       "encoding": {
+        "shape": { "field": "geometry", "type": "geojson" },
         "color": {
           "field": "d2010", "type": "quantitative",
-          "scale": {
-            "domain": [5, 75],
-            "range": ["#b2182b","#ef8a62","#fddbc7","#d1e5f0","#67a9cf","#2166ac"]
-          },
+          "scale": { "domain": [5, 75], "range": ["#b2182b","#ef8a62","#fddbc7","#d1e5f0","#67a9cf","#2166ac"] },
           "legend": {
             "title": "Avg yrs since last fire",
             "titleColor": "#c8d8f0", "labelColor": "#8aabcc",
