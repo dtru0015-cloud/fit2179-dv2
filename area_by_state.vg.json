@@ -1,54 +1,82 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 380,
-  "data": {"url": "annual_area_burned.csv"},
-  "layer": [
+  "height": 280,
+  "data": {"url": "bushfire_area_by_state.csv"},
+  "transform": [
+    {"filter": "datum.state !== 'Northern Territory'"}
+  ],
+  "params": [
     {
-      "mark": {"type": "area", "color": "#E67E22", "opacity": 0.3,
-               "line": {"color": "#E67E22", "strokeWidth": 2}},
-      "encoding": {
-        "x": {
-          "field": "year", "type": "ordinal", "title": "Year",
-          "axis": {"labelAngle": -45, "labelFontSize": 9, "titleFontSize": 11,
-                   "labelColor": "#aaaaaa", "titleColor": "#ffffff",
-                   "grid": false, "domainColor": "#1e3a55"}
-        },
-        "y": {
-          "field": "total_area_ha", "type": "quantitative", "title": "Total Area Burned (ha)",
-          "axis": {"format": "~s", "titleFontSize": 11, "labelFontSize": 10,
-                   "titleColor": "#ffffff", "labelColor": "#aaaaaa",
-                   "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a"}
-        }
-      }
-    },
-    {
-      "mark": {"type": "point", "filled": true, "size": 50, "color": "#E67E22"},
-      "encoding": {
-        "x": {"field": "year", "type": "ordinal"},
-        "y": {"field": "total_area_ha", "type": "quantitative"},
-        "tooltip": [
-          {"field": "year", "type": "ordinal", "title": "Year"},
-          {"field": "total_area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
-          {"field": "notable_event", "type": "nominal", "title": "Notable Event"}
-        ]
-      }
-    },
-    {
-      "transform": [{"filter": "datum.notable_event != ''"}],
-      "mark": {"type": "text", "fontSize": 9, "fontWeight": "bold", "color": "#E67E22",
-               "angle": -35, "align": "left", "dx": 4, "dy": -10},
-      "encoding": {
-        "x": {"field": "year", "type": "ordinal"},
-        "y": {"field": "total_area_ha", "type": "quantitative"},
-        "text": {"field": "notable_event", "type": "nominal"}
-      }
-    },
-    {
-      "data": {"values": [{"year": "2019"}]},
-      "mark": {"type": "rule", "color": "#C0392B", "strokeDash": [4,3], "strokeWidth": 1.5},
-      "encoding": {"x": {"field": "year", "type": "ordinal"}}
+      "name": "state_highlight",
+      "select": {"type": "point", "fields": ["state"]},
+      "bind": "legend"
     }
   ],
-  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
+  "mark": {
+    "type": "bar",
+    "cornerRadiusTopLeft": 3,
+    "cornerRadiusTopRight": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "season",
+      "type": "ordinal",
+      "title": "Fire Season",
+      "sort": null,
+      "axis": {
+        "labelAngle": -30,
+        "labelFontSize": 9,
+        "titleFontSize": 11,
+        "titleColor": "#ffffff",
+        "labelColor": "#cccccc",
+        "domainColor": "#1e3a55",
+        "tickColor": "#1e3a55"
+      }
+    },
+    "y": {
+      "field": "area_burned_ha",
+      "type": "quantitative",
+      "title": "Area Burned (ha)",
+      "axis": {
+        "format": ".2s",
+        "titleFontSize": 11,
+        "labelFontSize": 9,
+        "titleColor": "#ffffff",
+        "labelColor": "#aaaaaa",
+        "gridColor": "#1e2d45",
+        "gridDash": [3, 3],
+        "domainColor": "#1e3a55"
+      }
+    },
+    "color": {
+      "field": "state",
+      "type": "nominal",
+      "title": "State — click to highlight",
+      "scale": {
+        "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania","Australian Capital Territory"],
+        "range": ["#E74C3C","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD","#1ABC9C"]
+      },
+      "legend": {
+        "labelColor": "#cccccc",
+        "titleColor": "#ffffff",
+        "labelFontSize": 10,
+        "titleFontSize": 10
+      }
+    },
+    "opacity": {
+      "condition": {"param": "state_highlight", "value": 1},
+      "value": 0.12
+    },
+    "tooltip": [
+      {"field": "state", "type": "nominal", "title": "State"},
+      {"field": "season", "type": "ordinal", "title": "Season"},
+      {"field": "area_burned_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ","}
+    ]
+  },
+  "config": {
+    "background": "#0a1628",
+    "font": "Inter, sans-serif",
+    "view": {"stroke": "transparent"}
+  }
 }

@@ -2,57 +2,110 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 280,
-  "params": [
+  "data": {"url": "population_fire_risk_exposure.csv"},
+  "layer": [
     {
-      "name": "year_select",
-      "value": 2021,
-      "bind": {
-        "input": "range",
-        "min": 2001,
-        "max": 2021,
-        "step": 5,
-        "name": "Census Year: "
+      "params": [
+        {
+          "name": "hover_year",
+          "select": {
+            "type": "point",
+            "fields": ["year"],
+            "nearest": true,
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5,
+        "point": {"filled": true, "size": 60}
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Census Year",
+          "axis": {
+            "labelFontSize": 11,
+            "titleFontSize": 11,
+            "titleColor": "#ffffff",
+            "labelColor": "#cccccc",
+            "grid": false,
+            "domainColor": "#1e3a55"
+          }
+        },
+        "y": {
+          "field": "pop_in_high_risk_zones",
+          "type": "quantitative",
+          "title": "Population in High-Risk Zones",
+          "axis": {
+            "format": "~s",
+            "titleFontSize": 11,
+            "labelFontSize": 10,
+            "titleColor": "#ffffff",
+            "labelColor": "#aaaaaa",
+            "gridColor": "#1e2d45",
+            "gridDash": [3,3],
+            "domainColor": "#1e3a55"
+          }
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State",
+          "scale": {
+            "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
+            "range": ["#E74C3C","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]
+          },
+          "legend": {
+            "labelColor": "#cccccc",
+            "titleColor": "#ffffff",
+            "labelFontSize": 10,
+            "titleFontSize": 10
+          }
+        },
+        "opacity": {
+          "condition": {"param": "hover_year", "value": 1},
+          "value": 0.4
+        },
+        "tooltip": [
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "pop_in_high_risk_zones", "type": "quantitative", "title": "Population at Risk", "format": ",.0f"},
+          {"field": "pct_pop_high_risk", "type": "quantitative", "title": "% of State Pop.", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": {"param": "hover_year", "empty": false}}],
+      "mark": {"type": "rule", "color": "#ffffff", "opacity": 0.25, "strokeWidth": 1},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"}
+      }
+    },
+    {
+      "transform": [{"filter": {"param": "hover_year", "empty": false}}],
+      "mark": {"type": "text", "align": "left", "dx": 6, "fontSize": 9, "fontWeight": "bold"},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "pop_in_high_risk_zones", "type": "quantitative"},
+        "text": {"field": "state", "type": "nominal"},
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "scale": {
+            "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
+            "range": ["#E74C3C","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]
+          }
+        }
       }
     }
   ],
-  "data": {"url": "bushfire_major_events.csv"},
-  "transform": [
-    {"filter": "datum.year <= year_select"}
-  ],
-  "mark": {
-    "type": "line",
-    "point": {"filled": true, "size": 60},
-    "strokeWidth": 2
-  },
-  "encoding": {
-    "x": {
-      "field": "year",
-      "type": "ordinal",
-      "title": "Census Year",
-      "axis": {"labelFontSize": 11, "titleFontSize": 11, "grid": false}
-    },
-    "y": {
-      "field": "pop_in_high_risk_zones",
-      "type": "quantitative",
-      "title": "Population in High Risk Zones",
-      "axis": {"format": "~s", "titleFontSize": 11, "labelFontSize": 10,
-               "grid": true, "gridDash": [3,3]}
-    },
-    "color": {
-      "field": "state",
-      "type": "nominal",
-      "title": "State",
-      "scale": {
-        "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
-        "range": ["#C0392B","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]
-      }
-    },
-    "tooltip": [
-      {"field": "year", "type": "ordinal", "title": "Year"},
-      {"field": "state", "type": "nominal", "title": "State"},
-      {"field": "pop_in_high_risk_zones", "type": "quantitative", "title": "Population at Risk", "format": ",.0f"},
-      {"field": "pct_pop_high_risk", "type": "quantitative", "title": "% of State Pop.", "format": ".1f"}
-    ]
-  },
-  "config": {"background": "transparent", "view": {"stroke": "transparent"}}
+  "config": {
+    "background": "transparent",
+    "font": "Inter, sans-serif",
+    "view": {"stroke": "transparent"}
+  }
 }
