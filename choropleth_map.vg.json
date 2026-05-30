@@ -16,24 +16,23 @@
 
   "layer": [
     {
-      "data": { "url": "bushfire_risk_by_state.csv" },
+      "data": {
+        "url": "australia_states.geojson",
+        "format": { "type": "geojson" }
+      },
       "transform": [
         {
-          "lookup": "state_code",
+          "lookup": "properties.state_code",
           "from": {
-            "data": {
-              "url": "australia_states.geojson",
-              "format": { "type": "json", "property": "features" }
-            },
-            "key": "properties.state_code",
-            "fields": ["geometry"]
+            "data": { "url": "bushfire_risk_by_state.csv" },
+            "key": "state_code",
+            "fields": ["state_code", "state", "fire_risk_score", "pct_land_fire_prone"]
           }
         },
         { "calculate": "datum.fire_risk_score / 100", "as": "risk_normalised" }
       ],
       "mark": { "type": "geoshape", "cursor": "pointer" },
       "encoding": {
-        "shape": { "field": "geometry", "type": "geojson" },
         "color": {
           "field": "risk_normalised",
           "type": "quantitative",
@@ -74,9 +73,9 @@
           "value": 0.2
         },
         "tooltip": [
-          { "field": "state",              "type": "nominal",      "title": "State"              },
-          { "field": "fire_risk_score",    "type": "quantitative", "title": "Risk Score"         },
-          { "field": "pct_land_fire_prone","type": "quantitative", "title": "% Fire-Prone Land",
+          { "field": "state",               "type": "nominal",      "title": "State"              },
+          { "field": "fire_risk_score",      "type": "quantitative", "title": "Risk Score"         },
+          { "field": "pct_land_fire_prone",  "type": "quantitative", "title": "% Fire-Prone Land",
             "format": ".0f" }
         ]
       }
