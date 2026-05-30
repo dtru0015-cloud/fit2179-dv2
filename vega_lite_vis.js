@@ -1,75 +1,107 @@
-{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": "container",
-  "height": 280,
-  "data": {"url": "bushfire_area_by_state.csv"},
-  "transform": [
-    {"filter": "datum.state !== 'Northern Territory'"}
-  ],
-  "params": [
-    {
-      "name": "state_highlight",
-      "select": {"type": "point", "fields": ["state"]},
-      "bind": "legend"
+// Australia's Bushfire Crisis — DV2 FIT2179
+// Dinh Duy Truong | 33538921 | May 2026
+
+const embedOpts = { actions: false, renderer: "svg", theme: "default" };
+const vegaOpts = { actions: false, renderer: "svg" };
+
+const eventData = {
+  2001: { name: "Black Christmas", area: "753,314 ha", deaths: 0, homes: 109, loss: "$70M" },
+  2003: { name: "Alpine Fires VIC", area: "1,100,000 ha", deaths: 0, homes: 41, loss: "$120M" },
+  2009: { name: "Black Saturday", area: "450,000 ha", deaths: 173, homes: 2029, loss: "$4.4B" },
+  2014: { name: "Hazelwood Mine Fire", area: "—", deaths: 0, homes: 0, loss: "$650M" },
+  2015: { name: "Sampson Flat", area: "12,600 ha", deaths: 0, homes: 27, loss: "$15M" },
+  2016: { name: "Yarloop", area: "69,000 ha", deaths: 2, homes: 181, loss: "$200M" },
+  2018: { name: "Tathra", area: "1,900 ha", deaths: 0, homes: 69, loss: "$25M" },
+  2019: { name: "🔥 Black Summer", area: "24,000,000 ha", deaths: 33, homes: 3000, loss: "$103B" },
+  2020: { name: "Post Black Summer", area: "96,000,000 ha", deaths: 0, homes: 0, loss: "—" },
+  2021: { name: "Wooroloo", area: "10,000 ha", deaths: 0, homes: 86, loss: "$50M" }
+};
+
+let lastEvent = null;
+
+function renderPopup(event, year) {
+  const popup = document.getElementById('event-popup');
+  if (!popup) return;
+  popup.innerHTML = `
+    <div style="background:linear-gradient(135deg,#1a0500,#4a1200);border:1px solid #E67E22;
+                border-radius:8px;padding:14px 18px;color:white;margin-top:10px;">
+      <div style="font-size:13px;font-weight:700;color:#E67E22;margin-bottom:8px;">📍 ${year}: ${event.name}</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;">
+        <div><div style="font-size:15px;font-weight:900;color:#F1C40F;">${event.area}</div>
+             <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Area Burned</div></div>
+        <div><div style="font-size:15px;font-weight:900;color:#F1C40F;">${event.deaths}</div>
+             <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Deaths</div></div>
+        <div><div style="font-size:15px;font-weight:900;color:#F1C40F;">${typeof event.homes === 'number' ? event.homes.toLocaleString() : event.homes}</div>
+             <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Homes Destroyed</div></div>
+        <div><div style="font-size:15px;font-weight:900;color:#F1C40F;">${event.loss}</div>
+             <div style="font-size:10px;color:#c9a090;text-transform:uppercase;margin-top:2px;">Economic Loss</div></div>
+      </div>
+    </div>`;
+}
+
+function updateEventPopup(year) {
+  const event = eventData[year];
+  if (event) { lastEvent = { event, year }; renderPopup(event, year); }
+  else if (lastEvent) { renderPopup(lastEvent.event, lastEvent.year); }
+}
+
+function updateYearLabel(year) {
+  const label = document.getElementById('year-label');
+  if (label) label.textContent = year;
+}
+
+let choroplethView, areaView;
+
+vegaEmbed("#choropleth_map", "choropleth_map.vg.json", embedOpts)
+  .then(result => {
+    choroplethView = result.view;
+    updateEventPopup(2019);
+    const slider = document.getElementById('year-slider');
+    if (slider) {
+      slider.addEventListener('input', function() {
+        const val = +this.value;
+        updateYearLabel(val);
+        choroplethView.signal('year_select', val).run();
+        if (areaView) areaView.signal('selected_year', val).run();
+        updateEventPopup(val);
+      });
     }
-  ],
-  "layer": [
-    {
-      "mark": {
-        "type": "bar",
-        "cornerRadiusTopLeft": 3,
-        "cornerRadiusTopRight": 3
-      },
+    const dropdown = document.getElementById('state-dropdown');
+    if (dropdown) {
+      dropdown.addEventListener('change', function() {
+        choroplethView.signal('state_select', this.value === 'null' ? null : this.value).run();
+      });
+    }
+  }).catch(console.error);
+
+fetch('area_by_state.vg.json')
+  .then(r => r.json())
+  .then(spec => {
+    spec.params = spec.params || [];
+    spec.params.push({ name: "selected_year", value: 2019 });
+    spec.layer.push({
+      "transform": [{ "filter": "datum.year == selected_year" }],
+      "mark": { "type": "point", "filled": true, "size": 300, "color": "#C0392B", "stroke": "#fff", "strokeWidth": 2 },
       "encoding": {
-        "x": {
-          "field": "season",
-          "type": "ordinal",
-          "title": "Fire Season",
-          "sort": null,
-          "axis": {
-            "labelAngle": -30, "labelFontSize": 9,
-            "titleFontSize": 11, "titleColor": "#ffffff",
-            "labelColor": "#cccccc", "domainColor": "#1e3a55", "tickColor": "#1e3a55"
-          }
-        },
-        "y": {
-          "field": "area_burned_ha",
-          "type": "quantitative",
-          "title": "Area Burned (ha)",
-          "axis": {
-            "format": ".2s", "titleFontSize": 11, "labelFontSize": 9,
-            "titleColor": "#ffffff", "labelColor": "#aaaaaa",
-            "gridColor": "#1e2d45", "gridDash": [3,3], "domainColor": "#1e3a55"
-          }
-        },
-        "color": {
-          "field": "state",
-          "type": "nominal",
-          "title": "State — click to highlight",
-          "scale": {
-            "domain": ["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania","Australian Capital Territory"],
-            "range": ["#E74C3C","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD","#1ABC9C"]
-          },
-          "legend": {
-            "labelColor": "#cccccc", "titleColor": "#ffffff",
-            "labelFontSize": 10, "titleFontSize": 10
-          }
-        },
-        "opacity": {
-          "condition": {"param": "state_highlight", "value": 1},
-          "value": 0.12
-        },
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "total_area_ha", "type": "quantitative" },
         "tooltip": [
-          {"field": "state", "type": "nominal", "title": "State"},
-          {"field": "season", "type": "ordinal", "title": "Season"},
-          {"field": "area_burned_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ","}
+          { "field": "year", "type": "ordinal", "title": "Year" },
+          { "field": "total_area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f" },
+          { "field": "notable_event", "type": "nominal", "title": "Event" }
         ]
       }
-    }
-  ],
-  "config": {
-    "background": "#0a1628",
-    "font": "Inter, sans-serif",
-    "view": {"stroke": "transparent"}
-  }
-}
+    });
+    return vegaEmbed("#area_by_state", spec, embedOpts);
+  })
+  .then(result => { areaView = result.view; })
+  .catch(console.error);
+
+vegaEmbed("#heatmap",         "heatmap.vg.json",         embedOpts).catch(console.error);
+vegaEmbed("#dual_axis",       "dual_axis.vg.json",        embedOpts).catch(console.error);
+vegaEmbed("#slope_chart",     "slope_chart.vg.json",      embedOpts).catch(console.error);
+vegaEmbed("#deaths_chart",    "deaths_chart.vg.json",     embedOpts).catch(console.error);
+vegaEmbed("#homes_chart",     "homes_chart.vg.json",      embedOpts).catch(console.error);
+vegaEmbed("#wildlife_chart",  "wildlife_chart.vg.json",   vegaOpts).catch(console.error);
+vegaEmbed("#waterfall_chart", "waterfall_chart.vg.json",  vegaOpts).catch(console.error);
+vegaEmbed("#dot_matrix",      "dot_matrix.vg.json",       embedOpts).catch(console.error);
