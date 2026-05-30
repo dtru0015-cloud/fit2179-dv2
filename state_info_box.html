@@ -1,0 +1,72 @@
+<!-- ════════════════════════════════════════════════════════════════════════
+     STEP 1 — Find your existing 4-card grid in index.html and REPLACE it
+     with this entire block. The id="state-info-box" is what the JS targets.
+     ════════════════════════════════════════════════════════════════════════ -->
+
+<div id="state-info-box" class="state-info-box">
+  <!-- JS fills this on load via resetStateBox() — no content needed here -->
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     STEP 2 — Add this CSS to your <style> block (or your CSS file)
+     ════════════════════════════════════════════════════════════════════════ -->
+<style>
+.state-info-box {
+  margin-top: 12px;
+}
+
+.state-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.state-card {
+  background: #0d1f3a;
+  border: 1px solid #1e3a5f;
+  border-radius: 8px;
+  padding: 14px 18px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.state-card:hover {
+  border-color: #E67E22;
+}
+
+.state-card-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #E67E22;
+}
+
+.state-card-label {
+  font-size: 10px;
+  color: #8aabcc;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 4px;
+}
+
+.state-fact {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #c8d8f0;
+  line-height: 1.65;
+  padding: 10px 12px;
+  background: rgba(224, 92, 42, 0.06);
+  border-left: 2px solid #E67E22;
+  border-radius: 0 6px 6px 0;
+}
+</style>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     STEP 3 — Check that the hint text below the box uses the same element,
+     e.g. if you have a static <p> with the NSW/VIC/ACT note, keep it as-is.
+     It won't be affected by the JS since it's outside #state-info-box.
+
+     STEP 4 — Open your CSV and confirm the 'state' column spelling:
+       - If it says "New South Wales" → keys in stateData already match ✓
+       - If it says "NSW" → short-code fallbacks in stateData also match ✓
+       - If it says something else (e.g. "New_South_Wales") → update the keys
+     ════════════════════════════════════════════════════════════════════════ -->
