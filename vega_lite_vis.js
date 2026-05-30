@@ -2,19 +2,19 @@
 // Dinh Duy Truong | 33538921 | May 2026
 
 const embedOpts = { actions: false, renderer: "svg", theme: "default" };
-const vegaOpts = { actions: false, renderer: "svg" };
+const vegaOpts  = { actions: false, renderer: "svg" };
 
 const eventData = {
-  2001: { name: "Black Christmas", area: "753,314 ha", deaths: 0, homes: 109, loss: "$70M" },
-  2003: { name: "Alpine Fires VIC", area: "1,100,000 ha", deaths: 0, homes: 41, loss: "$120M" },
-  2009: { name: "Black Saturday", area: "450,000 ha", deaths: 173, homes: 2029, loss: "$4.4B" },
-  2014: { name: "Hazelwood Mine Fire", area: "—", deaths: 0, homes: 0, loss: "$650M" },
-  2015: { name: "Sampson Flat", area: "12,600 ha", deaths: 0, homes: 27, loss: "$15M" },
-  2016: { name: "Yarloop", area: "69,000 ha", deaths: 2, homes: 181, loss: "$200M" },
-  2018: { name: "Tathra", area: "1,900 ha", deaths: 0, homes: 69, loss: "$25M" },
-  2019: { name: "🔥 Black Summer", area: "24,000,000 ha", deaths: 33, homes: 3000, loss: "$103B" },
-  2020: { name: "Post Black Summer", area: "96,000,000 ha", deaths: 0, homes: 0, loss: "—" },
-  2021: { name: "Wooroloo", area: "10,000 ha", deaths: 0, homes: 86, loss: "$50M" }
+  2001: { name: "Black Christmas",    area: "753,314 ha",    deaths: 0,   homes: 109,  loss: "$70M"  },
+  2003: { name: "Alpine Fires VIC",   area: "1,100,000 ha",  deaths: 0,   homes: 41,   loss: "$120M" },
+  2009: { name: "Black Saturday",     area: "450,000 ha",    deaths: 173, homes: 2029, loss: "$4.4B" },
+  2014: { name: "Hazelwood Mine Fire",area: "—",             deaths: 0,   homes: 0,    loss: "$650M" },
+  2015: { name: "Sampson Flat",       area: "12,600 ha",     deaths: 0,   homes: 27,   loss: "$15M"  },
+  2016: { name: "Yarloop",            area: "69,000 ha",     deaths: 2,   homes: 181,  loss: "$200M" },
+  2018: { name: "Tathra",             area: "1,900 ha",      deaths: 0,   homes: 69,   loss: "$25M"  },
+  2019: { name: "🔥 Black Summer",    area: "24,000,000 ha", deaths: 33,  homes: 3000, loss: "$103B" },
+  2020: { name: "Post Black Summer",  area: "96,000,000 ha", deaths: 0,   homes: 0,    loss: "—"     },
+  2021: { name: "Wooroloo",           area: "10,000 ha",     deaths: 0,   homes: 86,   loss: "$50M"  }
 };
 
 let lastEvent = null;
@@ -52,10 +52,16 @@ function updateYearLabel(year) {
 
 let choroplethView, areaView;
 
+// Embed area chart directly - param is built into the spec
+vegaEmbed("#area_by_state", "area_by_state.vg.json", embedOpts)
+  .then(result => { areaView = result.view; })
+  .catch(console.error);
+
 vegaEmbed("#choropleth_map", "choropleth_map.vg.json", embedOpts)
   .then(result => {
     choroplethView = result.view;
     updateEventPopup(2019);
+
     const slider = document.getElementById('year-slider');
     if (slider) {
       slider.addEventListener('input', function() {
@@ -66,6 +72,7 @@ vegaEmbed("#choropleth_map", "choropleth_map.vg.json", embedOpts)
         updateEventPopup(val);
       });
     }
+
     const dropdown = document.getElementById('state-dropdown');
     if (dropdown) {
       dropdown.addEventListener('change', function() {
@@ -74,34 +81,11 @@ vegaEmbed("#choropleth_map", "choropleth_map.vg.json", embedOpts)
     }
   }).catch(console.error);
 
-fetch('area_by_state.vg.json')
-  .then(r => r.json())
-  .then(spec => {
-    spec.params = spec.params || [];
-    spec.params.push({ name: "selected_year", value: 2019 });
-    spec.layer.push({
-      "transform": [{ "filter": "datum.year == selected_year" }],
-      "mark": { "type": "point", "filled": true, "size": 300, "color": "#C0392B", "stroke": "#fff", "strokeWidth": 2 },
-      "encoding": {
-        "x": { "field": "year", "type": "ordinal" },
-        "y": { "field": "total_area_ha", "type": "quantitative" },
-        "tooltip": [
-          { "field": "year", "type": "ordinal", "title": "Year" },
-          { "field": "total_area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f" },
-          { "field": "notable_event", "type": "nominal", "title": "Event" }
-        ]
-      }
-    });
-    return vegaEmbed("#area_by_state", spec, embedOpts);
-  })
-  .then(result => { areaView = result.view; })
-  .catch(console.error);
-
 vegaEmbed("#heatmap",         "heatmap.vg.json",         embedOpts).catch(console.error);
 vegaEmbed("#dual_axis",       "dual_axis.vg.json",        embedOpts).catch(console.error);
 vegaEmbed("#slope_chart",     "slope_chart.vg.json",      embedOpts).catch(console.error);
 vegaEmbed("#deaths_chart",    "deaths_chart.vg.json",     embedOpts).catch(console.error);
 vegaEmbed("#homes_chart",     "homes_chart.vg.json",      embedOpts).catch(console.error);
-vegaEmbed("#wildlife_chart",  "wildlife_chart.vg.json",   vegaOpts).catch(console.error);
-vegaEmbed("#waterfall_chart", "waterfall_chart.vg.json",  vegaOpts).catch(console.error);
+vegaEmbed("#wildlife_chart",  "wildlife_chart.vg.json",   vegaOpts ).catch(console.error);
+vegaEmbed("#waterfall_chart", "waterfall_chart.vg.json",  vegaOpts ).catch(console.error);
 vegaEmbed("#dot_matrix",      "dot_matrix.vg.json",       embedOpts).catch(console.error);
