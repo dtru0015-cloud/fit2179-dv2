@@ -1,99 +1,138 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 380,
+  "height": 420,
+  "background": "transparent",
   "title": {
     "text": "Bushfire Risk Across Australia",
-    "fontSize": 18,
+    "anchor": "middle",
     "color": "#ffffff",
-    "anchor": "middle"
+    "fontSize": 18,
+    "fontWeight": "bold",
+    "offset": 10
   },
-  "params": [
-    {
-      "name": "year_select",
-      "value": 2019
-    },
-    {
-      "name": "state_select",
-      "value": null
-    }
-  ],
   "projection": {
     "type": "mercator",
-    "center": [128, -28],
-    "scale": 460,
-    "translate": [310, 200]
+    "center": [134, -28],
+    "scale": 820
   },
   "layer": [
     {
-      "data": {"url": "bushfire_risk_by_state_multiyear.csv"},
+      "data": {
+        "url": "australia_states_enriched.geojson",
+        "format": {"type": "json", "property": "features"}
+      },
       "transform": [
-        {"filter": "datum.year == (year_select <= 2003 ? 2001 : year_select <= 2008 ? 2006 : year_select <= 2013 ? 2011 : year_select <= 2018 ? 2016 : 2021)"},
-        {
-          "lookup": "state",
-          "from": {
-            "data": {"url": "australia_states.geojson", "format": {"type": "json", "property": "features"}},
-            "key": "properties.STATE_NAME",
-            "fields": ["type", "geometry"]
+        {"calculate": "datum.properties.fire_risk_score", "as": "risk"},
+        {"calculate": "datum.properties.STATE_NAME", "as": "state"},
+        {"calculate": "datum.properties.pct_land_fire_prone", "as": "fire_prone_pct"}
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#071221",
+        "strokeWidth": 1.4
+      },
+      "encoding": {
+        "color": {
+          "field": "risk",
+          "type": "quantitative",
+          "title": "Fire Risk Score",
+          "scale": {
+            "type": "threshold",
+            "domain": [50, 60, 70, 80],
+            "range": ["#4ECDC4", "#FFE66D", "#F39C12", "#E74C3C", "#8E1B13"]
+          },
+          "legend": {
+            "title": "Fire Risk Score",
+            "orient": "left",
+            "direction": "vertical",
+            "gradientLength": 190,
+            "titleColor": "#ffffff",
+            "labelColor": "#ffffff",
+            "titleFontSize": 11,
+            "labelFontSize": 10,
+            "offset": 0
           }
         },
-        {"calculate": "state_select == null || datum.state == state_select ? 1 : 0.3", "as": "op"}
-      ],
-      "mark": {"type": "geoshape", "stroke": "#0a1628", "strokeWidth": 1.5},
-      "encoding": {
-        "shape": {"field": "geometry", "type": "geojson"},
-        "color": {
-          "field": "fire_risk_score",
-          "type": "quantitative",
-          "scale": {"type": "threshold", "domain": [50, 60, 70, 80],
-                    "range": ["#4ECDC4","#F7DC6F","#F39C12","#E74C3C","#8E1A0E"]},
-          "legend": {"title": "Fire Risk Score", "orient": "bottom-left",
-                     "titleColor": "#ffffff", "labelColor": "#ffffff",
-                     "titleFontSize": 11, "labelFontSize": 10}
-        },
-        "opacity": {"field": "op", "type": "quantitative", "legend": null},
         "tooltip": [
           {"field": "state", "type": "nominal", "title": "State"},
-          {"field": "fire_risk_score", "type": "quantitative", "title": "Fire Risk Score"},
-          {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Fire-Prone Land"}
+          {"field": "risk", "type": "quantitative", "title": "Fire Risk Score", "format": ".0f"},
+          {"field": "fire_prone_pct", "type": "quantitative", "title": "Fire-prone Land", "format": ".0f"}
         ]
       }
     },
     {
-      "data": {"url": "bushfire_risk_by_state_multiyear.csv"},
-      "transform": [
-        {"filter": "datum.year == (year_select <= 2003 ? 2001 : year_select <= 2008 ? 2006 : year_select <= 2013 ? 2011 : year_select <= 2018 ? 2016 : 2021)"},
-        {"calculate": "state_select == null || datum.state == state_select ? 1 : 0.2", "as": "op"}
-      ],
-      "mark": {"type": "circle", "stroke": "#ffffff", "strokeWidth": 1.5},
+      "data": {
+        "values": [
+          {"abbr": "WA", "lon": 121.0, "lat": -25.5, "risk": 78},
+          {"abbr": "NT", "lon": 133.4, "lat": -19.5, "risk": 48},
+          {"abbr": "SA", "lon": 135.4, "lat": -30.1, "risk": 61},
+          {"abbr": "QLD", "lon": 145.1, "lat": -22.8, "risk": 76},
+          {"abbr": "NSW", "lon": 147.0, "lat": -32.4, "risk": 92},
+          {"abbr": "ACT", "lon": 149.1, "lat": -35.3, "risk": 80},
+          {"abbr": "VIC", "lon": 144.5, "lat": -37.1, "risk": 88},
+          {"abbr": "TAS", "lon": 146.6, "lat": -42.1, "risk": 55}
+        ]
+      },
+      "mark": {
+        "type": "circle",
+        "filled": true,
+        "size": 760,
+        "opacity": 0.86,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.2
+      },
       "encoding": {
-        "longitude": {"field": "label_lon", "type": "quantitative"},
-        "latitude": {"field": "label_lat", "type": "quantitative"},
-        "size": {"field": "fire_risk_score", "type": "quantitative", "scale": {"range": [150, 1500]}, "legend": null},
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
         "color": {
-          "field": "fire_risk_score", "type": "quantitative",
-          "scale": {"type": "threshold", "domain": [50, 60, 70, 80],
-                    "range": ["#4ECDC4","#F7DC6F","#F39C12","#E74C3C","#8E1A0E"]},
+          "field": "risk",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [50, 60, 70, 80],
+            "range": ["#4ECDC4", "#FFE66D", "#F39C12", "#E74C3C", "#8E1B13"]
+          },
           "legend": null
         },
-        "opacity": {"field": "op", "type": "quantitative", "legend": null},
         "tooltip": [
-          {"field": "state", "type": "nominal", "title": "State"},
-          {"field": "fire_risk_score", "type": "quantitative", "title": "Fire Risk Score"},
-          {"field": "pct_land_fire_prone", "type": "quantitative", "title": "% Fire-Prone Land"}
+          {"field": "abbr", "type": "nominal", "title": "State"},
+          {"field": "risk", "type": "quantitative", "title": "Risk Score", "format": ".0f"}
         ]
       }
     },
     {
-      "data": {"url": "bushfire_risk_by_state_multiyear.csv"},
-      "transform": [{"filter": "datum.year == (year_select <= 2003 ? 2001 : year_select <= 2008 ? 2006 : year_select <= 2013 ? 2011 : year_select <= 2018 ? 2016 : 2021)"}],
-      "mark": {"type": "text", "fontSize": 10, "fontWeight": "bold", "fill": "#ffffff", "dy": -2},
+      "data": {
+        "values": [
+          {"abbr": "WA", "lon": 121.0, "lat": -25.5},
+          {"abbr": "NT", "lon": 133.4, "lat": -19.5},
+          {"abbr": "SA", "lon": 135.4, "lat": -30.1},
+          {"abbr": "QLD", "lon": 145.1, "lat": -22.8},
+          {"abbr": "NSW", "lon": 147.0, "lat": -32.4},
+          {"abbr": "ACT", "lon": 149.1, "lat": -35.3},
+          {"abbr": "VIC", "lon": 144.5, "lat": -37.1},
+          {"abbr": "TAS", "lon": 146.6, "lat": -42.1}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#ffffff"
+      },
       "encoding": {
-        "longitude": {"field": "label_lon", "type": "quantitative"},
-        "latitude": {"field": "label_lat", "type": "quantitative"},
-        "text": {"field": "state_code", "type": "nominal"}
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "text": {"field": "abbr", "type": "nominal"}
       }
     }
   ],
-  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
+  "config": {
+    "view": {"stroke": "transparent"},
+    "axis": {
+      "labelColor": "#c9d7e6",
+      "titleColor": "#ffffff",
+      "gridColor": "#1e3a55"
+    }
+  }
 }
