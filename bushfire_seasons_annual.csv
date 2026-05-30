@@ -1,0 +1,26 @@
+season,year,deaths_direct,homes_lost,area_burned_ha,climate_pattern,enso,temp_anomaly_c,max_temp_c,notable_event,severity
+2000-01,2001,3,70,500000,Neutral,Neutral,0.07,28.54,Minor season,Minor
+2001-02,2002,0,109,753314,La Niña / El Niño,Neutral,0.82,29.75,Black Christmas (NSW),Moderate
+2002-03,2003,7,41,21241000,El Niño,El Niño,0.23,29.16,2003 Canberra fires,Major
+2003-04,2004,1,20,300000,Neutral,Neutral,0.15,29.08,Minor season,Minor
+2004-05,2005,9,103,500000,El Niño,El Niño,0.65,29.58,Wangary fires (SA),Moderate
+2005-06,2006,5,75,180000,El Niño (weak),El Niño,0.07,29.00,Western Victoria fires,Minor
+2006-07,2007,5,83,1360000,El Niño,El Niño,0.18,29.11,Victorian Alpine fires,Moderate
+2007-08,2008,5,3,100000,La Niña,La Niña,-0.09,28.84,Below-average season,Minor
+2008-09,2009,173,2140,450000,El Niño,El Niño,0.41,29.34,Black Saturday (VIC),Catastrophic
+2009-10,2010,2,64,800000,El Niño / La Niña,El Niño,-0.79,28.14,Post–Black Saturday,Moderate
+2010-11,2011,0,84,100000,La Niña,La Niña,-0.51,28.42,La Niña floods suppress fires,Minor
+2011-12,2012,0,39,1407600,La Niña,La Niña,0.22,29.15,Margaret River (WA),Moderate
+2012-13,2013,4,310,914760,Neutral,Neutral,1.08,30.01,January heatwave,Moderate
+2013-14,2014,3,224,250000,Neutral,Neutral,0.87,29.80,NSW Blue Mountains fires,Moderate
+2014-15,2015,5,100,300000,El Niño (developing),El Niño,0.54,29.47,Hazelwood mine fire (VIC),Moderate
+2015-16,2016,9,408,299468,El Niño (strong),El Niño,0.33,29.26,Yarloop fire (WA),Significant
+2016-17,2017,1,46,100000,La Niña / Neutral,Neutral,0.90,29.83,Below-average season,Minor
+2017-18,2018,0,50,200000,Neutral,Neutral,1.03,29.96,Tathra fire (NSW),Minor
+2018-19,2019,0,0,100000,Neutral,Neutral,1.52,30.35,Record dry & hot spring,Minor
+2019-20,2020,33,3094,24000000,El Niño / IOD+,El Niño,0.72,29.65,Black Summer,Catastrophic
+2020-21,2021,0,52,200000,La Niña,La Niña,0.23,29.16,Wooroloo (WA),Minor
+2021-22,2022,0,0,50000,La Niña,La Niña,-0.13,28.80,Very wet La Niña season,Minor
+2022-23,2023,0,39,100000,La Niña,La Niña,0.60,29.67,Below-average (La Niña end),Minor
+2023-24,2024,10,171,96081928,El Niño,El Niño,1.46,30.50,El Niño — record NT area,Major
+2024-25,2025,5,386,200000,Neutral,Neutral,1.10,29.90,Grampians (VIC) Dec fires,Moderate

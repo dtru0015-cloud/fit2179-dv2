@@ -1,0 +1,85 @@
+state,month,month_num,ffdi_avg,ffdi_severe_days,season_peak
+New South Wales,January,1,26.4,4.2,Summer
+New South Wales,February,2,23.8,3.1,Summer
+New South Wales,March,3,18.2,1.4,Autumn
+New South Wales,April,4,11.5,0.3,Autumn
+New South Wales,May,5,7.2,0.1,Winter
+New South Wales,June,6,4.8,0.0,Winter
+New South Wales,July,7,4.1,0.0,Winter
+New South Wales,August,8,6.3,0.1,Winter
+New South Wales,September,9,11.0,0.2,Spring
+New South Wales,October,10,17.2,0.8,Spring
+New South Wales,November,11,22.5,2.3,Spring
+New South Wales,December,12,26.1,3.8,Summer
+Victoria,January,1,23.5,3.8,Summer
+Victoria,February,2,21.2,2.9,Summer
+Victoria,March,3,15.8,1.1,Autumn
+Victoria,April,4,9.4,0.2,Autumn
+Victoria,May,5,5.6,0.0,Winter
+Victoria,June,6,3.8,0.0,Winter
+Victoria,July,7,3.2,0.0,Winter
+Victoria,August,8,4.9,0.0,Winter
+Victoria,September,9,9.1,0.1,Spring
+Victoria,October,10,14.5,0.6,Spring
+Victoria,November,11,19.3,1.8,Spring
+Victoria,December,12,23.0,3.2,Summer
+Queensland,January,1,19.8,2.1,Summer
+Queensland,February,2,17.5,1.6,Summer
+Queensland,March,3,15.2,1.0,Autumn
+Queensland,April,4,13.1,0.5,Autumn
+Queensland,May,5,10.4,0.2,Winter
+Queensland,June,6,8.3,0.1,Winter
+Queensland,July,7,8.0,0.1,Winter
+Queensland,August,8,9.6,0.2,Spring
+Queensland,September,9,13.5,0.5,Spring
+Queensland,October,10,16.8,1.0,Spring
+Queensland,November,11,18.4,1.5,Spring
+Queensland,December,12,19.5,1.9,Summer
+Western Australia,January,1,17.8,1.5,Summer
+Western Australia,February,2,16.9,1.2,Summer
+Western Australia,March,3,14.0,0.7,Autumn
+Western Australia,April,4,9.8,0.2,Autumn
+Western Australia,May,5,6.5,0.0,Winter
+Western Australia,June,6,4.5,0.0,Winter
+Western Australia,July,7,4.0,0.0,Winter
+Western Australia,August,8,5.2,0.0,Winter
+Western Australia,September,9,8.5,0.1,Spring
+Western Australia,October,10,12.3,0.4,Spring
+Western Australia,November,11,15.6,0.9,Spring
+Western Australia,December,12,17.5,1.3,Summer
+South Australia,January,1,21.3,2.8,Summer
+South Australia,February,2,19.4,2.2,Summer
+South Australia,March,3,15.0,0.9,Autumn
+South Australia,April,4,9.5,0.2,Autumn
+South Australia,May,5,5.9,0.0,Winter
+South Australia,June,6,3.9,0.0,Winter
+South Australia,July,7,3.4,0.0,Winter
+South Australia,August,8,4.8,0.0,Winter
+South Australia,September,9,8.8,0.1,Spring
+South Australia,October,10,14.1,0.5,Spring
+South Australia,November,11,17.8,1.3,Spring
+South Australia,December,12,21.0,2.5,Summer
+Tasmania,January,1,12.5,0.8,Summer
+Tasmania,February,2,11.2,0.6,Summer
+Tasmania,March,3,8.8,0.2,Autumn
+Tasmania,April,4,5.5,0.0,Autumn
+Tasmania,May,5,3.4,0.0,Winter
+Tasmania,June,6,2.5,0.0,Winter
+Tasmania,July,7,2.2,0.0,Winter
+Tasmania,August,8,3.0,0.0,Winter
+Tasmania,September,9,5.1,0.0,Spring
+Tasmania,October,10,7.5,0.1,Spring
+Tasmania,November,11,10.2,0.3,Spring
+Tasmania,December,12,12.0,0.7,Summer
+Northern Territory,January,1,5.2,0.0,Wet season
+Northern Territory,February,2,4.5,0.0,Wet season
+Northern Territory,March,3,5.8,0.0,Wet/dry transition
+Northern Territory,April,4,10.5,0.2,Dry season
+Northern Territory,May,5,17.8,1.0,Dry season
+Northern Territory,June,6,22.4,2.2,Dry season
+Northern Territory,July,7,24.1,2.8,Dry season
+Northern Territory,August,8,22.5,2.1,Dry season
+Northern Territory,September,9,19.8,1.5,Dry season
+Northern Territory,October,10,13.5,0.5,Dry/wet transition
+Northern Territory,November,11,7.8,0.1,Wet season
+Northern Territory,December,12,5.5,0.0,Wet season
