@@ -62,6 +62,10 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 .spotlight-stat .val { font-family: 'Merriweather', serif; font-size: 1.3rem; font-weight: 900; color: var(--fire-yellow); }
 .spotlight-stat .lbl { font-size: 0.68rem; color: #c9a090; text-transform: uppercase; letter-spacing: 0.07em; }
 
+.insight-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.insight-item { display: flex; gap: 10px; align-items: flex-start; background: #060f1a; border-left: 3px solid var(--fire-orange); border-radius: 0 6px 6px 0; padding: 10px 12px; font-size: 0.78rem; color: #c8d8f0; line-height: 1.6; }
+.insight-item .insight-year { font-family: 'Merriweather', serif; font-weight: 900; color: var(--fire-orange); font-size: 0.85rem; min-width: 38px; padding-top: 1px; }
+
 .wildlife-total { font-family: 'Merriweather', serif; font-size: 2.2rem; font-weight: 900; color: var(--fire-orange); line-height: 1; margin-bottom: 4px; text-align: center; }
 .wildlife-sub { font-size: 0.85rem; color: #aaa; text-align: center; margin-bottom: 14px; }
 
@@ -161,23 +165,26 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <p class="chart-title">③ Fire Risk Score by State</p>
 <p class="chart-subtitle">Idiom: Choropleth Map · Source: Geoscience Australia</p>
 <div id="choropleth_map" class="vis-container"></div>
-
-<!-- ★ THE ONE-LINE FIX: id="state-info-box" added here ★ -->
 <div class="stat-row" id="state-info-box">
 <div class="stat-box"><div class="sv">8 States</div><div class="sl">Assessed for risk</div></div>
 <div class="stat-box"><div class="sv">92 / 100</div><div class="sl">NSW highest score</div></div>
 <div class="stat-box"><div class="sv">48 / 100</div><div class="sl">NT lowest score</div></div>
 <div class="stat-box"><div class="sv">+23 pts</div><div class="sl">NSW rise 2001–2021</div></div>
 </div>
-
 <p class="chart-annotation">🔴 NSW scores highest (92), followed by VIC (88) and ACT (80) — states with both dense bush and growing urban fringe populations. Click a state circle to see its stats.</p>
 </div>
+
 <div class="chart-card">
 <p class="chart-title">④ Area Burned — Major Seasons (2000–2024)</p>
 <p class="chart-subtitle">Idiom: Interactive Line Chart · Source: ABARES · Drag year slider to highlight a season</p>
 <div id="area_by_state" class="vis-container"></div>
 <div id="event-popup"></div>
 <p class="chart-annotation">🔴 The Black Summer (2019) burned 186M ha nationally — more than all other seasons in this dataset combined.</p>
+
+<div class="insight-list">
+  <div class="insight-item"><span>📈 <strong style="color:#E67E22">Accelerating extremes.</strong> Before 2019, no season exceeded 25M ha. Since then, two seasons have surpassed 96M ha — a structural shift, not an anomaly.</span></div>
+  <div class="insight-item"><span>🌡️ <strong style="color:#E67E22">Climate is the driver.</strong> Peak seasons align with Australia's hottest years. As temperatures rise, the gap between a bad season and a catastrophic one keeps shrinking.</span></div>
+</div>
 </div>
 </div>
 </div>
