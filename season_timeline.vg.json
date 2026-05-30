@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "data": {"url": "bushfire_seasons_annual.csv"},
+  "params": [
+    {
+      "name": "pattern_select",
+      "select": {"type": "point", "fields": ["climate_pattern"]},
+      "bind": "legend"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2},
+      "encoding": {
+        "x": {
+          "field": "season", "type": "ordinal", "title": "Fire Season",
+          "sort": null,
+          "axis": {"labelAngle": -40, "labelFontSize": 8, "titleFontSize": 11,
+            "titleColor": "#ffffff", "labelColor": "#cccccc",
+            "domainColor": "#1e3a55", "tickColor": "#1e3a55"}
+        },
+        "y": {
+          "field": "area_burned_ha", "type": "quantitative",
+          "title": "Area Burned (ha)", "scale": {"type": "sqrt"},
+          "axis": {"format": ".2s", "titleFontSize": 11, "labelFontSize": 9,
+            "titleColor": "#ffffff", "labelColor": "#aaaaaa",
+            "gridColor": "#1e2d45", "gridDash": [3,3], "domainColor": "#1e3a55"}
+        },
+        "color": {
+          "field": "climate_pattern", "type": "nominal", "title": "ENSO Pattern — click to filter",
+          "scale": {
+            "domain": ["El Niño", "El Niño / IOD+", "El Niño (strong)", "El Niño (weak)", "El Niño (developing)", "La Niña", "La Niña / Neutral", "La Niña / El Niño", "Neutral", "El Niño / La Niña"],
+            "range": ["#E74C3C","#C0392B","#E74C3C","#F1948A","#E74C3C","#2980B9","#2980B9","#5DADE2","#95A5A6","#9B59B6"]
+          },
+          "legend": {"labelColor": "#cccccc", "titleColor": "#ffffff", "labelFontSize": 9, "titleFontSize": 10}
+        },
+        "opacity": {
+          "condition": {"param": "pattern_select", "value": 1},
+          "value": 0.12
+        },
+        "tooltip": [
+          {"field": "season", "type": "nominal", "title": "Season"},
+          {"field": "climate_pattern", "type": "nominal", "title": "ENSO Pattern"},
+          {"field": "area_burned_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
+          {"field": "deaths_direct", "type": "quantitative", "title": "Direct Deaths"},
+          {"field": "homes_lost", "type": "quantitative", "title": "Homes Lost", "format": ","},
+          {"field": "notable_event", "type": "nominal", "title": "Notable Event"},
+          {"field": "temp_anomaly_c", "type": "quantitative", "title": "Temp Anomaly (°C)", "format": "+.2f"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "angle": -90, "align": "right", "dx": -4, "fontSize": 8, "fontWeight": "bold"},
+      "transform": [{"filter": "datum.area_burned_ha > 5000000"}],
+      "encoding": {
+        "x": {"field": "season", "type": "ordinal", "sort": null},
+        "y": {"field": "area_burned_ha", "type": "quantitative", "scale": {"type": "sqrt"}},
+        "text": {"field": "notable_event", "type": "nominal"},
+        "color": {"value": "#ffffff"}
+      }
+    }
+  ],
+  "config": {
+    "background": "#0a1628",
+    "font": "Inter, sans-serif",
+    "view": {"stroke": "transparent"}
+  }
+}

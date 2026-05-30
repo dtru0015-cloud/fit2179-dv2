@@ -1,0 +1,63 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 260,
+  "data": {"url": "monthly_ffdi_by_state.csv"},
+  "transform": [
+    {"filter": "datum.state !== 'Northern Territory'"}
+  ],
+  "params": [
+    {
+      "name": "state_hover",
+      "select": {"type": "point", "fields": ["state"], "on": "mouseover"},
+      "bind": "legend"
+    }
+  ],
+  "mark": {"type": "rect", "cornerRadius": 2},
+  "encoding": {
+    "x": {
+      "field": "month", "type": "ordinal",
+      "sort": ["January","February","March","April","May","June","July","August","September","October","November","December"],
+      "title": "Month",
+      "axis": {"labelAngle": -30, "labelFontSize": 9, "titleFontSize": 11,
+        "titleColor": "#ffffff", "labelColor": "#cccccc",
+        "domainColor": "#1e3a55"}
+    },
+    "y": {
+      "field": "state", "type": "nominal", "title": "State",
+      "sort": ["New South Wales","Victoria","South Australia","Western Australia","Queensland","Tasmania"],
+      "axis": {"labelFontSize": 10, "titleFontSize": 11,
+        "titleColor": "#ffffff", "labelColor": "#cccccc",
+        "domainColor": "#1e3a55"}
+    },
+    "color": {
+      "field": "ffdi_avg", "type": "quantitative",
+      "title": "Avg FFDI",
+      "scale": {
+        "type": "threshold",
+        "domain": [5, 10, 15, 20, 25],
+        "range": ["#1a2d45","#1a6b3c","#F1C40F","#E67E22","#C0392B","#7B241C"]
+      },
+      "legend": {
+        "labelColor": "#cccccc", "titleColor": "#ffffff",
+        "labelFontSize": 9, "titleFontSize": 10, "orient": "right"
+      }
+    },
+    "opacity": {
+      "condition": {"param": "state_hover", "value": 1},
+      "value": 0.35
+    },
+    "tooltip": [
+      {"field": "state", "type": "nominal", "title": "State"},
+      {"field": "month", "type": "ordinal", "title": "Month"},
+      {"field": "ffdi_avg", "type": "quantitative", "title": "Avg FFDI", "format": ".1f"},
+      {"field": "ffdi_severe_days", "type": "quantitative", "title": "Severe Days/Month", "format": ".1f"},
+      {"field": "season_peak", "type": "nominal", "title": "Season"}
+    ]
+  },
+  "config": {
+    "background": "#0a1628",
+    "font": "Inter, sans-serif",
+    "view": {"stroke": "transparent"}
+  }
+}

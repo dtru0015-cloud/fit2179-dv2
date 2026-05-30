@@ -1,0 +1,98 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "data": {"url": "temp_vs_fire_annual.csv"},
+  "layer": [
+    {
+      "mark": {"type": "line", "color": "#334e6e", "strokeWidth": 1, "opacity": 0.6},
+      "encoding": {
+        "x": {"field": "temp_anomaly_c", "type": "quantitative"},
+        "y": {"field": "area_burned_million_ha", "type": "quantitative", "scale": {"type": "sqrt"}},
+        "order": {"field": "year", "type": "quantitative"}
+      }
+    },
+    {
+      "params": [
+        {
+          "name": "hover",
+          "select": {"type": "point", "on": "mouseover", "nearest": true}
+        }
+      ],
+      "mark": {"type": "circle", "filled": true, "strokeWidth": 1.5},
+      "encoding": {
+        "x": {
+          "field": "temp_anomaly_c", "type": "quantitative",
+          "title": "Annual Temperature Anomaly (°C vs 1961–1990 baseline)",
+          "axis": {"format": "+.1f", "titleFontSize": 10, "labelFontSize": 9,
+            "titleColor": "#ffffff", "labelColor": "#aaaaaa",
+            "gridColor": "#1e2d45", "gridDash": [3,3], "domainColor": "#1e3a55"}
+        },
+        "y": {
+          "field": "area_burned_million_ha", "type": "quantitative",
+          "title": "Area Burned (million ha, √ scale)",
+          "scale": {"type": "sqrt"},
+          "axis": {"format": ".1f", "titleFontSize": 10, "labelFontSize": 9,
+            "titleColor": "#ffffff", "labelColor": "#aaaaaa",
+            "gridColor": "#1e2d45", "gridDash": [3,3], "domainColor": "#1e3a55"}
+        },
+        "color": {
+          "field": "climate_pattern", "type": "nominal",
+          "title": "ENSO",
+          "scale": {
+            "domain": ["El Niño","Neutral","La Niña"],
+            "range": ["#E74C3C","#95A5A6","#2980B9"]
+          },
+          "legend": {"labelColor": "#cccccc", "titleColor": "#ffffff", "labelFontSize": 9, "titleFontSize": 10}
+        },
+        "size": {
+          "field": "deaths_direct", "type": "quantitative",
+          "title": "Direct deaths",
+          "scale": {"range": [40, 1200]},
+          "legend": {"labelColor": "#cccccc", "titleColor": "#ffffff", "labelFontSize": 9, "titleFontSize": 10}
+        },
+        "stroke": {
+          "condition": {"param": "hover", "value": "#ffffff"},
+          "value": "transparent"
+        },
+        "opacity": {
+          "condition": {"param": "hover", "value": 1},
+          "value": 0.75
+        },
+        "tooltip": [
+          {"field": "year", "type": "quantitative", "title": "Season end year", "format": "d"},
+          {"field": "temp_anomaly_c", "type": "quantitative", "title": "Temp Anomaly (°C)", "format": "+.2f"},
+          {"field": "area_burned_million_ha", "type": "quantitative", "title": "Area Burned (M ha)", "format": ".2f"},
+          {"field": "deaths_direct", "type": "quantitative", "title": "Deaths"},
+          {"field": "homes_lost", "type": "quantitative", "title": "Homes Lost", "format": ","},
+          {"field": "climate_pattern", "type": "nominal", "title": "ENSO Pattern"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 7, "dy": -5, "fontSize": 9, "fontWeight": "bold"},
+      "transform": [{"filter": {"param": "hover", "empty": false}}],
+      "encoding": {
+        "x": {"field": "temp_anomaly_c", "type": "quantitative"},
+        "y": {"field": "area_burned_million_ha", "type": "quantitative", "scale": {"type": "sqrt"}},
+        "text": {"field": "year", "type": "quantitative", "format": "d"},
+        "color": {"value": "#ffffff"}
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 7, "dy": 7, "fontSize": 8},
+      "transform": [{"filter": "datum.label !== ''"}],
+      "encoding": {
+        "x": {"field": "temp_anomaly_c", "type": "quantitative"},
+        "y": {"field": "area_burned_million_ha", "type": "quantitative", "scale": {"type": "sqrt"}},
+        "text": {"field": "label", "type": "nominal"},
+        "color": {"value": "#E67E22"}
+      }
+    }
+  ],
+  "config": {
+    "background": "#0a1628",
+    "font": "Inter, sans-serif",
+    "view": {"stroke": "transparent"}
+  }
+}
