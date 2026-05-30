@@ -1,76 +1,219 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 340,
+  "height": 290,
   "params": [
-    {"name": "selected_year", "value": 2019}
+    {
+      "name": "selected_year",
+      "value": 2019
+    }
   ],
-  "data": {"url": "annual_area_burned.csv"},
+  "data": {
+    "url": "annual_area_burned.csv"
+  },
   "layer": [
     {
-      "mark": {"type": "area", "color": "#E67E22", "opacity": 0.3,
-               "line": {"color": "#E67E22", "strokeWidth": 2}},
+      "mark": {
+        "type": "area",
+        "color": "#E67E22",
+        "opacity": 0.3,
+        "line": {
+          "color": "#E67E22",
+          "strokeWidth": 2
+        }
+      },
       "encoding": {
         "x": {
-          "field": "year", "type": "ordinal", "title": "Year",
-          "axis": {"labelAngle": -45, "labelFontSize": 9, "titleFontSize": 11,
-                   "labelColor": "#aaaaaa", "titleColor": "#ffffff",
-                   "grid": false, "domainColor": "#1e3a55"}
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {
+            "labelAngle": -45,
+            "labelFontSize": 9,
+            "titleFontSize": 11,
+            "labelColor": "#aaaaaa",
+            "titleColor": "#ffffff",
+            "grid": false,
+            "domainColor": "#1e3a55"
+          }
         },
         "y": {
-          "field": "total_area_ha", "type": "quantitative", "title": "Total Area Burned (ha)",
-          "axis": {"format": "~s", "titleFontSize": 11, "labelFontSize": 10,
-                   "titleColor": "#ffffff", "labelColor": "#aaaaaa",
-                   "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a"}
+          "field": "total_area_ha",
+          "type": "quantitative",
+          "title": "Total Area Burned (ha)",
+          "axis": {
+            "format": "~s",
+            "titleFontSize": 11,
+            "labelFontSize": 10,
+            "titleColor": "#ffffff",
+            "labelColor": "#aaaaaa",
+            "grid": true,
+            "gridDash": [
+              3,
+              3
+            ],
+            "gridColor": "#1a2a3a"
+          }
         },
         "tooltip": [
-          {"field": "year", "type": "ordinal", "title": "Year"},
-          {"field": "total_area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
-          {"field": "notable_event", "type": "nominal", "title": "Event"}
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "total_area_ha",
+            "type": "quantitative",
+            "title": "Area Burned (ha)",
+            "format": ",.0f"
+          },
+          {
+            "field": "notable_event",
+            "type": "nominal",
+            "title": "Event"
+          }
         ]
       }
     },
     {
-      "mark": {"type": "point", "filled": true, "size": 50, "color": "#E67E22"},
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 50,
+        "color": "#E67E22"
+      },
       "encoding": {
-        "x": {"field": "year", "type": "ordinal"},
-        "y": {"field": "total_area_ha", "type": "quantitative"},
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "total_area_ha",
+          "type": "quantitative"
+        },
         "tooltip": [
-          {"field": "year", "type": "ordinal", "title": "Year"},
-          {"field": "total_area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
-          {"field": "notable_event", "type": "nominal", "title": "Event"}
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "total_area_ha",
+            "type": "quantitative",
+            "title": "Area Burned (ha)",
+            "format": ",.0f"
+          },
+          {
+            "field": "notable_event",
+            "type": "nominal",
+            "title": "Event"
+          }
         ]
       }
     },
     {
-      "transform": [{"filter": "datum.notable_event != ''"}],
-      "mark": {"type": "text", "fontSize": 9, "fontWeight": "bold", "color": "#E67E22",
-               "angle": -35, "align": "left", "dx": 4, "dy": -10},
+      "transform": [
+        {
+          "filter": "datum.notable_event != ''"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 9,
+        "fontWeight": "bold",
+        "color": "#E67E22",
+        "angle": -35,
+        "align": "left",
+        "dx": 4,
+        "dy": -10
+      },
       "encoding": {
-        "x": {"field": "year", "type": "ordinal"},
-        "y": {"field": "total_area_ha", "type": "quantitative"},
-        "text": {"field": "notable_event", "type": "nominal"}
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "total_area_ha",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "notable_event",
+          "type": "nominal"
+        }
       }
     },
     {
-      "data": {"values": [{"year": "2019"}]},
-      "mark": {"type": "rule", "color": "#C0392B", "strokeDash": [4,3], "strokeWidth": 1.5},
-      "encoding": {"x": {"field": "year", "type": "ordinal"}}
+      "data": {
+        "values": [
+          {
+            "year": "2019"
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#C0392B",
+        "strokeDash": [
+          4,
+          3
+        ],
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        }
+      }
     },
     {
-      "transform": [{"filter": "datum.year == selected_year"}],
-      "mark": {"type": "point", "filled": true, "size": 300,
-               "color": "#C0392B", "stroke": "#fff", "strokeWidth": 2},
+      "transform": [
+        {
+          "filter": "datum.year == selected_year"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 300,
+        "color": "#C0392B",
+        "stroke": "#fff",
+        "strokeWidth": 2
+      },
       "encoding": {
-        "x": {"field": "year", "type": "ordinal"},
-        "y": {"field": "total_area_ha", "type": "quantitative"},
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "total_area_ha",
+          "type": "quantitative"
+        },
         "tooltip": [
-          {"field": "year", "type": "ordinal", "title": "Year"},
-          {"field": "total_area_ha", "type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
-          {"field": "notable_event", "type": "nominal", "title": "Event"}
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "total_area_ha",
+            "type": "quantitative",
+            "title": "Area Burned (ha)",
+            "format": ",.0f"
+          },
+          {
+            "field": "notable_event",
+            "type": "nominal",
+            "title": "Event"
+          }
         ]
       }
     }
   ],
-  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
+  "config": {
+    "background": "#0a1628",
+    "view": {
+      "stroke": "transparent"
+    }
+  }
 }

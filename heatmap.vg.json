@@ -1,9 +1,14 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 340,
-  "data": { "url": "bushfire_season_heatmap.csv" },
-  "mark": { "type": "rect", "tooltip": true },
+  "height": 260,
+  "data": {
+    "url": "bushfire_season_heatmap.csv"
+  },
+  "mark": {
+    "type": "rect",
+    "tooltip": true
+  },
   "encoding": {
     "y": {
       "field": "year",
@@ -11,52 +16,101 @@
       "title": "Fire Year",
       "sort": "descending",
       "axis": {
-        "labelColor": "#aaaaaa", "titleColor": "#ffffff",
-        "labelFontSize": 9,  "titleFontSize": 11,
-        "domainColor": "#1e3a55", "tickColor": "#1e3a55",
+        "labelColor": "#aaaaaa",
+        "titleColor": "#ffffff",
+        "labelFontSize": 9,
+        "titleFontSize": 11,
+        "domainColor": "#1e3a55",
+        "tickColor": "#1e3a55",
         "labelOverlap": true
       }
     },
     "x": {
       "field": "month",
       "type": "ordinal",
-      "title": "Month (fire year: Jul → Jun)",
-      "sort": ["Jul","Aug","Sep","Oct","Nov","Dec","Jan","Feb","Mar","Apr","May","Jun"],
+      "title": "Month (fire year: Jul \u2192 Jun)",
+      "sort": [
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun"
+      ],
       "axis": {
-        "labelColor": "#aaaaaa", "titleColor": "#ffffff",
-        "labelFontSize": 10, "titleFontSize": 11,
-        "domainColor": "#1e3a55", "tickColor": "#1e3a55"
+        "labelColor": "#aaaaaa",
+        "titleColor": "#ffffff",
+        "labelFontSize": 10,
+        "titleFontSize": 11,
+        "domainColor": "#1e3a55",
+        "tickColor": "#1e3a55"
       }
     },
     "color": {
       "field": "area_km2",
       "type": "quantitative",
-      "title": "Burned Area (km²)",
+      "title": "Burned Area (km\u00b2)",
       "scale": {
         "type": "log",
         "base": 10,
-        "domain": [10, 12000],
-        "range": ["#fde8d0", "#f4a460", "#e05c2a", "#c0392b", "#7a0000"]
+        "domain": [
+          10,
+          12000
+        ],
+        "range": [
+          "#fde8d0",
+          "#f4a460",
+          "#e05c2a",
+          "#c0392b",
+          "#7a0000"
+        ]
       },
       "legend": {
-        "title": "Burned Area (km²)",
+        "title": "Burned Area (km\u00b2)",
         "titleColor": "#ffffff",
         "labelColor": "#aaaaaa",
         "titleFontSize": 10,
         "labelFontSize": 9,
         "gradientLength": 120,
-        "values": [10, 100, 1000, 5000, 12000]
+        "values": [
+          10,
+          100,
+          1000,
+          5000,
+          12000
+        ]
       }
     },
     "tooltip": [
-      { "field": "year",     "type": "ordinal",      "title": "Fire Year" },
-      { "field": "month",    "type": "nominal",       "title": "Month"     },
-      { "field": "area_km2", "type": "quantitative",  "title": "Area (km²)", "format": ",.0f" }
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Fire Year"
+      },
+      {
+        "field": "month",
+        "type": "nominal",
+        "title": "Month"
+      },
+      {
+        "field": "area_km2",
+        "type": "quantitative",
+        "title": "Area (km\u00b2)",
+        "format": ",.0f"
+      }
     ]
   },
   "config": {
     "background": "#0a1628",
-    "view": { "stroke": "transparent" },
+    "view": {
+      "stroke": "transparent"
+    },
     "font": "Inter, sans-serif"
   }
 }

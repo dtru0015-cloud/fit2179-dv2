@@ -1,29 +1,72 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 300,
-  "data": {"url": "bushfire_human_impact.csv"},
-  "mark": {"type": "bar", "cornerRadiusEnd": 4, "color": "#E67E22"},
+  "height": 260,
+  "data": {
+    "url": "bushfire_human_impact.csv"
+  },
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4,
+    "color": "#E67E22"
+  },
   "encoding": {
     "y": {
-      "field": "event_name", "type": "nominal",
-      "sort": {"field": "homes", "order": "descending"},
+      "field": "event_name",
+      "type": "nominal",
+      "sort": {
+        "field": "homes",
+        "order": "descending"
+      },
       "title": null,
-      "axis": {"labelFontSize": 10, "labelColor": "#ffffff", "labelLimit": 180}
+      "axis": {
+        "labelFontSize": 10,
+        "labelColor": "#ffffff",
+        "labelLimit": 180
+      }
     },
     "x": {
-      "field": "homes", "type": "quantitative",
+      "field": "homes",
+      "type": "quantitative",
       "title": "Homes Destroyed",
-      "axis": {"format": ",.0f", "titleFontSize": 11, "labelFontSize": 10,
-               "titleColor": "#E67E22", "labelColor": "#aaaaaa",
-               "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
-               "domainColor": "#1e3a55"}
+      "axis": {
+        "format": ",.0f",
+        "titleFontSize": 11,
+        "labelFontSize": 10,
+        "titleColor": "#E67E22",
+        "labelColor": "#aaaaaa",
+        "grid": true,
+        "gridDash": [
+          3,
+          3
+        ],
+        "gridColor": "#1a2a3a",
+        "domainColor": "#1e3a55"
+      }
     },
     "tooltip": [
-      {"field": "event_name", "type": "nominal", "title": "Event"},
-      {"field": "year", "type": "ordinal", "title": "Year"},
-      {"field": "homes", "type": "quantitative", "title": "Homes Destroyed", "format": ",.0f"}
+      {
+        "field": "event_name",
+        "type": "nominal",
+        "title": "Event"
+      },
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "homes",
+        "type": "quantitative",
+        "title": "Homes Destroyed",
+        "format": ",.0f"
+      }
     ]
   },
-  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
+  "config": {
+    "background": "#0a1628",
+    "view": {
+      "stroke": "transparent"
+    }
+  }
 }

@@ -1,74 +1,167 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 280,
-  "data": { "url": "aus_tree_cover_loss.csv" },
+  "height": 260,
+  "data": {
+    "url": "aus_tree_cover_loss.csv"
+  },
   "layer": [
     {
       "mark": {
         "type": "line",
         "strokeWidth": 2,
-        "point": { "filled": true, "size": 30, "opacity": 0.7 }
+        "point": {
+          "filled": true,
+          "size": 30,
+          "opacity": 0.7
+        }
       },
       "encoding": {
         "x": {
-          "field": "year", "type": "quantitative",
+          "field": "year",
+          "type": "quantitative",
           "title": "Year",
           "axis": {
-            "format": "d", "labelColor": "#aaaaaa", "titleColor": "#ffffff",
-            "gridColor": "#1a2a3a", "gridDash": [3,3],
-            "domainColor": "#1e3a55", "tickColor": "#1e3a55",
-            "labelFontSize": 10, "titleFontSize": 11
+            "format": "d",
+            "labelColor": "#aaaaaa",
+            "titleColor": "#ffffff",
+            "gridColor": "#1a2a3a",
+            "gridDash": [
+              3,
+              3
+            ],
+            "domainColor": "#1e3a55",
+            "tickColor": "#1e3a55",
+            "labelFontSize": 10,
+            "titleFontSize": 11
           }
         },
         "y": {
-          "field": "loss_kha", "type": "quantitative",
+          "field": "loss_kha",
+          "type": "quantitative",
           "title": "Tree cover loss (thousand ha)",
           "axis": {
-            "labelColor": "#aaaaaa", "titleColor": "#ffffff",
-            "gridColor": "#1a2a3a", "gridDash": [3,3],
+            "labelColor": "#aaaaaa",
+            "titleColor": "#ffffff",
+            "gridColor": "#1a2a3a",
+            "gridDash": [
+              3,
+              3
+            ],
             "domainColor": "#1e3a55",
-            "labelFontSize": 9, "titleFontSize": 11
+            "labelFontSize": 9,
+            "titleFontSize": 11
           }
         },
         "color": {
-          "field": "domain", "type": "nominal",
+          "field": "domain",
+          "type": "nominal",
           "title": "Climate Domain",
           "scale": {
-            "domain": ["Temperate", "Subtropical", "Tropical"],
-            "range": ["#4fc3a1", "#f5c518", "#2ecc71"]
+            "domain": [
+              "Temperate",
+              "Subtropical",
+              "Tropical"
+            ],
+            "range": [
+              "#4fc3a1",
+              "#f5c518",
+              "#2ecc71"
+            ]
           },
           "legend": {
-            "titleColor": "#ffffff", "labelColor": "#c8d8f0",
-            "titleFontSize": 10, "labelFontSize": 10,
+            "titleColor": "#ffffff",
+            "labelColor": "#c8d8f0",
+            "titleFontSize": 10,
+            "labelFontSize": 10,
             "orient": "top-left"
           }
         },
         "tooltip": [
-          { "field": "year",     "type": "quantitative", "title": "Year",         "format": "d"    },
-          { "field": "domain",   "type": "nominal",      "title": "Domain"                         },
-          { "field": "loss_kha", "type": "quantitative", "title": "Loss (000 ha)", "format": ",.0f" }
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year",
+            "format": "d"
+          },
+          {
+            "field": "domain",
+            "type": "nominal",
+            "title": "Domain"
+          },
+          {
+            "field": "loss_kha",
+            "type": "quantitative",
+            "title": "Loss (000 ha)",
+            "format": ",.0f"
+          }
         ]
       }
     },
     {
-      "data": { "values": [{"year": 2019, "label": "Black Summer", "y": 1950}] },
-      "mark": { "type": "rule", "color": "#E67E22", "strokeDash": [4,3], "strokeWidth": 1 },
-      "encoding": { "x": { "field": "year", "type": "quantitative" } }
+      "data": {
+        "values": [
+          {
+            "year": 2019,
+            "label": "Black Summer",
+            "y": 1950
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "color": "#E67E22",
+        "strokeDash": [
+          4,
+          3
+        ],
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        }
+      }
     },
     {
-      "data": { "values": [{"year": 2019, "label": "🔥 Black Summer", "y": 1750}] },
-      "mark": { "type": "text", "fontSize": 9, "color": "#E67E22", "align": "right", "dx": -4 },
+      "data": {
+        "values": [
+          {
+            "year": 2019,
+            "label": "\ud83d\udd25 Black Summer",
+            "y": 1750
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 9,
+        "color": "#E67E22",
+        "align": "right",
+        "dx": -4
+      },
       "encoding": {
-        "x": { "field": "year", "type": "quantitative" },
-        "y": { "field": "y",    "type": "quantitative" },
-        "text": { "field": "label", "type": "nominal" }
+        "x": {
+          "field": "year",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
       }
     }
   ],
   "config": {
     "background": "#0a1628",
-    "view": { "stroke": "transparent" },
+    "view": {
+      "stroke": "transparent"
+    },
     "font": "Inter, sans-serif"
   }
 }
