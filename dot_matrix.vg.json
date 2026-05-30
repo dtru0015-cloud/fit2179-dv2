@@ -3,28 +3,9 @@
   "width": "container",
   "height": 280,
   "data": {"url": "bushfire_major_events.csv"},
-  "transform": [
-    {
-      "calculate": "round(datum.pop_in_high_risk_zones / 100000)",
-      "as": "dots"
-    },
-    {
-      "flatten": ["dots"],
-      "as": ["dot_index"]
-    },
-    {
-      "window": [{"op": "row_number", "as": "row_num"}],
-      "groupby": ["year", "state"]
-    },
-    {
-      "calculate": "datum.row_num - 1",
-      "as": "dot_pos"
-    }
-  ],
   "mark": {
     "type": "point",
     "filled": true,
-    "size": 80,
     "opacity": 0.85
   },
   "encoding": {
@@ -33,12 +14,9 @@
       "type": "ordinal",
       "title": "Census Year",
       "axis": {
-        "labelColor": "#ffffff",
-        "titleColor": "#ffffff",
-        "labelFontSize": 11,
-        "titleFontSize": 11,
-        "grid": false,
-        "domainColor": "#1e3a55"
+        "labelColor": "#ffffff", "titleColor": "#ffffff",
+        "labelFontSize": 11, "titleFontSize": 11,
+        "grid": false, "domainColor": "#1e3a55"
       }
     },
     "y": {
@@ -46,13 +24,9 @@
       "type": "quantitative",
       "title": "Population in High Risk Zones",
       "axis": {
-        "format": "~s",
-        "labelColor": "#aaaaaa",
-        "titleColor": "#ffffff",
-        "labelFontSize": 10,
-        "titleFontSize": 11,
-        "gridColor": "#1a2a3a",
-        "domainColor": "#1e3a55"
+        "format": "~s", "labelColor": "#aaaaaa", "titleColor": "#ffffff",
+        "labelFontSize": 10, "titleFontSize": 11,
+        "gridColor": "#1a2a3a", "domainColor": "#1e3a55"
       }
     },
     "color": {
@@ -64,10 +38,8 @@
         "range": ["#E74C3C","#E67E22","#F1C40F","#2980B9","#27AE60","#8E44AD"]
       },
       "legend": {
-        "labelColor": "#ffffff",
-        "titleColor": "#ffffff",
-        "labelFontSize": 10,
-        "titleFontSize": 10
+        "labelColor": "#ffffff", "titleColor": "#ffffff",
+        "labelFontSize": 10, "titleFontSize": 10
       }
     },
     "size": {
@@ -77,10 +49,10 @@
       "legend": null
     },
     "tooltip": [
-      {"field": "year", "type": "ordinal", "title": "Year"},
-      {"field": "state", "type": "nominal", "title": "State"},
-      {"field": "pop_in_high_risk_zones", "type": "quantitative", "title": "Population at Risk", "format": ",.0f"},
-      {"field": "pct_pop_high_risk", "type": "quantitative", "title": "% of State Pop.", "format": ".1f"}
+      {"field": "year",                  "type": "ordinal",      "title": "Year"},
+      {"field": "state",                 "type": "nominal",      "title": "State"},
+      {"field": "pop_in_high_risk_zones","type": "quantitative", "title": "Population at Risk", "format": ",.0f"},
+      {"field": "pct_pop_high_risk",     "type": "quantitative", "title": "% of State Pop.",    "format": ".1f"}
     ]
   },
   "config": {
