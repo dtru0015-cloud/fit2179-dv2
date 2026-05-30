@@ -226,7 +226,8 @@ vegaEmbed("#choropleth_map", "choropleth_map.vg.json", embedOpts)
 
 vegaEmbed("#heatmap",         "heatmap.vg.json",         embedOpts).catch(console.error);
 vegaEmbed("#dual_axis",       "dual_axis.vg.json",        embedOpts).catch(console.error);
-vegaEmbed("#seasonal_trend", "seasonal_trend.vg.json", embedOpts).catch(console.error);
+vegaEmbed("#seasonal_trend",     "seasonal_trend.vg.json",     embedOpts).catch(console.error);
+vegaEmbed("#fire_frequency_map", "fire_frequency_map.vg.json", embedOpts).catch(console.error);
 vegaEmbed("#deaths_chart",    "deaths_chart.vg.json",     embedOpts).catch(console.error);
 vegaEmbed("#homes_chart",     "homes_chart.vg.json",      embedOpts).catch(console.error);
 vegaEmbed("#wildlife_chart",  "wildlife_chart.vg.json",   vegaOpts ).catch(console.error);

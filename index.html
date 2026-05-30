@@ -216,15 +216,13 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <div class="grid-2" style="margin-bottom:28px;">
 <div class="chart-card">
 <p class="chart-title">⑦ Fires Are Returning More Frequently — Decadal Fire Maps (1980–2019)</p>
-<p class="chart-subtitle">Years since last wildfire (decadal mean) · Source: NASA-MODIS & State Records · CSIRO (2021)</p>
-<img src="https://www.csiro.au/-/media/WordPress/CSIROBlog/Bushfire-2-1.png"
-     alt="Decadal fire frequency maps showing years since last wildfire 1980-2019"
-     style="width:100%;border-radius:6px;margin-bottom:10px;">
+<p class="chart-subtitle">Average years since last wildfire by state · Blue = long interval (safer) · Red = short interval (more frequent) · Source: Based on CSIRO Cook et al. (2021), Nature Communications</p>
+<div id="fire_frequency_map" class="vis-container"></div>
 <div class="insight-list">
-  <div class="insight-item"><span>🗺️ <strong style="color:#E67E22">Areas that burned every 40–60 years</strong> in the 1980s now burn every 10–20 years. Blue (long intervals) is disappearing — replaced by orange and red (short intervals).</span></div>
-  <div class="insight-item"><span>🌲 <strong style="color:#E67E22">+800% more forest burned</strong> in 2002–2019 vs 1988–2001. Wet Tasmanian forests and Queensland rainforests — never fire-adapted — are now burning for the first time on record.</span></div>
+  <div class="insight-item"><span>🔵→🔴 <strong style="color:#E67E22">Blue is disappearing.</strong> States that averaged 40–75 years between fires in the 1980s now burn every 9–22 years. The shift from cool blue to hot red across all four maps tells the story at a glance.</span></div>
+  <div class="insight-item"><span>🌲 <strong style="color:#E67E22">TAS and QLD most alarming.</strong> Tasmania's ancient rainforests dropped from 75-year intervals to 30 years. Queensland wet tropics — never fire-adapted — are burning for the first time on record.</span></div>
 </div>
-<p class="chart-annotation" style="margin-top:8px;">Source: Cook et al. (2021), <em>Nature Communications</em>. Data: NASA-MODIS burned area & State/Territory records. © CSIRO 2021.</p>
+<p class="chart-annotation" style="margin-top:8px;">Data approximated from Cook et al. (2021) <em>Nature Communications</em> — satellite-derived burned area (NASA-MODIS / NOAA-AVHRR). State-level aggregation; sub-state variation is higher in forest zones.</p>
 </div>
 <div class="chart-card">
 <p class="chart-title">⑦b The Fire Season Is Lengthening — Summer vs Autumn/Winter Fires (1990–2019)</p>
