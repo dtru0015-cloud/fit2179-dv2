@@ -197,10 +197,13 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 
 <div class="grid-2" style="margin-bottom:28px;">
 <div class="chart-card">
-<p class="chart-title">⑤ Fire Danger Throughout the Year</p>
-<p class="chart-subtitle">Idiom: Matrix Heatmap · Average FFDI by month · Source: Bureau of Meteorology</p>
+<p class="chart-title">⑤ Burned Area by Fire Year and Month (1990–2019)</p>
+<p class="chart-subtitle">Idiom: Matrix Heatmap · Forest burned area (km²) · Source: NOAA-AVHRR / NASA-MODIS · Darker = more area burned · Based on CSIRO (2021)</p>
 <div id="heatmap" class="vis-container"></div>
-<p class="chart-annotation">Victoria and NSW peak in January–February. The NT's fire season runs May–September — meaning Australia faces fire risk year-round with no safe month.</p>
+<div class="insight-list">
+  <div class="insight-item"><span>🔥 <strong style="color:#E67E22">Season is expanding.</strong> Before 2001, extreme fire activity was confined to Dec–Feb. Post-2011, severe burns now extend into Oct and Mar–Apr — fire season is growing at both ends.</span></div>
+  <div class="insight-item"><span>📈 <strong style="color:#E67E22">2002 and 2019 stand apart.</strong> The Alpine Fires (2002) and Black Summer (2019) are the two darkest rows — but 2019 shows the critical difference: the entire row is dark, not just summer months.</span></div>
+</div>
 </div>
 <div class="chart-card">
 <p class="chart-title">⑥ Area Burned vs. Temperature Anomaly (2000–2024)</p>
@@ -210,11 +213,28 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 </div>
 </div>
 
+<div class="grid-2" style="margin-bottom:28px;">
 <div class="chart-card">
-<p class="chart-title">⑦ Fire Risk Score Increasing Across All States (2001–2021)</p>
-<p class="chart-subtitle">Idiom: Slope Chart · Source: Geoscience Australia / FFDI research (Clarke et al., Dowdy et al.)</p>
-<div id="slope_chart" class="vis-container"></div>
-<p class="chart-annotation">Every Australian state has seen its fire risk score increase over 20 years. NSW shows the largest rise (+0.23), but even historically lower-risk states like WA, SA and Tasmania are trending upward — there is no state immune to increasing fire danger.</p>
+<p class="chart-title">⑦ Fires Are Returning More Frequently — Decadal Fire Maps (1980–2019)</p>
+<p class="chart-subtitle">Years since last wildfire (decadal mean) · Source: NASA-MODIS & State Records · CSIRO (2021)</p>
+<img src="https://www.csiro.au/-/media/WordPress/CSIROBlog/Bushfire-2-1.png"
+     alt="Decadal fire frequency maps showing years since last wildfire 1980-2019"
+     style="width:100%;border-radius:6px;margin-bottom:10px;">
+<div class="insight-list">
+  <div class="insight-item"><span>🗺️ <strong style="color:#E67E22">Areas that burned every 40–60 years</strong> in the 1980s now burn every 10–20 years. Blue (long intervals) is disappearing — replaced by orange and red (short intervals).</span></div>
+  <div class="insight-item"><span>🌲 <strong style="color:#E67E22">+800% more forest burned</strong> in 2002–2019 vs 1988–2001. Wet Tasmanian forests and Queensland rainforests — never fire-adapted — are now burning for the first time on record.</span></div>
+</div>
+<p class="chart-annotation" style="margin-top:8px;">Source: Cook et al. (2021), <em>Nature Communications</em>. Data: NASA-MODIS burned area & State/Territory records. © CSIRO 2021.</p>
+</div>
+<div class="chart-card">
+<p class="chart-title">⑦b The Fire Season Is Lengthening — Summer vs Autumn/Winter Fires (1990–2019)</p>
+<p class="chart-subtitle">Idiom: Area Chart · Forest burned area (km²) by season · Source: CSIRO (2021) · Based on NOAA-AVHRR / NASA-MODIS</p>
+<div id="seasonal_trend" class="vis-container"></div>
+<div class="insight-list">
+  <div class="insight-item"><span>🟣 <strong style="color:#9b59b6">Autumn/winter fires (purple)</strong> have grown 5× since 2001 — rising at 14% per year. Fires once unheard of in May–August are now routine in forest zones.</span></div>
+  <div class="insight-item"><span>🟠 <strong style="color:#E67E22">Summer fires (orange)</strong> remain dominant but autumn/winter is closing the gap, extending total fire exposure across the full calendar year.</span></div>
+</div>
+</div>
 </div>
 </div>
 

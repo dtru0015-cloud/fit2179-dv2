@@ -1,0 +1,96 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 260,
+  "data": {
+    "values": [
+      {"year":1990,"summer":2900,"autumn_winter":280},
+      {"year":1991,"summer":2670,"autumn_winter":240},
+      {"year":1992,"summer":3100,"autumn_winter":306},
+      {"year":1993,"summer":2790,"autumn_winter":255},
+      {"year":1994,"summer":8200,"autumn_winter":450},
+      {"year":1995,"summer":2980,"autumn_winter":269},
+      {"year":1996,"summer":2740,"autumn_winter":234},
+      {"year":1997,"summer":3050,"autumn_winter":279},
+      {"year":1998,"summer":2715,"autumn_winter":228},
+      {"year":1999,"summer":3005,"autumn_winter":263},
+      {"year":2000,"summer":3145,"autumn_winter":302},
+      {"year":2001,"summer":4600,"autumn_winter":490},
+      {"year":2002,"summer":20000,"autumn_winter":1060},
+      {"year":2003,"summer":11400,"autumn_winter":840},
+      {"year":2004,"summer":8600,"autumn_winter":622},
+      {"year":2005,"summer":9280,"autumn_winter":671},
+      {"year":2006,"summer":9610,"autumn_winter":708},
+      {"year":2007,"summer":10000,"autumn_winter":762},
+      {"year":2008,"summer":10300,"autumn_winter":810},
+      {"year":2009,"summer":16100,"autumn_winter":1210},
+      {"year":2010,"summer":11200,"autumn_winter":1070},
+      {"year":2011,"summer":14500,"autumn_winter":2200},
+      {"year":2012,"summer":15200,"autumn_winter":2370},
+      {"year":2013,"summer":16300,"autumn_winter":2600},
+      {"year":2014,"summer":17000,"autumn_winter":2860},
+      {"year":2015,"summer":17600,"autumn_winter":3020},
+      {"year":2016,"summer":18000,"autumn_winter":3230},
+      {"year":2017,"summer":18600,"autumn_winter":3480},
+      {"year":2018,"summer":19200,"autumn_winter":3720},
+      {"year":2019,"summer":28000,"autumn_winter":5900}
+    ]
+  },
+  "layer": [
+    {
+      "mark": { "type": "area", "color": "#E67E22", "opacity": 0.15,
+                "line": { "color": "#E67E22", "strokeWidth": 2 } },
+      "encoding": {
+        "x": {
+          "field": "year", "type": "quantitative", "title": "Fire Year",
+          "axis": { "format": "d", "labelColor": "#aaaaaa", "titleColor": "#ffffff",
+                    "gridColor": "#1a2a3a", "domainColor": "#1e3a55",
+                    "labelFontSize": 10, "titleFontSize": 11 }
+        },
+        "y": {
+          "field": "summer", "type": "quantitative", "title": "Burned Area (km²)",
+          "axis": { "format": "~s", "labelColor": "#aaaaaa", "titleColor": "#ffffff",
+                    "gridColor": "#1a2a3a", "gridDash": [3,3], "domainColor": "#1e3a55",
+                    "labelFontSize": 9, "titleFontSize": 11 }
+        },
+        "tooltip": [
+          {"field":"year","type":"quantitative","title":"Year","format":"d"},
+          {"field":"summer","type":"quantitative","title":"Summer fires (km²)","format":",.0f"},
+          {"field":"autumn_winter","type":"quantitative","title":"Autumn/Winter fires (km²)","format":",.0f"}
+        ]
+      }
+    },
+    {
+      "mark": { "type": "area", "color": "#9b59b6", "opacity": 0.35,
+                "line": { "color": "#9b59b6", "strokeWidth": 2.5 } },
+      "encoding": {
+        "x": { "field": "year", "type": "quantitative" },
+        "y": { "field": "autumn_winter", "type": "quantitative" },
+        "tooltip": [
+          {"field":"year","type":"quantitative","title":"Year","format":"d"},
+          {"field":"summer","type":"quantitative","title":"Summer fires (km²)","format":",.0f"},
+          {"field":"autumn_winter","type":"quantitative","title":"Autumn/Winter fires (km²)","format":",.0f"}
+        ]
+      }
+    },
+    {
+      "data": { "values": [{"year": 2001}] },
+      "mark": { "type": "rule", "color": "#aaaaaa", "strokeDash": [4,3], "strokeWidth": 1 },
+      "encoding": { "x": { "field": "year", "type": "quantitative" } }
+    },
+    {
+      "data": { "values": [{"year": 2001, "label": "Post-2001: winter fires ↑5×", "y": 18000}] },
+      "mark": { "type": "text", "fontSize": 9, "color": "#aaaaaa", "align": "left", "dx": 4 },
+      "encoding": {
+        "x": { "field": "year", "type": "quantitative" },
+        "y": { "field": "y",    "type": "quantitative" },
+        "text": { "field": "label", "type": "nominal" }
+      }
+    }
+  ],
+  "config": {
+    "background": "#0a1628",
+    "view": { "stroke": "transparent" },
+    "font": "Inter, sans-serif"
+  }
+}
