@@ -272,4 +272,5 @@ vegaEmbed("#wildlife_chart", "wildlife_chart.vg.json", vegaOpts)
     });
   }).catch(console.error);
 vegaEmbed("#waterfall_chart", "waterfall_chart.vg.json",  vegaOpts ).catch(console.error);
-vegaEmbed("#dot_matrix",      "dot_matrix.vg.json",       embedOpts).catch(console.error);
+vegaEmbed("#dot_matrix",         "dot_matrix.vg.json",         embedOpts).catch(console.error);
+vegaEmbed("#population_trend",   "population_trend.vg.json",   embedOpts).catch(console.error);

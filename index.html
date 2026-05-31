@@ -269,11 +269,19 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <h2 class="section-title">More Australians may be in harm's way.</h2>
 <p class="section-intro">As Australia's population grows and spreads into fire-prone areas, the number of people directly exposed to high fire risk is increasing — even as fire seasons grow more intense and frequent.</p>
 
+<div class="grid-2">
 <div class="chart-card">
 <p class="chart-title">⑪ Population Exposed to High Bushfire Risk (2001–2021)</p>
-<p class="chart-subtitle">Idiom: Dot Matrix / Bubble Plot · Sources: ABS Census (2001–2021) &amp; Geoscience Australia</p>
+<p class="chart-subtitle">Idiom: Bubble Plot · Sources: ABS Census · Hover to highlight state</p>
 <div id="dot_matrix" class="vis-container"></div>
-<p class="chart-annotation">NSW consistently has the largest exposed population, growing from 1.24M in 2001 to 1.85M in 2021 — a 49% increase. Every state shows upward growth, meaning millions more Australians now live within high fire risk zones than at the start of this century.</p>
+<p class="chart-annotation">🔴 Bubble size = exposed population. NSW (red) is consistently the largest. Every state's bubbles grow rightward — more people in harm's way each census decade.</p>
+</div>
+<div class="chart-card">
+<p class="chart-title">⑪b Growth Trajectories — Population at Risk by State</p>
+<p class="chart-subtitle">Idiom: Multi-Line Trend Chart · Click a line to focus · Sources: ABS Census &amp; Geoscience Australia</p>
+<div id="population_trend" class="vis-container"></div>
+<p class="chart-annotation">🔴 Every state trends upward. NSW grew from 1.24M → 1.85M (+49%). Click any line to isolate that state's trajectory — showing how the gap between high-risk and low-risk states is widening.</p>
+</div>
 </div>
 </div>
 
