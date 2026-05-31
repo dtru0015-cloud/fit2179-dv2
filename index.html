@@ -1,3 +1,453 @@
+Any idea how we can use a chart like this
+add 1 more chart 
+got this already different data and idiom
+Stopped thinking
+Edit
+More Australians may be in harm's way.
+As Australia's population grows and spreads into fire-prone areas, the number of people directly exposed to high fire risk is increasing — even as fire seasons grow more intense and frequent. do not think it is answering this tho
+something like this curve
+Thought for 1m 25s
+Edit
+https://dtru0015-cloud.github.io/fit2179-dv2/
+
+
+
+Look at the typographic acpect of it ( how to improve title, highlight key words, colour hierchy,..)
+Thought for 6s
+
+Yes — the dashboard has strong visuals, but the typographic hierarchy can be improved so the story feels more polished and easier to scan.
+
+1. Make the main title shorter and stronger
+
+Current:
+
+Australia’s Bushfire Crisis: Are We Becoming More Vulnerable?
+
+This is good, but it is a bit long. For a dashboard title, make the emotional hook bigger and keep the question as the subtitle.
+
+Better:
+
+Australia’s Bushfire Crisis
+Are We Becoming More Vulnerable?
+
+Typography suggestion:
+
+.main-title {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: #ffffff;
+}
+
+.main-title span {
+  color: #ff5a3d;
+}
+
+Use highlight like:
+
+<h1>Australia’s <span>Bushfire Crisis</span></h1>
+<h2>Are We Becoming More Vulnerable?</h2>
+
+This creates a stronger title hierarchy than having everything at the same weight.
+
+2. Highlight only key words, not whole sentences
+
+Your intro sentence is good:
+
+Bushfires are part of Australia's history. But the scale and intensity of recent seasons — and the number of people in harm's way — are changing.
+
+Improve it by highlighting key terms:
+
+<p>
+  Bushfires are part of Australia's history. But the 
+  <strong>scale and intensity</strong> of recent seasons — and the 
+  <strong>number of people in harm's way</strong> — are changing.
+</p>
+
+CSS:
+
+p strong {
+  color: #ff5a3d;
+  font-weight: 700;
+}
+
+Do this throughout the dashboard for words like:
+
+Black Summer
+highest risk
++23 pts
+3 billion animals
+$103B
+49% increase
+more vulnerable
+
+This helps the reader scan the story quickly.
+
+3. Make section headings more consistent
+
+Your section headings are clear, for example:
+
+Section 2 — Where is the Risk?
+Risk is uneven — and seasons are worsening.
+
+Good structure. But visually, make the section label smaller and the main message bigger.
+
+Suggested hierarchy:
+
+SECTION 2
+Where is the Risk?
+
+Risk is uneven — and seasons are worsening.
+
+CSS idea:
+
+.section-label {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #ff5a3d;
+  font-weight: 700;
+}
+
+.section-title {
+  font-size: 34px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: #c9d4df;
+  line-height: 1.5;
+  max-width: 900px;
+}
+
+This will make each section feel more professional and less like plain body text.
+
+4. Improve chart titles by removing “Idiom” from visual priority
+
+Right now, the dashboard shows lines like:
+
+Idiom: Choropleth Map · Source: Geoscience Australia
+
+This is useful for marking, but visually it should be smaller and less dominant.
+
+Better layout:
+
+③ Fire Risk Score by State
+NSW and VIC show the highest combined fire-risk exposure.
+
+Choropleth Map · Source: Geoscience Australia
+
+So the insight sentence should come before the technical chart label.
+
+Suggested CSS:
+
+.chart-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.chart-insight {
+  font-size: 16px;
+  color: #d9e2ec;
+  line-height: 1.45;
+}
+
+.chart-meta {
+  font-size: 12px;
+  color: #7f91a3;
+  letter-spacing: 0.3px;
+}
+
+This makes the dashboard feel more like a story, not just an assignment checklist.
+
+5. Use colour hierarchy more carefully
+
+Your dashboard already uses dark navy, white, orange and red. That fits bushfire well.
+
+Suggested hierarchy:
+
+White: main headings
+Light grey/blue: body text
+Orange: important keywords and chart titles
+Red: danger, extreme values, warning statements
+Muted grey: metadata, source text, idiom labels
+
+Example:
+
+:root {
+  --bg: #071525;
+  --panel: #0a1d33;
+  --text-main: #ffffff;
+  --text-body: #c9d4df;
+  --text-muted: #7f91a3;
+  --accent-orange: #ff8c2b;
+  --accent-red: #ff4d3d;
+}
+
+Avoid using bright red for everything. Save red for extreme danger, such as:
+
+Black Summer
+$103B
+186M ha
+highest risk
+The evidence is clear
+
+Use orange for general emphasis.
+
+6. Make the conclusion more visually powerful
+
+Your final section is strong because it directly answers the question:
+
+The evidence suggests Australia is becoming more vulnerable.
+
+Make this the biggest final takeaway.
+
+Suggested final block:
+
+<div class="final-callout">
+  <p class="eyebrow">Final takeaway</p>
+  <h2>The evidence suggests Australia is becoming more vulnerable.</h2>
+  <p>
+    Hotter conditions, worsening fire seasons, rising risk scores, escalating losses,
+    and growing population exposure all point in the same direction.
+  </p>
+</div>
+
+CSS:
+
+.final-callout {
+  border: 1px solid rgba(255, 90, 61, 0.5);
+  background: linear-gradient(135deg, rgba(255, 90, 61, 0.15), rgba(7, 21, 37, 0.95));
+  padding: 32px;
+  border-radius: 18px;
+}
+
+.final-callout h2 {
+  font-size: 36px;
+  color: #ffffff;
+  line-height: 1.15;
+}
+
+.final-callout .eyebrow {
+  color: #ff5a3d;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+}
+7. Specific wording improvements
+
+I would change some chart/section titles to be more insight-driven.
+
+Current	Better
+The Scale of Impact	The Scale of Bushfire Damage
+Black Summer Spotlight	Black Summer: The Defining Disaster
+Fire Risk Score by State	Fire Risk Is Highest in NSW, VIC and ACT
+Area Burned — Major Seasons	Burned Area Has Spiked Since 2019
+Fire Danger Throughout the Year	Fire Danger Is Now a Year-Round Problem
+Area Burned vs. Temperature Anomaly	Hotter Years Align With Larger Fire Seasons
+Homes Destroyed by Major Bushfires	Black Summer Destroyed the Most Homes
+Population Exposed to High Bushfire Risk	More Australians Are Living in High-Risk Zones
+
+Your webpage text already clearly says the dashboard is about trends, impacts and growing bushfire risks, so using more insight-driven titles will make the visual story stronger.
+
+Biggest improvement to make first
+
+The most important fix is this:
+
+Make every chart title answer “so what?”
+
+Instead of:
+
+⑪ Population Exposed to High Bushfire Risk (2001–2021)
+
+Use:
+
+⑪ More Australians Are Living in High-Risk Zones
+
+Then put the technical detail underneath:
+
+Population exposed to high bushfire risk, 2001–2021
+
+That one change will make your whole dashboard feel much more professional.
+
+Australia's Bushfire Crisis:
+Are We Becoming More Vulnerable?
+
+
+Are We Becoming More Vulnerable?
+
+I think it is hard to understadn phase it a bit
+Thought for a second
+
+Yes — “Are We Becoming More Vulnerable?” is a bit broad. It does not clearly say vulnerable to what or why.
+
+Better phrasing:
+
+Best option
+Australia’s Bushfire Crisis:
+Are More People and Places at Risk?
+
+This is clearer because your dashboard talks about people, homes, land, economic loss, and future exposure.
+
+Other good options
+Australia’s Bushfire Crisis:
+Is the Risk Getting Worse?
+Australia’s Bushfire Crisis:
+Who and What Is Most at Risk?
+Australia’s Bushfire Crisis:
+Are We More Exposed Than Before?
+Australia’s Bushfire Crisis:
+How Is Bushfire Risk Changing?
+My recommendation for your dashboard
+
+Use this:
+
+Australia’s Bushfire Crisis:
+Are More People and Places at Risk?
+
+It is simple, easy to understand, and matches your story better than “vulnerable”.
+
+Are We Becoming More At Risk
+Thought for a second
+
+“Are We Becoming More At Risk” is understandable, but grammatically it sounds a bit awkward.
+
+Better versions:
+
+Best option
+Australia’s Bushfire Crisis:
+Are We More at Risk?
+
+This is clean, natural, and easy to understand.
+
+Slightly stronger
+Australia’s Bushfire Crisis:
+Is Australia More at Risk?
+More specific to your dashboard
+Australia’s Bushfire Crisis:
+Are More Australians at Risk?
+
+My recommendation:
+
+Australia’s Bushfire Crisis:
+Are More Australians at Risk?
+
+This matches your story about population exposure, homes, economic loss, and people in fire-prone areas.
+
+(Version 1.2) FIT2179 Data Visualisation 2 (3).pdf
+PDF
+Thought for 4s
+
+Yes — for Part B: Domain Description, you can write it like this. It matches the assignment requirement to explain domain, why/who, what, and how within the Moodle form. The brief says your DV2 must use a specific domain, target the average Australian audience, use real-world data from at least two sources, include at least one map, and demonstrate Munzer’s What/Why/How framework.
+
+Writing
+
+Describe your domain chosen for DV II
+
+My chosen domain is bushfire risk and vulnerability in Australia. This visualisation explores whether Australia is becoming more exposed to bushfire impacts by examining fire danger, land burned, homes destroyed, economic loss, population exposure and future risk. Bushfires are a highly relevant Australian issue because they affect communities, ecosystems, housing, emergency services and government planning. The project focuses on how bushfire vulnerability has changed over time and across states, rather than only showing individual disaster events.
+
+Describe the Why and Who aspects of your DV II
+
+The purpose of this visualisation is to help average Australians understand how bushfire risk is changing and why more people and places may be at risk. The intended audience is the general Australian public, including people who may not have technical knowledge of climate data, emergency management or statistics. The visualisation aims to make the issue easier to understand by using simple language, clear chart titles, annotations and a strong visual story. The main question guiding the dashboard is: “Are more Australians at risk from bushfires?” This gives the audience a clear reason to continue through the visualisation.
+
+Describe the “What” aspect of your DV II
+
+The data used in this visualisation includes real-world bushfire and risk-related data from multiple public sources. The datasets include information about major bushfire events, homes destroyed, estimated economic loss, land area burned, fire danger trends, population exposure and state-based risk scores. These variables are used to compare the scale, location and human impact of bushfire vulnerability across Australia. The data is transformed into meaningful indicators such as rankings, trends, proportions and state comparisons so the audience can identify patterns that would be difficult to see from raw tables alone.
+
+Describe the “How” aspect of your DV II
+
+The visualisation uses a range of Vega-Lite idioms to support storytelling and comparison. A choropleth map is used to show state-based fire risk because geographic location is central to the topic. Bar charts and lollipop charts are used to rank major bushfires by homes destroyed, economic loss and other impacts. Line and area charts are used to show how exposure and risk have changed over time. Bubble plots are used to compare multiple variables at once, such as population exposure and risk level. Colour is used consistently, with orange and red representing increasing severity, while dark navy backgrounds create strong figure-ground contrast. Interactive tooltips allow users to inspect details without overcrowding the page. Overall, the idioms are chosen to guide the viewer from national context, to state-level risk, to human impact, and finally to future vulnerability.
+
+This is around the right style: clear, formal, but not too complicated.
+
+DV1 Template (1) (7).pdf
+PDF
+match my tone here ( got a D here try to go up to HD)
+Thought for 4s
+
+Yes — your DV1 tone was simple and direct, which is good, but to push toward HD, this version needs to be more polished, more specific, and more clearly linked to Why / Who / What / How. Your DV1 described exports in a straightforward way, but DV2 needs stronger storytelling, more idiom rationale, and clearer design decisions because the rubric rewards advanced typography, storytelling, annotations, and well-justified visual idioms.
+
+Here is a stronger version that still sounds like your writing style, but more HD-level:
+
+Writing
+
+Describe your domain chosen for DV II
+
+The domain I chose for DV II is Australia’s bushfire risk and vulnerability. It looks at how bushfires have affected Australia over time, including area burned, homes destroyed, economic losses, fire danger, population exposure and state-based risk. I chose this domain because bushfires are one of Australia’s most serious natural hazards, and they have a direct impact on people, homes, communities, wildlife and the economy. I also wanted to explore whether bushfire risk is only a past disaster issue, or whether Australia is becoming more exposed in the future.
+
+Describe the Why and Who aspects of your DV II
+
+The purpose of this visualisation is to help users understand whether more Australians are at risk from bushfires. It is designed for the average Australian viewer, including students, teachers, residents in fire-prone areas, and general audiences who may not have technical knowledge of climate or emergency data. The visualisation aims to make bushfire vulnerability easier to understand by showing the issue through a clear story: where risk is highest, how severe past events have been, how fire conditions are changing, and why future exposure matters. The main question guiding the dashboard is: “Australia’s Bushfire Crisis: Are More Australians at Risk?”
+
+Describe the “What” aspect of your DV II
+
+The visualisation uses real-world data related to Australian bushfire impacts, climate conditions and population exposure. The main attributes include state, year, bushfire event name, area burned, homes destroyed, deaths, economic loss, fire danger level, temperature anomaly and exposed population. These variables include both quantitative data, such as hectares burned and number of homes destroyed, and categorical data, such as state, event name and fire danger category. The data is transformed into rankings, trends, comparisons and risk scores so users can see patterns that would be difficult to understand from raw tables alone.
+
+Describe the “How” aspect of your DV II
+
+The dashboard uses a range of Vega-Lite visualisation idioms to support the story. A choropleth map is used to show state-based fire risk because location is important when discussing bushfire exposure. Bar charts and lollipop charts are used to rank major bushfire events by homes destroyed, deaths and economic loss. Line and area charts are used to show changes over time, such as fire danger and population exposure. Bubble charts are used where multiple variables need to be compared at the same time, such as state risk and exposed population. The dashboard uses a dark navy background with orange and red highlights to match the bushfire theme and create strong figure-ground contrast. Important numbers and keywords are highlighted so viewers can quickly identify the main message. Interactive tooltips are included to give extra detail without making the charts too crowded. Overall, the design guides the viewer from the national bushfire problem, to state-level risk, to human and economic impacts, and finally to future vulnerability.
+
+This version keeps your original style but sounds more confident and assessment-ready. It also directly matches the DV2 requirement to describe domain, who, what, why and how in the Moodle form.
+
+Make it simpler so all  reader can understand
+
+Yes — this version is simpler and easier for any reader to understand, but still stronger than your DV1 writing.
+
+Writing
+
+Describe your domain chosen for DV II
+
+The domain I chose for DV II is bushfire risk in Australia. My visualisation looks at how bushfires affect people, homes, land, and the economy. It also looks at whether more Australians may be at risk in the future. I chose this topic because bushfires are a major issue in Australia and many people can relate to them, especially after events like Black Summer.
+
+Describe the Why and Who aspects of your DV II
+
+The purpose of this visualisation is to help everyday Australians understand how bushfire risk is changing. It is made for general readers, such as students, teachers, residents, and people who want a simple overview of the issue. The main question is: “Australia’s Bushfire Crisis: Are More Australians at Risk?” The visualisation helps answer this by showing where risk is highest, which bushfires caused the most damage, and why future exposure is becoming a concern.
+
+Describe the “What” aspect of your DV II
+
+The visualisation uses real-world bushfire data from public sources. It includes information such as bushfire event names, years, states, homes destroyed, area burned, deaths, economic losses, fire danger levels, temperature changes, and population exposure. These data points help show both the past impact of bushfires and the possible future risk to Australians.
+
+Describe the “How” aspect of your DV II
+
+The dashboard uses different types of charts to tell the story clearly. A map is used to show where bushfire risk is highest across Australia. Bar charts and lollipop charts are used to compare major bushfire events. Line and area charts are used to show changes over time. Bubble charts are used to compare risk and population exposure together. The colours are mainly dark blue, orange, and red to match the bushfire theme. Important words and numbers are highlighted so readers can quickly understand the main message. Tooltips are also used so users can hover over charts to see more details.
+
+No same paragraph just more simple words
+
+Sure — same paragraph structure, just with simpler wording:
+
+Writing
+
+Describe your domain chosen for DV II
+
+The domain I chose for DV II is bushfire risk in Australia. It looks at how bushfires have affected Australia over time, including land burned, homes destroyed, economic loss, fire danger, population exposure and risk across different states. I chose this topic because bushfires are a serious issue in Australia and they affect people, homes, animals, communities and the economy. I also wanted to explore whether bushfires are only a past problem, or whether more Australians may be at risk in the future.
+
+Describe the Why and Who aspects of your DV II
+
+The purpose of this visualisation is to help users understand whether more Australians are at risk from bushfires. It is designed for everyday Australians, including students, teachers, residents and general viewers who may not know much about climate or bushfire data. The visualisation tells a clear story by showing where risk is highest, which bushfires caused the most damage, how fire conditions are changing, and why future exposure matters. The main question guiding the dashboard is: “Australia’s Bushfire Crisis: Are More Australians at Risk?”
+
+Describe the “What” aspect of your DV II
+
+The visualisation uses real-world data about Australian bushfires, climate conditions and population exposure. The main data includes state, year, bushfire event name, area burned, homes destroyed, deaths, economic loss, fire danger level, temperature change and exposed population. These data points help compare different bushfires and different states. They also help show patterns over time, such as whether bushfire impacts and exposure are becoming larger.
+
+Describe the “How” aspect of your DV II
+
+The dashboard uses different Vega-Lite charts to make the story easy to follow. A map is used to show bushfire risk by state because location is important for this topic. Bar charts and lollipop charts are used to rank major bushfire events by homes destroyed, deaths and economic loss. Line and area charts are used to show changes over time, such as fire danger and population exposure. Bubble charts are used to compare more than one thing at once, such as state risk and exposed population. The dashboard uses dark blue, orange and red colours to match the bushfire theme. Important numbers and words are highlighted so readers can quickly understand the key message. Tooltips are included so users can hover over charts and see more detail without making the page too crowded.
+
+Pasted text(22).txt
+Document
+Simple fix — just remove all the chart-subtitle lines from index.html. Let me do it directly:
+
+give me file back
+Thought for 26s
+
+Done — I removed all the chart-subtitle lines from the HTML.
+
+Download the fixed file here: index_no_chart_subtitles.html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +483,6 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
 .chart-card { background: #0d1f35; border: 1px solid var(--border); border-radius: 8px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
 .chart-title { font-family: 'Merriweather', serif; font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-.chart-subtitle { font-size: 0.78rem; color: #888; margin-bottom: 14px; }
 .chart-annotation { font-size: 0.78rem; color: #aaa; margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px; line-height: 1.6; }
 
 .controls-bar { display: flex; align-items: center; justify-content: center; gap: 40px; background: #060f1a; border: 1px solid #1e3a55; border-radius: 8px; padding: 16px 28px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -107,8 +556,6 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 
     .chart-title  { font-size: 15px; font-weight: 800; color: #fff; margin: 0 0 4px; }
     .chart-insight{ font-size: 13px; color: var(--text-body); line-height: 1.45; margin: 0 0 4px; }
-    .chart-subtitle{ font-size: 11px; color: var(--text-muted); letter-spacing: 0.2px;
-                     margin: 0 0 10px; }
     .chart-annotation { font-size: 12px; color: var(--text-body); line-height: 1.65;
                         margin-top: 10px; }
     .chart-annotation strong { color: var(--accent-orange); }
@@ -204,7 +651,6 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <div class="grid-2">
 <div class="chart-card">
 <p class="chart-title">③ Fire Risk Is Highest in NSW, VIC and ACT</p>
-<p class="chart-subtitle">Idiom: Choropleth Map · Source: Geoscience Australia</p>
 <div id="choropleth_map" class="vis-container"></div>
 <div class="stat-row" id="state-info-box">
 <div class="stat-box"><div class="sv">8 States</div><div class="sl">Assessed for risk</div></div>
@@ -217,7 +663,6 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 
 <div class="chart-card">
 <p class="chart-title">④ Burned Area Has Spiked Since 2019</p>
-<p class="chart-subtitle">Idiom: Interactive Line Chart · Source: ABARES · Drag year slider to highlight a season</p>
 <div id="area_by_state" class="vis-container"></div>
 <div id="event-popup"></div>
 <p class="chart-annotation">🔴 The <strong>Black Summer (2019) burned 24M ha</strong> — the largest single season ever recorded. The previous record was 22M ha in 2003. Post-2019, seasons remain elevated well above the historical average of 12–14M ha, confirming a <strong>structural shift</strong> driven by rising temperatures.</p>
@@ -267,13 +712,11 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <div class="grid-2" style="margin-bottom:28px;">
 <div class="chart-card">
 <p class="chart-title">⑤ Fires Are Returning More Frequently</p>
-<p class="chart-subtitle">Average years since last wildfire by state · Blue = long interval (safer) · Red = short interval (more frequent) · Source: Based on CSIRO Cook et al. (2021), Nature Communications</p>
 <div id="fire_frequency_map" class="vis-container"></div>
 <p class="chart-annotation">🔴 States that averaged 40–75 years between fires in the 1980s now burn every 9–22 years. Tasmania dropped from 75-year intervals to 30. Blue is disappearing — replaced by red. Data: Cook et al. (2021), <em>Nature Communications</em>.</p>
 </div>
 <div class="chart-card">
 <p class="chart-title">⑥ Hotter Years Align With Larger Fire Seasons</p>
-<p class="chart-subtitle">Idiom: Dual-Axis Line Chart · Sources: ABARES · Bureau of Meteorology (ACORN-SAT)</p>
 <div id="dual_axis" class="vis-container"></div>
 <p class="chart-annotation">The 2019–20 Black Summer coincides with Australia's hottest year on record (+1.52°C above baseline). Warmer years consistently align with larger burned areas.</p>
 </div>
@@ -282,13 +725,11 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <div class="grid-2" style="margin-bottom:28px;">
 <div class="chart-card">
 <p class="chart-title">⑦ Fire Danger Is Now a Year-Round Problem</p>
-<p class="chart-subtitle">Idiom: Matrix Heatmap · Forest burned area (km²) · Source: NOAA-AVHRR / NASA-MODIS · Darker = more area burned · Based on CSIRO (2021)</p>
 <div id="heatmap" class="vis-container"></div>
 <p class="chart-annotation">🔴 Before 2001, severe burns were confined to Dec–Feb (dark band). Post-2011 the dark zone expands into Oct and Apr — fire season is growing at both ends. 2019 is the critical outlier: the entire row is dark, not just summer.</p>
 </div>
 <div class="chart-card">
 <p class="chart-title">⑧ The Fire Season Is Expanding at Both Ends</p>
-<p class="chart-subtitle">Idiom: Area Chart · Forest burned area (km²) by season · Source: CSIRO (2021) · Based on NOAA-AVHRR / NASA-MODIS</p>
 <div id="seasonal_trend" class="vis-container"></div>
 <p class="chart-annotation">🟣 Autumn/winter fires (purple) have grown 5× since 2001, rising at 14% per year. Summer fires (orange) remain dominant but the gap is closing — Australia now faces fire exposure across the full calendar year.</p>
 </div>
@@ -343,13 +784,11 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <div class="grid-2" style="margin-bottom:28px;">
 <div class="chart-card">
 <p class="chart-title">⑧ Temperate Forests Are the Hardest Hit</p>
-<p class="chart-subtitle">Idiom: Multi-line Chart · Source: Global Forest Watch (Australia) · Approximate data based on NASA-MODIS burned area · Thousand hectares</p>
 <div id="tree_cover_loss" class="vis-container"></div>
 <p class="chart-annotation">🔴 Temperate forests (teal) suffered the sharpest spike in 2019 — 1.95M ha lost, dwarfing every prior year. Tropical loss (green) surged in 2020 as post–Black Summer dry conditions extended fire weather north into regions historically resilient to severe fire.</p>
 </div>
 <div class="chart-card">
 <p class="chart-title">⑧ Black Summer Destroyed the Most Homes by Far</p>
-<p class="chart-subtitle">Idiom: Horizontal Bar Chart · Sources: CFA, NSW RFS, QFES, etc.</p>
 <div id="homes_chart" class="vis-container"></div>
 <p class="chart-annotation">The Black Summer (2019–20) caused the greatest property destruction — 3,000+ homes across multiple states, surpassing even Ash Wednesday (1983).</p>
 </div>
@@ -358,7 +797,6 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <div class="grid-2">
 <div class="chart-card">
 <p class="chart-title">⑨ Nearly 3 Billion Animals Lost in One Season</p>
-<p class="chart-subtitle">Idiom: Bar Chart · Source: WWF Australia / University of Sydney (2020)</p>
 <div class="wildlife-total">~3 Billion</div>
 <div class="wildlife-sub">animals killed or displaced · Black Summer 2019–20</div>
 <div id="wildlife_chart" class="vis-container"></div>
@@ -369,7 +807,6 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 </div>
 <div class="chart-card">
 <p class="chart-title">⑩ Black Summer's $103B Loss Dwarfed All Prior Events</p>
-<p class="chart-subtitle">Idiom: Waterfall Chart · Source: Insurance Council of Australia</p>
 <div id="waterfall_chart" class="vis-container"></div>
 <p class="chart-annotation">Each bar shows the economic loss added by a major bushfire event. The Black Summer's $103B single-season loss is larger than all previous events across 80 years combined — a single catastrophic step change in Australia's bushfire costs.</p>
 </div>
@@ -385,13 +822,11 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <div class="grid-2">
 <div class="chart-card">
 <p class="chart-title">⑪ More Australians Are Living in High-Risk Zones</p>
-<p class="chart-subtitle">Idiom: Bubble Plot · Sources: ABS Census · Hover to highlight state</p>
 <div id="dot_matrix" class="vis-container"></div>
 <p class="chart-annotation">🔴 Bubble size = exposed population. NSW (red) is consistently the largest. Every state's bubbles grow rightward — more people in harm's way each census decade.</p>
 </div>
 <div class="chart-card">
 <p class="chart-title">⑪b More States Will Enter the Extreme Fire Danger Zone</p>
-<p class="chart-subtitle">Idiom: Stacked Area Chart · Historical (solid) + Projected (translucent) · Inspired by EPBC threatened species trends</p>
 <div id="fire_danger_forecast" class="vis-container"></div>
 <p class="chart-annotation">🔴 In 1992 only 1 state was in High — none were Extreme. By 2024, 2 are Extreme, 3 High. <strong style="color:#C0392B;">Projected:</strong> by 2035 up to 5 states enter Extreme and the last Moderate state disappears by 2034.</p>
 </div>
