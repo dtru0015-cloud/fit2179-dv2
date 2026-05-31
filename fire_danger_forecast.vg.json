@@ -58,64 +58,45 @@
       {"year":2035,"category":"Extreme","count":5,"type":"forecast"}
     ]
   },
+  "encoding": {
+    "x": {
+      "field": "year", "type": "quantitative",
+      "scale": {"domain": [1992, 2035]},
+      "title": "Year",
+      "axis": {
+        "format": "d", "tickCount": 12,
+        "labelColor": "#aaaaaa", "titleColor": "#ffffff",
+        "labelFontSize": 10, "titleFontSize": 11,
+        "gridColor": "#1a2a3a", "gridDash": [3,3],
+        "domainColor": "#1e3a55"
+      }
+    }
+  },
   "layer": [
     {
-      "transform": [{"filter": "datum.type === 'forecast'"}],
-      "mark": {"type": "rect", "opacity": 0.07, "color": "#ffffff"},
-      "encoding": {
-        "x":  {"datum": 2024, "type": "quantitative"},
-        "x2": {"datum": 2035},
-        "y":  {"value": 0},
-        "y2": {"value": 300}
-      }
-    },
-    {
       "transform": [{"filter": "datum.type === 'historical'"}],
-      "mark": {
-        "type": "area",
-        "interpolate": "monotone",
-        "opacity": 0.9,
-        "line": {"strokeWidth": 1.5, "opacity": 0.6}
-      },
+      "mark": {"type": "area", "interpolate": "monotone", "opacity": 0.9,
+               "line": {"strokeWidth": 1.5, "opacity": 0.6}},
       "encoding": {
-        "x": {
-          "field": "year", "type": "quantitative",
-          "scale": {"domain": [1992, 2035]},
-          "title": "Year",
-          "axis": {
-            "labelColor": "#aaaaaa", "titleColor": "#ffffff",
-            "labelFontSize": 10, "titleFontSize": 11,
-            "gridColor": "#1a2a3a", "gridDash": [3,3],
-            "format": "d", "tickCount": 12
-          }
-        },
         "y": {
-          "field": "count", "type": "quantitative",
-          "stack": "zero",
+          "field": "count", "type": "quantitative", "stack": "zero",
           "title": "No. of States / Territories",
-          "axis": {
-            "labelColor": "#aaaaaa", "titleColor": "#ffffff",
-            "labelFontSize": 10, "titleFontSize": 11,
-            "gridColor": "#1a2a3a", "tickCount": 8
-          }
+          "axis": {"labelColor": "#aaaaaa", "titleColor": "#ffffff",
+                   "labelFontSize": 10, "titleFontSize": 11,
+                   "gridColor": "#1a2a3a", "tickCount": 8}
         },
         "color": {
           "field": "category", "type": "nominal",
           "sort": ["Moderate", "High", "Extreme"],
-          "scale": {
-            "domain": ["Moderate", "High", "Extreme"],
-            "range": ["#27AE60", "#E67E22", "#C0392B"]
-          },
-          "legend": {
-            "title": "Fire Danger Level",
-            "labelColor": "#ffffff", "titleColor": "#ffffff",
-            "labelFontSize": 10, "titleFontSize": 10,
-            "orient": "top-right"
-          }
+          "scale": {"domain": ["Moderate","High","Extreme"],
+                    "range": ["#27AE60","#E67E22","#C0392B"]},
+          "legend": {"title": "Fire Danger Level", "orient": "top-right",
+                     "labelColor": "#ffffff", "titleColor": "#ffffff",
+                     "labelFontSize": 10, "titleFontSize": 10}
         },
-        "order": {"field": "category", "sort": ["Moderate", "High", "Extreme"]},
+        "order": {"field": "category", "sort": ["Moderate","High","Extreme"]},
         "tooltip": [
-          {"field": "year",     "type": "quantitative", "title": "Year"},
+          {"field": "year",     "type": "quantitative", "title": "Year",         "format": "d"},
           {"field": "category", "type": "nominal",      "title": "Danger Level"},
           {"field": "count",    "type": "quantitative", "title": "No. of States"}
         ]
@@ -123,54 +104,49 @@
     },
     {
       "transform": [{"filter": "datum.type === 'forecast'"}],
-      "mark": {
-        "type": "area",
-        "interpolate": "monotone",
-        "opacity": 0.45,
-        "strokeDash": [5, 3],
-        "line": {"strokeWidth": 2, "opacity": 0.8, "strokeDash": [5,3]}
-      },
+      "mark": {"type": "area", "interpolate": "monotone", "opacity": 0.4,
+               "line": {"strokeWidth": 2, "opacity": 0.8, "strokeDash": [5,3]}},
       "encoding": {
-        "x": {"field": "year", "type": "quantitative"},
         "y": {"field": "count", "type": "quantitative", "stack": "zero"},
         "color": {
           "field": "category", "type": "nominal",
-          "sort": ["Moderate", "High", "Extreme"],
-          "scale": {
-            "domain": ["Moderate", "High", "Extreme"],
-            "range": ["#27AE60", "#E67E22", "#C0392B"]
-          },
+          "sort": ["Moderate","High","Extreme"],
+          "scale": {"domain": ["Moderate","High","Extreme"],
+                    "range": ["#27AE60","#E67E22","#C0392B"]},
           "legend": null
         },
-        "order": {"field": "category", "sort": ["Moderate", "High", "Extreme"]},
+        "order": {"field": "category", "sort": ["Moderate","High","Extreme"]},
         "tooltip": [
-          {"field": "year",     "type": "quantitative", "title": "Year (Projected)"},
+          {"field": "year",     "type": "quantitative", "title": "Year (Projected)", "format": "d"},
           {"field": "category", "type": "nominal",      "title": "Danger Level"},
           {"field": "count",    "type": "quantitative", "title": "No. of States"}
         ]
       }
     },
     {
-      "data": {"values": [{"x": 2024}]},
-      "mark": {"type": "rule", "color": "#ffffff", "strokeDash": [4,3], "strokeWidth": 1.5, "opacity": 0.5},
-      "encoding": {"x": {"field": "x", "type": "quantitative"}}
+      "data": {"values": [{"year": 2024}]},
+      "mark": {"type": "rule", "color": "#ffffff", "strokeDash": [4,3],
+               "strokeWidth": 1.5, "opacity": 0.5},
+      "encoding": {"x": {"field": "year", "type": "quantitative"}}
     },
     {
-      "data": {"values": [{"x": 2024.5, "y": 7.6, "label": "◀ Historical"}]},
-      "mark": {"type": "text", "align": "right", "fontSize": 9, "color": "#aaaaaa", "fontStyle": "italic"},
+      "data": {"values": [{"year": 2023.5, "count": 7.7}]},
+      "mark": {"type": "text", "align": "right", "fontSize": 9,
+               "color": "#aaaaaa", "fontStyle": "italic"},
       "encoding": {
-        "x": {"field": "x", "type": "quantitative"},
-        "y": {"field": "y", "type": "quantitative"},
-        "text": {"field": "label"}
+        "x": {"field": "year", "type": "quantitative"},
+        "y": {"field": "count", "type": "quantitative"},
+        "text": {"value": "◀ Historical"}
       }
     },
     {
-      "data": {"values": [{"x": 2024.5, "y": 7.6, "label": "Projected ▶"}]},
-      "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 9, "color": "#E67E22", "fontStyle": "italic"},
+      "data": {"values": [{"year": 2024.5, "count": 7.7}]},
+      "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 9,
+               "color": "#E67E22", "fontStyle": "italic"},
       "encoding": {
-        "x": {"field": "x", "type": "quantitative"},
-        "y": {"field": "y", "type": "quantitative"},
-        "text": {"field": "label"}
+        "x": {"field": "year", "type": "quantitative"},
+        "y": {"field": "count", "type": "quantitative"},
+        "text": {"value": "Projected ▶"}
       }
     }
   ]
