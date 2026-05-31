@@ -12,7 +12,7 @@
     },
     "font": "Inter, sans-serif",
     "concat": {
-      "spacing": 12
+      "spacing": 8
     },
     "title": {
       "color": "#c8d8f0",
@@ -21,349 +21,357 @@
       "offset": 4
     }
   },
-  "hconcat": [
+  "vconcat": [
     {
-      "title": "1980\u201389",
-      "width": 160,
-      "height": 340,
-      "projection": {
-        "type": "mercator",
-        "center": [
-          134,
-          -28
-        ],
-        "scale": 240,
-        "translate": [
-          90,
-          140
-        ]
-      },
-      "data": {
-        "url": "fire_return_interval.csv"
-      },
-      "transform": [
+      "hconcat": [
         {
-          "lookup": "state_name",
-          "from": {
-            "data": {
-              "url": "australia_states.geojson",
-              "format": {
-                "type": "json",
-                "property": "features"
+          "title": "1980\u201389",
+          "width": 280,
+          "height": 240,
+          "projection": {
+            "type": "mercator",
+            "center": [
+              134,
+              -28
+            ],
+            "scale": 260,
+            "translate": [
+              140,
+              120
+            ]
+          },
+          "data": {
+            "url": "fire_return_interval.csv"
+          },
+          "transform": [
+            {
+              "lookup": "state_name",
+              "from": {
+                "data": {
+                  "url": "australia_states.geojson",
+                  "format": {
+                    "type": "json",
+                    "property": "features"
+                  }
+                },
+                "key": "properties.STATE_NAME",
+                "fields": [
+                  "type",
+                  "geometry"
+                ]
               }
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#0a1628",
+            "strokeWidth": 0.8
+          },
+          "encoding": {
+            "shape": {
+              "field": "geometry",
+              "type": "geojson"
             },
-            "key": "properties.STATE_NAME",
-            "fields": [
-              "type",
-              "geometry"
+            "color": {
+              "field": "d1980",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  5,
+                  75
+                ],
+                "range": [
+                  "#b2182b",
+                  "#ef8a62",
+                  "#fddbc7",
+                  "#d1e5f0",
+                  "#67a9cf",
+                  "#2166ac"
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "d1980",
+                "type": "quantitative",
+                "title": "Avg yrs since fire",
+                "format": ".0f"
+              }
+            ]
+          }
+        },
+        {
+          "title": "1990\u201399",
+          "width": 280,
+          "height": 240,
+          "projection": {
+            "type": "mercator",
+            "center": [
+              134,
+              -28
+            ],
+            "scale": 260,
+            "translate": [
+              140,
+              120
+            ]
+          },
+          "data": {
+            "url": "fire_return_interval.csv"
+          },
+          "transform": [
+            {
+              "lookup": "state_name",
+              "from": {
+                "data": {
+                  "url": "australia_states.geojson",
+                  "format": {
+                    "type": "json",
+                    "property": "features"
+                  }
+                },
+                "key": "properties.STATE_NAME",
+                "fields": [
+                  "type",
+                  "geometry"
+                ]
+              }
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#0a1628",
+            "strokeWidth": 0.8
+          },
+          "encoding": {
+            "shape": {
+              "field": "geometry",
+              "type": "geojson"
+            },
+            "color": {
+              "field": "d1990",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  5,
+                  75
+                ],
+                "range": [
+                  "#b2182b",
+                  "#ef8a62",
+                  "#fddbc7",
+                  "#d1e5f0",
+                  "#67a9cf",
+                  "#2166ac"
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "d1990",
+                "type": "quantitative",
+                "title": "Avg yrs since fire",
+                "format": ".0f"
+              }
             ]
           }
         }
-      ],
-      "mark": {
-        "type": "geoshape",
-        "stroke": "#0a1628",
-        "strokeWidth": 0.8
-      },
-      "encoding": {
-        "shape": {
-          "field": "geometry",
-          "type": "geojson"
-        },
-        "color": {
-          "field": "d1980",
-          "type": "quantitative",
-          "scale": {
-            "domain": [
-              5,
-              75
-            ],
-            "range": [
-              "#b2182b",
-              "#ef8a62",
-              "#fddbc7",
-              "#d1e5f0",
-              "#67a9cf",
-              "#2166ac"
-            ]
-          },
-          "legend": null
-        },
-        "tooltip": [
-          {
-            "field": "state_name",
-            "type": "nominal",
-            "title": "State"
-          },
-          {
-            "field": "d1980",
-            "type": "quantitative",
-            "title": "Avg yrs since fire",
-            "format": ".0f"
-          }
-        ]
-      }
+      ]
     },
     {
-      "title": "1990\u201399",
-      "width": 160,
-      "height": 340,
-      "projection": {
-        "type": "mercator",
-        "center": [
-          134,
-          -28
-        ],
-        "scale": 240,
-        "translate": [
-          90,
-          140
-        ]
-      },
-      "data": {
-        "url": "fire_return_interval.csv"
-      },
-      "transform": [
+      "hconcat": [
         {
-          "lookup": "state_name",
-          "from": {
-            "data": {
-              "url": "australia_states.geojson",
-              "format": {
-                "type": "json",
-                "property": "features"
+          "title": "2000\u201309",
+          "width": 280,
+          "height": 240,
+          "projection": {
+            "type": "mercator",
+            "center": [
+              134,
+              -28
+            ],
+            "scale": 260,
+            "translate": [
+              140,
+              120
+            ]
+          },
+          "data": {
+            "url": "fire_return_interval.csv"
+          },
+          "transform": [
+            {
+              "lookup": "state_name",
+              "from": {
+                "data": {
+                  "url": "australia_states.geojson",
+                  "format": {
+                    "type": "json",
+                    "property": "features"
+                  }
+                },
+                "key": "properties.STATE_NAME",
+                "fields": [
+                  "type",
+                  "geometry"
+                ]
+              }
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#0a1628",
+            "strokeWidth": 0.8
+          },
+          "encoding": {
+            "shape": {
+              "field": "geometry",
+              "type": "geojson"
+            },
+            "color": {
+              "field": "d2000",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  5,
+                  75
+                ],
+                "range": [
+                  "#b2182b",
+                  "#ef8a62",
+                  "#fddbc7",
+                  "#d1e5f0",
+                  "#67a9cf",
+                  "#2166ac"
+                ]
+              },
+              "legend": null
+            },
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "d2000",
+                "type": "quantitative",
+                "title": "Avg yrs since fire",
+                "format": ".0f"
+              }
+            ]
+          }
+        },
+        {
+          "title": "2010\u201319",
+          "width": 280,
+          "height": 240,
+          "projection": {
+            "type": "mercator",
+            "center": [
+              134,
+              -28
+            ],
+            "scale": 260,
+            "translate": [
+              140,
+              120
+            ]
+          },
+          "data": {
+            "url": "fire_return_interval.csv"
+          },
+          "transform": [
+            {
+              "lookup": "state_name",
+              "from": {
+                "data": {
+                  "url": "australia_states.geojson",
+                  "format": {
+                    "type": "json",
+                    "property": "features"
+                  }
+                },
+                "key": "properties.STATE_NAME",
+                "fields": [
+                  "type",
+                  "geometry"
+                ]
+              }
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#0a1628",
+            "strokeWidth": 0.8
+          },
+          "encoding": {
+            "shape": {
+              "field": "geometry",
+              "type": "geojson"
+            },
+            "color": {
+              "field": "d2010",
+              "type": "quantitative",
+              "scale": {
+                "domain": [
+                  5,
+                  75
+                ],
+                "range": [
+                  "#b2182b",
+                  "#ef8a62",
+                  "#fddbc7",
+                  "#d1e5f0",
+                  "#67a9cf",
+                  "#2166ac"
+                ]
+              },
+              "legend": {
+                "title": "Avg yrs since last fire",
+                "titleColor": "#c8d8f0",
+                "labelColor": "#8aabcc",
+                "titleFontSize": 10,
+                "labelFontSize": 9,
+                "orient": "right",
+                "gradientLength": 100,
+                "values": [
+                  5,
+                  15,
+                  30,
+                  50,
+                  75
+                ]
               }
             },
-            "key": "properties.STATE_NAME",
-            "fields": [
-              "type",
-              "geometry"
+            "tooltip": [
+              {
+                "field": "state_name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "d2010",
+                "type": "quantitative",
+                "title": "Avg yrs since fire",
+                "format": ".0f"
+              }
             ]
           }
         }
-      ],
-      "mark": {
-        "type": "geoshape",
-        "stroke": "#0a1628",
-        "strokeWidth": 0.8
-      },
-      "encoding": {
-        "shape": {
-          "field": "geometry",
-          "type": "geojson"
-        },
-        "color": {
-          "field": "d1990",
-          "type": "quantitative",
-          "scale": {
-            "domain": [
-              5,
-              75
-            ],
-            "range": [
-              "#b2182b",
-              "#ef8a62",
-              "#fddbc7",
-              "#d1e5f0",
-              "#67a9cf",
-              "#2166ac"
-            ]
-          },
-          "legend": null
-        },
-        "tooltip": [
-          {
-            "field": "state_name",
-            "type": "nominal",
-            "title": "State"
-          },
-          {
-            "field": "d1990",
-            "type": "quantitative",
-            "title": "Avg yrs since fire",
-            "format": ".0f"
-          }
-        ]
-      }
-    },
-    {
-      "title": "2000\u201309",
-      "width": 160,
-      "height": 340,
-      "projection": {
-        "type": "mercator",
-        "center": [
-          134,
-          -28
-        ],
-        "scale": 240,
-        "translate": [
-          90,
-          140
-        ]
-      },
-      "data": {
-        "url": "fire_return_interval.csv"
-      },
-      "transform": [
-        {
-          "lookup": "state_name",
-          "from": {
-            "data": {
-              "url": "australia_states.geojson",
-              "format": {
-                "type": "json",
-                "property": "features"
-              }
-            },
-            "key": "properties.STATE_NAME",
-            "fields": [
-              "type",
-              "geometry"
-            ]
-          }
-        }
-      ],
-      "mark": {
-        "type": "geoshape",
-        "stroke": "#0a1628",
-        "strokeWidth": 0.8
-      },
-      "encoding": {
-        "shape": {
-          "field": "geometry",
-          "type": "geojson"
-        },
-        "color": {
-          "field": "d2000",
-          "type": "quantitative",
-          "scale": {
-            "domain": [
-              5,
-              75
-            ],
-            "range": [
-              "#b2182b",
-              "#ef8a62",
-              "#fddbc7",
-              "#d1e5f0",
-              "#67a9cf",
-              "#2166ac"
-            ]
-          },
-          "legend": null
-        },
-        "tooltip": [
-          {
-            "field": "state_name",
-            "type": "nominal",
-            "title": "State"
-          },
-          {
-            "field": "d2000",
-            "type": "quantitative",
-            "title": "Avg yrs since fire",
-            "format": ".0f"
-          }
-        ]
-      }
-    },
-    {
-      "title": "2010\u201319",
-      "width": 160,
-      "height": 340,
-      "projection": {
-        "type": "mercator",
-        "center": [
-          134,
-          -28
-        ],
-        "scale": 240,
-        "translate": [
-          90,
-          140
-        ]
-      },
-      "data": {
-        "url": "fire_return_interval.csv"
-      },
-      "transform": [
-        {
-          "lookup": "state_name",
-          "from": {
-            "data": {
-              "url": "australia_states.geojson",
-              "format": {
-                "type": "json",
-                "property": "features"
-              }
-            },
-            "key": "properties.STATE_NAME",
-            "fields": [
-              "type",
-              "geometry"
-            ]
-          }
-        }
-      ],
-      "mark": {
-        "type": "geoshape",
-        "stroke": "#0a1628",
-        "strokeWidth": 0.8
-      },
-      "encoding": {
-        "shape": {
-          "field": "geometry",
-          "type": "geojson"
-        },
-        "color": {
-          "field": "d2010",
-          "type": "quantitative",
-          "scale": {
-            "domain": [
-              5,
-              75
-            ],
-            "range": [
-              "#b2182b",
-              "#ef8a62",
-              "#fddbc7",
-              "#d1e5f0",
-              "#67a9cf",
-              "#2166ac"
-            ]
-          },
-          "legend": {
-            "title": "Avg yrs since last fire",
-            "titleColor": "#c8d8f0",
-            "labelColor": "#8aabcc",
-            "titleFontSize": 10,
-            "labelFontSize": 9,
-            "orient": "right",
-            "gradientLength": 100,
-            "values": [
-              5,
-              15,
-              30,
-              50,
-              75
-            ]
-          }
-        },
-        "tooltip": [
-          {
-            "field": "state_name",
-            "type": "nominal",
-            "title": "State"
-          },
-          {
-            "field": "d2010",
-            "type": "quantitative",
-            "title": "Avg yrs since fire",
-            "format": ".0f"
-          }
-        ]
-      }
+      ]
     }
   ]
 }
