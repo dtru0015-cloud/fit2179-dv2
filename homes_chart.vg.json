@@ -1,13 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 300,
+  "height": 370,
   "data": { "url": "bushfire_human_impact.csv" },
   "encoding": {
     "y": {
       "field": "event_name",
       "type": "nominal",
-      "sort": { "field": "homes", "order": "ascending" },
+      "sort": { "field": "homes", "order": "descending" },
       "title": null,
       "axis": {
         "labelColor": "#ffffff",
