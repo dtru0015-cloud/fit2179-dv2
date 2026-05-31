@@ -30,7 +30,7 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 .section-title { font-family: 'Merriweather', serif; font-size: 1.7rem; font-weight: 700; color: #fff; margin-bottom: 10px; line-height: 1.3; }
 .section-intro { font-size: 0.95rem; color: #aaa; max-width: 720px; margin-bottom: 30px; line-height: 1.8; }
 
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
 .chart-card { background: #0d1f35; border: 1px solid var(--border); border-radius: 8px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
 .chart-title { font-family: 'Merriweather', serif; font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
 .chart-subtitle { font-size: 0.78rem; color: #888; margin-bottom: 14px; }
@@ -179,12 +179,7 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <p class="chart-subtitle">Idiom: Interactive Line Chart · Source: ABARES · Drag year slider to highlight a season</p>
 <div id="area_by_state" class="vis-container"></div>
 <div id="event-popup"></div>
-<p class="chart-annotation">🔴 The Black Summer (2019) burned 186M ha nationally — more than all other seasons in this dataset combined.</p>
-
-<div class="insight-list">
-  <div class="insight-item"><span>📈 <strong style="color:#E67E22">Accelerating extremes.</strong> Before 2019, no season exceeded 25M ha. Since then, two seasons have surpassed 96M ha — a structural shift, not an anomaly.</span></div>
-  <div class="insight-item"><span>🌡️ <strong style="color:#E67E22">Climate is the driver.</strong> Peak seasons align with Australia's hottest years. As temperatures rise, the gap between a bad season and a catastrophic one keeps shrinking.</span></div>
-</div>
+<p class="chart-annotation">🔴 The Black Summer (2019) burned 186M ha nationally — more than all other seasons in this dataset combined. Before 2019, no single season exceeded 25M ha. Since then two seasons have surpassed 96M ha — a structural shift driven by rising temperatures, not an anomaly.</p>
 </div>
 </div>
 </div>
@@ -200,10 +195,7 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <p class="chart-title">⑤ Burned Area by Fire Year and Month (1990–2019)</p>
 <p class="chart-subtitle">Idiom: Matrix Heatmap · Forest burned area (km²) · Source: NOAA-AVHRR / NASA-MODIS · Darker = more area burned · Based on CSIRO (2021)</p>
 <div id="heatmap" class="vis-container"></div>
-<div class="insight-list">
-  <div class="insight-item"><span>🔥 <strong style="color:#E67E22">Season is expanding.</strong> Before 2001, extreme fire activity was confined to Dec–Feb. Post-2011, severe burns now extend into Oct and Mar–Apr — fire season is growing at both ends.</span></div>
-  <div class="insight-item"><span>📈 <strong style="color:#E67E22">2002 and 2019 stand apart.</strong> The Alpine Fires (2002) and Black Summer (2019) are the two darkest rows — but 2019 shows the critical difference: the entire row is dark, not just summer months.</span></div>
-</div>
+<p class="chart-annotation">🔴 Before 2001, severe burns were confined to Dec–Feb (dark band). Post-2011 the dark zone expands into Oct and Apr — fire season is growing at both ends. 2019 is the critical outlier: the entire row is dark, not just summer.</p>
 </div>
 <div class="chart-card">
 <p class="chart-title">⑥ Area Burned vs. Temperature Anomaly (2000–2024)</p>
@@ -218,20 +210,13 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <p class="chart-title">⑦ Fires Are Returning More Frequently — Decadal Fire Maps (1980–2019)</p>
 <p class="chart-subtitle">Average years since last wildfire by state · Blue = long interval (safer) · Red = short interval (more frequent) · Source: Based on CSIRO Cook et al. (2021), Nature Communications</p>
 <div id="fire_frequency_map" class="vis-container"></div>
-<div class="insight-list">
-  <div class="insight-item"><span>🔵→🔴 <strong style="color:#E67E22">Blue is disappearing.</strong> States that averaged 40–75 years between fires in the 1980s now burn every 9–22 years. The shift from cool blue to hot red across all four maps tells the story at a glance.</span></div>
-  <div class="insight-item"><span>🌲 <strong style="color:#E67E22">TAS and QLD most alarming.</strong> Tasmania's ancient rainforests dropped from 75-year intervals to 30 years. Queensland wet tropics — never fire-adapted — are burning for the first time on record.</span></div>
-</div>
-<p class="chart-annotation" style="margin-top:8px;">Data approximated from Cook et al. (2021) <em>Nature Communications</em> — satellite-derived burned area (NASA-MODIS / NOAA-AVHRR). State-level aggregation; sub-state variation is higher in forest zones.</p>
+<p class="chart-annotation">🔴 States that averaged 40–75 years between fires in the 1980s now burn every 9–22 years. Tasmania dropped from 75-year intervals to 30. Blue is disappearing — replaced by red. Data: Cook et al. (2021), <em>Nature Communications</em>.</p>
 </div>
 <div class="chart-card">
 <p class="chart-title">⑦b The Fire Season Is Lengthening — Summer vs Autumn/Winter Fires (1990–2019)</p>
 <p class="chart-subtitle">Idiom: Area Chart · Forest burned area (km²) by season · Source: CSIRO (2021) · Based on NOAA-AVHRR / NASA-MODIS</p>
 <div id="seasonal_trend" class="vis-container"></div>
-<div class="insight-list">
-  <div class="insight-item"><span>🟣 <strong style="color:#9b59b6">Autumn/winter fires (purple)</strong> have grown 5× since 2001 — rising at 14% per year. Fires once unheard of in May–August are now routine in forest zones.</span></div>
-  <div class="insight-item"><span>🟠 <strong style="color:#E67E22">Summer fires (orange)</strong> remain dominant but autumn/winter is closing the gap, extending total fire exposure across the full calendar year.</span></div>
-</div>
+<p class="chart-annotation">🟣 Autumn/winter fires (purple) have grown 5× since 2001, rising at 14% per year. Summer fires (orange) remain dominant but the gap is closing — Australia now faces fire exposure across the full calendar year.</p>
 </div>
 </div>
 </div>
@@ -247,10 +232,7 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 <p class="chart-title">⑧ Tree Cover Loss Due to Fire by Climate Domain (2001–2024)</p>
 <p class="chart-subtitle">Idiom: Multi-line Chart · Source: Global Forest Watch (Australia) · Approximate data based on NASA-MODIS burned area · Thousand hectares</p>
 <div id="tree_cover_loss" class="vis-container"></div>
-<div class="insight-list">
-  <div class="insight-item"><span>🌿 <strong style="color:#E67E22">Temperate forests hardest hit.</strong> Victoria's mountain ash and NSW coastal forests suffered catastrophic tree cover loss in 2019 — over 1.95M ha, dwarfing every prior year. These are slow-growing ecosystems that take decades to recover.</span></div>
-  <div class="insight-item"><span>🌴 <strong style="color:#E67E22">Tropical loss is rising too.</strong> Northern savanna woodlands showed a sharp 2020 spike as post–Black Summer dry conditions extended fire weather into the tropics — a region historically resilient to severe fire.</span></div>
-</div>
+<p class="chart-annotation">🔴 Temperate forests (teal) suffered the sharpest spike in 2019 — 1.95M ha lost, dwarfing every prior year. Tropical loss (green) surged in 2020 as post–Black Summer dry conditions extended fire weather north into regions historically resilient to severe fire.</p>
 </div>
 <div class="chart-card">
 <p class="chart-title">⑧ Homes Destroyed by Major Bushfires</p>
