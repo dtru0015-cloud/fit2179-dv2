@@ -1,5 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "height": 370
   "resolve": {
     "scale": {
       "color": "shared"
@@ -32,7 +33,11 @@
           134,
           -28
         ],
-        "scale": 240
+        "scale": 240,
+        "translate": [
+          105,
+          140
+        ]
       },
       "data": {
         "url": "fire_return_interval.csv"
@@ -110,7 +115,11 @@
           134,
           -28
         ],
-        "scale": 240
+        "scale": 240,
+        "translate": [
+          105,
+          140
+        ]
       },
       "data": {
         "url": "fire_return_interval.csv"
@@ -188,7 +197,11 @@
           134,
           -28
         ],
-        "scale": 240
+        "scale": 240,
+        "translate": [
+          105,
+          140
+        ]
       },
       "data": {
         "url": "fire_return_interval.csv"
@@ -266,7 +279,11 @@
           134,
           -28
         ],
-        "scale": 240
+        "scale": 240,
+        "translate": [
+          105,
+          140
+        ]
       },
       "data": {
         "url": "fire_return_interval.csv"
