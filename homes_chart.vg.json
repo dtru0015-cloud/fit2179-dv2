@@ -1,23 +1,23 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 370,
+  "height": 300,
   "data": { "url": "bushfire_human_impact.csv" },
   "transform": [
     { "filter": "datum.homes > 0" },
-    { "calculate": "sequence(1, ceil(datum.homes / 100) + 1)", "as": "seq" },
+    { "calculate": "sequence(1, ceil(datum.homes / 250) + 1)", "as": "seq" },
     { "flatten": ["seq"] }
   ],
   "mark": {
     "type": "text",
     "baseline": "middle",
-    "fontSize": 15
+    "fontSize": 18
   },
   "encoding": {
     "x": {
       "field": "seq",
       "type": "quantitative",
-      "title": "Each 🏠 = 100 homes destroyed",
+      "title": "Each 🏠 = 250 homes destroyed",
       "axis": {
         "titleColor": "#E67E22",
         "titleFontSize": 11,
