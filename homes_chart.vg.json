@@ -2,12 +2,25 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 300,
-  "data": { "url": "bushfire_human_impact.csv" },
+  "data": {
+    "values": [
+      {"event_name": "Black Summer",      "year": "2019", "homes": 3000},
+      {"event_name": "Ash Wednesday",     "year": "1983", "homes": 2500},
+      {"event_name": "Black Saturday",    "year": "2009", "homes": 2029},
+      {"event_name": "Black Friday",      "year": "1939", "homes": 1300},
+      {"event_name": "Yarloop",           "year": "2016", "homes": 181},
+      {"event_name": "Black Christmas",   "year": "2001", "homes": 109},
+      {"event_name": "Wooroloo",          "year": "2021", "homes": 86},
+      {"event_name": "Tathra",            "year": "2018", "homes": 69},
+      {"event_name": "Alpine Fires",      "year": "2003", "homes": 41},
+      {"event_name": "Sampson Flat",      "year": "2015", "homes": 27}
+    ]
+  },
   "encoding": {
     "y": {
       "field": "event_name",
       "type": "nominal",
-      "sort": { "field": "homes", "order": "ascending" },
+      "sort": null,
       "title": null,
       "axis": {
         "labelFontSize": 10,
