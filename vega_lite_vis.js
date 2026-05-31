@@ -230,6 +230,46 @@ vegaEmbed("#seasonal_trend",     "seasonal_trend.vg.json",     embedOpts).catch(
 vegaEmbed("#fire_frequency_map", "fire_frequency_map.vg.json", embedOpts).catch(console.error);
 vegaEmbed("#tree_cover_loss",    "tree_cover_loss.vg.json",    embedOpts).catch(console.error);
 vegaEmbed("#homes_chart",     "homes_chart.vg.json",      embedOpts).catch(console.error);
-vegaEmbed("#wildlife_chart",  "wildlife_chart.vg.json",   vegaOpts ).catch(console.error);
+// Wildlife info box data
+const wildlifeInfo = {
+  reptiles: {
+    title: "🦎 Reptiles — 2.46 billion",
+    body: "<strong>81% of all affected animals.</strong> Reptiles — from tiny skinks to large goannas — were found across every burned ecosystem. Their ground-level habitat was incinerated directly, leaving few escape routes."
+  },
+  birds: {
+    title: "🦅 Birds — 180 million",
+    body: "<strong>6% of the total.</strong> Including critically threatened species like the glossy black cockatoo and regent honeyeater. Many birds escaped the flames but lost food sources and nesting trees for years after."
+  },
+  mammals: {
+    title: "🦘 Mammals — 143 million",
+    body: "<strong>5% of the total.</strong> Koalas, gliders, wallabies, wombats and bats displaced from eastern Australia's burned forests. Koala populations dropped so sharply they were subsequently listed as Endangered."
+  },
+  frogs: {
+    title: "🐸 Frogs — 51 million",
+    body: "<strong>2% of the total.</strong> Already among Australia's most threatened animals before the fires. Frogs depend on moist microhabitats that dried out completely, pushing several species toward local extinction."
+  }
+};
+
+const wildlifeDefault = "<span style='color:#E67E22;font-weight:600;'>🔴 Click any circle to explore.</span>&nbsp;Reptiles dominated the toll (2.46B — 81% of all affected animals), followed by birds (180M), mammals (143M) and frogs (51M). One of the worst wildlife disasters in modern history.";
+
+function updateWildlifeBox(id) {
+  const box = document.getElementById('wildlife-info');
+  if (!box) return;
+  if (!id || !wildlifeInfo[id]) {
+    box.innerHTML = wildlifeDefault;
+    box.style.borderColor = '#1e3a55';
+  } else {
+    const d = wildlifeInfo[id];
+    box.innerHTML = \`<span style="color:#E67E22;font-weight:700;font-size:0.88rem;">\${d.title}</span><br>\${d.body}\`;
+    box.style.borderColor = '#E67E22';
+  }
+}
+
+vegaEmbed("#wildlife_chart", "wildlife_chart.vg.json", vegaOpts)
+  .then(result => {
+    result.view.addSignalListener('selected', (name, value) => {
+      updateWildlifeBox(value);
+    });
+  }).catch(console.error);
 vegaEmbed("#waterfall_chart", "waterfall_chart.vg.json",  vegaOpts ).catch(console.error);
 vegaEmbed("#dot_matrix",      "dot_matrix.vg.json",       embedOpts).catch(console.error);

@@ -1,17 +1,19 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "width": 500,
-  "height": 380,
+  "height": 340,
   "background": "#0a1628",
   "padding": 10,
 
   "signals": [
     {
-      "name": "hovered",
+      "name": "selected",
       "value": null,
       "on": [
-        {"events": "symbol:mouseover", "update": "datum.id"},
-        {"events": "symbol:mouseout",  "update": "null"}
+        {
+          "events": "symbol:click",
+          "update": "selected === datum.id ? null : datum.id"
+        }
       ]
     }
   ],
@@ -20,10 +22,10 @@
     {
       "name": "circles",
       "values": [
-        {"id": "reptiles", "label": "2.46b", "name": "🦎 Reptiles", "x": 152, "y": 195, "size": 55000, "color": "#C0392B", "fact": "2.46 billion — 81% of all animals affected. Reptiles range from tiny skinks to large goannas across every burned ecosystem."},
-        {"id": "birds",    "label": "180m",  "name": "🦅 Birds",    "x": 390, "y": 100, "size": 4024,  "color": "#E67E22", "fact": "180 million birds lost — including threatened species like glossy black cockatoos and regent honeyeaters."},
-        {"id": "mammals",  "label": "143m",  "name": "🦘 Mammals",  "x": 390, "y": 215, "size": 3198,  "color": "#F39C12", "fact": "143 million mammals — koalas, gliders, wallabies and bats displaced from burned habitat across eastern Australia."},
-        {"id": "frogs",    "label": "51m",   "name": "🐸 Frogs",    "x": 390, "y": 315, "size": 1140,  "color": "#27AE60", "fact": "51 million frogs — already among Australia's most vulnerable wildlife, now facing potential local extinctions."}
+        {"id": "reptiles", "label": "2.46b", "name": "🦎 Reptiles", "x": 148, "y": 180, "size": 38000, "color": "#C0392B"},
+        {"id": "birds",    "label": "180m",  "name": "🦅 Birds",    "x": 380, "y":  90, "size": 7000,  "color": "#E67E22"},
+        {"id": "mammals",  "label": "143m",  "name": "🦘 Mammals",  "x": 380, "y": 200, "size": 5500,  "color": "#F39C12"},
+        {"id": "frogs",    "label": "51m",   "name": "🐸 Frogs",    "x": 380, "y": 295, "size": 2500,  "color": "#27AE60"}
       ]
     }
   ],
@@ -37,25 +39,43 @@
           "shape":  {"value": "circle"},
           "x":      {"field": "x"},
           "y":      {"field": "y"},
-          "size":   {"field": "size"},
           "fill":   {"field": "color"},
           "cursor": {"value": "pointer"},
-          "tooltip": {"signal": "{'Species': datum.name, 'Count': datum.label, 'Fact': datum.fact}"}
+          "tooltip": {"signal": "{'Species': datum.name, 'Count': datum.label}"}
         },
         "update": {
-          "opacity":      {"signal": "hovered === null || hovered === datum.id ? 1 : 0.35"},
-          "stroke":       {"signal": "hovered === datum.id ? '#ffffff' : '#0a1628'"},
-          "strokeWidth":  {"signal": "hovered === datum.id ? 3 : 1"}
+          "size":        {"signal": "selected === datum.id ? datum.size * 1.12 : datum.size"},
+          "opacity":     {"signal": "selected === null || selected === datum.id ? 1 : 0.25"},
+          "stroke":      {"signal": "selected === datum.id ? '#ffffff' : '#0a1628'"},
+          "strokeWidth": {"signal": "selected === datum.id ? 3 : 1"}
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {"data": "circles"},
+      "encode": {
+        "enter": {
+          "shape":   {"value": "circle"},
+          "x":       {"field": "x"},
+          "y":       {"field": "y"},
+          "fill":    {"value": "transparent"},
+          "stroke":  {"value": "transparent"},
+          "cursor":  {"value": "pointer"}
+        },
+        "update": {
+          "size": {"signal": "datum.size * 1.6"}
         }
       }
     },
     {
       "type": "text",
       "from": {"data": "circles"},
+      "interactive": false,
       "encode": {
         "enter": {
           "x":          {"field": "x"},
-          "y":          {"field": "y", "offset": -8},
+          "y":          {"field": "y", "offset": -7},
           "text":       {"field": "label"},
           "fill":       {"value": "#ffffff"},
           "fontSize":   {"signal": "datum.id === 'reptiles' ? 20 : 12"},
@@ -64,13 +84,14 @@
           "baseline":   {"value": "middle"}
         },
         "update": {
-          "opacity": {"signal": "hovered === null || hovered === datum.id ? 1 : 0.4"}
+          "opacity": {"signal": "selected === null || selected === datum.id ? 1 : 0.3"}
         }
       }
     },
     {
       "type": "text",
       "from": {"data": "circles"},
+      "interactive": false,
       "encode": {
         "enter": {
           "x":        {"field": "x"},
@@ -82,38 +103,7 @@
           "baseline": {"value": "middle"}
         },
         "update": {
-          "opacity": {"signal": "hovered === null || hovered === datum.id ? 1 : 0.4"}
-        }
-      }
-    },
-    {
-      "type": "rect",
-      "encode": {
-        "enter": {
-          "x": {"value": 0}, "y": {"value": 345},
-          "width": {"value": 500}, "height": {"value": 45},
-          "fill": {"value": "#112240"},
-          "cornerRadius": {"value": 6}
-        },
-        "update": {
-          "opacity": {"signal": "hovered !== null ? 1 : 0"}
-        }
-      }
-    },
-    {
-      "type": "text",
-      "encode": {
-        "enter": {
-          "x": {"value": 250}, "y": {"value": 370},
-          "align": {"value": "center"},
-          "baseline": {"value": "middle"},
-          "fontSize": {"value": 11},
-          "fill": {"value": "#c8d8f0"},
-          "width": {"value": 480}
-        },
-        "update": {
-          "text":    {"signal": "hovered !== null ? data('circles')[indexof(pluck(data('circles'),'id'), hovered)].fact : ''"},
-          "opacity": {"signal": "hovered !== null ? 1 : 0"}
+          "opacity": {"signal": "selected === null || selected === datum.id ? 1 : 0.3"}
         }
       }
     }
