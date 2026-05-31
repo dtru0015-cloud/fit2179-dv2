@@ -25,7 +25,7 @@
     {
       "title": "1980\u201389",
       "width": 140,
-      "height": 140,
+      "height": 160,
       "projection": {
         "type": "mercator",
         "center": [
@@ -103,7 +103,7 @@
     {
       "title": "1990\u201399",
       "width": 140,
-      "height": 140,
+      "height": 160,
       "projection": {
         "type": "mercator",
         "center": [
@@ -181,7 +181,7 @@
     {
       "title": "2000\u201309",
       "width": 140,
-      "height": 140,
+      "height": 160,
       "projection": {
         "type": "mercator",
         "center": [
@@ -259,7 +259,7 @@
     {
       "title": "2010\u201319",
       "width": 140,
-      "height": 140,
+      "height": 160,
       "projection": {
         "type": "mercator",
         "center": [

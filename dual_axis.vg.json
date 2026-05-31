@@ -6,7 +6,7 @@
   "vconcat": [
     {
       "width": "container",
-      "height": 185,
+      "height": 220,
       "layer": [
         {
           "mark": {
@@ -126,7 +126,7 @@
     },
     {
       "width": "container",
-      "height": 40,
+      "height": 50,
       "params": [
         {
           "name": "brush",
