@@ -149,7 +149,7 @@
     },
     {
       "comment": "── Black Summer sublabel",
-      "data": {"values": [{"year": "2019", "label": "186M ha — largest on record"}]},
+      "data": {"values": [{"year": "2019", "label": "18.6M ha — largest on record"}]},
       "mark": {"type": "text", "align": "right", "dx": -4, "dy": 28,
                "fontSize": 9, "color": "#C0392B"},
       "encoding": {
