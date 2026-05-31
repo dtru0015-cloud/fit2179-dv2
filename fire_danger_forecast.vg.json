@@ -1,0 +1,177 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "config": { "background": "#0a1628", "view": { "stroke": "transparent" } },
+  "data": {
+    "values": [
+      {"year":1992,"category":"Moderate","count":7,"type":"historical"},
+      {"year":1992,"category":"High","count":1,"type":"historical"},
+      {"year":1992,"category":"Extreme","count":0,"type":"historical"},
+      {"year":1996,"category":"Moderate","count":7,"type":"historical"},
+      {"year":1996,"category":"High","count":1,"type":"historical"},
+      {"year":1996,"category":"Extreme","count":0,"type":"historical"},
+      {"year":2000,"category":"Moderate","count":6,"type":"historical"},
+      {"year":2000,"category":"High","count":2,"type":"historical"},
+      {"year":2000,"category":"Extreme","count":0,"type":"historical"},
+      {"year":2004,"category":"Moderate","count":6,"type":"historical"},
+      {"year":2004,"category":"High","count":2,"type":"historical"},
+      {"year":2004,"category":"Extreme","count":0,"type":"historical"},
+      {"year":2008,"category":"Moderate","count":5,"type":"historical"},
+      {"year":2008,"category":"High","count":3,"type":"historical"},
+      {"year":2008,"category":"Extreme","count":0,"type":"historical"},
+      {"year":2012,"category":"Moderate","count":5,"type":"historical"},
+      {"year":2012,"category":"High","count":3,"type":"historical"},
+      {"year":2012,"category":"Extreme","count":0,"type":"historical"},
+      {"year":2014,"category":"Moderate","count":4,"type":"historical"},
+      {"year":2014,"category":"High","count":3,"type":"historical"},
+      {"year":2014,"category":"Extreme","count":1,"type":"historical"},
+      {"year":2018,"category":"Moderate","count":4,"type":"historical"},
+      {"year":2018,"category":"High","count":3,"type":"historical"},
+      {"year":2018,"category":"Extreme","count":1,"type":"historical"},
+      {"year":2020,"category":"Moderate","count":3,"type":"historical"},
+      {"year":2020,"category":"High","count":3,"type":"historical"},
+      {"year":2020,"category":"Extreme","count":2,"type":"historical"},
+      {"year":2024,"category":"Moderate","count":3,"type":"historical"},
+      {"year":2024,"category":"High","count":3,"type":"historical"},
+      {"year":2024,"category":"Extreme","count":2,"type":"historical"},
+      {"year":2024,"category":"Moderate","count":3,"type":"forecast"},
+      {"year":2024,"category":"High","count":3,"type":"forecast"},
+      {"year":2024,"category":"Extreme","count":2,"type":"forecast"},
+      {"year":2026,"category":"Moderate","count":2,"type":"forecast"},
+      {"year":2026,"category":"High","count":4,"type":"forecast"},
+      {"year":2026,"category":"Extreme","count":2,"type":"forecast"},
+      {"year":2028,"category":"Moderate","count":2,"type":"forecast"},
+      {"year":2028,"category":"High","count":3,"type":"forecast"},
+      {"year":2028,"category":"Extreme","count":3,"type":"forecast"},
+      {"year":2030,"category":"Moderate","count":1,"type":"forecast"},
+      {"year":2030,"category":"High","count":4,"type":"forecast"},
+      {"year":2030,"category":"Extreme","count":3,"type":"forecast"},
+      {"year":2032,"category":"Moderate","count":1,"type":"forecast"},
+      {"year":2032,"category":"High","count":3,"type":"forecast"},
+      {"year":2032,"category":"Extreme","count":4,"type":"forecast"},
+      {"year":2034,"category":"Moderate","count":0,"type":"forecast"},
+      {"year":2034,"category":"High","count":4,"type":"forecast"},
+      {"year":2034,"category":"Extreme","count":4,"type":"forecast"},
+      {"year":2035,"category":"Moderate","count":0,"type":"forecast"},
+      {"year":2035,"category":"High","count":3,"type":"forecast"},
+      {"year":2035,"category":"Extreme","count":5,"type":"forecast"}
+    ]
+  },
+  "layer": [
+    {
+      "transform": [{"filter": "datum.type === 'forecast'"}],
+      "mark": {"type": "rect", "opacity": 0.07, "color": "#ffffff"},
+      "encoding": {
+        "x":  {"datum": 2024, "type": "quantitative"},
+        "x2": {"datum": 2035},
+        "y":  {"value": 0},
+        "y2": {"value": 300}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.type === 'historical'"}],
+      "mark": {
+        "type": "area",
+        "interpolate": "monotone",
+        "opacity": 0.9,
+        "line": {"strokeWidth": 1.5, "opacity": 0.6}
+      },
+      "encoding": {
+        "x": {
+          "field": "year", "type": "quantitative",
+          "scale": {"domain": [1992, 2035]},
+          "title": "Year",
+          "axis": {
+            "labelColor": "#aaaaaa", "titleColor": "#ffffff",
+            "labelFontSize": 10, "titleFontSize": 11,
+            "gridColor": "#1a2a3a", "gridDash": [3,3],
+            "format": "d", "tickCount": 12
+          }
+        },
+        "y": {
+          "field": "count", "type": "quantitative",
+          "stack": "zero",
+          "title": "No. of States / Territories",
+          "axis": {
+            "labelColor": "#aaaaaa", "titleColor": "#ffffff",
+            "labelFontSize": 10, "titleFontSize": 11,
+            "gridColor": "#1a2a3a", "tickCount": 8
+          }
+        },
+        "color": {
+          "field": "category", "type": "nominal",
+          "sort": ["Moderate", "High", "Extreme"],
+          "scale": {
+            "domain": ["Moderate", "High", "Extreme"],
+            "range": ["#27AE60", "#E67E22", "#C0392B"]
+          },
+          "legend": {
+            "title": "Fire Danger Level",
+            "labelColor": "#ffffff", "titleColor": "#ffffff",
+            "labelFontSize": 10, "titleFontSize": 10,
+            "orient": "top-right"
+          }
+        },
+        "order": {"field": "category", "sort": ["Moderate", "High", "Extreme"]},
+        "tooltip": [
+          {"field": "year",     "type": "quantitative", "title": "Year"},
+          {"field": "category", "type": "nominal",      "title": "Danger Level"},
+          {"field": "count",    "type": "quantitative", "title": "No. of States"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.type === 'forecast'"}],
+      "mark": {
+        "type": "area",
+        "interpolate": "monotone",
+        "opacity": 0.45,
+        "strokeDash": [5, 3],
+        "line": {"strokeWidth": 2, "opacity": 0.8, "strokeDash": [5,3]}
+      },
+      "encoding": {
+        "x": {"field": "year", "type": "quantitative"},
+        "y": {"field": "count", "type": "quantitative", "stack": "zero"},
+        "color": {
+          "field": "category", "type": "nominal",
+          "sort": ["Moderate", "High", "Extreme"],
+          "scale": {
+            "domain": ["Moderate", "High", "Extreme"],
+            "range": ["#27AE60", "#E67E22", "#C0392B"]
+          },
+          "legend": null
+        },
+        "order": {"field": "category", "sort": ["Moderate", "High", "Extreme"]},
+        "tooltip": [
+          {"field": "year",     "type": "quantitative", "title": "Year (Projected)"},
+          {"field": "category", "type": "nominal",      "title": "Danger Level"},
+          {"field": "count",    "type": "quantitative", "title": "No. of States"}
+        ]
+      }
+    },
+    {
+      "data": {"values": [{"x": 2024}]},
+      "mark": {"type": "rule", "color": "#ffffff", "strokeDash": [4,3], "strokeWidth": 1.5, "opacity": 0.5},
+      "encoding": {"x": {"field": "x", "type": "quantitative"}}
+    },
+    {
+      "data": {"values": [{"x": 2024.5, "y": 7.6, "label": "◀ Historical"}]},
+      "mark": {"type": "text", "align": "right", "fontSize": 9, "color": "#aaaaaa", "fontStyle": "italic"},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {"values": [{"x": 2024.5, "y": 7.6, "label": "Projected ▶"}]},
+      "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 9, "color": "#E67E22", "fontStyle": "italic"},
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ]
+}
