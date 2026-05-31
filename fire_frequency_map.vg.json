@@ -26,18 +26,18 @@
       "hconcat": [
         {
           "title": "1980\u201389",
-          "width": 270,
-          "height": 130,
+          "width": 280,
+          "height": 220,
           "projection": {
             "type": "mercator",
             "center": [
               134,
               -28
             ],
-            "scale": 230,
+            "scale": 260,
             "translate": [
-              135,
-              65
+              140,
+              110
             ]
           },
           "data": {
@@ -108,18 +108,18 @@
         },
         {
           "title": "1990\u201399",
-          "width": 270,
-          "height": 130,
+          "width": 280,
+          "height": 220,
           "projection": {
             "type": "mercator",
             "center": [
               134,
               -28
             ],
-            "scale": 230,
+            "scale": 260,
             "translate": [
-              135,
-              65
+              140,
+              110
             ]
           },
           "data": {
@@ -194,18 +194,18 @@
       "hconcat": [
         {
           "title": "2000\u201309",
-          "width": 270,
-          "height": 130,
+          "width": 280,
+          "height": 220,
           "projection": {
             "type": "mercator",
             "center": [
               134,
               -28
             ],
-            "scale": 230,
+            "scale": 260,
             "translate": [
-              135,
-              65
+              140,
+              110
             ]
           },
           "data": {
@@ -276,18 +276,18 @@
         },
         {
           "title": "2010\u201319",
-          "width": 270,
-          "height": 130,
+          "width": 280,
+          "height": 220,
           "projection": {
             "type": "mercator",
             "center": [
               134,
               -28
             ],
-            "scale": 230,
+            "scale": 260,
             "translate": [
-              135,
-              65
+              140,
+              110
             ]
           },
           "data": {
