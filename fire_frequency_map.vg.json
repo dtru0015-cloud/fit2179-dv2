@@ -24,15 +24,15 @@
   "hconcat": [
     {
       "title": "1980\u201389",
-      "width": 200,
-      "height": 370,
+      "width": 160,
+      "height": 280,
       "projection": {
         "type": "mercator",
         "center": [
           134,
           -28
         ],
-        "scale": 280
+        "scale": 240
       },
       "data": {
         "url": "fire_return_interval.csv"
@@ -102,15 +102,15 @@
     },
     {
       "title": "1990\u201399",
-      "width": 200,
-      "height": 370,
+      "width": 160,
+      "height": 280,
       "projection": {
         "type": "mercator",
         "center": [
           134,
           -28
         ],
-        "scale": 280
+        "scale": 240
       },
       "data": {
         "url": "fire_return_interval.csv"
@@ -180,15 +180,15 @@
     },
     {
       "title": "2000\u201309",
-      "width": 200,
-      "height": 370,
+      "width": 160,
+      "height": 280,
       "projection": {
         "type": "mercator",
         "center": [
           134,
           -28
         ],
-        "scale": 280
+        "scale": 240
       },
       "data": {
         "url": "fire_return_interval.csv"
@@ -258,15 +258,15 @@
     },
     {
       "title": "2010\u201319",
-      "width": 200,
-      "height": 370,
+      "width": 160,
+      "height": 280,
       "projection": {
         "type": "mercator",
         "center": [
           134,
           -28
         ],
-        "scale": 280
+        "scale": 240
       },
       "data": {
         "url": "fire_return_interval.csv"
