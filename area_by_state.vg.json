@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 350,
+  "height": 300,
   "params": [
     {
       "name": "selected_year",
@@ -167,36 +167,6 @@
         "fontWeight": "bold",
         "color": "#E67E22",
         "fontStyle": "italic"
-      },
-      "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal"
-        },
-        "y": {
-          "value": 0
-        },
-        "text": {
-          "field": "label"
-        }
-      }
-    },
-    {
-      "comment": "\u2500\u2500 New normal sublabel",
-      "data": {
-        "values": [
-          {
-            "year": "2022",
-            "label": "3 of 5 seasons broke pre-2019 records"
-          }
-        ]
-      },
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "dy": 34,
-        "fontSize": 9,
-        "color": "#E67E22"
       },
       "encoding": {
         "x": {
