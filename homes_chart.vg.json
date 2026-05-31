@@ -3,31 +3,8 @@
   "width": "container",
   "height": 300,
   "data": { "url": "bushfire_human_impact.csv" },
-  "transform": [
-    { "filter": "datum.homes > 0" },
-    { "calculate": "sequence(1, ceil(datum.homes / 250) + 1)", "as": "seq" },
-    { "flatten": ["seq"] }
-  ],
-  "mark": {
-    "type": "text",
-    "baseline": "middle",
-    "fontSize": 18
-  },
+  "mark": { "type": "bar", "cornerRadiusEnd": 3 },
   "encoding": {
-    "x": {
-      "field": "seq",
-      "type": "quantitative",
-      "title": "Each 🏠 = 250 homes destroyed",
-      "axis": {
-        "titleColor": "#E67E22",
-        "titleFontSize": 11,
-        "labelColor": "#888888",
-        "labelFontSize": 9,
-        "grid": false,
-        "tickMinStep": 1,
-        "domain": false
-      }
-    },
     "y": {
       "field": "event_name",
       "type": "nominal",
@@ -36,12 +13,37 @@
       "axis": {
         "labelColor": "#ffffff",
         "labelFontSize": 10,
-        "labelLimit": 160,
+        "labelLimit": 180,
         "ticks": false,
         "domain": false
       }
     },
-    "text": { "value": "🏠" },
+    "x": {
+      "field": "homes",
+      "type": "quantitative",
+      "title": "Homes Destroyed",
+      "axis": {
+        "format": ",.0f",
+        "titleFontSize": 11,
+        "labelFontSize": 9,
+        "titleColor": "#E67E22",
+        "labelColor": "#aaaaaa",
+        "grid": true,
+        "gridDash": [3, 3],
+        "gridColor": "#1a2a3a",
+        "domainColor": "#1e3a55"
+      }
+    },
+    "color": {
+      "field": "homes",
+      "type": "quantitative",
+      "scale": {
+        "type": "threshold",
+        "domain": [100, 500, 1500, 2500],
+        "range": ["#f4a460", "#e07b39", "#c0392b", "#8b1a1a", "#5c0a0a"]
+      },
+      "legend": null
+    },
     "tooltip": [
       { "field": "event_name", "type": "nominal",      "title": "Event"                              },
       { "field": "year",       "type": "ordinal",       "title": "Year"                               },
