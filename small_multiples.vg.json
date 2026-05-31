@@ -1,8 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 280,
-  "data": {"url": "bom_temperature_anomaly.csv"},
+  "height": 370,
+  "data": {
+    "url": "bom_temperature_anomaly.csv"
+  },
   "facet": {
     "field": "state",
     "type": "nominal",
@@ -21,13 +23,29 @@
       "type": "area",
       "color": "#E67E22",
       "opacity": 0.4,
-      "line": {"color": "#E67E22", "strokeWidth": 1.5}
+      "line": {
+        "color": "#E67E22",
+        "strokeWidth": 1.5
+      }
     },
     "encoding": {
       "x": {
         "field": "month",
         "type": "ordinal",
-        "sort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+        "sort": [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec"
+        ],
         "title": null,
         "axis": {
           "labelAngle": -45,
@@ -51,15 +69,32 @@
         }
       },
       "tooltip": [
-        {"field": "state", "type": "nominal", "title": "State"},
-        {"field": "month", "type": "ordinal", "title": "Month"},
-        {"field": "avg_fire_danger_index", "type": "quantitative", "title": "Fire Danger Index", "format": ".1f"}
+        {
+          "field": "state",
+          "type": "nominal",
+          "title": "State"
+        },
+        {
+          "field": "month",
+          "type": "ordinal",
+          "title": "Month"
+        },
+        {
+          "field": "avg_fire_danger_index",
+          "type": "quantitative",
+          "title": "Fire Danger Index",
+          "format": ".1f"
+        }
       ]
     }
   },
   "config": {
     "background": "#0a1628",
-    "view": {"stroke": "#1e3a55"},
-    "facet": {"spacing": 12}
+    "view": {
+      "stroke": "#1e3a55"
+    },
+    "facet": {
+      "spacing": 12
+    }
   }
 }
