@@ -7,7 +7,7 @@
     "y": {
       "field": "event_name",
       "type": "nominal",
-      "sort": { "field": "homes", "order": "descending" },
+      "sort": { "field": "homes", "order": "ascending" },
       "title": null,
       "axis": {
         "labelFontSize": 10,
@@ -47,43 +47,14 @@
           "legend": null
         },
         "tooltip": [
-          { "field": "event_name", "type": "nominal", "title": "Event" },
-          { "field": "year", "type": "ordinal", "title": "Year" },
-          {
-            "field": "homes",
-            "type": "quantitative",
-            "title": "Homes Destroyed",
-            "format": ",.0f"
-          }
+          { "field": "event_name", "type": "nominal",     "title": "Event"           },
+          { "field": "year",       "type": "ordinal",      "title": "Year"            },
+          { "field": "homes",      "type": "quantitative", "title": "Homes Destroyed",
+            "format": ",.0f" }
         ]
       }
     },
     {
-      "transform": [
-        { "filter": "datum.homes >= 400" }
-      ],
-      "mark": {
-        "type": "text",
-        "align": "right",
-        "dx": -6,
-        "baseline": "middle",
-        "fontSize": 10,
-        "fontWeight": "bold",
-        "color": "#ffffff"
-      },
-      "encoding": {
-        "x": { "field": "homes", "type": "quantitative" },
-        "text": {
-          "field": "homes",
-          "type": "quantitative",
-          "format": ",.0f"
-        }
-      }
-    },
-    {
-      "transform": [
-        { "filter": "datum.homes > 0 && datum.homes < 400" }
-      ],
       "mark": {
         "type": "text",
         "align": "left",
@@ -95,11 +66,7 @@
       },
       "encoding": {
         "x": { "field": "homes", "type": "quantitative" },
-        "text": {
-          "field": "homes",
-          "type": "quantitative",
-          "format": ",.0f"
-        }
+        "text": { "field": "homes", "type": "quantitative", "format": ",.0f" }
       }
     }
   ],
