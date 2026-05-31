@@ -3,71 +3,47 @@
   "width": "container",
   "height": 370,
   "background": "#0a1628",
-  "data": {
-    "url": "area_temp_combined.csv"
-  },
-  "resolve": {
-    "scale": {
-      "y": "independent"
-    }
-  },
+  "data": {"url": "area_temp_combined.csv"},
+  "resolve": {"scale": {"y": "independent"}},
   "layer": [
     {
       "mark": {
         "type": "line",
         "color": "#E74C3C",
         "strokeWidth": 2.5,
-        "point": {
-          "filled": true,
-          "color": "#E74C3C",
-          "size": 40
-        }
+        "point": {"filled": true, "color": "#E74C3C", "size": 40}
       },
       "encoding": {
         "x": {
-          "field": "year",
-          "type": "ordinal",
-          "title": null,
+          "field": "year", "type": "ordinal", "title": null,
           "axis": {
-            "labelAngle": -45,
-            "labelFontSize": 9,
-            "labelColor": "#999",
+            "labelAngle": -45, "labelFontSize": 9,
+            "labelColor": "#aaaaaa",
             "grid": false,
-            "domainColor": "#333",
-            "tickColor": "#333"
+            "domainColor": "#1e3a55",
+            "tickColor": "#1e3a55",
+            "tickSize": 4
           }
         },
         "y": {
-          "field": "area_burned_mha",
-          "type": "quantitative",
+          "field": "area_burned_mha", "type": "quantitative",
           "title": "Area Burned (million ha)",
           "axis": {
             "titleColor": "#E74C3C",
             "labelColor": "#E74C3C",
-            "titleFontSize": 10,
-            "labelFontSize": 9,
+            "titleFontSize": 11,
+            "labelFontSize": 10,
             "gridColor": "#1a2a3a",
-            "domainColor": "#333"
+            "gridDash": [3, 3],
+            "domainColor": "#E74C3C",
+            "tickColor": "#E74C3C",
+            "tickSize": 4
           }
         },
         "tooltip": [
-          {
-            "field": "year",
-            "type": "ordinal",
-            "title": "Year"
-          },
-          {
-            "field": "area_burned_mha",
-            "type": "quantitative",
-            "title": "Area Burned (M ha)",
-            "format": ".1f"
-          },
-          {
-            "field": "temp_anomaly_c",
-            "type": "quantitative",
-            "title": "Temp Anomaly (\u00b0C)",
-            "format": "+.2f"
-          }
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "area_burned_mha", "type": "quantitative", "title": "Area Burned (M ha)", "format": ".1f"},
+          {"field": "temp_anomaly_c", "type": "quantitative", "title": "Temp Anomaly (°C)", "format": "+.2f"}
         ]
       }
     },
@@ -76,124 +52,81 @@
         "type": "line",
         "color": "#F39C12",
         "strokeWidth": 2,
-        "strokeDash": [
-          4,
-          2
-        ],
-        "point": {
-          "filled": true,
-          "color": "#F39C12",
-          "size": 40
-        }
+        "strokeDash": [4, 2],
+        "point": {"filled": true, "color": "#F39C12", "size": 40}
       },
       "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal"
-        },
+        "x": {"field": "year", "type": "ordinal"},
         "y": {
-          "field": "temp_anomaly_c",
-          "type": "quantitative",
-          "title": "Temp Anomaly (\u00b0C)",
+          "field": "temp_anomaly_c", "type": "quantitative",
+          "title": "Temp Anomaly (°C)",
           "axis": {
             "orient": "right",
             "titleColor": "#F39C12",
             "labelColor": "#F39C12",
             "format": "+.1f",
-            "titleFontSize": 10,
-            "labelFontSize": 9,
+            "titleFontSize": 11,
+            "labelFontSize": 10,
             "gridColor": "#1a2a3a",
-            "domainColor": "#333"
+            "gridDash": [3, 3],
+            "domainColor": "#F39C12",
+            "tickColor": "#F39C12",
+            "tickSize": 4
           }
         },
         "tooltip": [
-          {
-            "field": "year",
-            "type": "ordinal",
-            "title": "Year"
-          },
-          {
-            "field": "area_burned_mha",
-            "type": "quantitative",
-            "title": "Area Burned (M ha)",
-            "format": ".1f"
-          },
-          {
-            "field": "temp_anomaly_c",
-            "type": "quantitative",
-            "title": "Temp Anomaly (\u00b0C)",
-            "format": "+.2f"
-          }
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "area_burned_mha", "type": "quantitative", "title": "Area Burned (M ha)", "format": ".1f"},
+          {"field": "temp_anomaly_c", "type": "quantitative", "title": "Temp Anomaly (°C)", "format": "+.2f"}
         ]
       }
     },
     {
-      "data": {
-        "values": [
-          {
-            "year": "2019"
-          }
-        ]
-      },
-      "mark": {
-        "type": "rule",
-        "color": "#ffffff",
-        "strokeDash": [
-          4,
-          3
-        ],
-        "strokeWidth": 1,
-        "opacity": 0.4
-      },
+      "data": {"values": [{"year": "2019"}]},
+      "mark": {"type": "rule", "color": "#ffffff", "strokeDash": [4,3], "strokeWidth": 1, "opacity": 0.3},
+      "encoding": {"x": {"field": "year", "type": "ordinal"}}
+    },
+    {
+      "data": {"values": [{"year": "2019", "area_burned_mha": 23.5}]},
+      "mark": {"type": "text", "align": "left", "dx": 6, "dy": 0,
+               "color": "#ffffff", "fontSize": 9, "fontWeight": "bold"},
       "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal"
-        }
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "area_burned_mha", "type": "quantitative"},
+        "text": {"value": "2019–20 Black Summer (24M ha)"}
       }
     },
     {
-      "data": {
-        "values": [
-          {
-            "year": "2019",
-            "area_burned_mha": 22,
-            "label": "2019\u201320 Black Summer (24M ha)"
-          }
-        ]
-      },
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "dx": 4,
-        "dy": -8,
-        "color": "#ffffff",
-        "fontSize": 9,
-        "fontWeight": "bold"
-      },
+      "data": {"values": [
+        {"year": "2000", "y": 22.5, "label": "── Area Burned (M ha)"},
+        {"year": "2000", "y": 20.5, "label": "╌╌ Temp Anomaly (°C)"}
+      ]},
+      "mark": {"type": "text", "align": "left", "dx": 0, "fontSize": 10, "fontWeight": "bold"},
       "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal"
-        },
-        "y": {
-          "field": "area_burned_mha",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "label"
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "label"},
+        "color": {
+          "field": "label", "type": "nominal",
+          "scale": {
+            "domain": ["── Area Burned (M ha)", "╌╌ Temp Anomaly (°C)"],
+            "range": ["#E74C3C", "#F39C12"]
+          },
+          "legend": null
         }
       }
     }
   ],
   "config": {
     "background": "#0a1628",
-    "view": {
-      "stroke": "transparent"
+    "view": {"stroke": "transparent"},
+    "axis": {
+      "labelColor": "#aaaaaa",
+      "titleColor": "#ffffff",
+      "domainColor": "#1e3a55",
+      "tickColor": "#1e3a55",
+      "gridColor": "#1a2a3a"
     },
-    "legend": {
-      "labelColor": "#ffffff",
-      "titleColor": "#ffffff"
-    }
+    "legend": {"disable": true}
   }
 }
