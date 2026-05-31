@@ -1,52 +1,127 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 300,
-  "data": {"url": "bushfire_human_impact.csv"},
+  "height": 320,
+  "data": {
+    "url": "bushfire_human_impact.csv"
+  },
   "layer": [
     {
-      "mark": {"type": "rule", "color": "#4a1a1a", "strokeWidth": 2},
+      "mark": {
+        "type": "rule",
+        "color": "#4a1a1a",
+        "strokeWidth": 2
+      },
       "encoding": {
         "y": {
-          "field": "event_name", "type": "nominal",
-          "sort": {"field": "deaths", "order": "descending"},
+          "field": "event_name",
+          "type": "nominal",
+          "sort": {
+            "field": "deaths",
+            "order": "descending"
+          },
           "title": null,
-          "axis": {"labelFontSize": 10, "labelColor": "#ffffff", "labelLimit": 180}
+          "axis": {
+            "labelFontSize": 10,
+            "labelColor": "#ffffff",
+            "labelLimit": 180
+          }
         },
-        "x": {"datum": 0},
-        "x2": {"field": "deaths", "type": "quantitative"}
+        "x": {
+          "datum": 0
+        },
+        "x2": {
+          "field": "deaths",
+          "type": "quantitative"
+        }
       }
     },
     {
-      "mark": {"type": "point", "filled": true, "size": 150, "color": "#C0392B"},
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 150,
+        "color": "#C0392B"
+      },
       "encoding": {
         "y": {
-          "field": "event_name", "type": "nominal",
-          "sort": {"field": "deaths", "order": "descending"}
+          "field": "event_name",
+          "type": "nominal",
+          "sort": {
+            "field": "deaths",
+            "order": "descending"
+          }
         },
         "x": {
-          "field": "deaths", "type": "quantitative",
+          "field": "deaths",
+          "type": "quantitative",
           "title": "Direct Deaths",
-          "axis": {"titleFontSize": 11, "labelFontSize": 10,
-                   "titleColor": "#C0392B", "labelColor": "#aaaaaa",
-                   "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
-                   "domainColor": "#1e3a55"}
+          "axis": {
+            "titleFontSize": 11,
+            "labelFontSize": 10,
+            "titleColor": "#C0392B",
+            "labelColor": "#aaaaaa",
+            "grid": true,
+            "gridDash": [
+              3,
+              3
+            ],
+            "gridColor": "#1a2a3a",
+            "domainColor": "#1e3a55"
+          }
         },
         "tooltip": [
-          {"field": "event_name", "type": "nominal", "title": "Event"},
-          {"field": "year", "type": "ordinal", "title": "Year"},
-          {"field": "deaths", "type": "quantitative", "title": "Deaths"}
+          {
+            "field": "event_name",
+            "type": "nominal",
+            "title": "Event"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "deaths",
+            "type": "quantitative",
+            "title": "Deaths"
+          }
         ]
       }
     },
     {
-      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 10, "fontWeight": "bold", "color": "#C0392B"},
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#C0392B"
+      },
       "encoding": {
-        "y": {"field": "event_name", "type": "nominal", "sort": {"field": "deaths", "order": "descending"}},
-        "x": {"field": "deaths", "type": "quantitative"},
-        "text": {"field": "deaths", "type": "quantitative"}
+        "y": {
+          "field": "event_name",
+          "type": "nominal",
+          "sort": {
+            "field": "deaths",
+            "order": "descending"
+          }
+        },
+        "x": {
+          "field": "deaths",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "deaths",
+          "type": "quantitative"
+        }
       }
     }
   ],
-  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
+  "config": {
+    "background": "#0a1628",
+    "view": {
+      "stroke": "transparent"
+    }
+  }
 }

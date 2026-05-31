@@ -1,13 +1,44 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 300,
+  "height": 320,
   "data": {
     "url": "bushfire_major_events.csv"
   },
+  "transform": [
+    {
+      "calculate": "round(datum.pop_in_high_risk_zones / 100000)",
+      "as": "dots"
+    },
+    {
+      "flatten": [
+        "dots"
+      ],
+      "as": [
+        "dot_index"
+      ]
+    },
+    {
+      "window": [
+        {
+          "op": "row_number",
+          "as": "row_num"
+        }
+      ],
+      "groupby": [
+        "year",
+        "state"
+      ]
+    },
+    {
+      "calculate": "datum.row_num - 1",
+      "as": "dot_pos"
+    }
+  ],
   "mark": {
     "type": "point",
     "filled": true,
+    "size": 80,
     "opacity": 0.85
   },
   "encoding": {

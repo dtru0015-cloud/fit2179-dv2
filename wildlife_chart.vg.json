@@ -1,19 +1,47 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "width": 480,
-  "height": 260,
+  "height": 300,
   "padding": 2,
   "background": "#0a1628",
-
   "data": [
     {
       "name": "tree",
       "values": [
-        {"id": 0, "parent": null, "name": "root",   "value": 0},
-        {"id": 1, "parent": 0,    "name": "Reptiles", "value": 2460, "label": "Reptiles 🦎\n2,460M"},
-        {"id": 2, "parent": 0,    "name": "Birds",    "value": 180,  "label": "Birds 🦅\n180M"},
-        {"id": 3, "parent": 0,    "name": "Mammals",  "value": 143,  "label": "Mammals 🦘\n143M"},
-        {"id": 4, "parent": 0,    "name": "Frogs",    "value": 51,   "label": "Frogs 🐸\n51M"}
+        {
+          "id": 0,
+          "parent": null,
+          "name": "root",
+          "value": 0
+        },
+        {
+          "id": 1,
+          "parent": 0,
+          "name": "Reptiles",
+          "value": 2460,
+          "label": "Reptiles \ud83e\udd8e\n2,460M"
+        },
+        {
+          "id": 2,
+          "parent": 0,
+          "name": "Birds",
+          "value": 180,
+          "label": "Birds \ud83e\udd85\n180M"
+        },
+        {
+          "id": 3,
+          "parent": 0,
+          "name": "Mammals",
+          "value": 143,
+          "label": "Mammals \ud83e\udd98\n143M"
+        },
+        {
+          "id": 4,
+          "parent": 0,
+          "name": "Frogs",
+          "value": 51,
+          "label": "Frogs \ud83d\udc38\n51M"
+        }
       ],
       "transform": [
         {
@@ -24,35 +52,62 @@
         {
           "type": "treemap",
           "field": "value",
-          "sort": {"field": "value", "order": "descending"},
+          "sort": {
+            "field": "value",
+            "order": "descending"
+          },
           "round": true,
           "method": "squarify",
           "ratio": 1.618,
-          "size": [{"signal": "width"}, {"signal": "height"}]
+          "size": [
+            {
+              "signal": "width"
+            },
+            {
+              "signal": "height"
+            }
+          ]
         }
       ]
     }
   ],
-
   "marks": [
     {
       "type": "rect",
-      "from": {"data": "tree"},
+      "from": {
+        "data": "tree"
+      },
       "encode": {
         "enter": {
-          "x":  {"field": "x0"},
-          "y":  {"field": "y0"},
-          "x2": {"field": "x1"},
-          "y2": {"field": "y1"},
-          "stroke":      {"value": "#0a1628"},
-          "strokeWidth": {"value": 3},
-          "cornerRadius":{"value": 4}
+          "x": {
+            "field": "x0"
+          },
+          "y": {
+            "field": "y0"
+          },
+          "x2": {
+            "field": "x1"
+          },
+          "y2": {
+            "field": "y1"
+          },
+          "stroke": {
+            "value": "#0a1628"
+          },
+          "strokeWidth": {
+            "value": 3
+          },
+          "cornerRadius": {
+            "value": 4
+          }
         },
         "update": {
           "fill": {
             "signal": "datum.name === 'root' ? '#0a1628' : datum.name === 'Reptiles' ? '#E74C3C' : datum.name === 'Birds' ? '#E67E22' : datum.name === 'Mammals' ? '#F39C12' : '#27AE60'"
           },
-          "opacity": {"value": 0.9},
+          "opacity": {
+            "value": 0.9
+          },
           "tooltip": {
             "signal": "{'Species': datum.label, 'Animals Affected': datum.value + 'M'}"
           }
@@ -61,20 +116,38 @@
     },
     {
       "type": "text",
-      "from": {"data": "tree"},
+      "from": {
+        "data": "tree"
+      },
       "encode": {
         "enter": {
-          "x":        {"signal": "(datum.x0 + datum.x1) / 2"},
-          "y":        {"signal": "(datum.y0 + datum.y1) / 2"},
-          "align":    {"value": "center"},
-          "baseline": {"value": "middle"},
-          "fill":     {"value": "#ffffff"},
-          "fontWeight": {"value": "bold"},
+          "x": {
+            "signal": "(datum.x0 + datum.x1) / 2"
+          },
+          "y": {
+            "signal": "(datum.y0 + datum.y1) / 2"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fill": {
+            "value": "#ffffff"
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
           "fontSize": {
             "signal": "datum.name === 'root' ? 0 : (datum.x1 - datum.x0) > 80 ? 13 : (datum.x1 - datum.x0) > 40 ? 10 : 0"
           },
-          "text": {"field": "label"},
-          "limit": {"signal": "datum.x1 - datum.x0 - 8"}
+          "text": {
+            "field": "label"
+          },
+          "limit": {
+            "signal": "datum.x1 - datum.x0 - 8"
+          }
         }
       }
     }

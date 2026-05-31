@@ -2,64 +2,163 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 320,
-  "data": {"url": "bushfire_human_impact.csv"},
+  "data": {
+    "url": "bushfire_human_impact.csv"
+  },
   "transform": [
-    {"calculate": "-datum.deaths", "as": "deaths_neg"}
+    {
+      "calculate": "-datum.deaths",
+      "as": "deaths_neg"
+    }
   ],
   "layer": [
     {
-      "mark": {"type": "bar", "cornerRadiusEnd": 3},
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 3
+      },
       "encoding": {
         "y": {
-          "field": "event_name", "type": "nominal", "title": null,
-          "sort": {"field": "homes", "order": "descending"},
-          "axis": {"labelFontSize": 10, "labelColor": "#ffffff", "labelLimit": 160}
+          "field": "event_name",
+          "type": "nominal",
+          "title": null,
+          "sort": {
+            "field": "homes",
+            "order": "descending"
+          },
+          "axis": {
+            "labelFontSize": 10,
+            "labelColor": "#ffffff",
+            "labelLimit": 160
+          }
         },
         "x": {
-          "field": "homes", "type": "quantitative",
-          "title": "Homes Destroyed →",
-          "axis": {"format": ",.0f", "titleFontSize": 10, "labelFontSize": 9,
-                   "titleColor": "#E67E22", "labelColor": "#aaaaaa",
-                   "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a",
-                   "domainColor": "#1e3a55"}
+          "field": "homes",
+          "type": "quantitative",
+          "title": "Homes Destroyed \u2192",
+          "axis": {
+            "format": ",.0f",
+            "titleFontSize": 10,
+            "labelFontSize": 9,
+            "titleColor": "#E67E22",
+            "labelColor": "#aaaaaa",
+            "grid": true,
+            "gridDash": [
+              3,
+              3
+            ],
+            "gridColor": "#1a2a3a",
+            "domainColor": "#1e3a55"
+          }
         },
-        "color": {"value": "#E67E22"},
+        "color": {
+          "value": "#E67E22"
+        },
         "tooltip": [
-          {"field": "event_name", "type": "nominal", "title": "Event"},
-          {"field": "year", "type": "ordinal", "title": "Year"},
-          {"field": "homes", "type": "quantitative", "title": "Homes Destroyed", "format": ",.0f"},
-          {"field": "deaths", "type": "quantitative", "title": "Deaths"}
+          {
+            "field": "event_name",
+            "type": "nominal",
+            "title": "Event"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "homes",
+            "type": "quantitative",
+            "title": "Homes Destroyed",
+            "format": ",.0f"
+          },
+          {
+            "field": "deaths",
+            "type": "quantitative",
+            "title": "Deaths"
+          }
         ]
       }
     },
     {
-      "mark": {"type": "bar", "cornerRadiusEnd": 3},
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 3
+      },
       "encoding": {
         "y": {
-          "field": "event_name", "type": "nominal",
-          "sort": {"field": "homes", "order": "descending"}
+          "field": "event_name",
+          "type": "nominal",
+          "sort": {
+            "field": "homes",
+            "order": "descending"
+          }
         },
         "x": {
-          "field": "deaths_neg", "type": "quantitative",
-          "title": "← Deaths",
-          "axis": {"format": ",.0f", "titleFontSize": 10, "labelFontSize": 9,
-                   "titleColor": "#C0392B", "labelColor": "#aaaaaa",
-                   "orient": "top", "grid": false, "domainColor": "#1e3a55"}
+          "field": "deaths_neg",
+          "type": "quantitative",
+          "title": "\u2190 Deaths",
+          "axis": {
+            "format": ",.0f",
+            "titleFontSize": 10,
+            "labelFontSize": 9,
+            "titleColor": "#C0392B",
+            "labelColor": "#aaaaaa",
+            "orient": "top",
+            "grid": false,
+            "domainColor": "#1e3a55"
+          }
         },
-        "color": {"value": "#C0392B"},
+        "color": {
+          "value": "#C0392B"
+        },
         "tooltip": [
-          {"field": "event_name", "type": "nominal", "title": "Event"},
-          {"field": "year", "type": "ordinal", "title": "Year"},
-          {"field": "deaths", "type": "quantitative", "title": "Deaths"},
-          {"field": "homes", "type": "quantitative", "title": "Homes Destroyed", "format": ",.0f"}
+          {
+            "field": "event_name",
+            "type": "nominal",
+            "title": "Event"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "deaths",
+            "type": "quantitative",
+            "title": "Deaths"
+          },
+          {
+            "field": "homes",
+            "type": "quantitative",
+            "title": "Homes Destroyed",
+            "format": ",.0f"
+          }
         ]
       }
     },
     {
-      "mark": {"type": "rule", "color": "#ffffff", "strokeWidth": 1, "opacity": 0.3},
-      "encoding": {"x": {"datum": 0}}
+      "mark": {
+        "type": "rule",
+        "color": "#ffffff",
+        "strokeWidth": 1,
+        "opacity": 0.3
+      },
+      "encoding": {
+        "x": {
+          "datum": 0
+        }
+      }
     }
   ],
-  "resolve": {"scale": {"x": "independent"}},
-  "config": {"background": "#0a1628", "view": {"stroke": "transparent"}}
+  "resolve": {
+    "scale": {
+      "x": "independent"
+    }
+  },
+  "config": {
+    "background": "#0a1628",
+    "view": {
+      "stroke": "transparent"
+    }
+  }
 }

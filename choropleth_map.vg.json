@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 380,
+  "height": 320,
   "title": {
     "text": "Bushfire Risk Across Australia",
     "fontSize": 18,
@@ -9,41 +9,86 @@
     "anchor": "middle"
   },
   "params": [
-    { "name": "year_select",  "value": 2019 },
-    { "name": "state_select", "value": null  }
+    {
+      "name": "year_select",
+      "value": 2019
+    },
+    {
+      "name": "state_select",
+      "value": null
+    }
   ],
   "projection": {
     "type": "mercator",
-    "center": [128, -28],
-    "scale": 460,
-    "translate": [310, 200]
+    "center": [
+      128,
+      -28
+    ],
+    "scale": 440,
+    "translate": [
+      310,
+      165
+    ]
   },
   "layer": [
-
     {
-      "data": { "url": "bushfire_risk_by_state_multiyear.csv" },
+      "data": {
+        "url": "bushfire_risk_by_state_multiyear.csv"
+      },
       "transform": [
-        { "filter": "datum.year == (year_select <= 2003 ? 2001 : year_select <= 2008 ? 2006 : year_select <= 2013 ? 2011 : year_select <= 2018 ? 2016 : 2021)" },
+        {
+          "filter": "datum.year == (year_select <= 2003 ? 2001 : year_select <= 2008 ? 2006 : year_select <= 2013 ? 2011 : year_select <= 2018 ? 2016 : 2021)"
+        },
         {
           "lookup": "state",
           "from": {
-            "data": { "url": "australia_states.geojson", "format": { "type": "json", "property": "features" } },
+            "data": {
+              "url": "australia_states.geojson",
+              "format": {
+                "type": "json",
+                "property": "features"
+              }
+            },
             "key": "properties.STATE_NAME",
-            "fields": ["type", "geometry"]
+            "fields": [
+              "type",
+              "geometry"
+            ]
           }
         },
-        { "calculate": "state_select == null || datum.state == state_select ? 1 : 0.3", "as": "op" }
+        {
+          "calculate": "state_select == null || datum.state == state_select ? 1 : 0.3",
+          "as": "op"
+        }
       ],
-      "mark": { "type": "geoshape", "stroke": "#0a1628", "strokeWidth": 1.5 },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#0a1628",
+        "strokeWidth": 1.5
+      },
       "encoding": {
-        "shape": { "field": "geometry", "type": "geojson" },
+        "shape": {
+          "field": "geometry",
+          "type": "geojson"
+        },
         "color": {
           "field": "fire_risk_score",
           "type": "quantitative",
           "scale": {
             "type": "threshold",
-            "domain": [50, 60, 70, 80],
-            "range": ["#6b2c00", "#9c3a00", "#c43d00", "#e02010", "#ff2200"]
+            "domain": [
+              50,
+              60,
+              70,
+              80
+            ],
+            "range": [
+              "#4ECDC4",
+              "#F7DC6F",
+              "#F39C12",
+              "#E74C3C",
+              "#8E1A0E"
+            ]
           },
           "legend": {
             "title": "Fire Risk Score",
@@ -54,34 +99,66 @@
             "labelFontSize": 10
           }
         },
-        "opacity": { "field": "op", "type": "quantitative", "legend": null },
+        "opacity": {
+          "field": "op",
+          "type": "quantitative",
+          "legend": null
+        },
         "tooltip": [
-          { "field": "state",              "type": "nominal",      "title": "State"           },
-          { "field": "fire_risk_score",    "type": "quantitative", "title": "Fire Risk Score" },
-          { "field": "pct_land_fire_prone","type": "quantitative", "title": "% Fire-Prone Land" }
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "fire_risk_score",
+            "type": "quantitative",
+            "title": "Fire Risk Score"
+          },
+          {
+            "field": "pct_land_fire_prone",
+            "type": "quantitative",
+            "title": "% Fire-Prone Land"
+          }
         ]
       }
     },
-
     {
-      "data": { "url": "bushfire_risk_by_state_multiyear.csv" },
+      "data": {
+        "url": "bushfire_risk_by_state_multiyear.csv"
+      },
       "transform": [
-        { "filter": "datum.year == (year_select <= 2003 ? 2001 : year_select <= 2008 ? 2006 : year_select <= 2013 ? 2011 : year_select <= 2018 ? 2016 : 2021)" },
-        { "calculate": "state_select == null || datum.state == state_select ? 1 : 0.2", "as": "op" }
+        {
+          "filter": "datum.year == (year_select <= 2003 ? 2001 : year_select <= 2008 ? 2006 : year_select <= 2013 ? 2011 : year_select <= 2018 ? 2016 : 2021)"
+        },
+        {
+          "calculate": "state_select == null || datum.state == state_select ? 1 : 0.2",
+          "as": "op"
+        }
       ],
       "mark": {
         "type": "circle",
         "stroke": "#ffffff",
-        "strokeWidth": 1.5,
-        "cursor": "pointer"
+        "strokeWidth": 1.5
       },
       "encoding": {
-        "longitude": { "field": "label_lon", "type": "quantitative" },
-        "latitude":  { "field": "label_lat", "type": "quantitative" },
+        "longitude": {
+          "field": "label_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "label_lat",
+          "type": "quantitative"
+        },
         "size": {
           "field": "fire_risk_score",
           "type": "quantitative",
-          "scale": { "range": [150, 1500] },
+          "scale": {
+            "range": [
+              150,
+              1500
+            ]
+          },
           "legend": null
         },
         "color": {
@@ -89,47 +166,82 @@
           "type": "quantitative",
           "scale": {
             "type": "threshold",
-            "domain": [50, 60, 70, 80],
-            "range": ["#6b2c00", "#9c3a00", "#c43d00", "#e02010", "#ff2200"]
+            "domain": [
+              50,
+              60,
+              70,
+              80
+            ],
+            "range": [
+              "#4ECDC4",
+              "#F7DC6F",
+              "#F39C12",
+              "#E74C3C",
+              "#8E1A0E"
+            ]
           },
           "legend": null
         },
-        "stroke": {
-          "condition": {
-            "test": "state_select !== null && datum.state === state_select",
-            "value": "#ffffff"
-          },
-          "value": "rgba(255,255,255,0.4)"
+        "opacity": {
+          "field": "op",
+          "type": "quantitative",
+          "legend": null
         },
-        "strokeWidth": {
-          "condition": {
-            "test": "state_select !== null && datum.state === state_select",
-            "value": 3
-          },
-          "value": 1.5
-        },
-        "opacity": { "field": "op", "type": "quantitative", "legend": null },
         "tooltip": [
-          { "field": "state",              "type": "nominal",      "title": "State"           },
-          { "field": "fire_risk_score",    "type": "quantitative", "title": "Fire Risk Score" },
-          { "field": "pct_land_fire_prone","type": "quantitative", "title": "% Fire-Prone Land" }
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "fire_risk_score",
+            "type": "quantitative",
+            "title": "Fire Risk Score"
+          },
+          {
+            "field": "pct_land_fire_prone",
+            "type": "quantitative",
+            "title": "% Fire-Prone Land"
+          }
         ]
       }
     },
-
     {
-      "data": { "url": "bushfire_risk_by_state_multiyear.csv" },
+      "data": {
+        "url": "bushfire_risk_by_state_multiyear.csv"
+      },
       "transform": [
-        { "filter": "datum.year == (year_select <= 2003 ? 2001 : year_select <= 2008 ? 2006 : year_select <= 2013 ? 2011 : year_select <= 2018 ? 2016 : 2021)" }
+        {
+          "filter": "datum.year == (year_select <= 2003 ? 2001 : year_select <= 2008 ? 2006 : year_select <= 2013 ? 2011 : year_select <= 2018 ? 2016 : 2021)"
+        }
       ],
-      "mark": { "type": "text", "fontSize": 10, "fontWeight": "bold", "fill": "#ffffff", "dy": -2 },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "fill": "#ffffff",
+        "dy": -2
+      },
       "encoding": {
-        "longitude": { "field": "label_lon", "type": "quantitative" },
-        "latitude":  { "field": "label_lat", "type": "quantitative" },
-        "text":      { "field": "state_code", "type": "nominal" }
+        "longitude": {
+          "field": "label_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "label_lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "state_code",
+          "type": "nominal"
+        }
       }
     }
-
   ],
-  "config": { "background": "#0a1628", "view": { "stroke": "transparent" } }
+  "config": {
+    "background": "#0a1628",
+    "view": {
+      "stroke": "transparent"
+    }
+  }
 }

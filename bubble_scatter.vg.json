@@ -1,65 +1,78 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 300,
-  "data": {"url": "economic_losses.csv"},
-  "params": [
+  "height": 320,
+  "data": {
+    "url": "bushfire_area_by_state.csv"
+  },
+  "transform": [
     {
-      "name": "event_select",
-      "select": {"type": "point", "on": "mouseover", "nearest": true}
+      "filter": "datum.event_name != 'Black Summer'"
     }
   ],
   "layer": [
     {
       "mark": {
-        "type": "circle",
-        "opacity": 0.85,
-        "stroke": "#ffffff",
-        "strokeWidth": 0.5
+        "type": "rule",
+        "color": "#1e3a55",
+        "strokeWidth": 2
       },
       "encoding": {
-        "x": {
-          "field": "year",
-          "type": "quantitative",
-          "title": "Year",
-          "scale": {"zero": false},
+        "y": {
+          "field": "event_name",
+          "type": "nominal",
+          "sort": {
+            "field": "economic_loss_aud_million",
+            "order": "descending"
+          },
+          "title": null,
           "axis": {
-            "format": "d",
-            "titleFontSize": 11,
-            "labelFontSize": 9,
-            "titleColor": "#ffffff",
-            "labelColor": "#aaaaaa",
-            "gridColor": "#1e2d45",
-            "gridDash": [3,3],
-            "domainColor": "#1e3a55"
+            "labelFontSize": 10,
+            "labelColor": "#ffffff",
+            "labelLimit": 180
           }
         },
+        "x": {
+          "value": 0
+        },
+        "x2": {
+          "field": "economic_loss_aud_million",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 150
+      },
+      "encoding": {
         "y": {
+          "field": "event_name",
+          "type": "nominal",
+          "sort": {
+            "field": "economic_loss_aud_million",
+            "order": "descending"
+          }
+        },
+        "x": {
           "field": "economic_loss_aud_million",
           "type": "quantitative",
           "title": "Economic Loss (AUD Million)",
-          "scale": {"type": "log"},
           "axis": {
-            "format": "$,.0f",
+            "format": ",.0f",
             "titleFontSize": 11,
-            "labelFontSize": 9,
+            "labelFontSize": 10,
             "titleColor": "#ffffff",
             "labelColor": "#aaaaaa",
-            "gridColor": "#1e2d45",
-            "gridDash": [3,3],
+            "grid": true,
+            "gridDash": [
+              3,
+              3
+            ],
+            "gridColor": "#1a2a3a",
             "domainColor": "#1e3a55"
-          }
-        },
-        "size": {
-          "field": "homes_destroyed",
-          "type": "quantitative",
-          "title": "Homes destroyed",
-          "scale": {"range": [40, 2000]},
-          "legend": {
-            "labelColor": "#cccccc",
-            "titleColor": "#ffffff",
-            "labelFontSize": 9,
-            "titleFontSize": 10
           }
         },
         "color": {
@@ -67,21 +80,45 @@
           "type": "quantitative",
           "scale": {
             "type": "threshold",
-            "domain": [100, 1000, 5000, 50000],
-            "range": ["#FDDBC7","#F4A582","#D6604D","#B2182B","#67001F"]
+            "domain": [
+              500,
+              1000,
+              2000,
+              5000
+            ],
+            "range": [
+              "#FDDBC7",
+              "#F4A582",
+              "#D6604D",
+              "#B2182B",
+              "#67001F"
+            ]
           },
           "legend": null
         },
-        "opacity": {
-          "condition": {"param": "event_select", "value": 1},
-          "value": 0.35
-        },
         "tooltip": [
-          {"field": "event_name", "type": "nominal", "title": "Event"},
-          {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
-          {"field": "economic_loss_aud_million", "type": "quantitative", "title": "Economic Loss (AUD M)", "format": "$,.0f"},
-          {"field": "homes_destroyed", "type": "quantitative", "title": "Homes Destroyed", "format": ","},
-          {"field": "deaths", "type": "quantitative", "title": "Deaths", "format": ","}
+          {
+            "field": "event_name",
+            "type": "nominal",
+            "title": "Event"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "economic_loss_aud_million",
+            "type": "quantitative",
+            "title": "Economic Loss (AUD M)",
+            "format": ",.0f"
+          },
+          {
+            "field": "homes_destroyed",
+            "type": "quantitative",
+            "title": "Homes Destroyed",
+            "format": ",.0f"
+          }
         ]
       }
     },
@@ -89,29 +126,35 @@
       "mark": {
         "type": "text",
         "align": "left",
-        "dx": 8,
-        "dy": -6,
+        "dx": 10,
         "fontSize": 9,
-        "fontWeight": "bold"
+        "color": "#aaaaaa"
       },
       "encoding": {
-        "x": {"field": "year", "type": "quantitative"},
-        "y": {"field": "economic_loss_aud_million", "type": "quantitative", "scale": {"type": "log"}},
-        "text": {
-          "condition": {
-            "param": "event_select",
-            "field": "event_name",
-            "type": "nominal"
-          },
-          "value": ""
+        "y": {
+          "field": "event_name",
+          "type": "nominal",
+          "sort": {
+            "field": "economic_loss_aud_million",
+            "order": "descending"
+          }
         },
-        "color": {"value": "#ffffff"}
+        "x": {
+          "field": "economic_loss_aud_million",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "economic_loss_aud_million",
+          "type": "quantitative",
+          "format": "$,.0fM"
+        }
       }
     }
   ],
   "config": {
     "background": "#0a1628",
-    "font": "Inter, sans-serif",
-    "view": {"stroke": "transparent"}
+    "view": {
+      "stroke": "transparent"
+    }
   }
 }
