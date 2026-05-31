@@ -86,7 +86,47 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 .spotlight-stats { grid-template-columns: repeat(2, 1fr); }
 .controls-bar { flex-direction: column; gap: 16px; }
 }
-</style>
+
+    /* ── Typography hierarchy ── */
+    :root {
+      --accent-orange: #E67E22;
+      --accent-red:    #C0392B;
+      --text-body:     #c9d4df;
+      --text-muted:    #7f91a3;
+    }
+
+    .hero h1 { font-size: 52px; font-weight: 800; line-height: 1.05; color: #fff; margin: 0 0 8px; }
+    .hero h1 span { color: var(--accent-orange); }
+    .hero h2 { font-size: 26px; font-weight: 500; color: var(--accent-orange); margin: 0 0 20px; }
+
+    .section-label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+                     color: var(--accent-orange); font-weight: 700; margin-bottom: 6px; }
+    .section-title  { font-size: 32px; font-weight: 800; color: #fff; line-height: 1.15; margin: 0 0 10px; }
+    .section-sub    { font-size: 17px; color: var(--text-body); line-height: 1.5;
+                      max-width: 820px; margin-bottom: 28px; }
+
+    .chart-title  { font-size: 15px; font-weight: 800; color: #fff; margin: 0 0 4px; }
+    .chart-insight{ font-size: 13px; color: var(--text-body); line-height: 1.45; margin: 0 0 4px; }
+    .chart-subtitle{ font-size: 11px; color: var(--text-muted); letter-spacing: 0.2px;
+                     margin: 0 0 10px; }
+    .chart-annotation { font-size: 12px; color: var(--text-body); line-height: 1.65;
+                        margin-top: 10px; }
+    .chart-annotation strong { color: var(--accent-orange); }
+
+    p strong { color: var(--accent-orange); font-weight: 700; }
+
+    .final-callout {
+      border: 1px solid rgba(230,126,34,0.4);
+      background: linear-gradient(135deg, rgba(192,57,43,0.12), rgba(10,22,40,0.97));
+      padding: 36px; border-radius: 18px; margin-top: 28px; text-align: center;
+    }
+    .final-callout .eyebrow { color: var(--accent-orange); text-transform: uppercase;
+      letter-spacing: 2px; font-weight: 800; font-size: 12px; margin-bottom: 12px; }
+    .final-callout h2 { font-size: 32px; color: #fff; line-height: 1.2; margin: 0 0 14px; }
+    .final-callout p  { font-size: 15px; color: var(--text-body); max-width: 720px;
+      margin: 0 auto; line-height: 1.65; }
+
+    </style>
 </head>
 <body>
 
@@ -162,7 +202,7 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 
 <div class="grid-2">
 <div class="chart-card">
-<p class="chart-title">③ Fire Risk Score by State</p>
+<p class="chart-title">③ Fire Risk Is Highest in NSW, VIC and ACT</p>
 <p class="chart-subtitle">Idiom: Choropleth Map · Source: Geoscience Australia</p>
 <div id="choropleth_map" class="vis-container"></div>
 <div class="stat-row" id="state-info-box">
@@ -175,7 +215,7 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 </div>
 
 <div class="chart-card">
-<p class="chart-title">④ Area Burned — Major Seasons (2000–2024)</p>
+<p class="chart-title">④ Burned Area Has Spiked Since 2019</p>
 <p class="chart-subtitle">Idiom: Interactive Line Chart · Source: ABARES · Drag year slider to highlight a season</p>
 <div id="area_by_state" class="vis-container"></div>
 <div id="event-popup"></div>
@@ -192,13 +232,13 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 
 <div class="grid-2" style="margin-bottom:28px;">
 <div class="chart-card">
-<p class="chart-title">⑤ Fires Are Returning More Frequently — Decadal Fire Maps (1980–2019)</p>
+<p class="chart-title">⑤ Fires Are Returning More Frequently</p>
 <p class="chart-subtitle">Average years since last wildfire by state · Blue = long interval (safer) · Red = short interval (more frequent) · Source: Based on CSIRO Cook et al. (2021), Nature Communications</p>
 <div id="fire_frequency_map" class="vis-container"></div>
 <p class="chart-annotation">🔴 States that averaged 40–75 years between fires in the 1980s now burn every 9–22 years. Tasmania dropped from 75-year intervals to 30. Blue is disappearing — replaced by red. Data: Cook et al. (2021), <em>Nature Communications</em>.</p>
 </div>
 <div class="chart-card">
-<p class="chart-title">⑥ Area Burned vs. Temperature Anomaly (2000–2024)</p>
+<p class="chart-title">⑥ Hotter Years Align With Larger Fire Seasons</p>
 <p class="chart-subtitle">Idiom: Dual-Axis Line Chart · Sources: ABARES · Bureau of Meteorology (ACORN-SAT)</p>
 <div id="dual_axis" class="vis-container"></div>
 <p class="chart-annotation">The 2019–20 Black Summer coincides with Australia's hottest year on record (+1.52°C above baseline). Warmer years consistently align with larger burned areas.</p>
@@ -207,13 +247,13 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 
 <div class="grid-2" style="margin-bottom:28px;">
 <div class="chart-card">
-<p class="chart-title">⑦ Burned Area by Fire Year and Month (1990–2019)</p>
+<p class="chart-title">⑦ Fire Danger Is Now a Year-Round Problem</p>
 <p class="chart-subtitle">Idiom: Matrix Heatmap · Forest burned area (km²) · Source: NOAA-AVHRR / NASA-MODIS · Darker = more area burned · Based on CSIRO (2021)</p>
 <div id="heatmap" class="vis-container"></div>
 <p class="chart-annotation">🔴 Before 2001, severe burns were confined to Dec–Feb (dark band). Post-2011 the dark zone expands into Oct and Apr — fire season is growing at both ends. 2019 is the critical outlier: the entire row is dark, not just summer.</p>
 </div>
 <div class="chart-card">
-<p class="chart-title">⑦b The Fire Season Is Lengthening — Summer vs Autumn/Winter Fires (1990–2019)</p>
+<p class="chart-title">⑦b The Fire Season Is Expanding at Both Ends</p>
 <p class="chart-subtitle">Idiom: Area Chart · Forest burned area (km²) by season · Source: CSIRO (2021) · Based on NOAA-AVHRR / NASA-MODIS</p>
 <div id="seasonal_trend" class="vis-container"></div>
 <p class="chart-annotation">🟣 Autumn/winter fires (purple) have grown 5× since 2001, rising at 14% per year. Summer fires (orange) remain dominant but the gap is closing — Australia now faces fire exposure across the full calendar year.</p>
@@ -229,13 +269,13 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 
 <div class="grid-2" style="margin-bottom:28px;">
 <div class="chart-card">
-<p class="chart-title">⑧ Tree Cover Loss Due to Fire by Climate Domain (2001–2024)</p>
+<p class="chart-title">⑧ Temperate Forests Are the Hardest Hit</p>
 <p class="chart-subtitle">Idiom: Multi-line Chart · Source: Global Forest Watch (Australia) · Approximate data based on NASA-MODIS burned area · Thousand hectares</p>
 <div id="tree_cover_loss" class="vis-container"></div>
 <p class="chart-annotation">🔴 Temperate forests (teal) suffered the sharpest spike in 2019 — 1.95M ha lost, dwarfing every prior year. Tropical loss (green) surged in 2020 as post–Black Summer dry conditions extended fire weather north into regions historically resilient to severe fire.</p>
 </div>
 <div class="chart-card">
-<p class="chart-title">⑧ Homes Destroyed by Major Bushfires</p>
+<p class="chart-title">⑧ Black Summer Destroyed the Most Homes by Far</p>
 <p class="chart-subtitle">Idiom: Horizontal Bar Chart · Sources: CFA, NSW RFS, QFES, etc.</p>
 <div id="homes_chart" class="vis-container"></div>
 <p class="chart-annotation">The Black Summer (2019–20) caused the greatest property destruction — 3,000+ homes across multiple states, surpassing even Ash Wednesday (1983).</p>
@@ -244,7 +284,7 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 
 <div class="grid-2">
 <div class="chart-card">
-<p class="chart-title">⑨ Wildlife Impact — Black Summer 2019–20</p>
+<p class="chart-title">⑨ Nearly 3 Billion Animals Lost in One Season</p>
 <p class="chart-subtitle">Idiom: Bar Chart · Source: WWF Australia / University of Sydney (2020)</p>
 <div class="wildlife-total">~3 Billion</div>
 <div class="wildlife-sub">animals killed or displaced · Black Summer 2019–20</div>
@@ -255,7 +295,7 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 </div>
 </div>
 <div class="chart-card">
-<p class="chart-title">⑩ Cumulative Economic Losses — A Step Change in Scale</p>
+<p class="chart-title">⑩ Black Summer's $103B Loss Dwarfed All Prior Events</p>
 <p class="chart-subtitle">Idiom: Waterfall Chart · Source: Insurance Council of Australia</p>
 <div id="waterfall_chart" class="vis-container"></div>
 <p class="chart-annotation">Each bar shows the economic loss added by a major bushfire event. The Black Summer's $103B single-season loss is larger than all previous events across 80 years combined — a single catastrophic step change in Australia's bushfire costs.</p>
@@ -271,13 +311,13 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 
 <div class="grid-2">
 <div class="chart-card">
-<p class="chart-title">⑪ Population Exposed to High Bushfire Risk (2001–2021)</p>
+<p class="chart-title">⑪ More Australians Are Living in High-Risk Zones</p>
 <p class="chart-subtitle">Idiom: Bubble Plot · Sources: ABS Census · Hover to highlight state</p>
 <div id="dot_matrix" class="vis-container"></div>
 <p class="chart-annotation">🔴 Bubble size = exposed population. NSW (red) is consistently the largest. Every state's bubbles grow rightward — more people in harm's way each census decade.</p>
 </div>
 <div class="chart-card">
-<p class="chart-title">⑪b States Entering the Danger Zone — Fire Risk Category Forecast (1992–2035)</p>
+<p class="chart-title">⑪b More States Will Enter the Extreme Fire Danger Zone</p>
 <p class="chart-subtitle">Idiom: Stacked Area Chart · Historical (solid) + Projected (translucent) · Inspired by EPBC threatened species trends</p>
 <div id="fire_danger_forecast" class="vis-container"></div>
 <p class="chart-annotation">🔴 In 1992 only 1 state was in High — none were Extreme. By 2024, 2 are Extreme, 3 High. <strong style="color:#C0392B;">Projected:</strong> by 2035 up to 5 states enter Extreme and the last Moderate state disappears by 2034.</p>
@@ -307,5 +347,59 @@ body { font-family: 'Inter', sans-serif; background: var(--cream); color: #fff; 
 </div>
 
 <script src="vega_lite_vis.js"></script>
+
+  <!-- ── Data Sources ──────────────────────────────────────────────────────── -->
+  <section style="background:#050f1c;padding:48px 60px;border-top:1px solid #1e3a55;">
+    <div style="max-width:1100px;margin:0 auto;">
+      <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#E67E22;font-weight:700;margin-bottom:20px;">Data Sources</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 48px;">
+        <p style="font-size:13px;color:#c9d4df;line-height:1.65;margin:0;">
+          <strong>Fire Risk Scores &amp; State Statistics:</strong>
+          <a href="https://www.ga.gov.au/" style="color:#E67E22;">Geoscience Australia</a> — National fire risk and hazard assessments, 2001–2021.
+        </p>
+        <p style="font-size:13px;color:#c9d4df;line-height:1.65;margin:0;">
+          <strong>Area Burned — Major Seasons:</strong>
+          <a href="https://www.agriculture.gov.au/abares" style="color:#E67E22;">ABARES</a> — Australian Bureau of Agricultural and Resource Economics, 2000–2024.
+        </p>
+        <p style="font-size:13px;color:#c9d4df;line-height:1.65;margin:0;">
+          <strong>Temperature Anomaly:</strong>
+          <a href="http://www.bom.gov.au/" style="color:#E67E22;">Bureau of Meteorology (ACORN-SAT)</a> — Australian Climate Observations Reference Network, 2000–2024.
+        </p>
+        <p style="font-size:13px;color:#c9d4df;line-height:1.65;margin:0;">
+          <strong>Satellite Burned Area (Heatmap &amp; Decadal Maps):</strong>
+          <a href="https://www.csiro.au/" style="color:#E67E22;">CSIRO — Cook et al. (2021)</a>, <em>Nature Communications</em>. Data via NOAA-AVHRR / NASA-MODIS.
+        </p>
+        <p style="font-size:13px;color:#c9d4df;line-height:1.65;margin:0;">
+          <strong>Tree Cover Loss by Climate Domain:</strong>
+          <a href="https://www.globalforestwatch.org/" style="color:#E67E22;">Global Forest Watch (Australia)</a> — Approximate data based on NASA-MODIS burned area, 2001–2024.
+        </p>
+        <p style="font-size:13px;color:#c9d4df;line-height:1.65;margin:0;">
+          <strong>Homes Destroyed:</strong>
+          CFA, NSW RFS, QFES, SA CFS and other state fire agencies — compiled from official post-event reports, 1939–2021.
+        </p>
+        <p style="font-size:13px;color:#c9d4df;line-height:1.65;margin:0;">
+          <strong>Wildlife Impact — Black Summer:</strong>
+          <a href="https://www.wwf.org.au/" style="color:#E67E22;">WWF Australia</a> / University of Sydney (2020) — <em>Impacts of the unprecedented 2019–20 bushfires on Australian animals.</em>
+        </p>
+        <p style="font-size:13px;color:#c9d4df;line-height:1.65;margin:0;">
+          <strong>Economic Losses (Waterfall Chart):</strong>
+          <a href="https://insurancecouncil.com.au/" style="color:#E67E22;">Insurance Council of Australia</a> — Catastrophe event loss data, 1939–2021.
+        </p>
+        <p style="font-size:13px;color:#c9d4df;line-height:1.65;margin:0;">
+          <strong>Population Exposure to High Fire Risk:</strong>
+          <a href="https://www.abs.gov.au/" style="color:#E67E22;">ABS Census</a> (2001–2021) &amp; Geoscience Australia fire risk zone boundaries.
+        </p>
+        <p style="font-size:13px;color:#c9d4df;line-height:1.65;margin:0;">
+          <strong>State Boundaries (GeoJSON):</strong>
+          <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/" style="color:#E67E22;">ABS ASGS</a> — Australian Statistical Geography Standard, Edition 3.
+        </p>
+      </div>
+      <p style="font-size:12px;color:#7f91a3;margin-top:24px;line-height:1.6;">
+        Prepared by <strong style="color:#c9d4df;">Dinh Duy Truong</strong> (Student ID: 33538921) · FIT2179 Data Visualisation 2 · Monash University · May 2026.<br>
+        All data used for educational purposes. Projections in Section 5 are extrapolated from observed trends and should not be treated as official forecasts.
+      </p>
+    </div>
+  </section>
+
 </body>
 </html>
