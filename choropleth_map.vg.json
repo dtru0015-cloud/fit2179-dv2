@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 320,
+  "height": 350,
   "title": {
     "text": "Bushfire Risk Across Australia",
     "fontSize": 18,
