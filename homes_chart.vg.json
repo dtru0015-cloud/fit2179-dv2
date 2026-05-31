@@ -7,7 +7,7 @@
     "y": {
       "field": "event_name",
       "type": "nominal",
-      "sort": { "field": "homes", "order": "descending" },
+      "sort": { "field": "homes", "order": "ascending" },
       "title": null,
       "axis": {
         "labelFontSize": 10,
