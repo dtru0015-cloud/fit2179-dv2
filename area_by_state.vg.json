@@ -1,219 +1,180 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 320,
-  "params": [
-    {
-      "name": "selected_year",
-      "value": 2019
-    }
-  ],
-  "data": {
-    "url": "annual_area_burned.csv"
-  },
+  "height": 350,
+  "params": [{ "name": "selected_year", "value": 2019 }],
+  "data": { "url": "annual_area_burned.csv" },
   "layer": [
+
     {
+      "comment": "── Stable era band 2000-2018",
+      "data": {"values": [{"x1":"2000","x2":"2018"}]},
+      "mark": {"type": "rect", "opacity": 0.06, "color": "#2980B9"},
+      "encoding": {
+        "x":  {"field": "x1", "type": "ordinal"},
+        "x2": {"field": "x2"}
+      }
+    },
+    {
+      "comment": "── Black Summer band 2019",
+      "data": {"values": [{"x1":"2019","x2":"2019"}]},
+      "mark": {"type": "rect", "opacity": 0.18, "color": "#C0392B"},
+      "encoding": {
+        "x":  {"field": "x1", "type": "ordinal"},
+        "x2": {"field": "x2"}
+      }
+    },
+    {
+      "comment": "── New normal band 2020-2024",
+      "data": {"values": [{"x1":"2020","x2":"2024"}]},
+      "mark": {"type": "rect", "opacity": 0.09, "color": "#E67E22"},
+      "encoding": {
+        "x":  {"field": "x1", "type": "ordinal"},
+        "x2": {"field": "x2"}
+      }
+    },
+
+    {
+      "comment": "── Stable era label",
+      "data": {"values": [{"year":"2009","label":"📊 Stable Baseline Era"}]},
+      "mark": {"type": "text","align":"center","dy": 14,"fontSize":10,"fontWeight":"bold","color":"#4a90c4","fontStyle":"italic"},
+      "encoding": {
+        "x": {"field": "year","type": "ordinal"},
+        "y": {"value": 0},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "comment": "── Stable era sublabel",
+      "data": {"values": [{"year":"2009","label":"No season exceeded 25M ha (2000–2018)"}]},
+      "mark": {"type": "text","align":"center","dy": 28,"fontSize":9,"color":"#4a90c4"},
+      "encoding": {
+        "x": {"field": "year","type": "ordinal"},
+        "y": {"value": 0},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "comment": "── New normal label",
+      "data": {"values": [{"year":"2022","label":"⚠️ The New Normal"}]},
+      "mark": {"type": "text","align":"center","dy": 14,"fontSize":10,"fontWeight":"bold","color":"#E67E22","fontStyle":"italic"},
+      "encoding": {
+        "x": {"field": "year","type": "ordinal"},
+        "y": {"value": 0},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "comment": "── New normal sublabel",
+      "data": {"values": [{"year":"2022","label":"3 of 5 seasons broke pre-2019 records"}]},
+      "mark": {"type": "text","align":"center","dy": 28,"fontSize":9,"color":"#E67E22"},
+      "encoding": {
+        "x": {"field": "year","type": "ordinal"},
+        "y": {"value": 0},
+        "text": {"field": "label"}
+      }
+    },
+
+    {
+      "comment": "── Main area",
       "mark": {
-        "type": "area",
-        "color": "#E67E22",
-        "opacity": 0.3,
-        "line": {
-          "color": "#E67E22",
-          "strokeWidth": 2
-        }
+        "type": "area", "color": "#E67E22", "opacity": 0.3,
+        "line": {"color": "#E67E22", "strokeWidth": 2}
       },
       "encoding": {
         "x": {
-          "field": "year",
-          "type": "ordinal",
-          "title": "Year",
-          "axis": {
-            "labelAngle": -45,
-            "labelFontSize": 9,
-            "titleFontSize": 11,
-            "labelColor": "#aaaaaa",
-            "titleColor": "#ffffff",
-            "grid": false,
-            "domainColor": "#1e3a55"
-          }
+          "field": "year", "type": "ordinal", "title": "Year",
+          "axis": {"labelAngle": -45, "labelFontSize": 9, "titleFontSize": 11,
+                   "labelColor": "#aaaaaa", "titleColor": "#ffffff",
+                   "grid": false, "domainColor": "#1e3a55"}
         },
         "y": {
-          "field": "total_area_ha",
-          "type": "quantitative",
+          "field": "total_area_ha", "type": "quantitative",
           "title": "Total Area Burned (ha)",
-          "axis": {
-            "format": "~s",
-            "titleFontSize": 11,
-            "labelFontSize": 10,
-            "titleColor": "#ffffff",
-            "labelColor": "#aaaaaa",
-            "grid": true,
-            "gridDash": [
-              3,
-              3
-            ],
-            "gridColor": "#1a2a3a"
-          }
+          "axis": {"format": "~s", "titleFontSize": 11, "labelFontSize": 10,
+                   "titleColor": "#ffffff", "labelColor": "#aaaaaa",
+                   "grid": true, "gridDash": [3,3], "gridColor": "#1a2a3a"}
         },
         "tooltip": [
-          {
-            "field": "year",
-            "type": "ordinal",
-            "title": "Year"
-          },
-          {
-            "field": "total_area_ha",
-            "type": "quantitative",
-            "title": "Area Burned (ha)",
-            "format": ",.0f"
-          },
-          {
-            "field": "notable_event",
-            "type": "nominal",
-            "title": "Event"
-          }
+          {"field": "year",         "type": "ordinal",      "title": "Year"},
+          {"field": "total_area_ha","type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
+          {"field": "notable_event","type": "nominal",       "title": "Event"}
         ]
       }
     },
+
     {
-      "mark": {
-        "type": "point",
-        "filled": true,
-        "size": 50,
-        "color": "#E67E22"
-      },
+      "comment": "── Data points",
+      "mark": {"type": "point", "filled": true, "size": 50, "color": "#E67E22"},
       "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal"
-        },
-        "y": {
-          "field": "total_area_ha",
-          "type": "quantitative"
-        },
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "total_area_ha", "type": "quantitative"},
         "tooltip": [
-          {
-            "field": "year",
-            "type": "ordinal",
-            "title": "Year"
-          },
-          {
-            "field": "total_area_ha",
-            "type": "quantitative",
-            "title": "Area Burned (ha)",
-            "format": ",.0f"
-          },
-          {
-            "field": "notable_event",
-            "type": "nominal",
-            "title": "Event"
-          }
+          {"field": "year",         "type": "ordinal",      "title": "Year"},
+          {"field": "total_area_ha","type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
+          {"field": "notable_event","type": "nominal",       "title": "Event"}
         ]
       }
     },
+
     {
-      "transform": [
-        {
-          "filter": "datum.notable_event != ''"
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "fontSize": 9,
-        "fontWeight": "bold",
-        "color": "#E67E22",
-        "angle": -35,
-        "align": "left",
-        "dx": 4,
-        "dy": -10
-      },
+      "comment": "── Event name labels (diagonal)",
+      "transform": [{"filter": "datum.notable_event != ''"}],
+      "mark": {"type": "text", "fontSize": 9, "fontWeight": "bold",
+               "color": "#E67E22", "angle": -35, "align": "left", "dx": 4, "dy": -10},
       "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal"
-        },
-        "y": {
-          "field": "total_area_ha",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "notable_event",
-          "type": "nominal"
-        }
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "total_area_ha", "type": "quantitative"},
+        "text": {"field": "notable_event", "type": "nominal"}
+      }
+    },
+
+    {
+      "comment": "── Black Summer vertical rule",
+      "data": {"values": [{"year": "2019"}]},
+      "mark": {"type": "rule", "color": "#C0392B", "strokeDash": [4,3], "strokeWidth": 1.5},
+      "encoding": {"x": {"field": "year", "type": "ordinal"}}
+    },
+
+    {
+      "comment": "── Black Summer label at top",
+      "data": {"values": [{"year": "2019", "label": "🔥 Black Summer"}]},
+      "mark": {"type": "text", "align": "right", "dx": -4, "dy": 14,
+               "fontSize": 10, "fontWeight": "bold", "color": "#C0392B"},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"value": 0},
+        "text": {"field": "label"}
       }
     },
     {
-      "data": {
-        "values": [
-          {
-            "year": "2019"
-          }
-        ]
-      },
-      "mark": {
-        "type": "rule",
-        "color": "#C0392B",
-        "strokeDash": [
-          4,
-          3
-        ],
-        "strokeWidth": 1.5
-      },
+      "comment": "── Black Summer sublabel",
+      "data": {"values": [{"year": "2019", "label": "186M ha — largest on record"}]},
+      "mark": {"type": "text", "align": "right", "dx": -4, "dy": 28,
+               "fontSize": 9, "color": "#C0392B"},
       "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal"
-        }
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"value": 0},
+        "text": {"field": "label"}
       }
     },
+
     {
-      "transform": [
-        {
-          "filter": "datum.year == selected_year"
-        }
-      ],
-      "mark": {
-        "type": "point",
-        "filled": true,
-        "size": 300,
-        "color": "#C0392B",
-        "stroke": "#fff",
-        "strokeWidth": 2
-      },
+      "comment": "── Selected year highlight dot",
+      "transform": [{"filter": "datum.year == selected_year"}],
+      "mark": {"type": "point", "filled": true, "size": 300,
+               "color": "#C0392B", "stroke": "#fff", "strokeWidth": 2},
       "encoding": {
-        "x": {
-          "field": "year",
-          "type": "ordinal"
-        },
-        "y": {
-          "field": "total_area_ha",
-          "type": "quantitative"
-        },
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "total_area_ha", "type": "quantitative"},
         "tooltip": [
-          {
-            "field": "year",
-            "type": "ordinal",
-            "title": "Year"
-          },
-          {
-            "field": "total_area_ha",
-            "type": "quantitative",
-            "title": "Area Burned (ha)",
-            "format": ",.0f"
-          },
-          {
-            "field": "notable_event",
-            "type": "nominal",
-            "title": "Event"
-          }
+          {"field": "year",         "type": "ordinal",      "title": "Year"},
+          {"field": "total_area_ha","type": "quantitative", "title": "Area Burned (ha)", "format": ",.0f"},
+          {"field": "notable_event","type": "nominal",       "title": "Event"}
         ]
       }
     }
   ],
-  "config": {
-    "background": "#0a1628",
-    "view": {
-      "stroke": "transparent"
-    }
-  }
+
+  "config": { "background": "#0a1628", "view": { "stroke": "transparent" } }
 }
