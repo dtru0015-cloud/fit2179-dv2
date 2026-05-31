@@ -1,13 +1,20 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 370,
+  "height": 300,
   "data": { "url": "bushfire_human_impact.csv" },
+  "transform": [
+    { "filter": "datum.homes > 0" },
+    {
+      "window": [{ "op": "rank", "as": "rank" }],
+      "sort": [{ "field": "homes", "order": "ascending" }]
+    }
+  ],
   "encoding": {
     "y": {
       "field": "event_name",
       "type": "nominal",
-      "sort": { "field": "homes", "order": "descending" },
+      "sort": { "field": "rank", "order": "descending" },
       "title": null,
       "axis": {
         "labelColor": "#ffffff",
@@ -58,22 +65,24 @@
     {
       "mark": {
         "type": "text",
-        "align": "right",
         "baseline": "middle",
-        "dx": -6,
         "fontSize": 10,
-        "fontWeight": "bold",
-        "color": "#ffffff"
+        "fontWeight": "bold"
       },
       "encoding": {
-        "x": {
-          "field": "homes",
-          "type": "quantitative"
+        "x": { "field": "homes", "type": "quantitative" },
+        "text": { "field": "homes", "type": "quantitative", "format": ",.0f" },
+        "align": {
+          "condition": { "test": "datum.homes < 400", "value": "left" },
+          "value": "right"
         },
-        "text": {
-          "field": "homes",
-          "type": "quantitative",
-          "format": ",.0f"
+        "dx": {
+          "condition": { "test": "datum.homes < 400", "value": 5 },
+          "value": -6
+        },
+        "color": {
+          "condition": { "test": "datum.homes < 400", "value": "#E67E22" },
+          "value": "#ffffff"
         }
       }
     }
