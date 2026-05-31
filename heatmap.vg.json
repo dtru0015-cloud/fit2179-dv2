@@ -3,80 +3,112 @@
   "width": "container",
   "height": 370,
   "data": {
-    "url": "bom_temperature_anomaly.csv"
+    "url": "bushfire_season_heatmap.csv"
   },
   "mark": {
     "type": "rect",
-    "cornerRadius": 2
+    "tooltip": true
   },
   "encoding": {
+    "y": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Fire Year",
+      "sort": "descending",
+      "axis": {
+        "labelColor": "#aaaaaa",
+        "titleColor": "#ffffff",
+        "labelFontSize": 9,
+        "titleFontSize": 11,
+        "domainColor": "#1e3a55",
+        "tickColor": "#1e3a55",
+        "labelOverlap": true
+      }
+    },
     "x": {
       "field": "month",
       "type": "ordinal",
-      "title": "Month",
+      "title": "Month (fire year: Jul \u2192 Jun)",
       "sort": [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
         "Jul",
         "Aug",
         "Sep",
         "Oct",
         "Nov",
-        "Dec"
+        "Dec",
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun"
       ],
       "axis": {
+        "labelColor": "#aaaaaa",
+        "titleColor": "#ffffff",
         "labelFontSize": 10,
         "titleFontSize": 11,
-        "labelColor": "#ffffff",
-        "titleColor": "#ffffff"
-      }
-    },
-    "y": {
-      "field": "state",
-      "type": "nominal",
-      "title": null,
-      "axis": {
-        "labelFontSize": 10,
-        "labelColor": "#ffffff"
+        "domainColor": "#1e3a55",
+        "tickColor": "#1e3a55"
       }
     },
     "color": {
-      "field": "avg_fire_danger_index",
+      "field": "area_km2",
       "type": "quantitative",
-      "title": "Fire Danger",
+      "title": "Burned Area (km\u00b2)",
       "scale": {
-        "type": "sequential",
-        "scheme": "orangered"
+        "type": "log",
+        "base": 10,
+        "domain": [
+          10,
+          12000
+        ],
+        "range": [
+          "#fde8d0",
+          "#f4a460",
+          "#e05c2a",
+          "#c0392b",
+          "#7a0000"
+        ]
       },
       "legend": {
-        "orient": "bottom",
+        "title": "Burned Area (km\u00b2)",
+        "titleColor": "#c8d8f0",
+        "labelColor": "#8aabcc",
+        "titleFontSize": 9,
+        "labelFontSize": 8,
+        "gradientLength": 90,
+        "gradientThickness": 8,
+        "orient": "none",
+        "legendX": 370,
+        "legendY": 6,
         "direction": "horizontal",
-        "titleColor": "#ffffff",
-        "labelColor": "#ffffff",
-        "titleFontSize": 10,
-        "labelFontSize": 9
+        "values": [
+          10,
+          100,
+          1000,
+          5000,
+          12000
+        ],
+        "format": "~s"
       }
     },
     "tooltip": [
       {
-        "field": "state",
-        "type": "nominal",
-        "title": "State"
+        "field": "year",
+        "type": "ordinal",
+        "title": "Fire Year"
       },
       {
         "field": "month",
-        "type": "ordinal",
+        "type": "nominal",
         "title": "Month"
       },
       {
-        "field": "avg_fire_danger_index",
+        "field": "area_km2",
         "type": "quantitative",
-        "title": "Fire Danger Index",
-        "format": ".1f"
+        "title": "Area (km\u00b2)",
+        "format": ",.0f"
       }
     ]
   },
@@ -84,6 +116,7 @@
     "background": "#0a1628",
     "view": {
       "stroke": "transparent"
-    }
+    },
+    "font": "Inter, sans-serif"
   }
 }
