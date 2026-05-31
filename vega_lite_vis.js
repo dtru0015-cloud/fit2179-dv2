@@ -7,14 +7,14 @@ const vegaOpts  = { actions: false, renderer: "svg" };
 // ─── Year slider → event popup ───────────────────────────────────────────────
 const eventData = {
   2001: { name: "Black Christmas",     area: "753,314 ha",    deaths: 0,   homes: 109,  loss: "$70M"  },
-  2003: { name: "Alpine Fires VIC",    area: "1,100,000 ha",  deaths: 0,   homes: 41,   loss: "$120M" },
+  2003: { name: "Alpine Fires VIC",    area: "1,300,000 ha",  deaths: 0,   homes: 41,   loss: "$120M" },
   2009: { name: "Black Saturday",      area: "450,000 ha",    deaths: 173, homes: 2029, loss: "$4.4B" },
   2014: { name: "Hazelwood Mine Fire", area: "—",             deaths: 0,   homes: 0,    loss: "$650M" },
   2015: { name: "Sampson Flat",        area: "12,600 ha",     deaths: 0,   homes: 27,   loss: "$15M"  },
-  2016: { name: "Yarloop",             area: "69,000 ha",     deaths: 2,   homes: 181,  loss: "$200M" },
-  2018: { name: "Tathra",              area: "1,900 ha",      deaths: 0,   homes: 69,   loss: "$25M"  },
-  2019: { name: "🔥 Black Summer",     area: "18,600,000 ha", deaths: 33,  homes: 3000, loss: "$103B" },
-  2020: { name: "Post Black Summer",   area: "96,000,000 ha", deaths: 0,   homes: 0,    loss: "—"     },
+  2016: { name: "Yarloop",             area: "70,000 ha",     deaths: 2,   homes: 181,  loss: "$155M" },
+  2018: { name: "Tathra",              area: "1,250 ha",      deaths: 0,   homes: 65,   loss: "$25M"  },
+  2019: { name: "🔥 Black Summer",     area: "24,000,000 ha", deaths: 33,  homes: 3000, loss: "$103B" },
+  2020: { name: "Post Black Summer",   area: "9,600,000 ha",  deaths: 0,   homes: 0,    loss: "—"     },
   2021: { name: "Wooroloo",            area: "10,000 ha",     deaths: 0,   homes: 86,   loss: "$50M"  }
 };
 
