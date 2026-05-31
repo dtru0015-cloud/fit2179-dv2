@@ -1,153 +1,172 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "width": 480,
-  "height": 340,
-  "padding": 2,
+  "width": 500,
+  "height": 360,
   "background": "#0a1628",
-  "data": [
-    {
-      "name": "tree",
-      "values": [
-        {
-          "id": 0,
-          "parent": null,
-          "name": "root",
-          "value": 0
-        },
-        {
-          "id": 1,
-          "parent": 0,
-          "name": "Reptiles",
-          "value": 2460,
-          "label": "Reptiles \ud83e\udd8e\n2,460M"
-        },
-        {
-          "id": 2,
-          "parent": 0,
-          "name": "Birds",
-          "value": 180,
-          "label": "Birds \ud83e\udd85\n180M"
-        },
-        {
-          "id": 3,
-          "parent": 0,
-          "name": "Mammals",
-          "value": 143,
-          "label": "Mammals \ud83e\udd98\n143M"
-        },
-        {
-          "id": 4,
-          "parent": 0,
-          "name": "Frogs",
-          "value": 51,
-          "label": "Frogs \ud83d\udc38\n51M"
-        }
-      ],
-      "transform": [
-        {
-          "type": "stratify",
-          "key": "id",
-          "parentKey": "parent"
-        },
-        {
-          "type": "treemap",
-          "field": "value",
-          "sort": {
-            "field": "value",
-            "order": "descending"
-          },
-          "round": true,
-          "method": "squarify",
-          "ratio": 1.618,
-          "size": [
-            {
-              "signal": "width"
-            },
-            {
-              "signal": "height"
-            }
-          ]
-        }
-      ]
-    }
-  ],
+  "padding": 10,
+
   "marks": [
     {
-      "type": "rect",
-      "from": {
-        "data": "tree"
-      },
+      "type": "symbol",
       "encode": {
         "enter": {
-          "x": {
-            "field": "x0"
-          },
-          "y": {
-            "field": "y0"
-          },
-          "x2": {
-            "field": "x1"
-          },
-          "y2": {
-            "field": "y1"
-          },
-          "stroke": {
-            "value": "#0a1628"
-          },
-          "strokeWidth": {
-            "value": 3
-          },
-          "cornerRadius": {
-            "value": 4
-          }
-        },
-        "update": {
-          "fill": {
-            "signal": "datum.name === 'root' ? '#0a1628' : datum.name === 'Reptiles' ? '#E74C3C' : datum.name === 'Birds' ? '#E67E22' : datum.name === 'Mammals' ? '#F39C12' : '#27AE60'"
-          },
-          "opacity": {
-            "value": 0.9
-          },
-          "tooltip": {
-            "signal": "{'Species': datum.label, 'Animals Affected': datum.value + 'M'}"
-          }
+          "x":     {"value": 155},
+          "y":     {"value": 185},
+          "size":  {"value": 62000},
+          "shape": {"value": "circle"},
+          "fill":  {"value": "#C0392B"},
+          "opacity": {"value": 0.9},
+          "tooltip": {"value": "Reptiles — 2.46 billion killed or displaced"}
         }
       }
     },
     {
       "type": "text",
-      "from": {
-        "data": "tree"
-      },
       "encode": {
         "enter": {
-          "x": {
-            "signal": "(datum.x0 + datum.x1) / 2"
-          },
-          "y": {
-            "signal": "(datum.y0 + datum.y1) / 2"
-          },
-          "align": {
-            "value": "center"
-          },
-          "baseline": {
-            "value": "middle"
-          },
-          "fill": {
-            "value": "#ffffff"
-          },
-          "fontWeight": {
-            "value": "bold"
-          },
-          "fontSize": {
-            "signal": "datum.name === 'root' ? 0 : (datum.x1 - datum.x0) > 80 ? 13 : (datum.x1 - datum.x0) > 40 ? 10 : 0"
-          },
-          "text": {
-            "field": "label"
-          },
-          "limit": {
-            "signal": "datum.x1 - datum.x0 - 8"
-          }
+          "x": {"value": 155}, "y": {"value": 178},
+          "text": {"value": "2.46b"},
+          "fill": {"value": "#ffffff"},
+          "fontSize": {"value": 22},
+          "fontWeight": {"value": "bold"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 155}, "y": {"value": 205},
+          "text": {"value": "🦎 Reptiles"},
+          "fill": {"value": "#ffffff"},
+          "fontSize": {"value": 13},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+
+    {
+      "type": "symbol",
+      "encode": {
+        "enter": {
+          "x":     {"value": 395},
+          "y":     {"value": 95},
+          "size":  {"value": 4550},
+          "shape": {"value": "circle"},
+          "fill":  {"value": "#E74C3C"},
+          "opacity": {"value": 0.75},
+          "tooltip": {"value": "Birds — 180 million killed or displaced"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 395}, "y": {"value": 90},
+          "text": {"value": "180m"},
+          "fill": {"value": "#ffffff"},
+          "fontSize": {"value": 13},
+          "fontWeight": {"value": "bold"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 395}, "y": {"value": 140},
+          "text": {"value": "🦅 Birds"},
+          "fill": {"value": "#c8d8f0"},
+          "fontSize": {"value": 11},
+          "align": {"value": "center"}
+        }
+      }
+    },
+
+    {
+      "type": "symbol",
+      "encode": {
+        "enter": {
+          "x":     {"value": 395},
+          "y":     {"value": 210},
+          "size":  {"value": 3620},
+          "shape": {"value": "circle"},
+          "fill":  {"value": "#E74C3C"},
+          "opacity": {"value": 0.6},
+          "tooltip": {"value": "Mammals — 143 million killed or displaced"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 395}, "y": {"value": 207},
+          "text": {"value": "143m"},
+          "fill": {"value": "#ffffff"},
+          "fontSize": {"value": 12},
+          "fontWeight": {"value": "bold"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 395}, "y": {"value": 248},
+          "text": {"value": "🦘 Mammals"},
+          "fill": {"value": "#c8d8f0"},
+          "fontSize": {"value": 11},
+          "align": {"value": "center"}
+        }
+      }
+    },
+
+    {
+      "type": "symbol",
+      "encode": {
+        "enter": {
+          "x":     {"value": 395},
+          "y":     {"value": 305},
+          "size":  {"value": 1290},
+          "shape": {"value": "circle"},
+          "fill":  {"value": "#E74C3C"},
+          "opacity": {"value": 0.45},
+          "tooltip": {"value": "Frogs — 51 million killed or displaced"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 395}, "y": {"value": 303},
+          "text": {"value": "51m"},
+          "fill": {"value": "#ffffff"},
+          "fontSize": {"value": 11},
+          "fontWeight": {"value": "bold"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 395}, "y": {"value": 330},
+          "text": {"value": "🐸 Frogs"},
+          "fill": {"value": "#c8d8f0"},
+          "fontSize": {"value": 11},
+          "align": {"value": "center"}
         }
       }
     }
