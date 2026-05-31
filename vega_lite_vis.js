@@ -260,7 +260,7 @@ function updateWildlifeBox(id) {
     box.style.borderColor = '#1e3a55';
   } else {
     const d = wildlifeInfo[id];
-    box.innerHTML = \`<span style="color:#E67E22;font-weight:700;font-size:0.88rem;">\${d.title}</span><br>\${d.body}\`;
+    box.innerHTML = '<span style="color:#E67E22;font-weight:700;font-size:0.88rem;">' + d.title + '</span><br>' + d.body;
     box.style.borderColor = '#E67E22';
   }
 }
