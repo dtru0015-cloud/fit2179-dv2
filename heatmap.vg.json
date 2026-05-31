@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 370,
+  "height": 300,
   "data": {
     "url": "bushfire_season_heatmap.csv"
   },
@@ -71,27 +71,7 @@
           "#7a0000"
         ]
       },
-      "legend": {
-        "title": "Burned Area (km\u00b2)",
-        "titleColor": "#c8d8f0",
-        "labelColor": "#8aabcc",
-        "titleFontSize": 9,
-        "labelFontSize": 8,
-        "gradientLength": 90,
-        "gradientThickness": 8,
-        "orient": "none",
-        "legendX": 370,
-        "legendY": 6,
-        "direction": "horizontal",
-        "values": [
-          10,
-          100,
-          1000,
-          5000,
-          12000
-        ],
-        "format": "~s"
-      }
+      "legend": null
     },
     "tooltip": [
       {

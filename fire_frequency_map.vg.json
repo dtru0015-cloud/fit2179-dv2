@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "height": 370,
   "resolve": {
     "scale": {
       "color": "shared"
@@ -35,7 +34,7 @@
         ],
         "scale": 240,
         "translate": [
-          105,
+          90,
           140
         ]
       },
@@ -117,7 +116,7 @@
         ],
         "scale": 240,
         "translate": [
-          105,
+          90,
           140
         ]
       },
@@ -199,7 +198,7 @@
         ],
         "scale": 240,
         "translate": [
-          105,
+          90,
           140
         ]
       },
@@ -281,7 +280,7 @@
         ],
         "scale": 240,
         "translate": [
-          105,
+          90,
           140
         ]
       },
